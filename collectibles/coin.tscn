@@ -1,0 +1,55 @@
+[gd_scene load_steps=9 format=3 uid="uid://cf748of1sxsra"]
+
+[ext_resource type="PackedScene" uid="uid://c4urdvaatn2no" path="res://hitboxes/hurtbox.tscn" id="1_b1usj"]
+[ext_resource type="Texture2D" uid="uid://dtmcenr1s0xye" path="res://assets/sprites/collectibles/coin/coin_1.png" id="1_eyn70"]
+[ext_resource type="Script" path="res://collectibles/coin.gd" id="1_yxg84"]
+[ext_resource type="Texture2D" uid="uid://buw41y8xkppk6" path="res://assets/sprites/collectibles/coin/coin_2.png" id="2_aswll"]
+[ext_resource type="Texture2D" uid="uid://dn47dupix2w1d" path="res://assets/sprites/collectibles/coin/coin_3.png" id="3_vfl7j"]
+[ext_resource type="Texture2D" uid="uid://bbyl3iw0k8a7j" path="res://assets/sprites/collectibles/coin/coin_4.png" id="4_mhahs"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_v1vbm"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_eyn70")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_aswll")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_vfl7j")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_mhahs")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 4.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_pw2yt"]
+radius = 6.0
+height = 12.0
+
+[node name="Coin" type="Node2D"]
+script = ExtResource("1_yxg84")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(0, -5)
+sprite_frames = SubResource("SpriteFrames_v1vbm")
+animation = &"idle"
+autoplay = "idle"
+frame = 3
+frame_progress = 0.36304
+
+[node name="Hurtbox" parent="." instance=ExtResource("1_b1usj")]
+collision_layer = 8
+collision_mask = 2
+
+[node name="CollisionShape2D" parent="Hurtbox" index="0"]
+position = Vector2(0, -5)
+shape = SubResource("CapsuleShape2D_pw2yt")
+
+[connection signal="area_entered" from="Hurtbox" to="." method="_on_hurtbox_area_entered"]
+
+[editable path="Hurtbox"]
