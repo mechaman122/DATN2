@@ -1,4 +1,5 @@
 extends PlayerState
+var melee_type = 2
 
 func enter(previous_state_path: String, data: Dictionary = {}) -> void:
 	# flip sprite based on mouse position
@@ -12,12 +13,13 @@ func enter(previous_state_path: String, data: Dictionary = {}) -> void:
 	else:
 		player.animated_sprite.offset.x = 0
 		
-	var melee_type = randi() % 2 + 1
-	player.animated_sprite.play("melee_" + str(melee_type))
+	melee_type = (melee_type + 1) % 2
+	var mt = melee_type + 1
+	player.animated_sprite.play("melee_" + str(mt))
 
 func physics_update(delta: float) -> void:
 	# transition to other state after animation finishes
-	if player.player_hp == 0:
+	if player.health.health == 0:
 		finished.emit(DIE)
 	elif (player.animated_sprite.frame == player.animated_sprite.sprite_frames.get_frame_count("melee_2") - 1):
 		finished.emit(IDLE)

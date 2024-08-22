@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=3 uid="uid://bublwbqgnah8x"]
+
+[ext_resource type="Texture2D" uid="uid://c2255fo5pv55u" path="res://assets/sprites/interface/Health Bar Asset Pack 2 by Adwit Rahman/greenbar (3).png" id="1_lebia"]
+[ext_resource type="Texture2D" uid="uid://cydustipd4m2v" path="res://assets/sprites/interface/Health Bar Asset Pack 2 by Adwit Rahman/greenbar (2).png" id="2_d3dbq"]
+
+[node name="LifeBar" type="HBoxContainer"]
+offset_right = 255.0
+offset_bottom = 42.0
+alignment = 1
+
+[node name="TextureProgressBar" type="TextureProgressBar" parent="."]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 4
+value = 60.0
+texture_under = ExtResource("1_lebia")
+texture_progress = ExtResource("2_d3dbq")
+texture_progress_offset = Vector2(16, 0)

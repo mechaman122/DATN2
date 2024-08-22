@@ -21,7 +21,7 @@ func physics_update(delta: float) -> void:
 
 	player.move_and_slide()
 
-	if player.player_hp == 0:
+	if player.health.health == 0:
 		finished.emit(DIE)
 	elif not Input.is_action_pressed("move_right") and not Input.is_action_pressed("move_left") and not Input.is_action_pressed("move_down") and not Input.is_action_pressed("move_up"):
 		finished.emit(IDLE)

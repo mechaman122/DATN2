@@ -1,22 +1,27 @@
-[gd_scene load_steps=4 format=3 uid="uid://xfcntficuxyx"]
+[gd_scene load_steps=5 format=3 uid="uid://xfcntficuxyx"]
 
 [ext_resource type="PackedScene" uid="uid://2tkmj873jyu3" path="res://scenes/adventurer.tscn" id="1_7c8dh"]
 [ext_resource type="PackedScene" uid="uid://b4a2vbki2mytf" path="res://scenes/damage_area_test.tscn" id="2_abr38"]
 [ext_resource type="PackedScene" uid="uid://cf748of1sxsra" path="res://collectibles/coin.tscn" id="4_8gk2r"]
+[ext_resource type="PackedScene" uid="uid://cba41v3c42exf" path="res://collectibles/health_potion.tscn" id="5_0akn1"]
 
 [node name="Game" type="Node2D"]
 
 [node name="Adventurer" parent="." instance=ExtResource("1_7c8dh")]
-position = Vector2(2, 0)
+position = Vector2(695, 330)
 
 [node name="Camera2D" type="Camera2D" parent="Adventurer"]
 position = Vector2(-2, 0)
 zoom = Vector2(4, 4)
 
 [node name="DamageArea_test" parent="." instance=ExtResource("2_abr38")]
+position = Vector2(693, 330)
 
 [node name="Coin" parent="." instance=ExtResource("4_8gk2r")]
-position = Vector2(70, -47)
+position = Vector2(763, 283)
 
 [node name="Coin2" parent="." instance=ExtResource("4_8gk2r")]
-position = Vector2(60, -2)
+position = Vector2(753, 328)
+
+[node name="health_potion" parent="." instance=ExtResource("5_0akn1")]
+position = Vector2(617, 332)

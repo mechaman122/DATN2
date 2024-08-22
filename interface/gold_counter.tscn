@@ -1,0 +1,40 @@
+[gd_scene load_steps=2 format=3 uid="uid://bhcko0vln6fe"]
+
+[ext_resource type="Texture2D" uid="uid://dtmcenr1s0xye" path="res://assets/sprites/collectibles/coin/coin_1.png" id="1_0kd24"]
+
+[node name="gold_counter" type="NinePatchRect"]
+offset_right = 97.0
+offset_bottom = 100.0
+patch_margin_left = 8
+patch_margin_top = 8
+patch_margin_right = 8
+patch_margin_bottom = 8
+
+[node name="Icon" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -53.0
+offset_top = -37.0
+offset_right = 8.0
+offset_bottom = 38.0
+grow_horizontal = 0
+grow_vertical = 2
+texture = ExtResource("1_0kd24")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_top = -11.0
+offset_right = 54.0
+offset_bottom = 12.0
+grow_vertical = 2
+text = "19"
+horizontal_alignment = 1
