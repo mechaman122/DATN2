@@ -8,8 +8,10 @@
 [ext_resource type="Script" path="res://states/FSM.gd" id="3_nfnxt"]
 [ext_resource type="Script" path="res://states/idle.gd" id="4_0iug0"]
 [ext_resource type="Script" path="res://states/run.gd" id="5_rlbn1"]
+[ext_resource type="PackedScene" uid="uid://c2deh2ka3p3xy" path="res://hitboxes/hitbox.tscn" id="6_46qem"]
 [ext_resource type="Script" path="res://states/melee.gd" id="6_p1umm"]
 [ext_resource type="Script" path="res://states/die.gd" id="8_7nkeu"]
+[ext_resource type="Script" path="res://states/hurt.gd" id="12_002dt"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_sow0o"]
 atlas = ExtResource("1_c2cxh")
@@ -38,6 +40,18 @@ region = Rect2(160, 224, 32, 32)
 [sub_resource type="AtlasTexture" id="AtlasTexture_en5jw"]
 atlas = ExtResource("1_c2cxh")
 region = Rect2(192, 224, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rkxe0"]
+atlas = ExtResource("1_c2cxh")
+region = Rect2(32, 192, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lbj2l"]
+atlas = ExtResource("1_c2cxh")
+region = Rect2(64, 192, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_iy31m"]
+atlas = ExtResource("1_c2cxh")
+region = Rect2(96, 192, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_q77tq"]
 atlas = ExtResource("1_c2cxh")
@@ -130,46 +144,6 @@ region = Rect2(256, 96, 32, 32)
 [sub_resource type="AtlasTexture" id="AtlasTexture_es3eg"]
 atlas = ExtResource("1_c2cxh")
 region = Rect2(288, 96, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_sx57y"]
-atlas = ExtResource("1_c2cxh")
-region = Rect2(0, 64, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_btdjn"]
-atlas = ExtResource("1_c2cxh")
-region = Rect2(32, 64, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_k7jbw"]
-atlas = ExtResource("1_c2cxh")
-region = Rect2(64, 64, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_dpfmt"]
-atlas = ExtResource("1_c2cxh")
-region = Rect2(96, 64, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_0j7ex"]
-atlas = ExtResource("1_c2cxh")
-region = Rect2(128, 64, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_loiel"]
-atlas = ExtResource("1_c2cxh")
-region = Rect2(160, 64, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_wo6x3"]
-atlas = ExtResource("1_c2cxh")
-region = Rect2(192, 64, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_oleh3"]
-atlas = ExtResource("1_c2cxh")
-region = Rect2(224, 64, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_4febb"]
-atlas = ExtResource("1_c2cxh")
-region = Rect2(256, 64, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_s6bv5"]
-atlas = ExtResource("1_c2cxh")
-region = Rect2(288, 64, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_aswhr"]
 atlas = ExtResource("1_c2cxh")
@@ -273,6 +247,20 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
+"texture": SubResource("AtlasTexture_rkxe0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lbj2l")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_iy31m")
+}],
+"loop": true,
+"name": &"hurt",
+"speed": 6.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_q77tq")
 }, {
 "duration": 1.0,
@@ -352,41 +340,6 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_sx57y")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_btdjn")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_k7jbw")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_dpfmt")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_0j7ex")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_loiel")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_wo6x3")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_oleh3")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_4febb")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_s6bv5")
-}],
-"loop": true,
-"name": &"melee_11",
-"speed": 15.0
-}, {
-"frames": [{
-"duration": 1.0,
 "texture": SubResource("AtlasTexture_aswhr")
 }, {
 "duration": 1.0,
@@ -450,8 +403,123 @@ animations = [{
 "speed": 10.0
 }]
 
+[sub_resource type="Animation" id="Animation_8rtcm"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [1]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("MeleeHitbox/CollisionShape2D:disabled")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_jcd2j"]
+resource_name = "melee_1"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"melee_1"]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimatedSprite2D:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.1, 0.15, 0.2, 0.25, 0.3, 0.35, 0.4, 0.45),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("MeleeHitbox/CollisionShape2D:disabled")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [true, false, true]
+}
+
+[sub_resource type="Animation" id="Animation_hb5bf"]
+resource_name = "melee_2"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"melee_2"]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimatedSprite2D:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.1, 0.15, 0.2, 0.25, 0.3, 0.35, 0.4, 0.45),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("MeleeHitbox/CollisionShape2D:disabled")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [true, false, true]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_3xob5"]
+_data = {
+"RESET": SubResource("Animation_8rtcm"),
+"melee_1": SubResource("Animation_jcd2j"),
+"melee_2": SubResource("Animation_hb5bf")
+}
+
 [sub_resource type="CircleShape2D" id="CircleShape2D_l7bue"]
 radius = 7.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_w4a67"]
+size = Vector2(7, 16)
 
 [node name="Adventurer" type="CharacterBody2D"]
 script = ExtResource("1_cfpa1")
@@ -465,17 +533,33 @@ max_health = 3
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(0, -15)
 sprite_frames = SubResource("SpriteFrames_hbsqt")
-animation = &"melee_2"
+animation = &"hurt"
 autoplay = "idle"
+frame = 1
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_3xob5")
+}
 
 [node name="Hurtbox" parent="." node_paths=PackedStringArray("health") instance=ExtResource("3_056ev")]
 collision_layer = 2
-collision_mask = 4
+collision_mask = 32
 health = NodePath("../Health")
 
 [node name="CollisionShape2D" parent="Hurtbox" index="0"]
 position = Vector2(-2, -9)
 shape = SubResource("CircleShape2D_l7bue")
+
+[node name="MeleeHitbox" parent="." instance=ExtResource("6_46qem")]
+collision_layer = 16
+collision_mask = 4
+
+[node name="CollisionShape2D" parent="MeleeHitbox" index="0"]
+position = Vector2(9, -8)
+shape = SubResource("RectangleShape2D_w4a67")
+disabled = true
+debug_color = Color(0.988294, 0, 0.303609, 0.42)
 
 [node name="FSM" type="Node2D" parent="."]
 script = ExtResource("3_nfnxt")
@@ -492,9 +576,14 @@ script = ExtResource("6_p1umm")
 [node name="Die" type="Node2D" parent="FSM"]
 script = ExtResource("8_7nkeu")
 
+[node name="Hurt" type="Node2D" parent="FSM"]
+script = ExtResource("12_002dt")
+
 [connection signal="health_changed" from="Health" to="." method="_on_health_health_changed"]
 [connection signal="health_depleted" from="Health" to="." method="_on_health_health_depleted"]
 [connection signal="max_health_changed" from="Health" to="." method="_on_health_max_health_changed"]
+[connection signal="area_entered" from="MeleeHitbox" to="FSM/Melee" method="_on_melee_hitbox_area_entered"]
 
 [editable path="Interface"]
 [editable path="Hurtbox"]
+[editable path="MeleeHitbox"]

@@ -4,6 +4,7 @@ const IDLE = "Idle"
 const RUN = "Run"
 const MELEE = "Melee"
 const DIE = "Die"
+const HURT = "Hurt"
 
 var player: Player
 

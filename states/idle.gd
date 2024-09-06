@@ -24,9 +24,12 @@ func physics_update(delta: float) -> void:
 		player.animated_sprite.offset.x = -4
 	else:
 		player.animated_sprite.offset.x = 0
-
+	
 	if player.health.health == 0:
 		finished.emit(DIE)
+	elif player.health_changed:
+		finished.emit(HURT)
+		player.health_changed = false
 	elif Input.is_action_pressed("move_right") or Input.is_action_pressed("move_left") or Input.is_action_pressed("move_down") or Input.is_action_pressed("move_up"):
 		finished.emit(RUN)
 	elif Input.is_action_pressed("melee"):

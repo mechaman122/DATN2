@@ -17,7 +17,7 @@ func set_max_health(value: int):
 
 	if clamp_value != max_health:
 		var difference = clamp_value - max_health
-		max_health = value
+		max_health = clamp_value
 		emit_signal("max_health_changed", difference)
 
 		if health > max_health:
@@ -44,7 +44,21 @@ func get_health() -> int:
 	return health
 
 func set_immortality(value: bool):
-	pass
+	immortality = value
 
 func get_immortality() -> bool:
 	return immortality
+
+func set_temp_immortality(time: float):
+	if immortality_timer == null:
+		immortality_timer = Timer.new()
+		immortality_timer.one_shot = true
+		add_child(immortality_timer)
+
+	if immortality_timer.timeout.is_connected(set_immortality):
+		immortality_timer.timeout.disconnect(set_immortality)
+
+	immortality_timer.set_wait_time(time)
+	immortality_timer.timeout.connect(set_immortality.bind(false))
+	immortality = true
+	immortality_timer.start()

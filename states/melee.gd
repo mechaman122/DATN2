@@ -7,15 +7,18 @@ func enter(previous_state_path: String, data: Dictionary = {}) -> void:
 		player.animated_sprite.flip_h = true
 	else:
 		player.animated_sprite.flip_h = false
+		
 	# move the sprite to the left a little bit
 	if player.animated_sprite.flip_h == true:
 		player.animated_sprite.offset.x = -4
+		player.melee_hitbox.position = Vector2(-13, -8)
 	else:
 		player.animated_sprite.offset.x = 0
+		player.melee_hitbox.position = Vector2(9, -8)
 		
 	melee_type = (melee_type + 1) % 2
 	var mt = melee_type + 1
-	player.animated_sprite.play("melee_" + str(mt))
+	player.animated_player.play("melee_" + str(mt))
 
 func physics_update(delta: float) -> void:
 	# transition to other state after animation finishes
@@ -29,3 +32,7 @@ func physics_update(delta: float) -> void:
 	# elif Input.is_action_pressed("move_right") or Input.is_action_pressed("move_left") or Input.is_action_pressed("move_down") or Input.is_action_pressed("move_up"):
 	# 		await get_tree().create_timer(0.15).timeout
 	# 		finished.emit(RUN)
+
+
+func _on_melee_hitbox_area_entered(hurtbox: Hurtbox) -> void:
+	print(hurtbox)

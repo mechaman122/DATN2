@@ -23,6 +23,9 @@ func physics_update(delta: float) -> void:
 
 	if player.health.health == 0:
 		finished.emit(DIE)
+	elif player.health_changed:
+		finished.emit(HURT)
+		player.health_changed = false
 	elif not Input.is_action_pressed("move_right") and not Input.is_action_pressed("move_left") and not Input.is_action_pressed("move_down") and not Input.is_action_pressed("move_up"):
 		finished.emit(IDLE)
 	elif Input.is_action_pressed("melee"):
