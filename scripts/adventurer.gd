@@ -29,3 +29,6 @@ func _on_health_health_changed(diff: int) -> void:
 func _on_health_max_health_changed(diff: int) -> void:
 	# change the percentage of the health bar
 	health_bar.value = (float(health.health) / float(health.max_health)) * 100
+	
+func player():
+	pass

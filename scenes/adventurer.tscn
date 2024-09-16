@@ -1,4 +1,4 @@
-[gd_scene load_steps=71 format=3 uid="uid://2tkmj873jyu3"]
+[gd_scene load_steps=72 format=3 uid="uid://2tkmj873jyu3"]
 
 [ext_resource type="Texture2D" uid="uid://cn25h6f20oytn" path="res://assets/sprites/adventurer/adventurer_sprite.png" id="1_c2cxh"]
 [ext_resource type="Script" path="res://scripts/adventurer.gd" id="1_cfpa1"]
@@ -521,7 +521,12 @@ radius = 7.0
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_w4a67"]
 size = Vector2(7, 16)
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_6prk3"]
+radius = 15.0333
+
 [node name="Adventurer" type="CharacterBody2D"]
+collision_layer = 2
+collision_mask = 13
 script = ExtResource("1_cfpa1")
 
 [node name="Interface" parent="." instance=ExtResource("2_5tqcb")]
@@ -533,7 +538,7 @@ max_health = 3
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(0, -15)
 sprite_frames = SubResource("SpriteFrames_hbsqt")
-animation = &"hurt"
+animation = &"idle"
 autoplay = "idle"
 frame = 1
 
@@ -578,6 +583,12 @@ script = ExtResource("8_7nkeu")
 
 [node name="Hurt" type="Node2D" parent="FSM"]
 script = ExtResource("12_002dt")
+
+[node name="CollectibleCollision" type="CollisionShape2D" parent="."]
+visible = false
+position = Vector2(-2, -9)
+shape = SubResource("CircleShape2D_6prk3")
+debug_color = Color(0.453053, 0.540124, 0.681173, 0.42)
 
 [connection signal="health_changed" from="Health" to="." method="_on_health_health_changed"]
 [connection signal="health_depleted" from="Health" to="." method="_on_health_health_depleted"]

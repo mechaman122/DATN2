@@ -1,6 +1,5 @@
-[gd_scene load_steps=9 format=3 uid="uid://cf748of1sxsra"]
+[gd_scene load_steps=8 format=3 uid="uid://cf748of1sxsra"]
 
-[ext_resource type="PackedScene" uid="uid://c4urdvaatn2no" path="res://hitboxes/hurtbox.tscn" id="1_b1usj"]
 [ext_resource type="Texture2D" uid="uid://dtmcenr1s0xye" path="res://assets/sprites/collectibles/coin/coin_1.png" id="1_eyn70"]
 [ext_resource type="Script" path="res://collectibles/coin.gd" id="1_yxg84"]
 [ext_resource type="Texture2D" uid="uid://buw41y8xkppk6" path="res://assets/sprites/collectibles/coin/coin_2.png" id="2_aswll"]
@@ -27,9 +26,9 @@ animations = [{
 "speed": 4.0
 }]
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_pw2yt"]
-radius = 6.0
-height = 12.0
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_t744n"]
+radius = 5.0
+height = 14.0
 
 [node name="Coin" type="Node2D"]
 script = ExtResource("1_yxg84")
@@ -42,14 +41,12 @@ autoplay = "idle"
 frame = 3
 frame_progress = 0.36304
 
-[node name="Hurtbox" parent="." instance=ExtResource("1_b1usj")]
+[node name="PickableArea" type="Area2D" parent="."]
 collision_layer = 8
-collision_mask = 2
+collision_mask = 3
 
-[node name="CollisionShape2D" parent="Hurtbox" index="0"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PickableArea"]
 position = Vector2(0, -5)
-shape = SubResource("CapsuleShape2D_pw2yt")
+shape = SubResource("CapsuleShape2D_t744n")
 
-[connection signal="area_entered" from="Hurtbox" to="." method="_on_hurtbox_area_entered"]
-
-[editable path="Hurtbox"]
+[connection signal="body_entered" from="PickableArea" to="." method="_on_pickable_area_body_entered"]
