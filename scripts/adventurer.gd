@@ -10,6 +10,8 @@ const speed = 100.0
 @onready var health_bar = $Interface/LifeBar/TextureProgressBar
 @onready var melee_hitbox = $MeleeHitbox/CollisionShape2D
 
+@export var inv: Inv
+
 var health_changed = false
 var knockback_direction = Vector2()
 

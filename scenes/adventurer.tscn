@@ -1,7 +1,8 @@
-[gd_scene load_steps=72 format=3 uid="uid://2tkmj873jyu3"]
+[gd_scene load_steps=73 format=3 uid="uid://2tkmj873jyu3"]
 
 [ext_resource type="Texture2D" uid="uid://cn25h6f20oytn" path="res://assets/sprites/adventurer/adventurer_sprite.png" id="1_c2cxh"]
 [ext_resource type="Script" path="res://scripts/adventurer.gd" id="1_cfpa1"]
+[ext_resource type="Resource" uid="uid://b4yodjyqpjfq7" path="res://inventory/player_inv.tres" id="2_1gq4k"]
 [ext_resource type="PackedScene" uid="uid://cmlvksdm3h5h2" path="res://interface/interface.tscn" id="2_5tqcb"]
 [ext_resource type="Script" path="res://scripts/health.gd" id="2_6m0bo"]
 [ext_resource type="PackedScene" uid="uid://c4urdvaatn2no" path="res://hitboxes/hurtbox.tscn" id="3_056ev"]
@@ -528,6 +529,7 @@ radius = 15.0333
 collision_layer = 2
 collision_mask = 13
 script = ExtResource("1_cfpa1")
+inv = ExtResource("2_1gq4k")
 
 [node name="Interface" parent="." instance=ExtResource("2_5tqcb")]
 
