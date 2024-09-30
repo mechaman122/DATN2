@@ -34,3 +34,6 @@ func _on_health_max_health_changed(diff: int) -> void:
 	
 func player():
 	pass
+
+func collect(item):
+	inv.insert(item)
