@@ -20,6 +20,7 @@ func _on_health_health_depleted() -> void:
 
 func _ready() -> void:
 	health_bar.value = 100
+	inv.use_item.connect(use_item)
 
 
 func _on_health_health_changed(diff: int) -> void:
@@ -37,3 +38,6 @@ func player():
 
 func collect(item):
 	inv.insert(item)
+
+func use_item(item: InvItem) -> void:
+	item.use(self)

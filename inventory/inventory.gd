@@ -3,6 +3,7 @@ extends Resource
 class_name Inv
 
 signal update
+signal use_item
 
 @export var slots: Array[InvSlot]
 
@@ -19,3 +20,18 @@ func insert(item: InvItem):
 			update.emit()
 		else:
 			print("Inventory is full")
+
+func use_item_at_index(index: int):
+	if index < 0 || index >= slots.size() || !slots[index].item:
+		return
+
+	var slot = slots[index]
+
+	use_item.emit(slot.item)
+	
+	if slot.amount > 1:
+		slot.amount -= 1
+	else:
+		slot.item = null
+		slot.amount = 0
+	update.emit()
