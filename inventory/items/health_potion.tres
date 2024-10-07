@@ -1,9 +1,10 @@
-[gd_resource type="Resource" script_class="InvItem" load_steps=3 format=3 uid="uid://dythkveglql4s"]
+[gd_resource type="Resource" script_class="HealthItem" load_steps=3 format=3 uid="uid://dythkveglql4s"]
 
-[ext_resource type="Script" path="res://inventory/inventory_item.gd" id="1_23g6q"]
+[ext_resource type="Script" path="res://inventory/items/health_item.gd" id="1_rvogj"]
 [ext_resource type="Texture2D" uid="uid://dnurhshcrl8lq" path="res://assets/sprites/collectibles/flasks/flasks_1_1.png" id="2_3k17b"]
 
 [resource]
-script = ExtResource("1_23g6q")
+script = ExtResource("1_rvogj")
+health_change = 1
 name = "health_potion"
 texture = ExtResource("2_3k17b")

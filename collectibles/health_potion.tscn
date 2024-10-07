@@ -3,7 +3,7 @@
 [ext_resource type="Texture2D" uid="uid://ckgj48bwu48q8" path="res://assets/sprites/collectibles/flasks/flasks_4_1.png" id="1_bddew"]
 [ext_resource type="Script" path="res://collectibles/health_potion.gd" id="1_q18lm"]
 [ext_resource type="Texture2D" uid="uid://dgcalrr50fjsc" path="res://assets/sprites/collectibles/flasks/flasks_4_2.png" id="2_c1v2q"]
-[ext_resource type="Resource" uid="uid://dythkveglql4s" path="res://inventory/items/health_potion.tres" id="2_rqimk"]
+[ext_resource type="Resource" uid="uid://dythkveglql4s" path="res://inventory/items/health_potion.tres" id="2_wu8ac"]
 [ext_resource type="Texture2D" uid="uid://c8xprjcxi7ftu" path="res://assets/sprites/collectibles/flasks/flasks_4_3.png" id="3_cbwa2"]
 [ext_resource type="Texture2D" uid="uid://c1ekpc5blent1" path="res://assets/sprites/collectibles/flasks/flasks_4_4.png" id="4_qndry"]
 
@@ -33,7 +33,7 @@ height = 16.0
 
 [node name="health_potion" type="Node2D"]
 script = ExtResource("1_q18lm")
-item = ExtResource("2_rqimk")
+item = ExtResource("2_wu8ac")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_tktwk")
