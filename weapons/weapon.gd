@@ -2,13 +2,19 @@ extends Node2D
 
 class_name Weapon; "res://assets/sprites/weapons/icons/sword_01.png"
 
+@export var is_on_floor: bool = false
+
 @onready var animation_player: AnimationPlayer = get_node("AnimationPlayer")
 @onready var charge_particles: GPUParticles2D = get_node("Sprite2D/ChargeParticles")
 @onready var hitbox: Hitbox = get_node("Sprite2D/Hitbox")
+@onready var pickable_area: Area2D = get_node("PickableArea")
+var tween: Tween = null
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	pass
+	if not is_on_floor:
+		pickable_area.set_collision_mask_value(1, false)
+		pickable_area.set_collision_mask_value(2, false)
 
 func get_input() -> void:
 	if Input.is_action_just_pressed("ui_attack") and not animation_player.is_playing():
@@ -34,4 +40,26 @@ func is_busy():
 	return false
 
 func cancel_attack():
-	animation_player.play("cancel_attack")
+	#animation_player.play("cancel_attack")
+	animation_player.call_deferred("play", "cancel_attack")
+
+
+func _on_pickable_area_body_entered(body: Node2D) -> void:
+	if body != null:
+		pickable_area.set_collision_mask_value(1, false)
+		pickable_area.set_collision_mask_value(2, false)
+		body.pick_up_weapon(self)
+		position = Vector2.ZERO
+	else:
+		tween.kill()
+		pickable_area.set_collision_mask_value(2, true)
+
+func interpolate_pos(init_pos: Vector2, final_pos: Vector2) -> void:
+	position = init_pos
+	tween = create_tween()
+	tween.tween_property(self, "position", final_pos, 0.8).set_trans(Tween.TRANS_QUART).set_ease(Tween.EASE_OUT)
+	tween.connect("finished", _on_tween_completed)
+	pickable_area.set_collision_mask_value(1, false)
+
+func _on_tween_completed() -> void:
+	pickable_area.set_collision_mask_value(2, true)

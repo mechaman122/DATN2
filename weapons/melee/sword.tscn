@@ -394,14 +394,15 @@ libraries = {
 "": SubResource("AnimationLibrary_hgog5")
 }
 
-[node name="pickable_area" type="Area2D" parent="."]
+[node name="PickableArea" type="Area2D" parent="."]
 visible = false
-collision_layer = 8
-collision_mask = 2
+rotation = -0.785509
+collision_layer = 0
+collision_mask = 3
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="pickable_area"]
-position = Vector2(-8, -8)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PickableArea"]
+position = Vector2(4.95124, -13.4345)
 rotation = -0.785398
 shape = SubResource("CapsuleShape2D_2rnu8")
 
-[connection signal="body_entered" from="pickable_area" to="." method="_on_pickable_area_body_entered"]
+[connection signal="body_entered" from="PickableArea" to="." method="_on_pickable_area_body_entered"]

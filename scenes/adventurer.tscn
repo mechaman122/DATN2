@@ -1,11 +1,10 @@
-[gd_scene load_steps=86 format=3 uid="uid://2tkmj873jyu3"]
+[gd_scene load_steps=85 format=3 uid="uid://2tkmj873jyu3"]
 
 [ext_resource type="Texture2D" uid="uid://cn25h6f20oytn" path="res://assets/sprites/adventurer/adventurer_sprite.png" id="1_c2cxh"]
 [ext_resource type="Script" path="res://scripts/adventurer.gd" id="1_cfpa1"]
 [ext_resource type="Script" path="res://scripts/health.gd" id="2_6m0bo"]
 [ext_resource type="Resource" uid="uid://di3j72xo2yj4n" path="res://inventory/player_inv.tres" id="2_lnpel"]
 [ext_resource type="PackedScene" uid="uid://c4urdvaatn2no" path="res://hitboxes/hurtbox.tscn" id="3_056ev"]
-[ext_resource type="PackedScene" uid="uid://db2unpgacyeik" path="res://weapons/melee/sword.tscn" id="3_neu2e"]
 [ext_resource type="Script" path="res://states/FSM.gd" id="3_nfnxt"]
 [ext_resource type="Script" path="res://states/idle.gd" id="4_0iug0"]
 [ext_resource type="PackedScene" uid="uid://c5ngb6vuv5lsd" path="res://weapons/melee/hammer.tscn" id="4_mum05"]
@@ -813,10 +812,7 @@ inv = ExtResource("2_lnpel")
 [node name="Weapons" type="Node2D" parent="."]
 rotation = 3.14159
 
-[node name="Sword" parent="Weapons" instance=ExtResource("3_neu2e")]
-
 [node name="Hammer" parent="Weapons" instance=ExtResource("4_mum05")]
-visible = false
 
 [node name="Inv_UI" parent="." instance=ExtResource("14_p8tc7")]
 offset_left = -34.0
@@ -847,7 +843,7 @@ collision_mask = 32
 health = NodePath("../Health")
 
 [node name="CollisionShape2D" parent="Hurtbox" index="0"]
-position = Vector2(-2, -9)
+position = Vector2(-2, 0)
 shape = SubResource("CircleShape2D_l7bue")
 
 [node name="MeleeHitbox" parent="." instance=ExtResource("6_46qem")]
@@ -883,7 +879,7 @@ script = ExtResource("16_w342q")
 
 [node name="CollectibleCollision" type="CollisionShape2D" parent="."]
 visible = false
-position = Vector2(-2, -9)
+position = Vector2(-2, 0)
 shape = SubResource("CircleShape2D_6prk3")
 debug_color = Color(0.453053, 0.540124, 0.681173, 0.42)
 

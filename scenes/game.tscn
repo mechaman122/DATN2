@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://xfcntficuxyx"]
+[gd_scene load_steps=8 format=3 uid="uid://xfcntficuxyx"]
 
 [ext_resource type="PackedScene" uid="uid://2tkmj873jyu3" path="res://scenes/adventurer.tscn" id="1_7c8dh"]
 [ext_resource type="PackedScene" uid="uid://cmlvksdm3h5h2" path="res://interface/interface.tscn" id="1_mf2yy"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://cf748of1sxsra" path="res://collectibles/coin.tscn" id="4_8gk2r"]
 [ext_resource type="PackedScene" uid="uid://cba41v3c42exf" path="res://collectibles/health_potion.tscn" id="5_0akn1"]
 [ext_resource type="PackedScene" uid="uid://b0p5cbviyxb0d" path="res://enemies/gladiator/gladiator.tscn" id="5_1kutf"]
+[ext_resource type="PackedScene" uid="uid://db2unpgacyeik" path="res://weapons/melee/sword.tscn" id="7_ghp38"]
 
 [node name="Game" type="Node2D"]
 
@@ -33,5 +34,9 @@ position = Vector2(750, 376)
 
 [node name="health_potion" parent="." instance=ExtResource("5_0akn1")]
 position = Vector2(649, 334)
+
+[node name="Sword" parent="." instance=ExtResource("7_ghp38")]
+position = Vector2(610, 384)
+is_on_floor = true
 
 [editable path="Interface"]
