@@ -5,6 +5,7 @@ const RUN = "Run"
 const MELEE = "Melee"
 const DIE = "Die"
 const HURT = "Hurt"
+const ROLL = "Roll"
 
 var player: Player
 

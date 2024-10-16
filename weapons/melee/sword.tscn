@@ -62,7 +62,7 @@ tracks/2/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [false]
+"values": [true]
 }
 tracks/3/type = "value"
 tracks/3/imported = false
@@ -379,6 +379,7 @@ visible = false
 position = Vector2(0.928932, -11.0711)
 rotation = -0.785398
 shape = SubResource("CapsuleShape2D_2kcvx")
+disabled = true
 debug_color = Color(0.988473, 0, 0.301591, 0.42)
 
 [node name="ChargeParticles" type="GPUParticles2D" parent="Sprite2D"]

@@ -1,9 +1,8 @@
-[gd_scene load_steps=8 format=3 uid="uid://xfcntficuxyx"]
+[gd_scene load_steps=7 format=3 uid="uid://xfcntficuxyx"]
 
 [ext_resource type="PackedScene" uid="uid://2tkmj873jyu3" path="res://scenes/adventurer.tscn" id="1_7c8dh"]
 [ext_resource type="PackedScene" uid="uid://cmlvksdm3h5h2" path="res://interface/interface.tscn" id="1_mf2yy"]
 [ext_resource type="PackedScene" uid="uid://b4a2vbki2mytf" path="res://scenes/damage_area_test.tscn" id="2_abr38"]
-[ext_resource type="Script" path="res://interface/interface.gd" id="2_tn0aj"]
 [ext_resource type="PackedScene" uid="uid://cf748of1sxsra" path="res://collectibles/coin.tscn" id="4_8gk2r"]
 [ext_resource type="PackedScene" uid="uid://cba41v3c42exf" path="res://collectibles/health_potion.tscn" id="5_0akn1"]
 [ext_resource type="PackedScene" uid="uid://b0p5cbviyxb0d" path="res://enemies/gladiator/gladiator.tscn" id="5_1kutf"]
@@ -11,7 +10,6 @@
 [node name="Game" type="Node2D"]
 
 [node name="Interface" parent="." instance=ExtResource("1_mf2yy")]
-script = ExtResource("2_tn0aj")
 
 [node name="Adventurer" parent="." instance=ExtResource("1_7c8dh")]
 position = Vector2(695, 330)

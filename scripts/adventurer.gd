@@ -12,7 +12,7 @@ var current_weapon
 @onready var health = $Health
 
 @onready var melee_hitbox = $MeleeHitbox/CollisionShape2D
-@onready var weapons = get_node("Weapon")
+@onready var weapons = get_node("Weapons")
 
 @export var inv: Inv
 
@@ -21,6 +21,7 @@ var health_changed = false
 var knockback_direction = Vector2()
 
 func _ready() -> void:
+	print(health.health)
 	inv.use_item.connect(use_item)
 	if weapons.get_child_count() > 0:
 		current_weapon = weapons.get_child(0)
@@ -69,3 +70,6 @@ func _switch_weapon(direction: int) -> void:
 	current_weapon.hide()
 	current_weapon = weapons.get_child(index)
 	current_weapon.show()
+
+func get_mouse_direction() -> Vector2:
+	return (get_global_mouse_position() - global_position).normalized()

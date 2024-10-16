@@ -21,3 +21,5 @@ func physics_update(delta: float) -> void:
 		finished.emit(IDLE)
 	elif Input.is_action_pressed("ui_attack") and !player.has_weapon:
 		finished.emit(MELEE)
+	elif Input.is_action_just_pressed("move_roll"):
+		finished.emit(ROLL)

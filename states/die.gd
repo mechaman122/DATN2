@@ -6,5 +6,5 @@ func enter(previous_state_path: String, data: Dictionary = {}) -> void:
 	# play the die animation only once
 	if player.has_weapon:
 		player.current_weapon.cancel_attack()
-	player.animation_sprite.play("die")
+	player.animation_player.play("die")
 	# queue_free()

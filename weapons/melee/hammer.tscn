@@ -424,13 +424,13 @@ color = Color(0.599199, 0.599199, 0.599199, 0)
 polygon = PackedVector2Array(-5.96294, -9.28713, -3.42169, -10.1314, 0.851709, -10.1315, 0.851762, -5.91002, -3.40744, -5.90997, -8.51846, -5.06562, -7.66665, -7.59849)
 
 [node name="Hitbox" type="Area2D" parent="Sprite2D"]
-visible = false
 collision_layer = 16
 collision_mask = 4
 script = ExtResource("4_ye8kq")
 damage = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Sprite2D/Hitbox"]
+visible = false
 position = Vector2(9.8995, -4.24264)
 shape = SubResource("CircleShape2D_x1sk0")
 disabled = true
