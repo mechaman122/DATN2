@@ -8,3 +8,4 @@ script = ExtResource("1_rvogj")
 health_change = 1
 name = "health_potion"
 texture = ExtResource("2_3k17b")
+type = "item"

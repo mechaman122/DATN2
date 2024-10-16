@@ -2,7 +2,9 @@ extends PlayerState
 
 
 func enter(previous_state_path: String, data: Dictionary = {}) -> void:
-	player.animated_sprite.play("hurt")
+	player.animation_player.play("hurt")
+	if player.has_weapon:
+		player.current_weapon.cancel_attack()
 	player.health.set_temp_immortality(1)
 	
 func physics_update(delta: float) -> void:
@@ -10,5 +12,5 @@ func physics_update(delta: float) -> void:
 	player.knockback_direction = Vector2()
 	player.move_and_slide()
 
-	if (player.animated_sprite.frame == player.animated_sprite.sprite_frames.get_frame_count("hurt") - 1):
+	if player.animation_player.get_current_animation_position() == player.animation_player.get_current_animation_length():
 		finished.emit(IDLE)
