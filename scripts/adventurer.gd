@@ -1,5 +1,7 @@
 class_name Player extends CharacterBody2D
 
+enum {UP, DOWN}
+
 const speed = 100.0
 
 var current_weapon
@@ -35,6 +37,11 @@ func _process(delta: float) -> void:
 		animated_sprite.flip_h = mouse_dir.x < 0 
 
 	if has_weapon:
+		if not current_weapon.is_busy():
+			if Input.is_action_just_released("ui_prev_weapon"):
+				_switch_weapon(UP)
+			elif Input.is_action_just_released("ui_next_weapon"):
+				_switch_weapon(DOWN)
 		current_weapon.move(mouse_dir)
 		current_weapon.get_input()
 	
@@ -46,3 +53,19 @@ func collect(item):
 
 func use_item(item: InvItem) -> void:
 	item.use(self)
+
+func _switch_weapon(direction: int) -> void:
+	if !has_weapon:
+		return
+	var index: int = current_weapon.get_index()
+	if direction == UP:
+		index -= 1
+		if index < 0:
+			index = weapons.get_child_count() - 1
+	else:
+		index += 1
+		if index > weapons.get_child_count() - 1:
+			index = 0
+	current_weapon.hide()
+	current_weapon = weapons.get_child(index)
+	current_weapon.show()
