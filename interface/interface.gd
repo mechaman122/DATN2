@@ -3,7 +3,7 @@ extends CanvasLayer
 @onready var damage_bar = $LifeBar/TextureProgressBar/DamageBar
 @onready var health = get_parent().get_node("Adventurer/Health")
 @onready var player = get_parent().get_node("Adventurer")
-@onready var timer = $Timer
+@onready var timer = get_node("LifeBar/Timer")
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:

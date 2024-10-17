@@ -11,8 +11,8 @@ offset_right = 300.0
 offset_bottom = 65.0
 scale = Vector2(1.5, 1.5)
 
-[node name="Timer" type="Timer" parent="."]
+[node name="Timer" type="Timer" parent="LifeBar"]
 wait_time = 0.4
 one_shot = true
 
-[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[connection signal="timeout" from="LifeBar/Timer" to="." method="_on_timer_timeout"]

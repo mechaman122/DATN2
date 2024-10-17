@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://c5ngb6vuv5lsd"]
+[gd_scene load_steps=18 format=3 uid="uid://c5ngb6vuv5lsd"]
 
 [ext_resource type="Script" path="res://weapons/weapon.gd" id="1_1wpst"]
 [ext_resource type="Shader" path="res://scripts/white.gdshader" id="2_6522i"]
@@ -24,6 +24,23 @@ tangential_accel_min = 79.7
 tangential_accel_max = 80.3
 turbulence_noise_strength = 20.0
 turbulence_noise_scale = 3.0
+
+[sub_resource type="Curve" id="Curve_kvytf"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_gunxp"]
+curve = SubResource("Curve_kvytf")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_bgrc6"]
+particle_flag_disable_z = true
+spread = 180.0
+initial_velocity_min = 79.5
+initial_velocity_max = 80.5
+gravity = Vector3(0, 0, 0)
+scale_min = 2.0
+scale_max = 2.0
+scale_curve = SubResource("CurveTexture_gunxp")
 
 [sub_resource type="Animation" id="Animation_q8kax"]
 length = 0.001
@@ -122,6 +139,18 @@ tracks/7/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 0,
 "values": [5.0]
+}
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("Sprite2D/ExplosionParticles:emitting")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
 }
 
 [sub_resource type="Animation" id="Animation_pbwg2"]
@@ -318,7 +347,7 @@ tracks/0/path = NodePath(".:rotation")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.25, 0.8, 1.2),
+"times": PackedFloat32Array(0, 0.25, 0.85, 1.2),
 "transitions": PackedFloat32Array(3, 1, 0.2, 1),
 "update": 0,
 "values": [0.0, 1.39626, 1.39626, 0.0]
@@ -330,7 +359,7 @@ tracks/1/path = NodePath("Sprite2D:rotation")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.25, 0.8, 1.2),
+"times": PackedFloat32Array(0, 0.25, 0.85, 1.2),
 "transitions": PackedFloat32Array(1, 1, 0.2, 1),
 "update": 0,
 "values": [-2.35619, -0.523599, -0.523599, -2.35619]
@@ -366,10 +395,10 @@ tracks/4/path = NodePath("Sprite2D/ChargeParticles:emitting")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
-"times": PackedFloat32Array(0, 0.45),
-"transitions": PackedFloat32Array(1, 1),
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [true, false]
+"values": [false]
 }
 tracks/5/type = "value"
 tracks/5/imported = false
@@ -394,6 +423,18 @@ tracks/6/keys = {
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 1,
 "values": [5.0, 15.0, 5.0]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("Sprite2D/ExplosionParticles:emitting")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0.25, 0.35),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_2qhip"]
@@ -421,13 +462,14 @@ offset = Vector2(4, -4)
 
 [node name="Polygon2D" type="Polygon2D" parent="Sprite2D"]
 z_index = -1
-position = Vector2(-1.41421, -1.41421)
+position = Vector2(-0.463209, -1.44752)
 rotation = 0.785406
 scale = Vector2(1.17393, 1.18443)
 color = Color(0.599199, 0.599199, 0.599199, 0)
-polygon = PackedVector2Array(-5.96294, -9.28713, -3.42169, -10.1314, 0.851709, -10.1315, 0.851762, -5.91002, -3.40744, -5.90997, -8.51846, -5.06562, -7.66665, -7.59849)
+polygon = PackedVector2Array(-5.96294, -9.28713, -3.42169, -10.1314, 0.851709, -10.1315, 0.804668, -4.85797, -2.99081, -5.18209, -9.16169, -4.57213, -7.66665, -7.59849)
 
 [node name="Hitbox" type="Area2D" parent="Sprite2D"]
+visible = false
 collision_layer = 16
 collision_mask = 4
 script = ExtResource("4_ye8kq")
@@ -445,6 +487,15 @@ emitting = false
 amount = 15
 process_material = SubResource("ParticleProcessMaterial_vmj2c")
 lifetime = 0.6
+
+[node name="ExplosionParticles" type="GPUParticles2D" parent="Sprite2D"]
+position = Vector2(9.89948, -4.24269)
+emitting = false
+amount = 50
+process_material = SubResource("ParticleProcessMaterial_bgrc6")
+lifetime = 0.5
+explosiveness = 1.0
+randomness = 0.5
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {

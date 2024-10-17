@@ -3,6 +3,7 @@ class_name Player extends CharacterBody2D
 enum {UP, DOWN}
 
 const speed = 100.0
+const DUST_SCENE: PackedScene = preload("res://scenes/dust.tscn")
 
 var current_weapon
 
@@ -13,6 +14,7 @@ var current_weapon
 
 @onready var melee_hitbox = $MeleeHitbox/CollisionShape2D
 @onready var weapons = get_node("Weapons")
+@onready var dust_position = get_node("DustPosition")
 
 @export var inv: Inv
 
@@ -29,12 +31,7 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	var mouse_dir: Vector2 = (get_global_mouse_position() - global_position).normalized()
 	
-	if velocity.x < 0:
-		animated_sprite.flip_h = true
-	elif velocity.x > 0:
-		animated_sprite.flip_h = false
-	else:
-		animated_sprite.flip_h = mouse_dir.x < 0 
+	animated_sprite.flip_h = mouse_dir.x < 0 
 
 	if has_weapon:
 		if not current_weapon.is_busy():
@@ -93,3 +90,8 @@ func _drop_weapon() -> void:
 
 	var throw_dir: Vector2 = (get_global_mouse_position() - position).normalized()
 	weapon_to_drop.interpolate_pos(position, position + throw_dir * 50)
+
+func spawn_dust() -> void:
+	var dust: Sprite2D = DUST_SCENE.instantiate()
+	dust.position = dust_position.global_position
+	get_parent().add_child(dust)
