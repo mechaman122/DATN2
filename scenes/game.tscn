@@ -12,6 +12,12 @@
 
 [node name="Interface" parent="." instance=ExtResource("1_mf2yy")]
 
+[node name="PanelContainer" parent="Interface" index="1"]
+size_flags_horizontal = 3
+
+[node name="Inventory" parent="Interface/PanelContainer" index="0"]
+custom_minimum_size = Vector2(16, 16)
+
 [node name="Adventurer" parent="." instance=ExtResource("1_7c8dh")]
 position = Vector2(695, 330)
 
@@ -32,11 +38,15 @@ position = Vector2(753, 328)
 [node name="Gladiator" parent="." instance=ExtResource("5_1kutf")]
 position = Vector2(750, 376)
 
-[node name="health_potion" parent="." instance=ExtResource("5_0akn1")]
-position = Vector2(649, 334)
-
 [node name="Sword" parent="." instance=ExtResource("7_ghp38")]
 position = Vector2(610, 384)
 is_on_floor = true
+
+[node name="HealthPotion" parent="." instance=ExtResource("5_0akn1")]
+position = Vector2(661, 357)
+
+[connection signal="weapon_dropped" from="Adventurer" to="Interface" method="_on_player_weapon_dropped"]
+[connection signal="weapon_picked_up" from="Adventurer" to="Interface" method="_on_player_weapon_picked_up"]
+[connection signal="weapon_switched" from="Adventurer" to="Interface" method="_on_player_weapon_switched"]
 
 [editable path="Interface"]

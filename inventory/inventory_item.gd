@@ -1,10 +1,12 @@
-extends Resource
+extends TextureRect
 
-class_name InvItem
+@onready var border: ReferenceRect = get_node("ReferenceRect")
 
-@export var name: String = ""
-@export var texture: Texture2D
-@export var type: String = ""
-
-func use(player: Player) -> void:
-	pass
+func initialize(texture: Texture) -> void:
+	self.texture = texture
+	
+func select() -> void:
+	border.show()
+	
+func deselect() -> void:
+	border.hide()

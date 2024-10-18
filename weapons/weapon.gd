@@ -63,3 +63,6 @@ func interpolate_pos(init_pos: Vector2, final_pos: Vector2) -> void:
 
 func _on_tween_completed() -> void:
 	pickable_area.set_collision_mask_value(2, true)
+
+func get_texture() -> Texture:
+	return get_node("Sprite2D").texture

@@ -1,12 +1,13 @@
-[gd_scene load_steps=8 format=3 uid="uid://cf748of1sxsra"]
+[gd_scene load_steps=9 format=3 uid="uid://cf748of1sxsra"]
 
 [ext_resource type="Texture2D" uid="uid://dtmcenr1s0xye" path="res://assets/sprites/collectibles/coin/coin_1.png" id="1_eyn70"]
+[ext_resource type="PackedScene" uid="uid://dattfmr6job88" path="res://collectibles/collectible.tscn" id="1_sq4w7"]
 [ext_resource type="Script" path="res://collectibles/coin.gd" id="1_yxg84"]
 [ext_resource type="Texture2D" uid="uid://buw41y8xkppk6" path="res://assets/sprites/collectibles/coin/coin_2.png" id="2_aswll"]
 [ext_resource type="Texture2D" uid="uid://dn47dupix2w1d" path="res://assets/sprites/collectibles/coin/coin_3.png" id="3_vfl7j"]
 [ext_resource type="Texture2D" uid="uid://bbyl3iw0k8a7j" path="res://assets/sprites/collectibles/coin/coin_4.png" id="4_mhahs"]
 
-[sub_resource type="SpriteFrames" id="SpriteFrames_v1vbm"]
+[sub_resource type="SpriteFrames" id="SpriteFrames_u4a68"]
 animations = [{
 "frames": [{
 "duration": 1.0,
@@ -26,27 +27,17 @@ animations = [{
 "speed": 4.0
 }]
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_t744n"]
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_u30iy"]
 radius = 5.0
 height = 14.0
 
-[node name="Coin" type="Node2D"]
+[node name="Coin" instance=ExtResource("1_sq4w7")]
 script = ExtResource("1_yxg84")
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-position = Vector2(0, -5)
-sprite_frames = SubResource("SpriteFrames_v1vbm")
+[node name="AnimatedSprite2D" parent="." index="0"]
+sprite_frames = SubResource("SpriteFrames_u4a68")
 animation = &"idle"
 autoplay = "idle"
-frame = 3
-frame_progress = 0.36304
 
-[node name="PickableArea" type="Area2D" parent="."]
-collision_layer = 8
-collision_mask = 3
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="PickableArea"]
-position = Vector2(0, -5)
-shape = SubResource("CapsuleShape2D_t744n")
-
-[connection signal="body_entered" from="PickableArea" to="." method="_on_pickable_area_body_entered"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PickableArea" index="0"]
+shape = SubResource("CapsuleShape2D_u30iy")

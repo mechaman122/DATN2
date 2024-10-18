@@ -1,0 +1,26 @@
+[gd_scene load_steps=3 format=3 uid="uid://dwepsfgttpkaj"]
+
+[ext_resource type="Texture2D" uid="uid://cu3cnbs3jqbgr" path="res://assets/sprites/weapons/icons/Hammer.png" id="1_4ot6e"]
+[ext_resource type="Script" path="res://inventory/inventory_item.gd" id="2_gq13k"]
+
+[node name="InventoryItem" type="TextureRect"]
+custom_minimum_size = Vector2(16, 16)
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("1_4ot6e")
+expand_mode = 2
+stretch_mode = 5
+script = ExtResource("2_gq13k")
+
+[node name="ReferenceRect" type="ReferenceRect" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.1
+anchor_top = 0.1
+anchor_right = 0.9
+anchor_bottom = 0.9
+grow_horizontal = 2
+grow_vertical = 2
+border_color = Color(0.552941, 1, 0.509804, 0.243137)
+border_width = 6.0
+editor_only = false
