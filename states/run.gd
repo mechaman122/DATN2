@@ -17,11 +17,11 @@ func physics_update(delta: float) -> void:
 	elif player.health_changed:
 		finished.emit(HURT)
 		player.health_changed = false
+	elif Input.is_action_just_pressed("move_roll"):
+		finished.emit(ROLL)
 	elif Input.is_action_pressed("move_right") or Input.is_action_pressed("move_left") or Input.is_action_pressed("move_down") or Input.is_action_pressed("move_up"):
 		finished.emit(RUN)
 	elif not Input.is_action_pressed("move_right") and not Input.is_action_pressed("move_left") and not Input.is_action_pressed("move_down") and not Input.is_action_pressed("move_up"):
 		finished.emit(IDLE)
 	elif Input.is_action_pressed("ui_attack") and !player.has_weapon:
 		finished.emit(MELEE)
-	elif Input.is_action_just_pressed("move_roll"):
-		finished.emit(ROLL)

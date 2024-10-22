@@ -813,7 +813,7 @@ radius = 7.0
 size = Vector2(7, 16)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_6prk3"]
-radius = 13.0
+radius = 9.05539
 
 [node name="Adventurer" type="CharacterBody2D"]
 collision_layer = 2
@@ -885,7 +885,6 @@ script = ExtResource("16_w342q")
 
 [node name="CollectibleCollision" type="CollisionShape2D" parent="."]
 visible = false
-position = Vector2(-2, 0)
 shape = SubResource("CircleShape2D_6prk3")
 debug_color = Color(0.453053, 0.540124, 0.681173, 0.42)
 
