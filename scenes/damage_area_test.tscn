@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=3 uid="uid://b4a2vbki2mytf"]
 
 [ext_resource type="PackedScene" uid="uid://c2deh2ka3p3xy" path="res://hitboxes/hitbox.tscn" id="1_ueb3p"]
-[ext_resource type="Texture2D" uid="uid://dc6qt2plqybi1" path="res://icon.svg" id="2_oddga"]
+[ext_resource type="Texture2D" uid="uid://ce725v2mlwfwb" path="res://icon.svg" id="2_oddga"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_j7liv"]
 radius = 19.0
@@ -28,12 +28,10 @@ collision_layer = 32
 collision_mask = 2
 
 [node name="CollisionShape2D" parent="Hitbox" index="0"]
-position = Vector2(111, -8)
 shape = SubResource("CircleShape2D_j7liv")
 debug_color = Color(0.999644, 0, 0.106203, 0.42)
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-position = Vector2(111, -8)
 scale = Vector2(0.15625, 0.148437)
 sprite_frames = SubResource("SpriteFrames_y2y3s")
 

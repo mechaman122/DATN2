@@ -25,7 +25,7 @@ func get_center():
 
 func _split(remaining, paths):
 	var rng = RandomNumberGenerator.new()
-	var split_percent = rng.randf_range(0.3, 0.7)
+	var split_percent = rng.randf_range(0.35, 0.65)
 	var split_horizontal = size.y >= size.x
 	
 	if split_horizontal:

@@ -22,7 +22,7 @@ signal weapon_dropped(index: int)
 
 var has_weapon = false
 var health_changed = false
-var knockback_direction = Vector2()
+var knockback: Vector2
 
 func _ready() -> void:
 	if weapons.get_child_count() > 0:

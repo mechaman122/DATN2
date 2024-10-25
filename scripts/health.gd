@@ -12,6 +12,11 @@ var immortality_timer: Timer = null
 
 @export var health: int = max_health: set = set_health, get = get_health
 
+func _ready():
+	set_max_health(max_health)
+	health = max_health
+	set_health(health)
+
 func set_max_health(value: int):
 	var clamp_value = max(1, value)
 

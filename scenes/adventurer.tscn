@@ -807,7 +807,7 @@ _data = {
 }
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_l7bue"]
-radius = 7.0
+radius = 6.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_w4a67"]
 size = Vector2(7, 16)
@@ -817,7 +817,7 @@ radius = 9.05539
 
 [node name="Adventurer" type="CharacterBody2D"]
 collision_layer = 2
-collision_mask = 13
+collision_mask = 77
 script = ExtResource("1_cfpa1")
 
 [node name="Weapons" type="Node2D" parent="."]
@@ -827,7 +827,7 @@ rotation = 3.14159
 
 [node name="Health" type="Node" parent="."]
 script = ExtResource("2_6m0bo")
-max_health = 3
+max_health = 100
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(0, -5)
@@ -843,13 +843,11 @@ libraries = {
 autoplay = "idle"
 
 [node name="Hurtbox" parent="." node_paths=PackedStringArray("health") instance=ExtResource("3_056ev")]
-visible = false
 collision_layer = 2
 collision_mask = 32
 health = NodePath("../Health")
 
 [node name="CollisionShape2D" parent="Hurtbox" index="0"]
-position = Vector2(-2, 0)
 shape = SubResource("CircleShape2D_l7bue")
 
 [node name="MeleeHitbox" parent="." instance=ExtResource("6_46qem")]

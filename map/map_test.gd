@@ -3,6 +3,7 @@ extends Node2D
 var root_node: Branch
 var tile_size: int = 16
 var paths: Array = []
+var room_list: Array = []
 var map_width: int = 80
 var map_height: int = 40
 
@@ -18,9 +19,8 @@ func _ready():
 			BetterTerrain.update_terrain_cell(tile_map_layer, Vector2i(x, y))
 	root_node._split(2, paths)
 	queue_redraw()
-	player_spawn.position = paths[0]['left']
-	#player.position = player_spawn.position
-	print(player.position)
+	player_spawn.position = root_node.get_leaves()[0].get_center() * 16
+	player.position = player_spawn.position
 	pass
 	
 	
@@ -38,16 +38,6 @@ func _draw():
 	)
 	
 	for leaf in root_node.get_leaves():
-		draw_rect(
-			Rect2i(
-				leaf.position.x * tile_size, #x
-				leaf.position.y * tile_size, #y
-				leaf.size.x * tile_size, #width
-				leaf.size.y * tile_size, #height
-			),
-			Color.GREEN, #color
-			false # is_filled
-		)
 		for x in range(leaf.size.x):
 			for y in range(leaf.size.y):
 				if not is_inside_padding(x, y, leaf, padding):
@@ -64,4 +54,5 @@ func _draw():
 				for i in range(path['right'].y - path['left'].y):
 					BetterTerrain.set_cells(tile_map_layer, [Vector2i(path['left'].x, path['left'].y + i), Vector2i(path['left'].x - 1, path['left'].y + i)], 1)
 					BetterTerrain.update_terrain_cells(tile_map_layer, [Vector2i(path['left'].x, path['left'].y + i), Vector2i(path['left'].x - 1, path['left'].y + i)])
+		room_list.push_back([Vector2i(leaf.position.x + padding.x, leaf.position.y + padding.y), Vector2i(leaf.size.x - padding.z, leaf.size.y - padding.w)])
 	pass

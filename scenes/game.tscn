@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://xfcntficuxyx"]
+[gd_scene load_steps=10 format=3 uid="uid://xfcntficuxyx"]
 
 [ext_resource type="PackedScene" uid="uid://2tkmj873jyu3" path="res://scenes/adventurer.tscn" id="1_7c8dh"]
 [ext_resource type="PackedScene" uid="uid://cmlvksdm3h5h2" path="res://interface/interface.tscn" id="1_mf2yy"]
@@ -7,6 +7,8 @@
 [ext_resource type="PackedScene" uid="uid://cba41v3c42exf" path="res://collectibles/health_potion.tscn" id="5_0akn1"]
 [ext_resource type="PackedScene" uid="uid://b0p5cbviyxb0d" path="res://enemies/gladiator/gladiator.tscn" id="5_1kutf"]
 [ext_resource type="PackedScene" uid="uid://db2unpgacyeik" path="res://weapons/melee/sword.tscn" id="7_ghp38"]
+[ext_resource type="PackedScene" uid="uid://bk1y10ciko62f" path="res://map/map_elements/treasure.tscn" id="8_qskdt"]
+[ext_resource type="PackedScene" uid="uid://bc5o1fjpnfyy5" path="res://map/map_elements/trap_floor.tscn" id="9_7qsxn"]
 
 [node name="Game" type="Node2D"]
 
@@ -27,7 +29,7 @@ zoom = Vector2(4, 4)
 position_smoothing_speed = 10.0
 
 [node name="DamageArea_test" parent="." instance=ExtResource("2_abr38")]
-position = Vector2(693, 330)
+position = Vector2(700, 300)
 
 [node name="Coin" parent="." instance=ExtResource("4_8gk2r")]
 position = Vector2(763, 283)
@@ -44,6 +46,12 @@ is_on_floor = true
 
 [node name="HealthPotion" parent="." instance=ExtResource("5_0akn1")]
 position = Vector2(661, 357)
+
+[node name="Treasure" parent="." instance=ExtResource("8_qskdt")]
+position = Vector2(700, 390)
+
+[node name="TrapFloor" parent="." instance=ExtResource("9_7qsxn")]
+position = Vector2(753, 404)
 
 [connection signal="weapon_dropped" from="Adventurer" to="Interface" method="_on_player_weapon_dropped"]
 [connection signal="weapon_picked_up" from="Adventurer" to="Interface" method="_on_player_weapon_picked_up"]
