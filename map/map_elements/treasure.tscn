@@ -296,8 +296,9 @@ animation_player = NodePath("AnimationPlayer")
 
 [node name="Label" type="Label" parent="."]
 offset_left = -59.0
-offset_top = -23.0
+offset_top = -16.0
 offset_right = 59.0
+offset_bottom = 7.0
 text = "Press F to open"
 label_settings = SubResource("LabelSettings_xnc72")
 horizontal_alignment = 1

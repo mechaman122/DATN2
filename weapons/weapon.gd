@@ -3,6 +3,7 @@ extends Node2D
 class_name Weapon; "res://assets/sprites/weapons/icons/sword_01.png"
 
 @export var is_on_floor: bool = false
+@export var is_ranged: bool = false
 
 @onready var animation_player: AnimationPlayer = get_node("AnimationPlayer")
 @onready var charge_particles: GPUParticles2D = get_node("Sprite2D/ChargeParticles")
@@ -26,13 +27,21 @@ func get_input() -> void:
 			animation_player.play("charged_attack")
 
 func move(mouse_dir: Vector2) -> void:
-	if not animation_player.is_playing() or animation_player.current_animation == "charge":
+	if is_ranged:
 		var parent = get_parent()
-		parent.rotation = mouse_dir.angle()
-		if parent.scale.y == 1 and mouse_dir.x < 0:
+		parent.rotation_degrees = rad_to_deg(mouse_dir.angle())
+		if mouse_dir.x < 0:
 			parent.scale.y = -1
-		elif parent.scale.y == -1 and mouse_dir.x > 0:
+		else:
 			parent.scale.y = 1
+	else:
+		if not animation_player.is_playing() or animation_player.current_animation == "charge":
+			var parent = get_parent()
+			parent.rotation = mouse_dir.angle()
+			if parent.scale.y == 1 and mouse_dir.x < 0:
+				parent.scale.y = -1
+			elif parent.scale.y == -1 and mouse_dir.x > 0:
+				parent.scale.y = 1
 
 func is_busy():
 	if animation_player.is_playing() or charge_particles.emitting:

@@ -1,0 +1,174 @@
+[gd_scene load_steps=10 format=3 uid="uid://cakvy7ysusne5"]
+
+[ext_resource type="PackedScene" uid="uid://bkla8rhoncab0" path="res://weapons/gun/gun.tscn" id="1_8auut"]
+[ext_resource type="Texture2D" uid="uid://c717rgge6pkj8" path="res://assets/sprites/weapons/icons/MP5.png" id="2_16n5j"]
+[ext_resource type="Texture2D" uid="uid://bv0u47iganyml" path="res://assets/sprites/effects/muzzle_flash_effect.png" id="3_lcihd"]
+[ext_resource type="Script" path="res://hitboxes/hitbox.gd" id="3_vuvl1"]
+
+[sub_resource type="Animation" id="Animation_v3bo2"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D/MuzzleEffect:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D/MuzzleEffect:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite2D:offset")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(16, 2)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Sprite2D:rotation")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="Animation" id="Animation_5j55g"]
+resource_name = "attack"
+length = 0.1
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D/MuzzleEffect:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D/MuzzleEffect:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"shoot"
+}]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Sprite2D:offset")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(16, 2), Vector2(14, 2), Vector2(16, 2)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Sprite2D:rotation")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [0.0, -0.0174533, 0.0]
+}
+
+[sub_resource type="Animation" id="Animation_e60s8"]
+resource_name = "cancel_attack"
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_q3031"]
+_data = {
+"RESET": SubResource("Animation_v3bo2"),
+"attack": SubResource("Animation_5j55g"),
+"cancel_attack": SubResource("Animation_e60s8")
+}
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_suj5n"]
+
+[node name="Mp5" instance=ExtResource("1_8auut")]
+is_ranged = true
+
+[node name="Sprite2D" parent="." index="0"]
+texture = ExtResource("2_16n5j")
+offset = Vector2(16, 2)
+
+[node name="Hitbox" type="Area2D" parent="Sprite2D" index="0"]
+script = ExtResource("3_vuvl1")
+
+[node name="MuzzleEffect" parent="Sprite2D" index="2"]
+visible = false
+position = Vector2(25, -2)
+texture = ExtResource("3_lcihd")
+
+[node name="AnimationPlayer" parent="." index="2"]
+libraries = {
+"": SubResource("AnimationLibrary_q3031")
+}
+
+[node name="PickableArea" parent="." index="3"]
+collision_layer = 8
+collision_mask = 3
+
+[node name="CollisionShape2D" parent="PickableArea" index="0"]
+visible = false
+position = Vector2(12, 0)
+shape = SubResource("CircleShape2D_suj5n")
+
+[node name="FiringTimer" parent="." index="4"]
+wait_time = 0.1
+one_shot = true
+
+[node name="MuzzlePosition" parent="." index="5"]
+position = Vector2(28, -1)
+
+[connection signal="body_entered" from="PickableArea" to="." method="_on_pickable_area_body_entered"]

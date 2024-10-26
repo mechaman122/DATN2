@@ -17,7 +17,7 @@ func _on_interactable_area_body_entered(body: Node2D) -> void:
 		body_entered = true
 
 func interact():
-	if rng <= 0.3:
+	if rng <= 0.4:
 		animation_player.play("open_gem")
 	else :
 		animation_player.play("open")
