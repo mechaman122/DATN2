@@ -41,17 +41,17 @@ script = ExtResource("1_mtqcu")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 
+[node name="Hitbox" type="Area2D" parent="Sprite2D"]
+script = ExtResource("2_d786s")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Sprite2D/Hitbox"]
+
 [node name="ChargeParticles" type="GPUParticles2D" parent="Sprite2D"]
 position = Vector2(7.07107, -7.07107)
 emitting = false
 amount = 15
 process_material = SubResource("ParticleProcessMaterial_hwm60")
 lifetime = 0.6
-
-[node name="Hitbox" type="Area2D" parent="."]
-script = ExtResource("2_d786s")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {

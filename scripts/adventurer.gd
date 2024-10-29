@@ -19,6 +19,8 @@ signal weapon_dropped(index: int)
 @onready var melee_hitbox = $MeleeHitbox/CollisionShape2D
 @onready var weapons = get_node("Weapons")
 @onready var dust_position = get_node("DustPosition")
+@onready var tooltip_label = get_node("TooltipLabel")
+@onready var interaction_manager = get_node("InteractionManager")
 
 var has_weapon = false
 var health_changed = false
@@ -46,6 +48,9 @@ func _process(delta: float) -> void:
 		current_weapon.move(mouse_dir)
 		current_weapon.get_input()
 	
+	if Input.is_action_just_pressed("ui_interact"):
+		interaction_manager.initiate_interaction()
+		
 func player():
 	pass
 
@@ -103,3 +108,7 @@ func spawn_dust() -> void:
 	var dust: Sprite2D = DUST_SCENE.instantiate()
 	dust.position = dust_position.global_position
 	get_parent().add_child(dust)
+
+
+func show_tooltip():
+	tooltip_label.show()

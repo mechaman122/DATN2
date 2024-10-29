@@ -1,4 +1,4 @@
-[gd_scene load_steps=83 format=3 uid="uid://2tkmj873jyu3"]
+[gd_scene load_steps=86 format=3 uid="uid://2tkmj873jyu3"]
 
 [ext_resource type="Texture2D" uid="uid://cn25h6f20oytn" path="res://assets/sprites/adventurer/adventurer_sprite.png" id="1_c2cxh"]
 [ext_resource type="Script" path="res://scripts/adventurer.gd" id="1_cfpa1"]
@@ -12,6 +12,8 @@
 [ext_resource type="Script" path="res://states/melee.gd" id="6_p1umm"]
 [ext_resource type="Script" path="res://states/die.gd" id="8_7nkeu"]
 [ext_resource type="Script" path="res://states/hurt.gd" id="12_002dt"]
+[ext_resource type="FontFile" uid="uid://dlndpcesvur4y" path="res://assets/fonts/quaver.ttf" id="14_3i23i"]
+[ext_resource type="PackedScene" uid="uid://djialem8q1fvs" path="res://hitboxes/interaction_manager.tscn" id="15_o18yt"]
 [ext_resource type="Script" path="res://states/roll.gd" id="16_w342q"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_sow0o"]
@@ -815,6 +817,10 @@ size = Vector2(7, 16)
 [sub_resource type="CircleShape2D" id="CircleShape2D_6prk3"]
 radius = 9.05539
 
+[sub_resource type="LabelSettings" id="LabelSettings_owr02"]
+font = ExtResource("14_3i23i")
+font_size = 8
+
 [node name="Adventurer" type="CharacterBody2D" groups=["Adventurer"]]
 collision_layer = 2
 collision_mask = 77
@@ -888,6 +894,23 @@ debug_color = Color(0.453053, 0.540124, 0.681173, 0.42)
 
 [node name="DustPosition" type="Marker2D" parent="."]
 position = Vector2(0, 10)
+
+[node name="TooltipLabel" type="Label" parent="."]
+visible = false
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -138.0
+offset_top = -40.0
+offset_right = 138.0
+offset_bottom = -17.0
+grow_horizontal = 2
+text = "Lalafajkdhfadshkfsdafhjksadfjhsdaf"
+label_settings = SubResource("LabelSettings_owr02")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="InteractionManager" parent="." instance=ExtResource("15_o18yt")]
 
 [connection signal="area_entered" from="MeleeHitbox" to="FSM/Melee" method="_on_melee_hitbox_area_entered"]
 

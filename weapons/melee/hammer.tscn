@@ -567,6 +567,7 @@ height = 22.6274
 
 [node name="Hammer" type="Node2D"]
 script = ExtResource("1_1wpst")
+damage = 2
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 material = SubResource("ShaderMaterial_ool8s")

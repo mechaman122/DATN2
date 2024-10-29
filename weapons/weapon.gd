@@ -5,6 +5,17 @@ class_name Weapon; "res://assets/sprites/weapons/icons/sword_01.png"
 @export var is_on_floor: bool = false
 @export var is_ranged: bool = false
 
+@export var damage: int = 1
+@export var crit_rate: float = 0.4
+@export var mana_consume: int = 0
+@export_multiline var description: String
+
+@export_enum("Melee", "Bow", "Gun", "Staf")
+var type: String = "Melee"
+
+@export_enum("Common", "Rare", "Epic", "Legendary")
+var rarity: String = "Common"
+
 @onready var animation_player: AnimationPlayer = get_node("AnimationPlayer")
 @onready var charge_particles: GPUParticles2D = get_node("Sprite2D/ChargeParticles")
 @onready var hitbox: Hitbox = get_node("Sprite2D/Hitbox")
@@ -13,6 +24,7 @@ var tween: Tween = null
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	hitbox.damage = damage
 	if not is_on_floor:
 		pickable_area.set_collision_mask_value(1, false)
 		pickable_area.set_collision_mask_value(2, false)
@@ -22,8 +34,15 @@ func get_input() -> void:
 		animation_player.play("charge")
 	elif Input.is_action_just_released("ui_attack"):
 		if animation_player.is_playing() and animation_player.current_animation == "charge":
+			if is_ranged == false:
+				if randf() > crit_rate:
+					hitbox.damage = roundi(damage * 1.5)
+				else: 
+					hitbox.damage = damage
 			animation_player.play("attack")
 		elif charge_particles.emitting:
+			if is_ranged == false:
+				hitbox.damage = roundi(damage * 1.5)
 			animation_player.play("charged_attack")
 
 func move(mouse_dir: Vector2) -> void:

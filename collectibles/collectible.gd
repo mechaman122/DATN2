@@ -2,11 +2,11 @@ extends Node2D
 
 class_name Collectible
 
+func interact() -> void:
+	pass
 
-func _on_pickable_area_body_entered(body: Node2D) -> void:
-	if body is Player:
-		use()
-		queue_free()
-		
-func use():
+func pre_interact(curr_interaction) -> void:
+	pass
+
+func detach() -> void:
 	pass

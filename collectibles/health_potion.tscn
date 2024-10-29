@@ -1,13 +1,13 @@
-[gd_scene load_steps=9 format=3 uid="uid://cba41v3c42exf"]
+[gd_scene load_steps=8 format=3 uid="uid://dngy6tjhq1f1u"]
 
-[ext_resource type="PackedScene" uid="uid://dattfmr6job88" path="res://collectibles/collectible.tscn" id="1_2pcx4"]
+[ext_resource type="PackedScene" uid="uid://bm5j1o45d8jd2" path="res://collectibles/collectible.tscn" id="1_o3c2g"]
 [ext_resource type="Script" path="res://collectibles/health_potion.gd" id="1_q18lm"]
 [ext_resource type="Texture2D" uid="uid://dnurhshcrl8lq" path="res://assets/sprites/collectibles/flasks/flasks_1_1.png" id="2_7ipe5"]
 [ext_resource type="Texture2D" uid="uid://db7rvgj62v3cv" path="res://assets/sprites/collectibles/flasks/flasks_1_2.png" id="3_hmnfs"]
 [ext_resource type="Texture2D" uid="uid://c7qkaeqj5c6qx" path="res://assets/sprites/collectibles/flasks/flasks_1_3.png" id="4_8rw8a"]
 [ext_resource type="Texture2D" uid="uid://be35rvhbyupvt" path="res://assets/sprites/collectibles/flasks/flasks_1_4.png" id="5_7kfdh"]
 
-[sub_resource type="SpriteFrames" id="SpriteFrames_b46ca"]
+[sub_resource type="SpriteFrames" id="SpriteFrames_kbpmp"]
 animations = [{
 "frames": [{
 "duration": 1.0,
@@ -23,20 +23,13 @@ animations = [{
 "texture": ExtResource("5_7kfdh")
 }],
 "loop": true,
-"name": &"idle",
-"speed": 4.0
+"name": &"default",
+"speed": 2.0
 }]
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_k5wrm"]
-radius = 6.0
-height = 16.0
-
-[node name="HealthPotion" instance=ExtResource("1_2pcx4")]
+[node name="HealthPotion" instance=ExtResource("1_o3c2g")]
 script = ExtResource("1_q18lm")
 
 [node name="AnimatedSprite2D" parent="." index="0"]
-sprite_frames = SubResource("SpriteFrames_b46ca")
-animation = &"idle"
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="PickableArea" index="0"]
-shape = SubResource("CapsuleShape2D_k5wrm")
+sprite_frames = SubResource("SpriteFrames_kbpmp")
+autoplay = "default"

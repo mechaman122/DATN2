@@ -1,9 +1,11 @@
-[gd_scene load_steps=23 format=3 uid="uid://bk1y10ciko62f"]
+[gd_scene load_steps=26 format=3 uid="uid://bk1y10ciko62f"]
 
 [ext_resource type="Script" path="res://map/map_elements/treasure.gd" id="1_ecq85"]
 [ext_resource type="Texture2D" uid="uid://bq3xdue2ap78q" path="res://assets/sprites/map/map_elements.png" id="2_dsonj"]
 [ext_resource type="FontFile" uid="uid://dlndpcesvur4y" path="res://assets/fonts/quaver.ttf" id="2_jkkd5"]
 [ext_resource type="Texture2D" uid="uid://cto7cakp2tfww" path="res://assets/sprites/effects/smoke_effect.png" id="4_rfjph"]
+[ext_resource type="PackedScene" uid="uid://djialem8q1fvs" path="res://hitboxes/interaction_manager.tscn" id="5_gikiw"]
+[ext_resource type="Script" path="res://map/map_elements/map_element_interaction_manager.gd" id="6_scme7"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_xnc72"]
 font = ExtResource("2_jkkd5")
@@ -129,8 +131,8 @@ tracks/4/keys = {
 
 [sub_resource type="Animation" id="Animation_5at5c"]
 resource_name = "open"
-length = 2.4
-step = 0.4
+length = 2.5
+step = 0.1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -191,11 +193,25 @@ tracks/4/keys = {
 "update": 0,
 "values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
 }
+tracks/5/type = "method"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath(".")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(2.5),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"queue_free"
+}]
+}
 
 [sub_resource type="Animation" id="Animation_q8xw8"]
 resource_name = "open_gem"
-length = 2.4
-step = 0.4
+length = 2.5
+step = 0.1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -256,6 +272,20 @@ tracks/4/keys = {
 "update": 1,
 "values": [0, 1, 2]
 }
+tracks/5/type = "method"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath(".")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(2.5),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"queue_free"
+}]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_ety70"]
 _data = {
@@ -290,11 +320,15 @@ scale_curve = SubResource("CurveTexture_dphwc")
 color_ramp = SubResource("GradientTexture1D_hm172")
 turbulence_enabled = true
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_8ww54"]
+radius = 15.0
+
 [node name="Treasure" type="Node2D" node_paths=PackedStringArray("animation_player")]
 script = ExtResource("1_ecq85")
 animation_player = NodePath("AnimationPlayer")
 
 [node name="Label" type="Label" parent="."]
+visible = false
 offset_left = -59.0
 offset_top = -16.0
 offset_right = 59.0
@@ -320,10 +354,6 @@ collision_mask = 3
 visible = false
 shape = SubResource("CircleShape2D_hna67")
 
-[node name="Timer" type="Timer" parent="."]
-wait_time = 2.5
-one_shot = true
-
 [node name="Smoke" type="GPUParticles2D" parent="."]
 emitting = false
 amount = 50
@@ -331,6 +361,14 @@ process_material = SubResource("ParticleProcessMaterial_fe1f3")
 texture = ExtResource("4_rfjph")
 explosiveness = 1.0
 
+[node name="InteractionManager" parent="." instance=ExtResource("5_gikiw")]
+script = ExtResource("6_scme7")
+
+[node name="CollisionShape2D" parent="InteractionManager" index="0"]
+visible = false
+shape = SubResource("CircleShape2D_8ww54")
+
 [connection signal="body_entered" from="InteractableArea" to="." method="_on_interactable_area_body_entered"]
 [connection signal="body_exited" from="InteractableArea" to="." method="_on_interactable_area_body_exited"]
-[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+
+[editable path="InteractionManager"]

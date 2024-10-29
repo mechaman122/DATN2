@@ -1,9 +1,7 @@
 extends Collectible
 	
-func _on_pickable_area_body_entered(body: Node2D) -> void:
-	# var health = body.get_node("Health")
-	#health.health += 1
-	if body is Player:
-		var health = body.get_node("Health")
+func pre_interact(curr_interaction) -> void:
+	if curr_interaction.get_parent() is Player:
+		var health = curr_interaction.get_parent().get_node("Health")
 		health.health += 1
 		queue_free()

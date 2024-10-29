@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://clhu51c4aveib"
-path="res://.godot/imported/Weapons Sheet 32x32.png-e4740bc4b62b55929f98a5b9748df9ac.ctex"
+uid="uid://my8knbrl6vd8"
+path="res://.godot/imported/bow_charge.png-22eec8ac9460e741952102462575a56f.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/weapons/Weapons Sheet 32x32.png"
-dest_files=["res://.godot/imported/Weapons Sheet 32x32.png-e4740bc4b62b55929f98a5b9748df9ac.ctex"]
+source_file="res://assets/sprites/weapons/icons/bow_charge.png"
+dest_files=["res://.godot/imported/bow_charge.png-22eec8ac9460e741952102462575a56f.ctex"]
 
 [params]
 
