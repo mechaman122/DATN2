@@ -9,7 +9,7 @@ var map_height: int = 40
 
 @onready var player_spawn = $PlayerSpawn
 @onready var tile_map_layer = $TileMapLayer
-@onready var player = $Adventurer
+@export var player: Player
 @onready var map_element_layer = $MapElementLayer
 
 func _ready():

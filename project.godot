@@ -19,6 +19,8 @@ config/icon="res://icon.svg"
 
 BetterTerrain="*res://addons/better-terrain/BetterTerrain.gd"
 Popups="*res://scenes/popups.tscn"
+SceneTransitor="*res://autoloads/scene_transitor.tscn"
+SavedData="*res://autoloads/saved_data.gd"
 
 [display]
 

@@ -1,23 +1,22 @@
-[gd_scene load_steps=10 format=3 uid="uid://bmly8qew0byye"]
+[gd_scene load_steps=8 format=3 uid="uid://bmly8qew0byye"]
 
 [ext_resource type="Script" path="res://weapons/weapon_animation.gd" id="1_2bflh"]
-[ext_resource type="Shader" path="res://scripts/white.gdshader" id="1_6u33h"]
 [ext_resource type="Texture2D" uid="uid://cu3cnbs3jqbgr" path="res://assets/sprites/weapons/icons/Hammer.png" id="1_th7x8"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_26wu8"]
-shader = ExtResource("1_6u33h")
-shader_parameter/active = false
-
 [sub_resource type="Animation" id="Animation_sux05"]
+resource_local_to_scene = true
 resource_name = "attack"
 
 [sub_resource type="Animation" id="Animation_ku1kl"]
+resource_local_to_scene = true
 resource_name = "cancel_attack"
 
 [sub_resource type="Animation" id="Animation_vsy4s"]
+resource_local_to_scene = true
 resource_name = "charge"
 
 [sub_resource type="Animation" id="Animation_44xih"]
+resource_local_to_scene = true
 resource_name = "charged_attack"
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_7v806"]
@@ -32,7 +31,6 @@ _data = {
 script = ExtResource("1_2bflh")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-material = SubResource("ShaderMaterial_26wu8")
 texture = ExtResource("1_th7x8")
 offset = Vector2(4, -4)
 

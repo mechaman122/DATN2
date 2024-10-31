@@ -1,9 +1,14 @@
-[gd_scene load_steps=14 format=3 uid="uid://4gksutb3wsqq"]
+[gd_scene load_steps=16 format=3 uid="uid://4gksutb3wsqq"]
 
 [ext_resource type="PackedScene" uid="uid://bmly8qew0byye" path="res://weapons/weapon_animation.tscn" id="1_l7rew"]
 [ext_resource type="Texture2D" uid="uid://cj15q45mquvpa" path="res://assets/sprites/weapons/icons/staff.png" id="2_3rp04"]
+[ext_resource type="Shader" path="res://scripts/white.gdshader" id="2_g3138"]
 [ext_resource type="PackedScene" uid="uid://d3ew2j5bdkrhl" path="res://weapons/projectile/fireball.tscn" id="3_bjeby"]
 [ext_resource type="Texture2D" uid="uid://bv0u47iganyml" path="res://assets/sprites/effects/flash_effect.png" id="3_va3b3"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_0a00g"]
+shader = ExtResource("2_g3138")
+shader_parameter/active = false
 
 [sub_resource type="Animation" id="Animation_2cu10"]
 length = 0.001
@@ -255,6 +260,7 @@ projectile = NodePath("Effects/Fireball")
 shooting_position = NodePath("Effects/ShootingPosition")
 
 [node name="Sprite2D" parent="." index="0"]
+material = SubResource("ShaderMaterial_0a00g")
 position = Vector2(6, 0)
 texture = ExtResource("2_3rp04")
 offset = Vector2(0, 0)

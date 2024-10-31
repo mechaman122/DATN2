@@ -9,11 +9,13 @@ const INVENTORY_ITEM_SCENE: PackedScene = preload("res://inventory/inventory_ite
 @onready var timer = get_node("LifeBar/Timer")
 
 @onready var inventory: HBoxContainer = get_node("PanelContainer/Inventory")
+@onready var level_label: Label = get_node("LevelLabel")
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	health_bar.value = 100
-	damage_bar.value = 100
+	#health_bar.value = 100
+	level_label.text = "Floor " + str(SavedData.level)
+	damage_bar.value = health_bar.value
 	health.max_health_changed.connect(_on_max_health_changed)
 	health.health_changed.connect(_on_health_changed)
 

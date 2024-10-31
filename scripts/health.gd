@@ -10,11 +10,10 @@ signal health_depleted
 
 var immortality_timer: Timer = null
 
-@export var health: int = max_health: set = set_health, get = get_health
+@export var health: int = 1: set = set_health, get = get_health
 
 func _ready():
 	set_max_health(max_health)
-	health = max_health
 	set_health(health)
 
 func set_max_health(value: int):
@@ -24,9 +23,14 @@ func set_max_health(value: int):
 		var difference = clamp_value - max_health
 		max_health = clamp_value
 		emit_signal("max_health_changed", difference)
-
+		
+		if get_parent() is Player:
+			SavedData.max_health = value
 		if health > max_health:
 			health = max_health
+			if get_parent() is Player:
+				SavedData.health = value
+			
 
 func get_max_health() -> int:
 	return max_health
@@ -40,6 +44,8 @@ func set_health(value: int):
 	if clamp_value != health:
 		var difference = clamp_value - health
 		health = value
+		if get_parent() is Player:
+			SavedData.health = value
 		emit_signal("health_changed", difference)
 
 		if health == 0:

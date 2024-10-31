@@ -1,11 +1,9 @@
-[gd_scene load_steps=86 format=3 uid="uid://2tkmj873jyu3"]
+[gd_scene load_steps=84 format=3 uid="uid://2tkmj873jyu3"]
 
 [ext_resource type="Texture2D" uid="uid://cn25h6f20oytn" path="res://assets/sprites/adventurer/adventurer_sprite.png" id="1_c2cxh"]
 [ext_resource type="Script" path="res://scripts/adventurer.gd" id="1_cfpa1"]
 [ext_resource type="Script" path="res://scripts/health.gd" id="2_6m0bo"]
 [ext_resource type="PackedScene" uid="uid://c8u2ipj70g35d" path="res://weapons/base_weapons/beginner_hammer.tscn" id="2_7df4t"]
-[ext_resource type="PackedScene" uid="uid://b66bau71264wo" path="res://weapons/base_weapons/apprentice_staff.tscn" id="2_g0rpi"]
-[ext_resource type="PackedScene" uid="uid://bj2o4qmn48oq5" path="res://weapons/base_weapons/beginner_sword.tscn" id="2_vqax2"]
 [ext_resource type="PackedScene" uid="uid://c4urdvaatn2no" path="res://hitboxes/hurtbox.tscn" id="3_056ev"]
 [ext_resource type="Script" path="res://states/FSM.gd" id="3_nfnxt"]
 [ext_resource type="Script" path="res://states/idle.gd" id="4_0iug0"]
@@ -826,12 +824,7 @@ script = ExtResource("1_cfpa1")
 [node name="Weapons" type="Node2D" parent="."]
 rotation = 3.14159
 
-[node name="ApprenticeStaff" parent="Weapons" instance=ExtResource("2_g0rpi")]
-
 [node name="BeginnerHammer" parent="Weapons" instance=ExtResource("2_7df4t")]
-visible = false
-
-[node name="BeginnerSword" parent="Weapons" instance=ExtResource("2_vqax2")]
 visible = false
 
 [node name="Health" type="Node" parent="."]

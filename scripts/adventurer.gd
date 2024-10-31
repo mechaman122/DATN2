@@ -26,12 +26,27 @@ var health_changed = false
 var knockback: Vector2
 
 func _ready() -> void:
-	if weapons.get_child_count() > 0:
-		current_weapon = weapons.get_child(0)
-		for weapon in weapons.get_children():
-			emit_signal("weapon_picked_up", weapon.get_texture())
-			emit_signal("weapon_switched", weapon.get_index(), 0)
-		has_weapon = true
+	emit_signal("weapon_picked_up", weapons.get_child(0).get_texture())
+	_restore_prev_state()
+	
+		
+func _restore_prev_state() -> void:
+	health.max_health = SavedData.max_health
+	health.health = SavedData.health
+	for weapon in SavedData.weapons:
+		weapon = weapon.duplicate()
+		weapon.position = Vector2.ZERO
+		weapons.add_child(weapon)
+		weapon.hide()
+		
+		emit_signal("weapon_picked_up", weapon.get_texture())
+		emit_signal("weapon_switched", weapons.get_child_count() - 2, weapons.get_child_count() - 1)
+		
+	current_weapon = weapons.get_child(SavedData.equipped_weapon_index)
+	current_weapon.show()
+	has_weapon = true
+	
+	emit_signal("weapon_switched", weapons.get_child_count() - 1, SavedData.equipped_weapon_index)
 
 func _process(delta: float) -> void:
 	var mouse_dir: Vector2 = (get_global_mouse_position() - global_position).normalized()
@@ -56,8 +71,8 @@ func player():
 	pass
 
 func _switch_weapon(direction: int) -> void:
-	if !has_weapon or weapons.get_child_count() == 1:
-		return
+	#if !has_weapon or weapons.get_child_count() == 1:
+		#return
 	var prev_index: int = current_weapon.get_index()
 	var index: int = prev_index
 	if direction == UP:
@@ -71,12 +86,18 @@ func _switch_weapon(direction: int) -> void:
 	current_weapon.hide()
 	current_weapon = weapons.get_child(index)
 	current_weapon.show()
+	SavedData.equipped_weapon_index = index
 	
 	emit_signal("weapon_switched", prev_index, index)
+	
 
 func pick_up_weapon(weapon: Weapon2) -> void:
-	var prev_index: int = current_weapon.get_index()
+	SavedData.weapons.append(weapon.duplicate())
+	
+	var prev_index: int = SavedData.equipped_weapon_index
 	var new_index: int = weapons.get_child_count()
+
+	SavedData.equipped_weapon_index = new_index
 
 	weapon.get_parent().call_deferred("remove_child", weapon)
 	weapons.call_deferred("add_child", weapon)
@@ -92,6 +113,7 @@ func pick_up_weapon(weapon: Weapon2) -> void:
 func _drop_weapon() -> void:
 	if !has_weapon or weapons.get_child_count() == 1:
 		return
+	SavedData.weapons.remove_at(current_weapon.get_index()-1)
 	var weapon_to_drop: Node2D = current_weapon
 	_switch_weapon(UP)
 

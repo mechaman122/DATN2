@@ -3,11 +3,11 @@
 [ext_resource type="PackedScene" uid="uid://2tkmj873jyu3" path="res://scenes/adventurer.tscn" id="1_7c8dh"]
 [ext_resource type="PackedScene" uid="uid://cmlvksdm3h5h2" path="res://interface/interface.tscn" id="1_mf2yy"]
 [ext_resource type="PackedScene" uid="uid://b4a2vbki2mytf" path="res://scenes/damage_area_test.tscn" id="2_abr38"]
+[ext_resource type="PackedScene" uid="uid://b66bau71264wo" path="res://weapons/base_weapons/apprentice_staff.tscn" id="8_axvye"]
 [ext_resource type="PackedScene" uid="uid://bk1y10ciko62f" path="res://map/map_elements/treasure.tscn" id="8_qskdt"]
 [ext_resource type="PackedScene" uid="uid://dngy6tjhq1f1u" path="res://collectibles/health_potion.tscn" id="8_ux3dy"]
 [ext_resource type="PackedScene" uid="uid://fbs870pep1s1" path="res://collectibles/coin.tscn" id="9_bowpb"]
-[ext_resource type="PackedScene" uid="uid://bj2o4qmn48oq5" path="res://weapons/base_weapons/beginner_sword.tscn" id="9_of22h"]
-[ext_resource type="PackedScene" uid="uid://b0p5cbviyxb0d" path="res://enemies/gladiator/gladiator.tscn" id="10_iwh5s"]
+[ext_resource type="PackedScene" uid="uid://n7vi3j6nc3tk" path="res://weapons/base_weapons/beginner_bow.tscn" id="9_cov3x"]
 
 [node name="Game" type="Node2D"]
 
@@ -39,11 +39,12 @@ position = Vector2(574, 352)
 [node name="Coin" parent="." instance=ExtResource("9_bowpb")]
 position = Vector2(614, 309)
 
-[node name="Gladiator" parent="." instance=ExtResource("10_iwh5s")]
-position = Vector2(796, 346)
+[node name="ApprenticeStaff" parent="." instance=ExtResource("8_axvye")]
+position = Vector2(629, 354)
+is_on_floor = true
 
-[node name="BeginnerSword" parent="." instance=ExtResource("9_of22h")]
-position = Vector2(621, 385)
+[node name="BeginnerBow" parent="." instance=ExtResource("9_cov3x")]
+position = Vector2(588, 373)
 is_on_floor = true
 
 [connection signal="weapon_dropped" from="Adventurer" to="Interface" method="_on_player_weapon_dropped"]

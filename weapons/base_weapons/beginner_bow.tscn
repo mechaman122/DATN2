@@ -20,10 +20,16 @@ hitbox = NodePath("Effects/Arrow/Hitbox")
 [node name="ChargeParticles" parent="BowAnimation/Effects/Arrow" index="2"]
 lifetime = 0.5
 
+[node name="PickableArea" parent="." index="1"]
+collision_mask = 3
+
 [node name="CollisionShape2D" parent="PickableArea" index="0"]
+visible = false
 position = Vector2(5, 4)
 rotation = 0.785398
 shape = SubResource("CapsuleShape2D_gkotm")
+
+[connection signal="body_entered" from="PickableArea" to="." method="_on_pickable_area_body_entered"]
 
 [editable path="BowAnimation"]
 [editable path="BowAnimation/Effects/Arrow"]

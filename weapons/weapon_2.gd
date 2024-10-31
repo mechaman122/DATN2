@@ -2,7 +2,7 @@ extends Node2D
 
 class_name Weapon2
 
-@export var is_on_floor: bool
+@export var is_on_floor: bool = false
 @export var weapon_anim: WeaponAnimation
 @onready var pickable_area: Area2D = get_node("PickableArea")
 var tween: Tween = null
@@ -24,9 +24,9 @@ func _ready() -> void:
 	if not is_on_floor:
 		pickable_area.set_collision_mask_value(1, false)
 		pickable_area.set_collision_mask_value(2, false)
-	else:
-		pickable_area.set_collision_mask_value(1, true)
-		pickable_area.set_collision_mask_value(2, true)
+	#else:
+		#pickable_area.set_collision_mask_value(1, true)
+		#pickable_area.set_collision_mask_value(2, true)
 
 
 func get_input() -> void:
@@ -62,12 +62,12 @@ func cancel_attack() -> void:
 
 
 func _on_pickable_area_body_entered(body: Node2D) -> void:
-	if body != null:
+	if body is Player:
 		pickable_area.set_collision_mask_value(1, false)
 		pickable_area.set_collision_mask_value(2, false)
 		body.pick_up_weapon(self)
 		position = Vector2.ZERO
-	else:
+	elif body == null:
 		tween.kill()
 		pickable_area.set_collision_mask_value(2, true)
 

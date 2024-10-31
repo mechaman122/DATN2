@@ -1,7 +1,12 @@
-[gd_scene load_steps=16 format=3 uid="uid://bhg3t2p2cwwcj"]
+[gd_scene load_steps=18 format=3 uid="uid://bhg3t2p2cwwcj"]
 
 [ext_resource type="PackedScene" uid="uid://bmly8qew0byye" path="res://weapons/weapon_animation.tscn" id="1_ubetg"]
+[ext_resource type="Shader" path="res://scripts/white.gdshader" id="2_5h2rk"]
 [ext_resource type="Script" path="res://hitboxes/hitbox.gd" id="2_tr0mb"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_jvx3r"]
+shader = ExtResource("2_5h2rk")
+shader_parameter/active = false
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_f7osu"]
 radius = 5.0
@@ -477,6 +482,7 @@ charge_particles = NodePath("Effects/ChargeParticles")
 hitbox = NodePath("Sprite2D/Hitbox")
 
 [node name="Sprite2D" parent="." index="0"]
+material = SubResource("ShaderMaterial_jvx3r")
 position = Vector2(0, -13)
 rotation = -2.35619
 
@@ -496,7 +502,7 @@ z_index = -1
 position = Vector2(-0.463209, -1.44752)
 rotation = 0.785406
 scale = Vector2(1.17393, 1.18443)
-color = Color(1, 1, 1, 0)
+color = Color(0.599199, 0.599199, 0.599199, 0)
 polygon = PackedVector2Array(-7.28194, -8.96434, -3.42169, -10.1314, -0.0538516, -10.1584, 0.548523, -5.97939, -2.99081, -5.18209, -7.2819, -4.18832, -12.1006, -1.80028, -9.69129, -6.57631)
 
 [node name="AnimationPlayer" parent="." index="1"]
