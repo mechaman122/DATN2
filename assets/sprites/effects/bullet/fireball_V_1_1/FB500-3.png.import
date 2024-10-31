@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bv0u47iganyml"
-path="res://.godot/imported/muzzle_flash_effect.png-b0a66f17f7039e7198ff0dffc7f4483b.ctex"
+uid="uid://ck7fvaa4t3v1n"
+path="res://.godot/imported/FB500-3.png-d5ff038d606bb4f78fbbed39113ceb17.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/effects/muzzle_flash_effect.png"
-dest_files=["res://.godot/imported/muzzle_flash_effect.png-b0a66f17f7039e7198ff0dffc7f4483b.ctex"]
+source_file="res://assets/sprites/effects/bullet/fireball_V_1_1/FB500-3.png"
+dest_files=["res://.godot/imported/FB500-3.png-d5ff038d606bb4f78fbbed39113ceb17.ctex"]
 
 [params]
 

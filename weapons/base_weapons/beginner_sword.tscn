@@ -1,0 +1,28 @@
+[gd_scene load_steps=5 format=3 uid="uid://bj2o4qmn48oq5"]
+
+[ext_resource type="PackedScene" uid="uid://deuqmbmge0hxd" path="res://weapons/weapon2.tscn" id="1_y7anc"]
+[ext_resource type="PackedScene" uid="uid://bipc3idppc1df" path="res://weapons/animations/sword_anim.tscn" id="2_02e2y"]
+[ext_resource type="Resource" uid="uid://dvrn5jwiff4m6" path="res://weapons/resources/stats/beginner_sword.tres" id="2_dmrpq"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_o6aj4"]
+radius = 5.0
+height = 22.0
+
+[node name="BeginnerSword" node_paths=PackedStringArray("weapon_anim") instance=ExtResource("1_y7anc")]
+weapon_anim = NodePath("SwordAnimation")
+stats = ExtResource("2_dmrpq")
+
+[node name="SwordAnimation" parent="." index="0" instance=ExtResource("2_02e2y")]
+
+[node name="PickableArea" parent="." index="1"]
+collision_mask = 3
+
+[node name="CollisionShape2D" parent="PickableArea" index="0"]
+visible = false
+position = Vector2(-5, -13)
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_o6aj4")
+
+[connection signal="body_entered" from="PickableArea" to="." method="_on_pickable_area_body_entered"]
+
+[editable path="SwordAnimation"]

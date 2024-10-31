@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="WeaponStats" load_steps=3 format=3 uid="uid://dpdxkjjtvrf7v"]
+
+[ext_resource type="Script" path="res://weapons/resources/stats.gd" id="1_tbjvs"]
+[ext_resource type="Texture2D" uid="uid://cu3cnbs3jqbgr" path="res://assets/sprites/weapons/icons/Hammer.png" id="2_jrwql"]
+
+[resource]
+script = ExtResource("1_tbjvs")
+weapon_name = "Beginner Hammer"
+is_ranged = false
+type = "Hammer"
+rarity = "Common"
+damage = 2
+crit = 0.4
+level = 1
+texture = ExtResource("2_jrwql")
+description = "A common hammer"

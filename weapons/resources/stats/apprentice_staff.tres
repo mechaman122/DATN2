@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="WeaponStats" load_steps=3 format=3 uid="uid://bsy6asvj1jf4u"]
+
+[ext_resource type="Script" path="res://weapons/resources/stats.gd" id="1_rtjlg"]
+[ext_resource type="Texture2D" uid="uid://cj15q45mquvpa" path="res://assets/sprites/weapons/icons/staff.png" id="2_ad4ce"]
+
+[resource]
+script = ExtResource("1_rtjlg")
+weapon_name = "Apprentice Staff"
+is_ranged = true
+type = "Staff"
+rarity = "Common"
+damage = 1
+crit = 0.0
+level = 1
+texture = ExtResource("2_ad4ce")
+description = "A normal staff"

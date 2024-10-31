@@ -13,9 +13,11 @@ func launch(init_pos: Vector2, dir: Vector2, spd: float, dmg: int) -> void:
 	position = init_pos
 	self.direction = dir
 	self.speed = spd
-	rotation += dir.angle()
+	rotation += dir.angle() - deg_to_rad(45)
 
 func _physics_process(delta: float) -> void:
 	position += direction * speed * delta
-	if !get_viewport().get_visible_rect().has_point(position):
-		queue_free()
+
+
+func _on_life_time_timeout() -> void:
+	queue_free()

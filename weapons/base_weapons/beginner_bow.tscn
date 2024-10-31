@@ -1,0 +1,29 @@
+[gd_scene load_steps=5 format=3 uid="uid://n7vi3j6nc3tk"]
+
+[ext_resource type="PackedScene" uid="uid://deuqmbmge0hxd" path="res://weapons/weapon2.tscn" id="1_ugvid"]
+[ext_resource type="PackedScene" uid="uid://cek62kqieqtap" path="res://weapons/animations/bow_anim.tscn" id="2_cu483"]
+[ext_resource type="Resource" uid="uid://cx3ob0xcbh3pk" path="res://weapons/resources/stats/beginner_bow.tres" id="2_maq7h"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_gkotm"]
+radius = 7.77817
+height = 26.8701
+
+[node name="BeginnerBow" node_paths=PackedStringArray("weapon_anim") instance=ExtResource("1_ugvid")]
+z_index = 1
+weapon_anim = NodePath("BowAnimation")
+stats = ExtResource("2_maq7h")
+
+[node name="BowAnimation" parent="." index="0" node_paths=PackedStringArray("charge_particles", "hitbox") instance=ExtResource("2_cu483")]
+charge_particles = NodePath("Effects/Arrow/ChargeParticles")
+hitbox = NodePath("Effects/Arrow/Hitbox")
+
+[node name="ChargeParticles" parent="BowAnimation/Effects/Arrow" index="2"]
+lifetime = 0.5
+
+[node name="CollisionShape2D" parent="PickableArea" index="0"]
+position = Vector2(5, 4)
+rotation = 0.785398
+shape = SubResource("CapsuleShape2D_gkotm")
+
+[editable path="BowAnimation"]
+[editable path="BowAnimation/Effects/Arrow"]

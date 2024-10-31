@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="WeaponStats" load_steps=3 format=3 uid="uid://dvrn5jwiff4m6"]
+
+[ext_resource type="Script" path="res://weapons/resources/stats.gd" id="1_ii055"]
+[ext_resource type="Texture2D" uid="uid://bw8upvidnh5t8" path="res://assets/sprites/weapons/icons/sword_02.png" id="2_1o3dp"]
+
+[resource]
+script = ExtResource("1_ii055")
+weapon_name = "Beginner Sword"
+is_ranged = false
+type = "Sword"
+rarity = "Common"
+damage = 1
+crit = 0.6
+level = 1
+texture = ExtResource("2_1o3dp")
+description = "A common sword"

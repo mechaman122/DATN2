@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://deuqmbmge0hxd"]
+
+[ext_resource type="Script" path="res://weapons/weapon_2.gd" id="1_l5icb"]
+
+[node name="Weapon2" type="Node2D"]
+script = ExtResource("1_l5icb")
+
+[node name="PickableArea" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PickableArea"]

@@ -19,7 +19,6 @@ signal weapon_dropped(index: int)
 @onready var melee_hitbox = $MeleeHitbox/CollisionShape2D
 @onready var weapons = get_node("Weapons")
 @onready var dust_position = get_node("DustPosition")
-@onready var tooltip_label = get_node("TooltipLabel")
 @onready var interaction_manager = get_node("InteractionManager")
 
 var has_weapon = false
@@ -29,7 +28,9 @@ var knockback: Vector2
 func _ready() -> void:
 	if weapons.get_child_count() > 0:
 		current_weapon = weapons.get_child(0)
-		emit_signal("weapon_picked_up", current_weapon.get_texture())
+		for weapon in weapons.get_children():
+			emit_signal("weapon_picked_up", weapon.get_texture())
+			emit_signal("weapon_switched", weapon.get_index(), 0)
 		has_weapon = true
 
 func _process(delta: float) -> void:
@@ -73,7 +74,7 @@ func _switch_weapon(direction: int) -> void:
 	
 	emit_signal("weapon_switched", prev_index, index)
 
-func pick_up_weapon(weapon: Weapon) -> void:
+func pick_up_weapon(weapon: Weapon2) -> void:
 	var prev_index: int = current_weapon.get_index()
 	var new_index: int = weapons.get_child_count()
 
@@ -86,6 +87,7 @@ func pick_up_weapon(weapon: Weapon) -> void:
 
 	emit_signal("weapon_picked_up", weapon.get_texture())
 	emit_signal("weapon_switched", prev_index, new_index)
+
 
 func _drop_weapon() -> void:
 	if !has_weapon or weapons.get_child_count() == 1:
@@ -108,7 +110,3 @@ func spawn_dust() -> void:
 	var dust: Sprite2D = DUST_SCENE.instantiate()
 	dust.position = dust_position.global_position
 	get_parent().add_child(dust)
-
-
-func show_tooltip():
-	tooltip_label.show()

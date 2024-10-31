@@ -1,0 +1,23 @@
+[gd_scene load_steps=5 format=3 uid="uid://b66bau71264wo"]
+
+[ext_resource type="PackedScene" uid="uid://deuqmbmge0hxd" path="res://weapons/weapon2.tscn" id="1_di5j4"]
+[ext_resource type="Resource" uid="uid://bsy6asvj1jf4u" path="res://weapons/resources/stats/apprentice_staff.tres" id="2_5ugl2"]
+[ext_resource type="PackedScene" uid="uid://4gksutb3wsqq" path="res://weapons/animations/staff_anim.tscn" id="2_43ad6"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_q5xnq"]
+
+[node name="ApprenticeStaff" node_paths=PackedStringArray("weapon_anim") instance=ExtResource("1_di5j4")]
+weapon_anim = NodePath("StaffAnimation")
+stats = ExtResource("2_5ugl2")
+
+[node name="StaffAnimation" parent="." index="0" instance=ExtResource("2_43ad6")]
+z_index = 1
+
+[node name="CollisionShape2D" parent="PickableArea" index="0"]
+visible = false
+position = Vector2(6, 0)
+rotation = 0.785398
+shape = SubResource("CapsuleShape2D_q5xnq")
+
+[editable path="StaffAnimation"]
+[editable path="StaffAnimation/Effects/Fireball"]

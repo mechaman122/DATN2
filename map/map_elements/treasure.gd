@@ -17,8 +17,10 @@ func interact():
 
 
 func detach():
+	Popups.item_hidepopup()
 	label.hide()
 	
 
 func pre_interact():
+	Popups.item_popup(null, null)
 	label.show()

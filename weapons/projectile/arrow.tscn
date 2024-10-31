@@ -35,7 +35,7 @@ tangential_accel_max = 80.3
 turbulence_noise_strength = 20.0
 turbulence_noise_scale = 3.0
 
-[node name="Projectile" instance=ExtResource("1_gg4pu")]
+[node name="Arrow" instance=ExtResource("1_gg4pu")]
 
 [node name="AnimatedSprite2D" parent="." index="0"]
 rotation = 0.785398
@@ -50,5 +50,8 @@ shape = SubResource("CapsuleShape2D_a3ckf")
 
 [node name="ChargeParticles" type="GPUParticles2D" parent="." index="2"]
 position = Vector2(7, 0)
+emitting = false
 amount = 15
 process_material = SubResource("ParticleProcessMaterial_rupy0")
+
+[connection signal="timeout" from="LifeTime" to="." method="_on_life_time_timeout"]

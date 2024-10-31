@@ -3,16 +3,17 @@
 [ext_resource type="Texture2D" uid="uid://cn25h6f20oytn" path="res://assets/sprites/adventurer/adventurer_sprite.png" id="1_c2cxh"]
 [ext_resource type="Script" path="res://scripts/adventurer.gd" id="1_cfpa1"]
 [ext_resource type="Script" path="res://scripts/health.gd" id="2_6m0bo"]
+[ext_resource type="PackedScene" uid="uid://c8u2ipj70g35d" path="res://weapons/base_weapons/beginner_hammer.tscn" id="2_7df4t"]
+[ext_resource type="PackedScene" uid="uid://b66bau71264wo" path="res://weapons/base_weapons/apprentice_staff.tscn" id="2_g0rpi"]
+[ext_resource type="PackedScene" uid="uid://bj2o4qmn48oq5" path="res://weapons/base_weapons/beginner_sword.tscn" id="2_vqax2"]
 [ext_resource type="PackedScene" uid="uid://c4urdvaatn2no" path="res://hitboxes/hurtbox.tscn" id="3_056ev"]
 [ext_resource type="Script" path="res://states/FSM.gd" id="3_nfnxt"]
 [ext_resource type="Script" path="res://states/idle.gd" id="4_0iug0"]
-[ext_resource type="PackedScene" uid="uid://c5ngb6vuv5lsd" path="res://weapons/melee/hammer.tscn" id="4_mum05"]
 [ext_resource type="Script" path="res://states/run.gd" id="5_rlbn1"]
 [ext_resource type="PackedScene" uid="uid://c2deh2ka3p3xy" path="res://hitboxes/hitbox.tscn" id="6_46qem"]
 [ext_resource type="Script" path="res://states/melee.gd" id="6_p1umm"]
 [ext_resource type="Script" path="res://states/die.gd" id="8_7nkeu"]
 [ext_resource type="Script" path="res://states/hurt.gd" id="12_002dt"]
-[ext_resource type="FontFile" uid="uid://dlndpcesvur4y" path="res://assets/fonts/quaver.ttf" id="14_3i23i"]
 [ext_resource type="PackedScene" uid="uid://djialem8q1fvs" path="res://hitboxes/interaction_manager.tscn" id="15_o18yt"]
 [ext_resource type="Script" path="res://states/roll.gd" id="16_w342q"]
 
@@ -817,10 +818,6 @@ size = Vector2(7, 16)
 [sub_resource type="CircleShape2D" id="CircleShape2D_6prk3"]
 radius = 9.05539
 
-[sub_resource type="LabelSettings" id="LabelSettings_owr02"]
-font = ExtResource("14_3i23i")
-font_size = 8
-
 [node name="Adventurer" type="CharacterBody2D" groups=["Adventurer"]]
 collision_layer = 2
 collision_mask = 77
@@ -829,7 +826,13 @@ script = ExtResource("1_cfpa1")
 [node name="Weapons" type="Node2D" parent="."]
 rotation = 3.14159
 
-[node name="Hammer" parent="Weapons" instance=ExtResource("4_mum05")]
+[node name="ApprenticeStaff" parent="Weapons" instance=ExtResource("2_g0rpi")]
+
+[node name="BeginnerHammer" parent="Weapons" instance=ExtResource("2_7df4t")]
+visible = false
+
+[node name="BeginnerSword" parent="Weapons" instance=ExtResource("2_vqax2")]
+visible = false
 
 [node name="Health" type="Node" parent="."]
 script = ExtResource("2_6m0bo")
@@ -895,22 +898,8 @@ debug_color = Color(0.453053, 0.540124, 0.681173, 0.42)
 [node name="DustPosition" type="Marker2D" parent="."]
 position = Vector2(0, 10)
 
-[node name="TooltipLabel" type="Label" parent="."]
-visible = false
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -138.0
-offset_top = -40.0
-offset_right = 138.0
-offset_bottom = -17.0
-grow_horizontal = 2
-text = "Lalafajkdhfadshkfsdafhjksadfjhsdaf"
-label_settings = SubResource("LabelSettings_owr02")
-horizontal_alignment = 1
-vertical_alignment = 1
-
 [node name="InteractionManager" parent="." instance=ExtResource("15_o18yt")]
+visible = false
 
 [connection signal="area_entered" from="MeleeHitbox" to="FSM/Melee" method="_on_melee_hitbox_area_entered"]
 
