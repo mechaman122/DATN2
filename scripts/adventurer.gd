@@ -8,7 +8,7 @@ const DUST_SCENE: PackedScene = preload("res://scenes/dust.tscn")
 var current_weapon
 
 signal weapon_switched(prev_index: int, new_index: int)
-signal weapon_picked_up(weapon_texture: Texture)
+signal weapon_picked_up(weapon_stats: WeaponStats)
 signal weapon_dropped(index: int)
 
 @onready var animated_sprite = $AnimatedSprite2D
@@ -26,7 +26,7 @@ var health_changed = false
 var knockback: Vector2
 
 func _ready() -> void:
-	emit_signal("weapon_picked_up", weapons.get_child(0).get_texture())
+	emit_signal("weapon_picked_up", weapons.get_child(0).stats)
 	_restore_prev_state()
 	
 		
@@ -39,7 +39,7 @@ func _restore_prev_state() -> void:
 		weapons.add_child(weapon)
 		weapon.hide()
 		
-		emit_signal("weapon_picked_up", weapon.get_texture())
+		emit_signal("weapon_picked_up", weapon.stats)
 		emit_signal("weapon_switched", weapons.get_child_count() - 2, weapons.get_child_count() - 1)
 		
 	current_weapon = weapons.get_child(SavedData.equipped_weapon_index)
@@ -106,7 +106,7 @@ func pick_up_weapon(weapon: Weapon2) -> void:
 	current_weapon.cancel_attack()
 	current_weapon = weapon
 
-	emit_signal("weapon_picked_up", weapon.get_texture())
+	emit_signal("weapon_picked_up", weapon.stats)
 	emit_signal("weapon_switched", prev_index, new_index)
 
 

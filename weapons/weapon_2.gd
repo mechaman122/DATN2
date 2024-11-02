@@ -72,6 +72,10 @@ func _on_pickable_area_body_entered(body: Node2D) -> void:
 		pickable_area.set_collision_mask_value(2, true)
 
 
+func _on_pickable_area_body_exited(body: Node2D) -> void:
+	pass
+
+
 func interpolate_pos(init_pos: Vector2, final_pos: Vector2) -> void:
 	position = init_pos
 	tween = create_tween()

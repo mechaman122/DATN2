@@ -46,10 +46,10 @@ func _on_player_weapon_dropped(index: int) -> void:
 	inventory.get_child(index).queue_free()
 
 
-func _on_player_weapon_picked_up(weapon_texture: Texture) -> void:
-	var new_weapon: TextureRect = INVENTORY_ITEM_SCENE.instantiate()
+func _on_player_weapon_picked_up(weapon_stats: WeaponStats) -> void:
+	var new_weapon: PanelContainer = INVENTORY_ITEM_SCENE.instantiate()
 	inventory.add_child(new_weapon)
-	new_weapon.initialize(weapon_texture)
+	new_weapon.initialize(weapon_stats)
 
 
 func _on_player_weapon_switched(prev_index: int, new_index: int) -> void:

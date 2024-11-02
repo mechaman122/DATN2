@@ -1,7 +1,22 @@
 [gd_scene load_steps=3 format=3 uid="uid://b5w8q3w5t50nd"]
 
-[ext_resource type="FontFile" uid="uid://dlndpcesvur4y" path="res://assets/fonts/quaver.ttf" id="1_n7a3m"]
 [ext_resource type="Script" path="res://scenes/popups.gd" id="1_tcpv7"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5863k"]
+content_margin_left = 10.0
+content_margin_top = 10.0
+content_margin_right = 10.0
+content_margin_bottom = 10.0
+bg_color = Color(0.738156, 0.561889, 0.373318, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_blend = true
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
 
 [node name="Popups" type="Control"]
 layout_mode = 3
@@ -17,8 +32,11 @@ script = ExtResource("1_tcpv7")
 [node name="ItemPopup" type="PopupPanel" parent="CanvasLayer"]
 unique_name_in_owner = true
 position = Vector2i(540, 500)
-size = Vector2i(200, 100)
+size = Vector2i(300, 274)
 visible = true
+min_size = Vector2i(120, 154)
+max_size = Vector2i(300, 300)
+theme_override_styles/panel = SubResource("StyleBoxFlat_5863k")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/ItemPopup"]
 anchors_preset = 8
@@ -26,20 +44,105 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -96.0
-offset_top = -46.0
-offset_right = 96.0
-offset_bottom = 46.0
+offset_left = 10.0
+offset_top = 10.0
+offset_right = 290.0
+offset_bottom = 264.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Label" type="Label" parent="CanvasLayer/ItemPopup/VBoxContainer"]
+[node name="Name" type="Label" parent="CanvasLayer/ItemPopup/VBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 35)
 layout_mode = 2
-theme_override_fonts/font = ExtResource("1_n7a3m")
-text = "Stats"
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.67451)
+theme_override_font_sizes/font_size = 24
+text = "Name"
 
-[node name="Label2" type="Label" parent="CanvasLayer/ItemPopup/VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/ItemPopup/VBoxContainer"]
+custom_minimum_size = Vector2(0, 20)
 layout_mode = 2
-theme_override_fonts/font = ExtResource("1_n7a3m")
+
+[node name="Label" type="Label" parent="CanvasLayer/ItemPopup/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.67451)
 theme_override_font_sizes/font_size = 16
-text = "Information"
+text = "Level"
+
+[node name="Level" type="Label" parent="CanvasLayer/ItemPopup/VBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.67451)
+theme_override_font_sizes/font_size = 16
+text = "70"
+horizontal_alignment = 2
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="CanvasLayer/ItemPopup/VBoxContainer"]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+
+[node name="Label" type="Label" parent="CanvasLayer/ItemPopup/VBoxContainer/HBoxContainer2"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.67451)
+theme_override_font_sizes/font_size = 16
+text = "Damage"
+
+[node name="Damage" type="Label" parent="CanvasLayer/ItemPopup/VBoxContainer/HBoxContainer2"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.67451)
+theme_override_font_sizes/font_size = 16
+text = "70"
+horizontal_alignment = 2
+
+[node name="HBoxContainer3" type="HBoxContainer" parent="CanvasLayer/ItemPopup/VBoxContainer"]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+
+[node name="Label" type="Label" parent="CanvasLayer/ItemPopup/VBoxContainer/HBoxContainer3"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.67451)
+theme_override_font_sizes/font_size = 16
+text = "Crit"
+
+[node name="Crit" type="Label" parent="CanvasLayer/ItemPopup/VBoxContainer/HBoxContainer3"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.67451)
+theme_override_font_sizes/font_size = 16
+text = "70"
+horizontal_alignment = 2
+
+[node name="Rarity" type="RichTextLabel" parent="CanvasLayer/ItemPopup/VBoxContainer"]
+unique_name_in_owner = true
+clip_contents = false
+custom_minimum_size = Vector2(0, 25)
+layout_mode = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.67451)
+theme_override_font_sizes/normal_font_size = 16
+bbcode_enabled = true
+text = "Rarity"
+scroll_active = false
+
+[node name="HBoxContainer4" type="VBoxContainer" parent="CanvasLayer/ItemPopup/VBoxContainer"]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+
+[node name="Label" type="Label" parent="CanvasLayer/ItemPopup/VBoxContainer/HBoxContainer4"]
+custom_minimum_size = Vector2(40, 0)
+layout_mode = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.67451)
+theme_override_font_sizes/font_size = 16
+text = "Passive:"
+
+[node name="PassiveDesc" type="Label" parent="CanvasLayer/ItemPopup/VBoxContainer/HBoxContainer4"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.67451)
+theme_override_font_sizes/font_size = 8
+text = "Lorem ipsum"
+autowrap_mode = 3
