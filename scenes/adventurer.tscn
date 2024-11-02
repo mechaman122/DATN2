@@ -807,14 +807,14 @@ _data = {
 "run": SubResource("Animation_aynjc")
 }
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_l7bue"]
-radius = 6.0
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_qurs3"]
+height = 22.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_w4a67"]
 size = Vector2(7, 16)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_6prk3"]
-radius = 9.05539
+radius = 7.0
 
 [node name="Adventurer" type="CharacterBody2D" groups=["Adventurer"]]
 collision_layer = 2
@@ -850,7 +850,8 @@ collision_mask = 32
 health = NodePath("../Health")
 
 [node name="CollisionShape2D" parent="Hurtbox" index="0"]
-shape = SubResource("CircleShape2D_l7bue")
+visible = false
+shape = SubResource("CapsuleShape2D_qurs3")
 
 [node name="MeleeHitbox" parent="." instance=ExtResource("6_46qem")]
 collision_layer = 16
@@ -884,7 +885,6 @@ script = ExtResource("12_002dt")
 script = ExtResource("16_w342q")
 
 [node name="CollectibleCollision" type="CollisionShape2D" parent="."]
-visible = false
 shape = SubResource("CircleShape2D_6prk3")
 debug_color = Color(0.453053, 0.540124, 0.681173, 0.42)
 

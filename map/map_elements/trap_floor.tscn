@@ -145,7 +145,7 @@ autoplay = "rise"
 
 [node name="Hitbox" type="Area2D" parent="."]
 collision_layer = 48
-collision_mask = 7
+collision_mask = 6
 script = ExtResource("2_81l2b")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]

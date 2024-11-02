@@ -1,0 +1,5 @@
+[gd_scene load_steps=2 format=3 uid="uid://c8sjgk4oye0xj"]
+
+[ext_resource type="PackedScene" uid="uid://m7n00jdah45y" path="res://map/rooms/room.tscn" id="1_yoi6e"]
+
+[node name="EnemyRoom" instance=ExtResource("1_yoi6e")]
