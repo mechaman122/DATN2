@@ -1,0 +1,17 @@
+[gd_scene load_steps=4 format=3 uid="uid://db8p2dw2s41xg"]
+
+[ext_resource type="Texture2D" uid="uid://cjr6587vkctxa" path="res://assets/sprites/interface/armor_bar.png" id="1_bly7f"]
+[ext_resource type="PackedScene" uid="uid://c4jeejt1av0vj" path="res://interface/something_bar.tscn" id="1_m63sa"]
+[ext_resource type="Texture2D" uid="uid://bj1d3atmg6jxe" path="res://assets/sprites/interface/grey_bar.png" id="2_rv16j"]
+
+[node name="ArmorBar" instance=ExtResource("1_m63sa")]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+value = 100.0
+under_texture = ExtResource("1_bly7f")
+progress_texture = ExtResource("2_rv16j")

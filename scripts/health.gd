@@ -1,5 +1,5 @@
 class_name Health
-extends Node
+extends Node2D
 
 signal max_health_changed(diff: int)
 signal health_changed(diff: int)
@@ -7,6 +7,7 @@ signal health_depleted
 
 @export var max_health: int = 10: set = set_max_health, get = get_max_health
 @export var immortality: bool = false: set = set_immortality, get = get_immortality
+@export var armor: Armor
 
 var immortality_timer: Timer = null
 

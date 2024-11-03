@@ -15,6 +15,7 @@ signal weapon_dropped(index: int)
 @onready var animation_player = $AnimationPlayer
 
 @onready var health = $Health
+@onready var armor =$Armor
 
 @onready var melee_hitbox = $MeleeHitbox/CollisionShape2D
 @onready var weapons = get_node("Weapons")
@@ -33,6 +34,8 @@ func _ready() -> void:
 func _restore_prev_state() -> void:
 	health.max_health = SavedData.max_health
 	health.health = SavedData.health
+	armor.max_armor = 10
+	armor.armor = 10
 	for weapon in SavedData.weapons:
 		weapon = weapon.duplicate()
 		weapon.position = Vector2.ZERO

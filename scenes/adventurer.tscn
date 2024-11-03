@@ -1,4 +1,4 @@
-[gd_scene load_steps=84 format=3 uid="uid://2tkmj873jyu3"]
+[gd_scene load_steps=85 format=3 uid="uid://2tkmj873jyu3"]
 
 [ext_resource type="Texture2D" uid="uid://cn25h6f20oytn" path="res://assets/sprites/adventurer/adventurer_sprite.png" id="1_c2cxh"]
 [ext_resource type="Script" path="res://scripts/adventurer.gd" id="1_cfpa1"]
@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://c4urdvaatn2no" path="res://hitboxes/hurtbox.tscn" id="3_056ev"]
 [ext_resource type="Script" path="res://states/FSM.gd" id="3_nfnxt"]
 [ext_resource type="Script" path="res://states/idle.gd" id="4_0iug0"]
+[ext_resource type="PackedScene" uid="uid://dav5md7665tgq" path="res://armor/armor.tscn" id="4_ovac2"]
 [ext_resource type="Script" path="res://states/run.gd" id="5_rlbn1"]
 [ext_resource type="PackedScene" uid="uid://c2deh2ka3p3xy" path="res://hitboxes/hitbox.tscn" id="6_46qem"]
 [ext_resource type="Script" path="res://states/melee.gd" id="6_p1umm"]
@@ -827,9 +828,11 @@ rotation = 3.14159
 [node name="BeginnerHammer" parent="Weapons" instance=ExtResource("2_7df4t")]
 visible = false
 
-[node name="Health" type="Node" parent="."]
+[node name="Health" type="Node2D" parent="."]
 script = ExtResource("2_6m0bo")
 max_health = 100
+
+[node name="Armor" parent="." instance=ExtResource("4_ovac2")]
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(0, -5)
@@ -844,10 +847,11 @@ libraries = {
 }
 autoplay = "idle"
 
-[node name="Hurtbox" parent="." node_paths=PackedStringArray("health") instance=ExtResource("3_056ev")]
+[node name="Hurtbox" parent="." node_paths=PackedStringArray("health", "armor") instance=ExtResource("3_056ev")]
 collision_layer = 2
 collision_mask = 32
 health = NodePath("../Health")
+armor = NodePath("../Armor")
 
 [node name="CollisionShape2D" parent="Hurtbox" index="0"]
 visible = false

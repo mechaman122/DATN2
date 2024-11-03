@@ -2,44 +2,43 @@ extends CanvasLayer
 
 const INVENTORY_ITEM_SCENE: PackedScene = preload("res://inventory/inventory_item.tscn")
 
-@onready var health_bar = $LifeBar/TextureProgressBar
-@onready var damage_bar = $LifeBar/TextureProgressBar/DamageBar
+@onready var health_bar = $HealthBar
 @onready var health = get_parent().get_node("Adventurer/Health")
-@onready var player = get_parent().get_node("Adventurer")
-@onready var timer = get_node("LifeBar/Timer")
+
+@onready var armor_bar = $ArmorBar
+@onready var armor = get_parent().get_node("Adventurer/Armor")
 
 @onready var inventory: HBoxContainer = get_node("PanelContainer/Inventory")
 @onready var level_label: Label = get_node("LevelLabel")
+@onready var player = get_parent().get_node("Adventurer")
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	#health_bar.value = 100
 	level_label.text = "Floor " + str(SavedData.level)
-	damage_bar.value = health_bar.value
+	
 	health.max_health_changed.connect(_on_max_health_changed)
 	health.health_changed.connect(_on_health_changed)
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
+	armor.max_armor_changed.connect(_on_max_armor_changed)
+	armor.armor_changed.connect(_on_armor_changed)
+
 
 func _on_health_changed(diff: int) -> void:
-	# change the percentage of the health bar
-	health_bar.value = (float(health.health) / float(health.max_health)) * 100
-	
+	health_bar.change_value(health.get_health(), health.get_max_health())
 	if diff < 0:
 		player.health_changed = true
-		timer.start()
-	else:
-		damage_bar.value = health_bar.value
+
 
 func _on_max_health_changed(diff: int) -> void:
-	# change the percentage of the health bar
-	health_bar.value = (float(health.health) / float(health.max_health)) * 100
-	damage_bar.value = health_bar.value
+	health_bar.change_max_value(health.get_health(), health.get_max_health())
 
-func _on_timer_timeout() -> void:
-	damage_bar.value = health_bar.value
+
+func _on_armor_changed(diff: int) -> void:
+	armor_bar.change_value(armor.get_armor(), armor.get_max_armor())
+	
+
+func _on_max_armor_changed(diff: int) -> void:
+	armor_bar.change_max_value(armor.get_armor(), armor.get_max_health())
 
 
 func _on_player_weapon_dropped(index: int) -> void:

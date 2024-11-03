@@ -1,0 +1,10 @@
+[gd_scene load_steps=4 format=3 uid="uid://d0u014spi8o8v"]
+
+[ext_resource type="PackedScene" uid="uid://c4jeejt1av0vj" path="res://interface/something_bar.tscn" id="1_7ymc5"]
+[ext_resource type="Texture2D" uid="uid://c2255fo5pv55u" path="res://assets/sprites/interface/Health Bar Asset Pack 2 by Adwit Rahman/greenbar (3).png" id="2_8xg82"]
+[ext_resource type="Texture2D" uid="uid://cydustipd4m2v" path="res://assets/sprites/interface/Health Bar Asset Pack 2 by Adwit Rahman/greenbar (2).png" id="3_axnts"]
+
+[node name="HealthBar" instance=ExtResource("1_7ymc5")]
+value = 100.0
+under_texture = ExtResource("2_8xg82")
+progress_texture = ExtResource("3_axnts")

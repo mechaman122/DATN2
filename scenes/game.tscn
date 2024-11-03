@@ -13,7 +13,7 @@
 
 [node name="Interface" parent="." instance=ExtResource("1_mf2yy")]
 
-[node name="PanelContainer" parent="Interface" index="1"]
+[node name="PanelContainer" parent="Interface" index="2"]
 size_flags_horizontal = 3
 
 [node name="Inventory" parent="Interface/PanelContainer" index="0"]
