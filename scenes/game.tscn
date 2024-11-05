@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://xfcntficuxyx"]
+[gd_scene load_steps=11 format=3 uid="uid://xfcntficuxyx"]
 
 [ext_resource type="PackedScene" uid="uid://2tkmj873jyu3" path="res://scenes/adventurer.tscn" id="1_7c8dh"]
 [ext_resource type="PackedScene" uid="uid://cmlvksdm3h5h2" path="res://interface/interface.tscn" id="1_mf2yy"]
@@ -6,8 +6,10 @@
 [ext_resource type="PackedScene" uid="uid://b66bau71264wo" path="res://weapons/base_weapons/apprentice_staff.tscn" id="8_axvye"]
 [ext_resource type="PackedScene" uid="uid://bk1y10ciko62f" path="res://map/map_elements/treasure.tscn" id="8_qskdt"]
 [ext_resource type="PackedScene" uid="uid://dngy6tjhq1f1u" path="res://collectibles/health_potion.tscn" id="8_ux3dy"]
+[ext_resource type="PackedScene" uid="uid://dmttjhygheopq" path="res://armor/base_armors/leather_shirt.tscn" id="9_bfpx6"]
 [ext_resource type="PackedScene" uid="uid://fbs870pep1s1" path="res://collectibles/coin.tscn" id="9_bowpb"]
 [ext_resource type="PackedScene" uid="uid://n7vi3j6nc3tk" path="res://weapons/base_weapons/beginner_bow.tscn" id="9_cov3x"]
+[ext_resource type="PackedScene" uid="uid://bj2o4qmn48oq5" path="res://weapons/base_weapons/beginner_sword.tscn" id="10_x42of"]
 
 [node name="Game" type="Node2D"]
 
@@ -47,6 +49,14 @@ is_on_floor = true
 position = Vector2(588, 373)
 is_on_floor = true
 
+[node name="LeatherShirt" parent="." instance=ExtResource("9_bfpx6")]
+position = Vector2(786, 322)
+
+[node name="BeginnerSword" parent="." instance=ExtResource("10_x42of")]
+position = Vector2(657, 394)
+is_on_floor = true
+
+[connection signal="armor_equipped" from="Adventurer" to="Interface" method="_on_player_armor_equipped"]
 [connection signal="weapon_dropped" from="Adventurer" to="Interface" method="_on_player_weapon_dropped"]
 [connection signal="weapon_picked_up" from="Adventurer" to="Interface" method="_on_player_weapon_picked_up"]
 [connection signal="weapon_switched" from="Adventurer" to="Interface" method="_on_player_weapon_switched"]

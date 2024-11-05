@@ -833,6 +833,7 @@ script = ExtResource("2_6m0bo")
 max_health = 100
 
 [node name="Armor" parent="." instance=ExtResource("4_ovac2")]
+max_armor = 100
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(0, -5)

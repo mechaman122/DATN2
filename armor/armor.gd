@@ -21,9 +21,10 @@ func set_max_armor(value: int):
 		max_armor = clamp_value
 		emit_signal("max_armor_changed", difference)
 		
-		if armor > max_armor:
+		if armor >= max_armor:
 			armor = max_armor
-			
+		else:
+			set_armor(armor)
 	
 func get_max_armor() -> int:
 	return max_armor

@@ -27,5 +27,6 @@ rotation = 1.5708
 shape = SubResource("CapsuleShape2D_l4v3p")
 
 [connection signal="body_entered" from="PickableArea" to="." method="_on_pickable_area_body_entered"]
+[connection signal="body_exited" from="PickableArea" to="." method="_on_pickable_area_body_exited"]
 
 [editable path="HammerAnimation"]

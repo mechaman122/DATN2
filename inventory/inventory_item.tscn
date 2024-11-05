@@ -1,13 +1,18 @@
-[gd_scene load_steps=3 format=3 uid="uid://dwepsfgttpkaj"]
+[gd_scene load_steps=4 format=3 uid="uid://dwepsfgttpkaj"]
 
 [ext_resource type="Texture2D" uid="uid://cu3cnbs3jqbgr" path="res://assets/sprites/weapons/icons/Hammer.png" id="2_3f1cj"]
 [ext_resource type="Script" path="res://inventory/inventory_item.gd" id="2_gq13k"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ccvw1"]
+bg_color = Color(0.737255, 0.560784, 0.372549, 1)
+border_blend = true
 
 [node name="InventoryItem" type="PanelContainer"]
 custom_minimum_size = Vector2(80, 80)
 offset_right = 80.0
 offset_bottom = 40.0
 mouse_filter = 1
+theme_override_styles/panel = SubResource("StyleBoxFlat_ccvw1")
 script = ExtResource("2_gq13k")
 
 [node name="TextureRect" type="TextureRect" parent="."]
@@ -18,11 +23,12 @@ expand_mode = 5
 stretch_mode = 6
 
 [node name="ReferenceRect" type="ReferenceRect" parent="."]
+visible = false
 show_behind_parent = true
 layout_mode = 2
 mouse_filter = 1
 border_color = Color(0.196078, 1, 0.4, 0.741176)
-border_width = 6.0
+border_width = 10.0
 editor_only = false
 
 [connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]

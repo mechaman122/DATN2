@@ -1,6 +1,9 @@
 extends Control
 
-func item_popup(slot: Rect2i, item: WeaponStats):
+const dot_green = preload("res://assets/sprites/rpg_icon/Individual icons (16x16)/dot_green.png")
+const dot_red = preload("res://assets/sprites/rpg_icon/Individual icons (16x16)/dot_red.png")
+
+func item_popup(slot: Rect2i, item: Item):
 	if item != null:
 		set_value(item)
 		%ItemPopup.size = Vector2i.ZERO
@@ -19,13 +22,31 @@ func item_hidepopup():
 	%ItemPopup.hide()
 
 
-func set_value(weapon_stats: WeaponStats) -> void:
-		%Name.text = weapon_stats.weapon_name
-		%Level.text = str(weapon_stats.level)
-		%Damage.text = str(weapon_stats.damage)
-		%Crit.text = str(weapon_stats.crit)
-		%Rarity.text = set_text_effect(weapon_stats.rarity)
-
+func set_value(item_stats: Item) -> void:
+	%Name.text = item_stats.item_name
+	%Level.text = str(item_stats.level)
+	%Rarity.text = set_text_effect(item_stats.rarity)
+	%Description.text = str(item_stats.description)
+	
+	if item_stats is WeaponStats:
+		%Damage.text = str(item_stats.damage)
+		%Crit.text = str(item_stats.crit)
+		
+		%ItemPopup.get_node("VBoxContainer/HBoxContainer2").show()
+		%ItemPopup.get_node("VBoxContainer/HBoxContainer3").show()
+		%ItemPopup.get_node("VBoxContainer/HBoxContainer4").hide()
+		%ItemPopup.get_node("VBoxContainer/HBoxContainer5").hide()
+		
+	elif item_stats is ArmorStats:
+		%Armor.text = str(item_stats.bonus_armor)
+		var string = str(item_stats.bonus_attribute)
+		%BonusLabel.text = string[0].to_upper() + string.substr(1, -1)
+		%BonusAttributeValue.text = str(item_stats.bonus_attribute_value)
+		
+		%ItemPopup.get_node("VBoxContainer/HBoxContainer2").hide()
+		%ItemPopup.get_node("VBoxContainer/HBoxContainer3").hide()
+		%ItemPopup.get_node("VBoxContainer/HBoxContainer4").show()
+		%ItemPopup.get_node("VBoxContainer/HBoxContainer5").show()
 
 func set_text_effect(rarity : String):
 	var text : String = rarity

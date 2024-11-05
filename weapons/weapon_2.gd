@@ -6,6 +6,7 @@ class_name Weapon2
 @export var weapon_anim: WeaponAnimation
 @onready var pickable_area: Area2D = get_node("PickableArea")
 var tween: Tween = null
+var touch_body: Node2D
 
 @export var stats: WeaponStats:
 	set(value):
@@ -28,6 +29,10 @@ func _ready() -> void:
 		#pickable_area.set_collision_mask_value(1, true)
 		#pickable_area.set_collision_mask_value(2, true)
 
+
+func _process(delta: float) -> void:
+	if touch_body is Player:
+		pickable_area.emit_signal("body_entered", touch_body)
 
 func get_input() -> void:
 	weapon_anim.get_input()
@@ -62,19 +67,23 @@ func cancel_attack() -> void:
 
 
 func _on_pickable_area_body_entered(body: Node2D) -> void:
+	touch_body = body
+	Popups.item_popup(Rect2i(Vector2i(global_position), Vector2i(0,0)), stats)
 	if body is Player:
-		pickable_area.set_collision_mask_value(1, false)
-		pickable_area.set_collision_mask_value(2, false)
-		body.pick_up_weapon(self)
-		position = Vector2.ZERO
+		if body.weapons.get_child_count() < 3:
+			pickable_area.set_collision_mask_value(1, false)
+			pickable_area.set_collision_mask_value(2, false)
+			body.pick_up_weapon(self)
+			position = Vector2.ZERO
 	elif body == null:
 		tween.kill()
 		pickable_area.set_collision_mask_value(2, true)
 
 
 func _on_pickable_area_body_exited(body: Node2D) -> void:
-	pass
-
+	touch_body = null
+	Popups.item_hidepopup()
+	
 
 func interpolate_pos(init_pos: Vector2, final_pos: Vector2) -> void:
 	position = init_pos

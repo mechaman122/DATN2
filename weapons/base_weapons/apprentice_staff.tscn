@@ -23,6 +23,7 @@ rotation = 0.785398
 shape = SubResource("CapsuleShape2D_q5xnq")
 
 [connection signal="body_entered" from="PickableArea" to="." method="_on_pickable_area_body_entered"]
+[connection signal="body_exited" from="PickableArea" to="." method="_on_pickable_area_body_exited"]
 
 [editable path="StaffAnimation"]
 [editable path="StaffAnimation/Effects/Fireball"]

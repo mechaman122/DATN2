@@ -9,6 +9,7 @@ const INVENTORY_ITEM_SCENE: PackedScene = preload("res://inventory/inventory_ite
 @onready var armor = get_parent().get_node("Adventurer/Armor")
 
 @onready var inventory: HBoxContainer = get_node("PanelContainer/Inventory")
+@onready var armor_inventory: PanelContainer = get_node("ArmorContainer/InventoryItem")
 @onready var level_label: Label = get_node("LevelLabel")
 @onready var player = get_parent().get_node("Adventurer")
 
@@ -30,7 +31,7 @@ func _on_health_changed(diff: int) -> void:
 
 
 func _on_max_health_changed(diff: int) -> void:
-	health_bar.change_max_value(health.get_health(), health.get_max_health())
+	health_bar.change_max_value(health.get_max_health())
 
 
 func _on_armor_changed(diff: int) -> void:
@@ -38,7 +39,7 @@ func _on_armor_changed(diff: int) -> void:
 	
 
 func _on_max_armor_changed(diff: int) -> void:
-	armor_bar.change_max_value(armor.get_armor(), armor.get_max_health())
+	armor_bar.change_max_value(armor.get_max_armor())
 
 
 func _on_player_weapon_dropped(index: int) -> void:
@@ -54,3 +55,7 @@ func _on_player_weapon_picked_up(weapon_stats: WeaponStats) -> void:
 func _on_player_weapon_switched(prev_index: int, new_index: int) -> void:
 	inventory.get_child(prev_index).deselect()
 	inventory.get_child(new_index).select()
+
+
+func _on_player_armor_equipped(armor_stats: ArmorStats) -> void:
+	armor_inventory.initialize(armor_stats)

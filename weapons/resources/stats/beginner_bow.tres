@@ -1,16 +1,16 @@
 [gd_resource type="Resource" script_class="WeaponStats" load_steps=3 format=3 uid="uid://cx3ob0xcbh3pk"]
 
-[ext_resource type="Script" path="res://weapons/resources/stats.gd" id="1_de3kx"]
+[ext_resource type="Script" path="res://weapons/resources/weapon_stats.gd" id="1_de3kx"]
 [ext_resource type="Texture2D" uid="uid://bfldu3i1crah" path="res://assets/sprites/weapons/icons/bow.png" id="2_r48dg"]
 
 [resource]
 script = ExtResource("1_de3kx")
-weapon_name = "Beginner Bow"
 is_ranged = true
 type = "Bow"
-rarity = "Common"
 damage = 1
 crit = 0.0
+item_name = "Beginner Bow"
 level = 1
 texture = ExtResource("2_r48dg")
 description = ""
+rarity = "Common"

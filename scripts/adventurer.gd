@@ -2,7 +2,7 @@ class_name Player extends CharacterBody2D
 
 enum {UP, DOWN}
 
-const speed = 100.0
+var speed = 100.0
 const DUST_SCENE: PackedScene = preload("res://scenes/dust.tscn")
 
 var current_weapon
@@ -10,6 +10,7 @@ var current_weapon
 signal weapon_switched(prev_index: int, new_index: int)
 signal weapon_picked_up(weapon_stats: WeaponStats)
 signal weapon_dropped(index: int)
+signal armor_equipped(armor_stats: ArmorStats)
 
 @onready var animated_sprite = $AnimatedSprite2D
 @onready var animation_player = $AnimationPlayer
@@ -135,3 +136,15 @@ func spawn_dust() -> void:
 	var dust: Sprite2D = DUST_SCENE.instantiate()
 	dust.position = dust_position.global_position
 	get_parent().add_child(dust)
+
+
+func equip_armor(armor_stats: ArmorStats) -> void:
+	armor.set_max_armor(armor.get_max_armor() + armor_stats.bonus_armor)
+	
+	var bonus_attribute = str(armor_stats.bonus_attribute)
+	var bonus_attribute_value = armor_stats.bonus_attribute_value
+	
+	var temp = get(bonus_attribute)
+	temp += bonus_attribute_value
+	set(bonus_attribute, temp)
+	emit_signal("armor_equipped", armor_stats)

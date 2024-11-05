@@ -29,13 +29,13 @@ func _on_damage_timer_timeout() -> void:
 
 
 func change_value(curr: int, max: int):
-	self.value = (float(curr) / float(max)) * 100
+	self.value = curr
 	if curr - max < 0:
 		damage_timer.start()
 	else: 
 		damage_bar.value = self.value
 
 
-func change_max_value(curr: int, max: int):
-	self.value = (float(curr) / float(max)) * 100
+func change_max_value(max: int):
+	self.max_value = max
 	damage_bar.value = self.value 

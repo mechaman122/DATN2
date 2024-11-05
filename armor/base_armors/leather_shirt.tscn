@@ -1,0 +1,21 @@
+[gd_scene load_steps=5 format=3 uid="uid://dmttjhygheopq"]
+
+[ext_resource type="Script" path="res://armor/armor_item.gd" id="1_y4obj"]
+[ext_resource type="Resource" uid="uid://cwlfkshtt5r28" path="res://armor/resources/leather_shirt.tres" id="2_t8wgl"]
+[ext_resource type="Texture2D" uid="uid://7muyhvx4fenl" path="res://assets/sprites/rpg_icon/Individual icons (16x16)/42.png" id="3_yjy4d"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_etc5h"]
+
+[node name="LeatherShirt" type="Area2D"]
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("1_y4obj")
+armor_stats = ExtResource("2_t8wgl")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("3_yjy4d")
+
+[node name="PickableArea" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_etc5h")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
