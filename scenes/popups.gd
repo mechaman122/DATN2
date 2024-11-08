@@ -23,9 +23,7 @@ func item_hidepopup():
 
 
 func set_value(item_stats: Item) -> void:
-	%Name.text = item_stats.item_name
-	%Level.text = str(item_stats.level)
-	%Rarity.text = set_text_effect(item_stats.rarity)
+	%Name.text = set_text_effect(item_stats.item_name)
 	%Description.text = str(item_stats.description)
 	
 	if item_stats is WeaponStats:

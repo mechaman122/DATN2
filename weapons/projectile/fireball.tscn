@@ -40,5 +40,6 @@ sprite_frames = SubResource("SpriteFrames_ewa12")
 frame_progress = 0.227217
 
 [node name="CollisionShape2D" parent="Hitbox" index="0"]
+visible = false
 position = Vector2(0, -1)
 shape = SubResource("CircleShape2D_21fak")

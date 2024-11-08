@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://xfcntficuxyx"]
+[gd_scene load_steps=12 format=3 uid="uid://xfcntficuxyx"]
 
 [ext_resource type="PackedScene" uid="uid://2tkmj873jyu3" path="res://scenes/adventurer.tscn" id="1_7c8dh"]
 [ext_resource type="PackedScene" uid="uid://cmlvksdm3h5h2" path="res://interface/interface.tscn" id="1_mf2yy"]
@@ -10,6 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://fbs870pep1s1" path="res://collectibles/coin.tscn" id="9_bowpb"]
 [ext_resource type="PackedScene" uid="uid://n7vi3j6nc3tk" path="res://weapons/base_weapons/beginner_bow.tscn" id="9_cov3x"]
 [ext_resource type="PackedScene" uid="uid://bj2o4qmn48oq5" path="res://weapons/base_weapons/beginner_sword.tscn" id="10_x42of"]
+[ext_resource type="PackedScene" uid="uid://3rtrhjddetts" path="res://map/map_elements/stairs.tscn" id="11_v8ere"]
 
 [node name="Game" type="Node2D"]
 
@@ -55,6 +56,9 @@ position = Vector2(786, 322)
 [node name="BeginnerSword" parent="." instance=ExtResource("10_x42of")]
 position = Vector2(657, 394)
 is_on_floor = true
+
+[node name="Statirs" parent="." instance=ExtResource("11_v8ere")]
+position = Vector2(792, 390)
 
 [connection signal="armor_equipped" from="Adventurer" to="Interface" method="_on_player_armor_equipped"]
 [connection signal="weapon_dropped" from="Adventurer" to="Interface" method="_on_player_weapon_dropped"]

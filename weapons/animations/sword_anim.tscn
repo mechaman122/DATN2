@@ -378,11 +378,10 @@ tangential_accel_max = 80.3
 turbulence_noise_strength = 20.0
 turbulence_noise_scale = 3.0
 
-[node name="SwordAnimation" node_paths=PackedStringArray("anim_player", "sprite", "charge_particles", "hitbox") instance=ExtResource("1_2i1gq")]
+[node name="SwordAnimation" node_paths=PackedStringArray("anim_player", "sprite", "charge_particles") instance=ExtResource("1_2i1gq")]
 anim_player = NodePath("AnimationPlayer")
 sprite = NodePath("Sprite2D")
 charge_particles = NodePath("Effects/ChargeParticles")
-hitbox = NodePath("Sprite2D/Hitbox")
 
 [node name="Sprite2D" parent="." index="0"]
 material = SubResource("ShaderMaterial_up422")

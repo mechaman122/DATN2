@@ -12,7 +12,5 @@ one_shot = true
 [node name="RechargeTimer" type="Timer" parent="."]
 one_shot = true
 
-[node name="EquippedArmor" type="Node2D" parent="."]
-
 [connection signal="timeout" from="CooldownTimer" to="." method="_on_cooldown_timer_timeout"]
 [connection signal="timeout" from="RechargeTimer" to="." method="_on_recharge_timer_timeout"]

@@ -2,6 +2,7 @@ extends PlayerState
 
 func enter(previous_state_path: String, data: Dictionary = {}) -> void:
 	player.animation_player.play("hurt")
+	player.health_changed = false
 	if player.has_weapon:
 		player.current_weapon.cancel_attack()
 	player.health.set_temp_immortality(1)

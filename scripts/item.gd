@@ -4,7 +4,6 @@ class_name Item
 
 @export var item_name: String
 
-@export var level: int
 @export var texture: Texture2D
 @export_multiline var description: String
 @export_enum("Common", "Rare", "Epic", "Legendary")

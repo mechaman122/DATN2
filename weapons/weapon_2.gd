@@ -7,6 +7,8 @@ class_name Weapon2
 @onready var pickable_area: Area2D = get_node("PickableArea")
 var tween: Tween = null
 var touch_body: Node2D
+var base_damage: int
+var bonus_damage: int
 
 @export var stats: WeaponStats:
 	set(value):
@@ -21,14 +23,14 @@ func _ready() -> void:
 		weapon_anim.sprite.texture = stats.texture
 	else:
 		weapon_anim.sprite.texture = stats.texture
-	weapon_anim.hitbox.damage = stats.damage
+	#weapon_anim.hitbox.damage = stats.damage
 	if not is_on_floor:
 		pickable_area.set_collision_mask_value(1, false)
 		pickable_area.set_collision_mask_value(2, false)
 	#else:
 		#pickable_area.set_collision_mask_value(1, true)
 		#pickable_area.set_collision_mask_value(2, true)
-
+	base_damage = stats.damage
 
 func _process(delta: float) -> void:
 	if touch_body is Player:

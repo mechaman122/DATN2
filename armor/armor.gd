@@ -8,7 +8,6 @@ signal armor_changed(diff: int)
 @export var max_armor: int = 10: set = set_max_armor, get = get_max_armor
 @export var armor: int: set = set_armor, get = get_armor
 
-@onready var equipped_armor: Node2D = get_node("EquippedArmor")
 @onready var cooldown_timer: Timer = get_node("CooldownTimer")
 @onready var recharge_timer: Timer = get_node("RechargeTimer")
 
@@ -21,6 +20,8 @@ func set_max_armor(value: int):
 		max_armor = clamp_value
 		emit_signal("max_armor_changed", difference)
 		
+		if get_parent() is Player:
+			SavedData.max_armor = value
 		if armor >= max_armor:
 			armor = max_armor
 		else:
@@ -38,6 +39,7 @@ func set_armor(value: int):
 		armor = value
 		if difference < 0:
 			cooldown_timer.start()
+			recharge_timer.stop()
 		emit_signal("armor_changed", difference)
 		print(armor)
 	

@@ -2,7 +2,6 @@ class_name Player extends CharacterBody2D
 
 enum {UP, DOWN}
 
-var speed = 100.0
 const DUST_SCENE: PackedScene = preload("res://scenes/dust.tscn")
 
 var current_weapon
@@ -11,12 +10,20 @@ signal weapon_switched(prev_index: int, new_index: int)
 signal weapon_picked_up(weapon_stats: WeaponStats)
 signal weapon_dropped(index: int)
 signal armor_equipped(armor_stats: ArmorStats)
+signal passive_received
 
 @onready var animated_sprite = $AnimatedSprite2D
 @onready var animation_player = $AnimationPlayer
 
+#stats
 @onready var health = $Health
 @onready var armor =$Armor
+var bonus_melee_damage: int = 0
+var bonus_ranged_damage: int = 0
+var bonus_speed: float = 0
+var bonus_crit: int = 0
+var speed: float = 100.0
+var status_effects: Array[StatusEffect] = []
 
 @onready var melee_hitbox = $MeleeHitbox/CollisionShape2D
 @onready var weapons = get_node("Weapons")
@@ -27,22 +34,42 @@ var has_weapon = false
 var health_changed = false
 var knockback: Vector2
 
+
 func _ready() -> void:
+
 	emit_signal("weapon_picked_up", weapons.get_child(0).stats)
 	_restore_prev_state()
-	
-		
+
+# for testing purpose
+func _input(event):
+	if event is InputEventKey and event.is_pressed():
+		if event.keycode == KEY_1:
+			apply_status_effect(Stun.new())
+		if event.keycode == KEY_2:
+			apply_status_effect(Slow.new())
+		if event.keycode == KEY_3:
+			apply_status_effect(Haste.new())
+		if event.keycode == KEY_4:
+			apply_status_effect(Heal.new())
+			
+			
 func _restore_prev_state() -> void:
+	
+	SavedData.allow_input = true
 	health.max_health = SavedData.max_health
 	health.health = SavedData.health
-	armor.max_armor = 10
-	armor.armor = 10
+	armor.max_armor = SavedData.max_armor
+	armor.armor = armor.max_armor
+	bonus_melee_damage = SavedData.bonus_melee_damage
+	bonus_ranged_damage = SavedData.bonus_ranged_damage
+	bonus_speed = SavedData.bonus_speed
+	
 	for weapon in SavedData.weapons:
 		weapon = weapon.duplicate()
 		weapon.position = Vector2.ZERO
 		weapons.add_child(weapon)
 		weapon.hide()
-		
+
 		emit_signal("weapon_picked_up", weapon.stats)
 		emit_signal("weapon_switched", weapons.get_child_count() - 2, weapons.get_child_count() - 1)
 		
@@ -51,6 +78,7 @@ func _restore_prev_state() -> void:
 	has_weapon = true
 	
 	emit_signal("weapon_switched", weapons.get_child_count() - 1, SavedData.equipped_weapon_index)
+	emit_signal("armor_equipped", SavedData.equipped_armor)
 
 func _process(delta: float) -> void:
 	var mouse_dir: Vector2 = (get_global_mouse_position() - global_position).normalized()
@@ -68,9 +96,22 @@ func _process(delta: float) -> void:
 		current_weapon.move(mouse_dir)
 		current_weapon.get_input()
 	
-	if Input.is_action_just_pressed("ui_interact"):
+	if Input.is_action_just_pressed("ui_interact") and SavedData.allow_input:
 		interaction_manager.initiate_interaction()
+
+# handle all physical stuff
+func _physics_process(delta: float) -> void:
+	for i in range(status_effects.size()):
+		var effect = status_effects[i]
+		effect.duration -= delta
 		
+		if effect.duration < 0:
+			effect.remove(self)
+			status_effects.remove_at(i)
+			print(status_effects)
+			reset_effect()
+			break
+	
 func player():
 	pass
 
@@ -91,6 +132,7 @@ func _switch_weapon(direction: int) -> void:
 	current_weapon = weapons.get_child(index)
 	current_weapon.show()
 	SavedData.equipped_weapon_index = index
+	print(index)
 	
 	emit_signal("weapon_switched", prev_index, index)
 	
@@ -117,7 +159,7 @@ func pick_up_weapon(weapon: Weapon2) -> void:
 func _drop_weapon() -> void:
 	if !has_weapon or weapons.get_child_count() == 1:
 		return
-	SavedData.weapons.remove_at(current_weapon.get_index()-1)
+	SavedData.weapons.remove_at(current_weapon.get_index()-1 if current_weapon.get_index() > 0 else 0)
 	var weapon_to_drop: Node2D = current_weapon
 	_switch_weapon(UP)
 
@@ -141,10 +183,43 @@ func spawn_dust() -> void:
 func equip_armor(armor_stats: ArmorStats) -> void:
 	armor.set_max_armor(armor.get_max_armor() + armor_stats.bonus_armor)
 	
-	var bonus_attribute = str(armor_stats.bonus_attribute)
+	var bonus_attribute = "bonus_" + str(armor_stats.bonus_attribute)
 	var bonus_attribute_value = armor_stats.bonus_attribute_value
 	
-	var temp = get(bonus_attribute)
-	temp += bonus_attribute_value
-	set(bonus_attribute, temp)
+	update_bonus_attribute(bonus_attribute, bonus_attribute_value)
+	SavedData.equipped_armor = armor_stats
 	emit_signal("armor_equipped", armor_stats)
+	
+	
+func equip_different_armor(curr: ArmorStats, next: ArmorStats) -> void:
+	armor.set_max_armor(armor.get_max_armor() - curr.bonus_armor)
+	
+	var bonus_attribute = "bonus_" + str(curr.bonus_attribute)
+	var bonus_attribute_value = -curr.bonus_attribute_value
+	
+	update_bonus_attribute(bonus_attribute, bonus_attribute_value)
+	SavedData.equipped_armor = null
+	equip_armor(next)
+	
+
+func update_bonus_attribute(attribute: String, value):
+	var temp = get(attribute)
+	temp = value
+	set(attribute, temp)
+	SavedData[attribute] = temp
+
+
+func apply_status_effect(effect):
+	
+	for i in range(status_effects.size()):
+		if status_effects[i].get_effect_name() == effect.get_effect_name():
+			status_effects[i].duration = effect.duration
+			return
+	
+	status_effects.append(effect)
+	effect.apply(self)
+	print(status_effects)
+
+func reset_effect():
+	for i in status_effects:
+		i.apply(self)

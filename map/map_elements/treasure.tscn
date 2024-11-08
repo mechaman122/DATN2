@@ -1,11 +1,9 @@
-[gd_scene load_steps=26 format=3 uid="uid://bk1y10ciko62f"]
+[gd_scene load_steps=24 format=3 uid="uid://bk1y10ciko62f"]
 
 [ext_resource type="Script" path="res://map/map_elements/treasure.gd" id="1_ecq85"]
 [ext_resource type="Texture2D" uid="uid://bq3xdue2ap78q" path="res://assets/sprites/map/map_elements.png" id="2_dsonj"]
 [ext_resource type="FontFile" uid="uid://dlndpcesvur4y" path="res://assets/fonts/quaver.ttf" id="2_jkkd5"]
 [ext_resource type="Texture2D" uid="uid://cto7cakp2tfww" path="res://assets/sprites/effects/smoke_effect.png" id="4_rfjph"]
-[ext_resource type="PackedScene" uid="uid://djialem8q1fvs" path="res://hitboxes/interaction_manager.tscn" id="5_gikiw"]
-[ext_resource type="Script" path="res://map/map_elements/map_element_interaction_manager.gd" id="6_scme7"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_xnc72"]
 font = ExtResource("2_jkkd5")
@@ -119,7 +117,7 @@ tracks/3/keys = {
 tracks/4/type = "value"
 tracks/4/imported = false
 tracks/4/enabled = true
-tracks/4/path = NodePath("InteractionManager/CollisionShape2D:disabled")
+tracks/4/path = NodePath("PickableArea/CollisionShape2D:disabled")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
@@ -198,7 +196,7 @@ tracks/4/keys = {
 tracks/5/type = "value"
 tracks/5/imported = false
 tracks/5/enabled = true
-tracks/5/path = NodePath("InteractionManager/CollisionShape2D:disabled")
+tracks/5/path = NodePath("PickableArea/CollisionShape2D:disabled")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = {
@@ -277,7 +275,7 @@ tracks/4/keys = {
 tracks/5/type = "value"
 tracks/5/imported = false
 tracks/5/enabled = true
-tracks/5/path = NodePath("InteractionManager/CollisionShape2D:disabled")
+tracks/5/path = NodePath("PickableArea/CollisionShape2D:disabled")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = {
@@ -317,11 +315,11 @@ scale_curve = SubResource("CurveTexture_dphwc")
 color_ramp = SubResource("GradientTexture1D_hm172")
 turbulence_enabled = true
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_8ww54"]
-radius = 15.0
-
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_dndor"]
 size = Vector2(16, 16)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_iwpbc"]
+radius = 16.0
 
 [node name="Treasure" type="StaticBody2D" node_paths=PackedStringArray("animation_player")]
 collision_layer = 8
@@ -355,16 +353,18 @@ process_material = SubResource("ParticleProcessMaterial_fe1f3")
 texture = ExtResource("4_rfjph")
 explosiveness = 1.0
 
-[node name="InteractionManager" parent="." instance=ExtResource("5_gikiw")]
-script = ExtResource("6_scme7")
-
-[node name="CollisionShape2D" parent="InteractionManager" index="0"]
-visible = false
-shape = SubResource("CircleShape2D_8ww54")
-
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 visible = false
 position = Vector2(0, 1.25)
 shape = SubResource("RectangleShape2D_dndor")
 
-[editable path="InteractionManager"]
+[node name="PickableArea" type="Area2D" parent="."]
+visible = false
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PickableArea"]
+shape = SubResource("CircleShape2D_iwpbc")
+
+[connection signal="body_entered" from="PickableArea" to="." method="_on_pickable_area_body_entered"]
+[connection signal="body_exited" from="PickableArea" to="." method="_on_pickable_area_body_exited"]

@@ -1,6 +1,7 @@
 extends Area2D
 class_name ArmorItem
 
+var touch_body: Node2D
 @onready var sprite = get_node("Sprite2D")
 @export var armor_stats: ArmorStats = null:
 	set(value):
@@ -14,10 +15,20 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	pass
+	if touch_body is Player and Input.is_action_just_pressed("ui_interact"):
+		if SavedData.equipped_armor == null:
+			touch_body.equip_armor(self.armor_stats)
+		else:
+			touch_body.equip_different_armor(SavedData.equipped_armor, self.armor_stats)
+		queue_free()
 
 
 func _on_body_entered(body: Node2D) -> void:
 	if body is Player:
-		body.equip_armor(self.armor_stats)
-		queue_free()
+		touch_body = body
+		Popups.item_popup(Rect2i(Vector2i(global_position), Vector2i(0,0)), armor_stats)
+
+
+func _on_body_exited(body: Node2D) -> void:
+	touch_body = null
+	Popups.item_hidepopup()

@@ -13,7 +13,7 @@ func launch(init_pos: Vector2, dir: Vector2, spd: float, dmg: int) -> void:
 	position = init_pos
 	self.direction = dir
 	self.speed = spd
-	rotation += dir.angle() - deg_to_rad(45)
+	rotation += dir.angle()
 
 func _physics_process(delta: float) -> void:
 	position += direction * speed * delta
