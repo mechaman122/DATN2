@@ -5,11 +5,10 @@ func enter(previous_state_path: String, data: Dictionary = {}) -> void:
 
 func physics_update(delta: float) -> void:
 	# move in 4 directions
-	var total_speed = player.speed + player.bonus_speed
 	var input_direction_x := Input.get_axis("move_left", "move_right")
-	player.velocity.x = total_speed * input_direction_x
+	player.velocity.x = player.curr_stats["speed"] * input_direction_x
 	var input_direction_y := Input.get_axis("move_up", "move_down")
-	player.velocity.y = total_speed * input_direction_y
+	player.velocity.y = player.curr_stats["speed"] * input_direction_y
 
 	player.move_and_slide()
 

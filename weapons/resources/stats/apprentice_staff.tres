@@ -5,12 +5,14 @@
 
 [resource]
 script = ExtResource("1_rtjlg")
-item_name = "Apprentice Staff"
 is_ranged = true
 type = "Staff"
-rarity = "Common"
-damage = 1
-crit = 0.0
-level = 1
+item_name = "Apprentice Staff"
 texture = ExtResource("2_ad4ce")
 description = "A normal staff"
+rarity = "Common"
+stats = {
+"crit": 0.4,
+"damage": 1
+}
+passives = {}

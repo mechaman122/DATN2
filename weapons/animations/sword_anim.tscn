@@ -135,7 +135,7 @@ tracks/3/path = NodePath("Sprite2D/Hitbox/CollisionShape2D:disabled")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
-"times": PackedFloat32Array(0, 0.15, 0.5),
+"times": PackedFloat32Array(0, 0.2, 0.5),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 1,
 "values": [false, true, true]
@@ -378,10 +378,11 @@ tangential_accel_max = 80.3
 turbulence_noise_strength = 20.0
 turbulence_noise_scale = 3.0
 
-[node name="SwordAnimation" node_paths=PackedStringArray("anim_player", "sprite", "charge_particles") instance=ExtResource("1_2i1gq")]
+[node name="SwordAnimation" node_paths=PackedStringArray("anim_player", "sprite", "charge_particles", "hitbox") instance=ExtResource("1_2i1gq")]
 anim_player = NodePath("AnimationPlayer")
 sprite = NodePath("Sprite2D")
 charge_particles = NodePath("Effects/ChargeParticles")
+hitbox = NodePath("Sprite2D/Hitbox")
 
 [node name="Sprite2D" parent="." index="0"]
 material = SubResource("ShaderMaterial_up422")
@@ -390,10 +391,11 @@ rotation = -2.35619
 texture = ExtResource("2_qosoy")
 
 [node name="Hitbox" type="Area2D" parent="Sprite2D" index="0"]
+collision_layer = 16
+collision_mask = 4
 script = ExtResource("3_fcqpj")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Sprite2D/Hitbox" index="0"]
-visible = false
 position = Vector2(6, -6)
 rotation = 0.785398
 shape = SubResource("CapsuleShape2D_v1voa")

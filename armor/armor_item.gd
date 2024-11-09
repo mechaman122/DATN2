@@ -2,6 +2,8 @@ extends Area2D
 class_name ArmorItem
 
 var touch_body: Node2D
+var stats2: Dictionary
+var passives: Dictionary
 @onready var sprite = get_node("Sprite2D")
 @export var armor_stats: ArmorStats = null:
 	set(value):
@@ -9,6 +11,11 @@ var touch_body: Node2D
 # Called when the node enters the scene tree for the first time.
 
 func _ready() -> void:
+	for i in armor_stats.stats:
+		stats2[i] = armor_stats.stats[i]
+	for i in armor_stats.passives:
+		passives[i] = armor_stats.passives[i]
+		
 	if armor_stats != null:
 		sprite.texture = armor_stats.texture
 

@@ -21,3 +21,7 @@ func _physics_process(delta: float) -> void:
 
 func _on_life_time_timeout() -> void:
 	queue_free()
+
+
+func _on_hitbox_area_entered(hurtbox: Hurtbox) -> void:
+	queue_free()

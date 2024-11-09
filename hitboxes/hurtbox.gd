@@ -6,7 +6,6 @@ signal received_damage(damage: int)
 
 @export var health: Health
 @export var armor: Armor
-@export var knockback_strength: int = 10
 
 func _ready() -> void:
 	connect("area_entered", _on_area_entered)
@@ -22,5 +21,5 @@ func _on_area_entered(hitbox: Hitbox) -> void:
 
 func set_knockback_direction(hitbox: Hitbox) -> void:
 	var direction = (global_position.direction_to(hitbox.global_position)) * -1
-	var force = direction * knockback_strength
+	var force = direction * hitbox.knockback_strength
 	get_parent().knockback = force

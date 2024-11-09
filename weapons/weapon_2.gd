@@ -7,13 +7,13 @@ class_name Weapon2
 @onready var pickable_area: Area2D = get_node("PickableArea")
 var tween: Tween = null
 var touch_body: Node2D
-var base_damage: int
-var bonus_damage: int
+
+var stats2: Dictionary
+var passives: Dictionary
 
 @export var stats: WeaponStats:
 	set(value):
 		stats = value
-		#weapon_anim.sprite.texture = value.texture
 
 
 func _ready() -> void:
@@ -22,7 +22,7 @@ func _ready() -> void:
 	if not stats.is_ranged:
 		weapon_anim.sprite.texture = stats.texture
 	else:
-		weapon_anim.sprite.texture = stats.texture
+		weapon_anim.sprite.texture = stats.animated_texture if stats.animated_texture != null else stats.texture
 	#weapon_anim.hitbox.damage = stats.damage
 	if not is_on_floor:
 		pickable_area.set_collision_mask_value(1, false)
@@ -30,7 +30,11 @@ func _ready() -> void:
 	#else:
 		#pickable_area.set_collision_mask_value(1, true)
 		#pickable_area.set_collision_mask_value(2, true)
-	base_damage = stats.damage
+
+	for i in stats.stats:
+		stats2[i] = stats.stats[i]
+	for i in stats.passives:
+		passives[i] = stats.passives[i]
 
 func _process(delta: float) -> void:
 	if touch_body is Player:

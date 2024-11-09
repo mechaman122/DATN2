@@ -6,7 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://b66bau71264wo" path="res://weapons/base_weapons/apprentice_staff.tscn" id="8_axvye"]
 [ext_resource type="PackedScene" uid="uid://bk1y10ciko62f" path="res://map/map_elements/treasure.tscn" id="8_qskdt"]
 [ext_resource type="PackedScene" uid="uid://dngy6tjhq1f1u" path="res://collectibles/health_potion.tscn" id="8_ux3dy"]
-[ext_resource type="PackedScene" uid="uid://dmttjhygheopq" path="res://armor/base_armors/leather_shirt.tscn" id="9_bfpx6"]
+[ext_resource type="PackedScene" uid="uid://cvua28iqo4xty" path="res://armor/base_armors/leather_shirt.tscn" id="9_bfpx6"]
 [ext_resource type="PackedScene" uid="uid://fbs870pep1s1" path="res://collectibles/coin.tscn" id="9_bowpb"]
 [ext_resource type="PackedScene" uid="uid://n7vi3j6nc3tk" path="res://weapons/base_weapons/beginner_bow.tscn" id="9_cov3x"]
 [ext_resource type="PackedScene" uid="uid://bj2o4qmn48oq5" path="res://weapons/base_weapons/beginner_sword.tscn" id="10_x42of"]
@@ -31,7 +31,7 @@ zoom = Vector2(4, 4)
 position_smoothing_speed = 10.0
 
 [node name="DamageArea_test" parent="." instance=ExtResource("2_abr38")]
-position = Vector2(700, 300)
+position = Vector2(679, 282)
 
 [node name="Treasure" parent="." instance=ExtResource("8_qskdt")]
 position = Vector2(700, 390)
@@ -50,15 +50,15 @@ is_on_floor = true
 position = Vector2(588, 373)
 is_on_floor = true
 
-[node name="LeatherShirt" parent="." instance=ExtResource("9_bfpx6")]
-position = Vector2(786, 322)
-
 [node name="BeginnerSword" parent="." instance=ExtResource("10_x42of")]
 position = Vector2(657, 394)
 is_on_floor = true
 
 [node name="Statirs" parent="." instance=ExtResource("11_v8ere")]
 position = Vector2(792, 390)
+
+[node name="LeatherShirt2" parent="." instance=ExtResource("9_bfpx6")]
+position = Vector2(762, 362)
 
 [connection signal="armor_equipped" from="Adventurer" to="Interface" method="_on_player_armor_equipped"]
 [connection signal="weapon_dropped" from="Adventurer" to="Interface" method="_on_player_weapon_dropped"]

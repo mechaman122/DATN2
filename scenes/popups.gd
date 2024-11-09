@@ -23,28 +23,30 @@ func item_hidepopup():
 
 
 func set_value(item_stats: Item) -> void:
-	%Name.text = set_text_effect(item_stats.item_name)
+	%ItemTexture.texture = item_stats.texture
+	%Name.text = item_stats.item_name
+	%Rarity.text = set_text_effect(item_stats.rarity)
 	%Description.text = str(item_stats.description)
 	
 	if item_stats is WeaponStats:
-		%Damage.text = str(item_stats.damage)
-		%Crit.text = str(item_stats.crit)
+		%Damage.text = str(item_stats.stats["damage"])
+		%Crit.text = str(item_stats.stats["crit"])
 		
 		%ItemPopup.get_node("VBoxContainer/HBoxContainer2").show()
 		%ItemPopup.get_node("VBoxContainer/HBoxContainer3").show()
 		%ItemPopup.get_node("VBoxContainer/HBoxContainer4").hide()
-		%ItemPopup.get_node("VBoxContainer/HBoxContainer5").hide()
+		#%ItemPopup.get_node("VBoxContainer/HBoxContainer5").hide()
 		
 	elif item_stats is ArmorStats:
-		%Armor.text = str(item_stats.bonus_armor)
-		var string = str(item_stats.bonus_attribute)
-		%BonusLabel.text = string[0].to_upper() + string.substr(1, -1)
-		%BonusAttributeValue.text = str(item_stats.bonus_attribute_value)
+		%Armor.text = str(item_stats.stats["armor"])
+		#var string = str(item_stats.bonus_attribute)
+		#%BonusLabel.text = string[0].to_upper() + string.substr(1, -1)
+		#%BonusAttributeValue.text = str(item_stats.bonus_attribute_value)
 		
 		%ItemPopup.get_node("VBoxContainer/HBoxContainer2").hide()
 		%ItemPopup.get_node("VBoxContainer/HBoxContainer3").hide()
 		%ItemPopup.get_node("VBoxContainer/HBoxContainer4").show()
-		%ItemPopup.get_node("VBoxContainer/HBoxContainer5").show()
+		#%ItemPopup.get_node("VBoxContainer/HBoxContainer5").show()
 
 func set_text_effect(rarity : String):
 	var text : String = rarity

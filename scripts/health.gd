@@ -48,8 +48,9 @@ func set_health(value: int):
 		if get_parent() is Player:
 			SavedData.health = value
 		emit_signal("health_changed", difference)
-		armor.cooldown_timer.start()
-		armor.recharge_timer.stop()
+		if armor != null:
+			armor.cooldown_timer.start()
+			armor.recharge_timer.stop()
 
 		if health == 0:
 			emit_signal("health_depleted")

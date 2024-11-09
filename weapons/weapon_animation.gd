@@ -19,10 +19,10 @@ func get_input() -> void:
 	if Input.is_action_just_pressed("ui_attack") and not anim_player.is_playing():
 		anim_player.play("charge")
 	elif Input.is_action_just_released("ui_attack"):
-		if get_parent().stats.crit >= randf():
-			hitbox.damage = get_parent().base_damage * 2
+		if get_parent().stats2["crit"] >= randf():
+			hitbox.damage = get_parent().stats2["damage"] * 2
 		else: 
-			hitbox.damage = get_parent().base_damage
+			hitbox.damage = get_parent().stats2["damage"]
 		if anim_player.is_playing() and anim_player.current_animation == "charge":
 			anim_player.play("attack")
 		elif charge_particles.emitting:

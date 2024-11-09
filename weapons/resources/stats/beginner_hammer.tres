@@ -5,12 +5,14 @@
 
 [resource]
 script = ExtResource("1_tbjvs")
-item_name = "Beginner Hammer"
 is_ranged = false
 type = "Hammer"
-rarity = "Common"
-damage = 2
-crit = 0.4
-level = 1
+item_name = "Beginner Hammer"
 texture = ExtResource("2_jrwql")
 description = "A common hammer"
+rarity = "Common"
+stats = {
+"crit": 0.4,
+"damage": 2
+}
+passives = {}

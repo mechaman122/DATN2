@@ -7,10 +7,8 @@ func _init(time = 3) -> void:
 
 func apply(target) -> void:
 	super.apply(target)
-	target.speed = target.speed * 0.25
-	target.bonus_speed = target.bonus_speed * 0.25
+	target.curr_stats["speed"] *= 0.25
 	
 func remove(target) -> void:
 	super.remove(target)
-	target.speed = SavedData.speed
-	target.bonus_speed = SavedData.bonus_speed
+	target.curr_stats["speed"] = target.base_stats["speed"]

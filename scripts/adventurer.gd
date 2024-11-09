@@ -5,6 +5,7 @@ enum {UP, DOWN}
 const DUST_SCENE: PackedScene = preload("res://scenes/dust.tscn")
 
 var current_weapon
+var current_armor
 
 signal weapon_switched(prev_index: int, new_index: int)
 signal weapon_picked_up(weapon_stats: WeaponStats)
@@ -18,12 +19,35 @@ signal passive_received
 #stats
 @onready var health = $Health
 @onready var armor =$Armor
-var bonus_melee_damage: int = 0
-var bonus_ranged_damage: int = 0
-var bonus_speed: float = 0
-var bonus_crit: int = 0
+var crit: int = 0
 var speed: float = 100.0
+
+var base_stats = {
+	"damage" : 0,
+	"crit" : 0.0,
+	"atk_speed": 0,
+	"speed" : 100.0
+}
+
+var curr_stats = {
+	"damage" : 0,
+	"crit" : 0.0,
+	"atk_speed": 0,
+	"speed" : 100.0
+}
+
 var status_effects: Array[StatusEffect] = []
+
+var passives = {
+	# increase damage dealt
+	"enhance" : 2,
+	# increase attack speed
+	"fast_firing" : 0.1,
+	# increase speed
+	"haste" : 0.3,
+	# increase crit chance
+	"crit_boost": 0.1,
+}
 
 @onready var melee_hitbox = $MeleeHitbox/CollisionShape2D
 @onready var weapons = get_node("Weapons")
@@ -60,9 +84,7 @@ func _restore_prev_state() -> void:
 	health.health = SavedData.health
 	armor.max_armor = SavedData.max_armor
 	armor.armor = armor.max_armor
-	bonus_melee_damage = SavedData.bonus_melee_damage
-	bonus_ranged_damage = SavedData.bonus_ranged_damage
-	bonus_speed = SavedData.bonus_speed
+
 	
 	for weapon in SavedData.weapons:
 		weapon = weapon.duplicate()
@@ -81,6 +103,8 @@ func _restore_prev_state() -> void:
 	emit_signal("armor_equipped", SavedData.equipped_armor)
 
 func _process(delta: float) -> void:
+	if !SavedData.allow_input:
+		return
 	var mouse_dir: Vector2 = (get_global_mouse_position() - global_position).normalized()
 	
 	animated_sprite.flip_h = mouse_dir.x < 0 
@@ -96,11 +120,13 @@ func _process(delta: float) -> void:
 		current_weapon.move(mouse_dir)
 		current_weapon.get_input()
 	
-	if Input.is_action_just_pressed("ui_interact") and SavedData.allow_input:
+	if Input.is_action_just_pressed("ui_interact"):
 		interaction_manager.initiate_interaction()
 
 # handle all physical stuff
 func _physics_process(delta: float) -> void:
+	
+	# apply status effect
 	for i in range(status_effects.size()):
 		var effect = status_effects[i]
 		effect.duration -= delta
@@ -111,6 +137,10 @@ func _physics_process(delta: float) -> void:
 			print(status_effects)
 			reset_effect()
 			break
+	
+	# apply passives
+	apply_passives(delta)
+	
 	
 func player():
 	pass
@@ -128,9 +158,31 @@ func _switch_weapon(direction: int) -> void:
 		index += 1
 		if index > weapons.get_child_count() - 1:
 			index = 0
+			
+	#remove old weapon stats
+	for stat_name in current_weapon.stats2:
+		if base_stats.has(stat_name):
+			base_stats[stat_name] -= current_weapon.stats2[stat_name]
+	
+	#remove old weapon passives
+	for passive_name in current_weapon.passives:
+		if passives.has(passive_name):
+			passives[passive_name] -= current_weapon.passives[passive_name]
+			
 	current_weapon.hide()
 	current_weapon = weapons.get_child(index)
 	current_weapon.show()
+	
+	#apply new weapon stats
+	for stat_name in current_weapon.stats2:
+		if base_stats.has(stat_name):
+			base_stats[stat_name] += current_weapon.stats2[stat_name]
+	
+	#apply new weapon passive
+	for passive_name in current_weapon.passives:
+		if passives.has(passive_name):
+			passives[passive_name] += current_weapon.passives[passive_name]
+	
 	SavedData.equipped_weapon_index = index
 	print(index)
 	
@@ -150,12 +202,33 @@ func pick_up_weapon(weapon: Weapon2) -> void:
 	weapon.set_deferred("owner", weapons)
 	current_weapon.hide()
 	current_weapon.cancel_attack()
+	
+	#remove old weapon stats
+	for stat_name in current_weapon.stats2:
+		if base_stats.has(stat_name):
+			base_stats[stat_name] -= current_weapon.stats2[stat_name]
+	
+	#remove old weapon passives
+	for passive_name in current_weapon.passives:
+		if passives.has(passive_name):
+			passives[passive_name] -= current_weapon.passives[passive_name]
+	
 	current_weapon = weapon
+	
+	#apply new weapon stats
+	for stat_name in current_weapon.stats2:
+		if base_stats.has(stat_name):
+			base_stats[stat_name] += current_weapon.stats2[stat_name]
+	
+	#apply new weapon passive
+	for passive_name in current_weapon.passives:
+		if passives.has(passive_name):
+			passives[passive_name] += current_weapon.passives[passive_name]
 
 	emit_signal("weapon_picked_up", weapon.stats)
 	emit_signal("weapon_switched", prev_index, new_index)
 
-
+	
 func _drop_weapon() -> void:
 	if !has_weapon or weapons.get_child_count() == 1:
 		return
@@ -181,36 +254,30 @@ func spawn_dust() -> void:
 
 
 func equip_armor(armor_stats: ArmorStats) -> void:
-	armor.set_max_armor(armor.get_max_armor() + armor_stats.bonus_armor)
+	armor.set_max_armor(armor.get_max_armor() + armor_stats.stats["armor"])
 	
-	var bonus_attribute = "bonus_" + str(armor_stats.bonus_attribute)
-	var bonus_attribute_value = armor_stats.bonus_attribute_value
+	# apply new armor passive
+	for passive_name in armor_stats.passives:
+		if passives.has(passive_name):
+			passives[passive_name] += armor_stats.passives[passive_name]
 	
-	update_bonus_attribute(bonus_attribute, bonus_attribute_value)
 	SavedData.equipped_armor = armor_stats
 	emit_signal("armor_equipped", armor_stats)
 	
 	
 func equip_different_armor(curr: ArmorStats, next: ArmorStats) -> void:
-	armor.set_max_armor(armor.get_max_armor() - curr.bonus_armor)
+	armor.set_max_armor(armor.get_max_armor() - curr.stats["armor"])
 	
-	var bonus_attribute = "bonus_" + str(curr.bonus_attribute)
-	var bonus_attribute_value = -curr.bonus_attribute_value
+	#remove old armor passives
+	for passive_name in curr.passives:
+		if passives.has(passive_name):
+			passives[passive_name] -= curr.passives[passive_name]
 	
-	update_bonus_attribute(bonus_attribute, bonus_attribute_value)
 	SavedData.equipped_armor = null
 	equip_armor(next)
-	
-
-func update_bonus_attribute(attribute: String, value):
-	var temp = get(attribute)
-	temp = value
-	set(attribute, temp)
-	SavedData[attribute] = temp
 
 
 func apply_status_effect(effect):
-	
 	for i in range(status_effects.size()):
 		if status_effects[i].get_effect_name() == effect.get_effect_name():
 			status_effects[i].duration = effect.duration
@@ -219,7 +286,27 @@ func apply_status_effect(effect):
 	status_effects.append(effect)
 	effect.apply(self)
 	print(status_effects)
-
+	
+	
 func reset_effect():
 	for i in status_effects:
 		i.apply(self)
+		
+
+func apply_passives(delta: float):
+	if passives.has("enhance"):
+		curr_stats["damage"] = base_stats["damage"] + passives["enhance"]
+
+	if passives.has("fast_firing"):
+		curr_stats["atk_speed"] = base_stats["atk_speed"] - base_stats["atk_speed"] * passives["fast_firing"]
+
+	if passives.has("haste"):
+		curr_stats["speed"] = base_stats["speed"] + base_stats["speed"] * passives["haste"]
+		
+	if passives.has("crit_boost"):
+		curr_stats["crit"] = base_stats["crit"] + passives["crit_boost"]
+		
+	if passives.has("health_boost"):
+		health.max_health = health.max_health + passives["health_boost"]
+		health.health = health.max_health + passives["health_boost"]
+		

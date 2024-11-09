@@ -495,6 +495,7 @@ damage = 2
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Sprite2D/Hitbox" index="0"]
 position = Vector2(9.8995, -4.24264)
 shape = SubResource("CircleShape2D_f7osu")
+disabled = true
 debug_color = Color(0.996362, 0, 0.188194, 0.42)
 
 [node name="Polygon2D" type="Polygon2D" parent="Sprite2D" index="1"]

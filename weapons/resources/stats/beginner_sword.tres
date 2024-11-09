@@ -5,12 +5,14 @@
 
 [resource]
 script = ExtResource("1_ii055")
-item_name = "Beginner Sword"
 is_ranged = false
 type = "Sword"
-rarity = "Common"
-damage = 1
-crit = 0.6
-level = 1
+item_name = "Beginner Sword"
 texture = ExtResource("2_1o3dp")
 description = "A common sword"
+rarity = "Common"
+stats = {
+"crit": 0.4,
+"damage": 1
+}
+passives = {}

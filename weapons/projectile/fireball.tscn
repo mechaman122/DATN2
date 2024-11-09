@@ -39,6 +39,9 @@ radius = 6.0
 sprite_frames = SubResource("SpriteFrames_ewa12")
 frame_progress = 0.227217
 
+[node name="Hitbox" parent="." index="1"]
+collision_layer = 16
+
 [node name="CollisionShape2D" parent="Hitbox" index="0"]
 visible = false
 position = Vector2(0, -1)

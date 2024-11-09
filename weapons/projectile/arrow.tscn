@@ -42,6 +42,9 @@ rotation = 0.785398
 sprite_frames = SubResource("SpriteFrames_qtl4d")
 offset = Vector2(0, 0)
 
+[node name="Hitbox" parent="." index="1"]
+collision_layer = 16
+
 [node name="CollisionShape2D" parent="Hitbox" index="0"]
 visible = false
 position = Vector2(1, 0)
@@ -54,4 +57,5 @@ emitting = false
 amount = 15
 process_material = SubResource("ParticleProcessMaterial_rupy0")
 
+[connection signal="area_entered" from="Hitbox" to="." method="_on_hitbox_area_entered"]
 [connection signal="timeout" from="LifeTime" to="." method="_on_life_time_timeout"]

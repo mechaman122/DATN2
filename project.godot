@@ -28,6 +28,7 @@ window/size/viewport_width=1280
 window/size/viewport_height=720
 window/stretch/mode="viewport"
 mouse_cursor/custom_image="res://assets/sprites/rpg_icon/Individual icons (16x16)/150_1.png"
+mouse_cursor/tooltip_position_offset=Vector2(0, 0)
 
 [editor_plugins]
 
