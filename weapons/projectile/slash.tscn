@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=3 uid="uid://bxlc6o4vvtrnf"]
+
+[ext_resource type="PackedScene" uid="uid://cqrgnms4g38vm" path="res://weapons/projectile/projectile.tscn" id="1_linj2"]
+[ext_resource type="Texture2D" uid="uid://bev6c2sksamnw" path="res://assets/sprites/weapons/projectiles/slash_effect_red.png" id="2_6yfdv"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_uinbm"]
+size = Vector2(5, 16)
+
+[node name="Slash" node_paths=PackedStringArray("sprite") instance=ExtResource("1_linj2")]
+sprite = NodePath("Sprite2D")
+
+[node name="Sprite2D" type="Sprite2D" parent="." index="0"]
+texture = ExtResource("2_6yfdv")
+
+[node name="Hitbox" parent="." index="1"]
+collision_layer = 16
+
+[node name="CollisionShape2D" parent="Hitbox" index="0"]
+position = Vector2(1.5, 0)
+shape = SubResource("RectangleShape2D_uinbm")

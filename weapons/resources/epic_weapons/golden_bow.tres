@@ -1,0 +1,30 @@
+[gd_resource type="Resource" script_class="WeaponStats" load_steps=7 format=3 uid="uid://cn5oogle62ny2"]
+
+[ext_resource type="Texture2D" uid="uid://c5ridqx14vavi" path="res://assets/sprites/weapons/epic_weapons/golden_bow_animatedt.png" id="1_kkx2s"]
+[ext_resource type="Script" path="res://weapons/resources/weapon_stats.gd" id="2_2f6ss"]
+[ext_resource type="Script" path="res://status_effects/status_effect.gd" id="3_o5y4j"]
+[ext_resource type="Script" path="res://status_effects/burn.gd" id="4_3xyc8"]
+[ext_resource type="Texture2D" uid="uid://bflrrp6ikh32r" path="res://assets/sprites/weapons/epic_weapons/golden_bow.png" id="4_vrybr"]
+
+[sub_resource type="Resource" id="Resource_5wo60"]
+script = ExtResource("4_3xyc8")
+damage_per_tick = 2
+chance_to_proc = 0.3
+
+[resource]
+script = ExtResource("2_2f6ss")
+is_ranged = true
+type = "Bow"
+status_effects = Array[ExtResource("3_o5y4j")]([SubResource("Resource_5wo60")])
+item_name = "Golden Bow"
+texture = ExtResource("4_vrybr")
+animated_texture = ExtResource("1_kkx2s")
+description = "A mythical golden bow, given by the god. Chance to burn enemies"
+rarity = "Epic"
+stats = {
+"crit": 0.4,
+"damage": 3
+}
+passives = {
+"haste": 0.1
+}

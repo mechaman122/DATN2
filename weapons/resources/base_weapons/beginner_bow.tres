@@ -1,0 +1,22 @@
+[gd_resource type="Resource" script_class="WeaponStats" load_steps=5 format=3 uid="uid://cx3ob0xcbh3pk"]
+
+[ext_resource type="Script" path="res://weapons/resources/weapon_stats.gd" id="1_de3kx"]
+[ext_resource type="Texture2D" uid="uid://bfldu3i1crah" path="res://assets/sprites/weapons/base_weapons/bow_animated.png" id="1_kf0ja"]
+[ext_resource type="Texture2D" uid="uid://dcac5icn7f8i" path="res://assets/sprites/weapons/base_weapons/bow.png" id="3_b57n6"]
+[ext_resource type="Script" path="res://status_effects/status_effect.gd" id="3_hwhmu"]
+
+[resource]
+script = ExtResource("1_de3kx")
+is_ranged = true
+type = "Bow"
+status_effects = Array[ExtResource("3_hwhmu")]([])
+item_name = "Beginner Bow"
+texture = ExtResource("3_b57n6")
+animated_texture = ExtResource("1_kf0ja")
+description = "A normal bow"
+rarity = "Common"
+stats = {
+"crit": 0.4,
+"damage": 1
+}
+passives = {}

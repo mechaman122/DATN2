@@ -17,7 +17,12 @@ func _on_area_entered(hitbox: Hitbox) -> void:
 		else:
 			health.health -= hitbox.damage
 			received_damage.emit(hitbox.damage)
+			print(health.health)
 			set_knockback_direction(hitbox)
+		for i in hitbox.status_effects:
+			var rng = randf()
+			if i.chance_to_proc > rng:
+				get_parent().apply_status_effect(i.duplicate())
 
 func set_knockback_direction(hitbox: Hitbox) -> void:
 	var direction = (global_position.direction_to(hitbox.global_position)) * -1

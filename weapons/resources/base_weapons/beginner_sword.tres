@@ -1,0 +1,20 @@
+[gd_resource type="Resource" script_class="WeaponStats" load_steps=4 format=3 uid="uid://dvrn5jwiff4m6"]
+
+[ext_resource type="Script" path="res://weapons/resources/weapon_stats.gd" id="1_ii055"]
+[ext_resource type="Texture2D" uid="uid://bw8upvidnh5t8" path="res://assets/sprites/weapons/base_weapons/sword.png" id="2_35302"]
+[ext_resource type="Script" path="res://status_effects/status_effect.gd" id="2_hhpui"]
+
+[resource]
+script = ExtResource("1_ii055")
+is_ranged = false
+type = "Sword"
+status_effects = Array[ExtResource("2_hhpui")]([])
+item_name = "Beginner Sword"
+texture = ExtResource("2_35302")
+description = "A common sword"
+rarity = "Common"
+stats = {
+"crit": 0.4,
+"damage": 1
+}
+passives = {}

@@ -1,7 +1,7 @@
 [gd_scene load_steps=16 format=3 uid="uid://4gksutb3wsqq"]
 
 [ext_resource type="PackedScene" uid="uid://bmly8qew0byye" path="res://weapons/weapon_animation.tscn" id="1_l7rew"]
-[ext_resource type="Texture2D" uid="uid://cj15q45mquvpa" path="res://assets/sprites/weapons/icons/staff.png" id="2_3rp04"]
+[ext_resource type="Texture2D" uid="uid://cj15q45mquvpa" path="res://assets/sprites/weapons/base_weapons/staff.png" id="2_3rp04"]
 [ext_resource type="Shader" path="res://scripts/white.gdshader" id="2_g3138"]
 [ext_resource type="Texture2D" uid="uid://bv0u47iganyml" path="res://assets/sprites/effects/flash_effect.png" id="3_va3b3"]
 [ext_resource type="Script" path="res://hitboxes/hitbox.gd" id="4_5ajxj"]
@@ -251,11 +251,12 @@ color_ramp = SubResource("GradientTexture1D_u7v5f")
 turbulence_noise_strength = 20.0
 turbulence_noise_scale = 3.0
 
-[node name="StaffAnimation" node_paths=PackedStringArray("anim_player", "sprite", "charge_particles", "hitbox", "shooting_position") instance=ExtResource("1_l7rew")]
+[node name="StaffAnimation" node_paths=PackedStringArray("anim_player", "sprite", "charge_particles", "hitbox", "projectile_sprite", "shooting_position") instance=ExtResource("1_l7rew")]
 anim_player = NodePath("AnimationPlayer")
 sprite = NodePath("Sprite2D")
 charge_particles = NodePath("Effects/ChargeParticles")
 hitbox = NodePath("Sprite2D/Hitbox")
+projectile_sprite = NodePath("Effects/Projectile/Sprite2D")
 shooting_position = NodePath("Effects/ShootingPosition")
 
 [node name="Sprite2D" parent="." index="0"]
@@ -272,16 +273,20 @@ libraries = {
 "": SubResource("AnimationLibrary_3ribk")
 }
 
-[node name="ShootingPosition" type="Marker2D" parent="Effects" index="0"]
+[node name="Projectile" type="Node2D" parent="Effects" index="0"]
+
+[node name="Sprite2D" type="Sprite2D" parent="Effects/Projectile" index="0"]
+
+[node name="ShootingPosition" type="Marker2D" parent="Effects" index="1"]
 position = Vector2(10, -4)
 
-[node name="FlashEffect" type="Sprite2D" parent="Effects" index="1"]
+[node name="FlashEffect" type="Sprite2D" parent="Effects" index="2"]
 modulate = Color(1, 1, 1, 0)
 position = Vector2(10, -5)
 scale = Vector2(0.6, 0.6)
 texture = ExtResource("3_va3b3")
 
-[node name="ChargeParticles" type="GPUParticles2D" parent="Effects" index="2"]
+[node name="ChargeParticles" type="GPUParticles2D" parent="Effects" index="3"]
 position = Vector2(10, -4)
 emitting = false
 amount = 15

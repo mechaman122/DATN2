@@ -1,7 +1,7 @@
 [gd_scene load_steps=14 format=3 uid="uid://bipc3idppc1df"]
 
 [ext_resource type="PackedScene" uid="uid://bmly8qew0byye" path="res://weapons/weapon_animation.tscn" id="1_2i1gq"]
-[ext_resource type="Texture2D" uid="uid://bw8upvidnh5t8" path="res://assets/sprites/weapons/icons/sword_02.png" id="2_qosoy"]
+[ext_resource type="Texture2D" uid="uid://bw8upvidnh5t8" path="res://assets/sprites/weapons/base_weapons/sword.png" id="2_qosoy"]
 [ext_resource type="Shader" path="res://scripts/white.gdshader" id="2_savmm"]
 [ext_resource type="Script" path="res://hitboxes/hitbox.gd" id="3_fcqpj"]
 
@@ -10,8 +10,8 @@ shader = ExtResource("2_savmm")
 shader_parameter/active = false
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_v1voa"]
-radius = 3.0
-height = 14.9706
+radius = 4.0
+height = 18.0
 
 [sub_resource type="Animation" id="Animation_c2beu"]
 length = 0.001
@@ -396,7 +396,7 @@ collision_mask = 4
 script = ExtResource("3_fcqpj")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Sprite2D/Hitbox" index="0"]
-position = Vector2(6, -6)
+position = Vector2(7.77814, -7.77821)
 rotation = 0.785398
 shape = SubResource("CapsuleShape2D_v1voa")
 

@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://bmly8qew0byye" path="res://weapons/weapon_animation.tscn" id="1_hdcr6"]
 [ext_resource type="Shader" path="res://scripts/white.gdshader" id="2_6xgvr"]
-[ext_resource type="Texture2D" uid="uid://bfldu3i1crah" path="res://assets/sprites/weapons/icons/bow.png" id="2_dve37"]
+[ext_resource type="Texture2D" uid="uid://bfldu3i1crah" path="res://assets/sprites/weapons/base_weapons/bow_animated.png" id="2_dve37"]
 [ext_resource type="Script" path="res://hitboxes/hitbox.gd" id="4_4csr2"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_nxgbr"]
@@ -38,7 +38,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("Effects/Arrow:visible")
+tracks/2/path = NodePath("Effects/Projectile:visible")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -50,7 +50,7 @@ tracks/2/keys = {
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("Effects/Arrow:position")
+tracks/3/path = NodePath("Effects/Projectile:position")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
@@ -86,7 +86,7 @@ tracks/5/keys = {
 tracks/6/type = "value"
 tracks/6/imported = false
 tracks/6/enabled = true
-tracks/6/path = NodePath("Effects/Arrow:rotation")
+tracks/6/path = NodePath("Effects/Projectile:rotation")
 tracks/6/interp = 1
 tracks/6/loop_wrap = true
 tracks/6/keys = {
@@ -139,7 +139,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("Effects/Arrow:visible")
+tracks/2/path = NodePath("Effects/Projectile:visible")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -177,7 +177,7 @@ tracks/4/keys = {
 tracks/5/type = "value"
 tracks/5/imported = false
 tracks/5/enabled = true
-tracks/5/path = NodePath("Effects/Arrow:rotation")
+tracks/5/path = NodePath("Effects/Projectile:rotation")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = {
@@ -230,7 +230,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("Effects/Arrow:visible")
+tracks/2/path = NodePath("Effects/Projectile:visible")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -282,7 +282,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Effects/Arrow:visible")
+tracks/1/path = NodePath("Effects/Projectile:visible")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -294,7 +294,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("Effects/Arrow:position")
+tracks/2/path = NodePath("Effects/Projectile:position")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -371,7 +371,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("Effects/Arrow:visible")
+tracks/2/path = NodePath("Effects/Projectile:visible")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -409,7 +409,7 @@ tracks/4/keys = {
 tracks/5/type = "value"
 tracks/5/imported = false
 tracks/5/enabled = true
-tracks/5/path = NodePath("Effects/Arrow:rotation")
+tracks/5/path = NodePath("Effects/Projectile:rotation")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = {
@@ -479,12 +479,12 @@ libraries = {
 [node name="ArrowPosition" type="Marker2D" parent="Effects" index="0"]
 position = Vector2(6, 6)
 
-[node name="Arrow" type="Node2D" parent="Effects" index="1"]
+[node name="Projectile" type="Node2D" parent="Effects" index="1"]
 visible = false
 position = Vector2(-1, 0)
 rotation = 0.785398
 
-[node name="Sprite2D" type="Sprite2D" parent="Effects/Arrow" index="0"]
+[node name="Sprite2D" type="Sprite2D" parent="Effects/Projectile" index="0"]
 rotation = 0.785398
 
 [node name="ChargeParticles" type="GPUParticles2D" parent="Effects" index="2"]

@@ -1,0 +1,28 @@
+[gd_resource type="Resource" script_class="WeaponStats" load_steps=6 format=3 uid="uid://c8jnfc651aw2a"]
+
+[ext_resource type="Script" path="res://weapons/resources/weapon_stats.gd" id="1_mcbas"]
+[ext_resource type="Script" path="res://status_effects/status_effect.gd" id="2_1r3oa"]
+[ext_resource type="Script" path="res://status_effects/burn.gd" id="3_h8i42"]
+[ext_resource type="Texture2D" uid="uid://csihy4hfybqwa" path="res://assets/sprites/weapons/rare_weapons/fire_sword.png" id="4_qhgc3"]
+
+[sub_resource type="Resource" id="Resource_82wh4"]
+script = ExtResource("3_h8i42")
+damage_per_tick = 1
+chance_to_proc = 0.2
+
+[resource]
+script = ExtResource("1_mcbas")
+is_ranged = false
+type = "Sword"
+status_effects = Array[ExtResource("2_1r3oa")]([SubResource("Resource_82wh4")])
+item_name = "Fire Sword"
+texture = ExtResource("4_qhgc3")
+description = "A sword that can shoot fire when charging. Chance to burn enemies"
+rarity = "Rare"
+stats = {
+"crit": 0.5,
+"damage": 2
+}
+passives = {
+"fast_firing": 0.2
+}

@@ -9,7 +9,7 @@ extends PanelContainer
 		if value != null:
 			texture_rect.texture = value.texture
 			match value.rarity:
-				"Rare": border.set_border_color(Color("#ffffff40"))
+				"Rare": border.set_border_color(Color("BLUE"))
 				"Epic": border.set_border_color(Color("PURPLE"))
 				"Legendary": border.set_border_color(Color("YELLOW"))
 				

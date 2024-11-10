@@ -1,7 +1,10 @@
-[gd_scene load_steps=6 format=3 uid="uid://b4a2vbki2mytf"]
+[gd_scene load_steps=10 format=3 uid="uid://b4a2vbki2mytf"]
 
+[ext_resource type="Script" path="res://scripts/health.gd" id="1_0rqek"]
+[ext_resource type="Script" path="res://scenes/damage_area_test.gd" id="1_dcaoo"]
 [ext_resource type="PackedScene" uid="uid://c2deh2ka3p3xy" path="res://hitboxes/hitbox.tscn" id="1_ueb3p"]
 [ext_resource type="Texture2D" uid="uid://ce725v2mlwfwb" path="res://icon.svg" id="2_oddga"]
+[ext_resource type="Script" path="res://hitboxes/hurtbox.gd" id="3_7df3y"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_j7liv"]
 radius = 19.0
@@ -21,7 +24,15 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_w6sy3"]
+
 [node name="DamageArea_test" type="Node2D"]
+script = ExtResource("1_dcaoo")
+
+[node name="Health" type="Node2D" parent="."]
+script = ExtResource("1_0rqek")
+max_health = 1000
+health = 1000
 
 [node name="Hitbox" parent="." instance=ExtResource("1_ueb3p")]
 collision_layer = 32
@@ -34,5 +45,14 @@ debug_color = Color(0.999644, 0, 0.106203, 0.42)
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 scale = Vector2(0.15625, 0.148437)
 sprite_frames = SubResource("SpriteFrames_y2y3s")
+
+[node name="Hurtbox" type="Area2D" parent="." node_paths=PackedStringArray("health")]
+collision_layer = 4
+collision_mask = 16
+script = ExtResource("3_7df3y")
+health = NodePath("../Health")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
+shape = SubResource("RectangleShape2D_w6sy3")
 
 [editable path="Hitbox"]

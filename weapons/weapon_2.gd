@@ -10,6 +10,7 @@ var touch_body: Node2D
 
 var stats2: Dictionary
 var passives: Dictionary
+var status_effects: Array[StatusEffect]
 
 @export var stats: WeaponStats:
 	set(value):
@@ -35,6 +36,8 @@ func _ready() -> void:
 		stats2[i] = stats.stats[i]
 	for i in stats.passives:
 		passives[i] = stats.passives[i]
+	for i in range((stats.status_effects).size()):
+		weapon_anim.hitbox.status_effects.append(stats.status_effects[i])
 
 func _process(delta: float) -> void:
 	if touch_body is Player:

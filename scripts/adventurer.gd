@@ -19,13 +19,11 @@ signal passive_received
 #stats
 @onready var health = $Health
 @onready var armor =$Armor
-var crit: int = 0
-var speed: float = 100.0
 
 var base_stats = {
 	"damage" : 0,
 	"crit" : 0.0,
-	"atk_speed": 0,
+	"atk_speed": 1,
 	"speed" : 100.0
 }
 
@@ -40,13 +38,13 @@ var status_effects: Array[StatusEffect] = []
 
 var passives = {
 	# increase damage dealt
-	"enhance" : 2,
+	"enhance" : 0,
 	# increase attack speed
-	"fast_firing" : 0.1,
+	"fast_firing" : 0,
 	# increase speed
-	"haste" : 0.3,
+	"haste" : 0,
 	# increase crit chance
-	"crit_boost": 0.1,
+	"crit_boost": 0,
 }
 
 @onready var melee_hitbox = $MeleeHitbox/CollisionShape2D
@@ -71,11 +69,10 @@ func _input(event):
 			apply_status_effect(Stun.new())
 		if event.keycode == KEY_2:
 			apply_status_effect(Slow.new())
-		if event.keycode == KEY_3:
-			apply_status_effect(Haste.new())
 		if event.keycode == KEY_4:
 			apply_status_effect(Heal.new())
-			
+		if event.keycode == KEY_5:
+			apply_status_effect(Burn.new())
 			
 func _restore_prev_state() -> void:
 	
@@ -102,6 +99,7 @@ func _restore_prev_state() -> void:
 	emit_signal("weapon_switched", weapons.get_child_count() - 1, SavedData.equipped_weapon_index)
 	emit_signal("armor_equipped", SavedData.equipped_armor)
 
+	
 func _process(delta: float) -> void:
 	if !SavedData.allow_input:
 		return
@@ -129,13 +127,14 @@ func _physics_process(delta: float) -> void:
 	# apply status effect
 	for i in range(status_effects.size()):
 		var effect = status_effects[i]
+		effect.tick(self, delta)
 		effect.duration -= delta
 		
 		if effect.duration < 0:
-			effect.remove(self)
 			status_effects.remove_at(i)
+			effect.remove(self)
 			print(status_effects)
-			reset_effect()
+			reset_status_effect()
 			break
 	
 	# apply passives
@@ -288,7 +287,7 @@ func apply_status_effect(effect):
 	print(status_effects)
 	
 	
-func reset_effect():
+func reset_status_effect():
 	for i in status_effects:
 		i.apply(self)
 		
@@ -296,9 +295,11 @@ func reset_effect():
 func apply_passives(delta: float):
 	if passives.has("enhance"):
 		curr_stats["damage"] = base_stats["damage"] + passives["enhance"]
+		SavedData.damage = curr_stats["damage"]
 
 	if passives.has("fast_firing"):
-		curr_stats["atk_speed"] = base_stats["atk_speed"] - base_stats["atk_speed"] * passives["fast_firing"]
+		curr_stats["atk_speed"] = base_stats["atk_speed"] + base_stats["atk_speed"] * passives["fast_firing"]
+		current_weapon.weapon_anim.anim_player.set_speed_scale(curr_stats["atk_speed"])
 
 	if passives.has("haste"):
 		curr_stats["speed"] = base_stats["speed"] + base_stats["speed"] * passives["haste"]
@@ -306,7 +307,6 @@ func apply_passives(delta: float):
 	if passives.has("crit_boost"):
 		curr_stats["crit"] = base_stats["crit"] + passives["crit_boost"]
 		
-	if passives.has("health_boost"):
-		health.max_health = health.max_health + passives["health_boost"]
-		health.health = health.max_health + passives["health_boost"]
+	if passives.has("life_steal") && health.health * 2 < health.max_health:
+		pass
 		

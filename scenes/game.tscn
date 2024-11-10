@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://xfcntficuxyx"]
+[gd_scene load_steps=14 format=3 uid="uid://xfcntficuxyx"]
 
 [ext_resource type="PackedScene" uid="uid://2tkmj873jyu3" path="res://scenes/adventurer.tscn" id="1_7c8dh"]
 [ext_resource type="PackedScene" uid="uid://cmlvksdm3h5h2" path="res://interface/interface.tscn" id="1_mf2yy"]
@@ -11,6 +11,8 @@
 [ext_resource type="PackedScene" uid="uid://n7vi3j6nc3tk" path="res://weapons/base_weapons/beginner_bow.tscn" id="9_cov3x"]
 [ext_resource type="PackedScene" uid="uid://bj2o4qmn48oq5" path="res://weapons/base_weapons/beginner_sword.tscn" id="10_x42of"]
 [ext_resource type="PackedScene" uid="uid://3rtrhjddetts" path="res://map/map_elements/stairs.tscn" id="11_v8ere"]
+[ext_resource type="PackedScene" uid="uid://bnilqrotedah1" path="res://weapons/epic_weapons/golden_bow.tscn" id="12_daosd"]
+[ext_resource type="PackedScene" uid="uid://b3p1558pfodxo" path="res://weapons/rare_weapons/fire_sword.tscn" id="13_lk08e"]
 
 [node name="Game" type="Node2D"]
 
@@ -43,6 +45,7 @@ position = Vector2(574, 352)
 position = Vector2(614, 309)
 
 [node name="ApprenticeStaff" parent="." instance=ExtResource("8_axvye")]
+z_index = 0
 position = Vector2(629, 354)
 is_on_floor = true
 
@@ -51,14 +54,23 @@ position = Vector2(588, 373)
 is_on_floor = true
 
 [node name="BeginnerSword" parent="." instance=ExtResource("10_x42of")]
+z_index = 0
 position = Vector2(657, 394)
 is_on_floor = true
 
 [node name="Statirs" parent="." instance=ExtResource("11_v8ere")]
 position = Vector2(792, 390)
 
-[node name="LeatherShirt2" parent="." instance=ExtResource("9_bfpx6")]
-position = Vector2(762, 362)
+[node name="LeatherShirt" parent="." instance=ExtResource("9_bfpx6")]
+position = Vector2(742, 362)
+
+[node name="GoldenBow" parent="." instance=ExtResource("12_daosd")]
+position = Vector2(778, 334)
+is_on_floor = true
+
+[node name="FireSword" parent="." instance=ExtResource("13_lk08e")]
+position = Vector2(751, 324)
+is_on_floor = true
 
 [connection signal="armor_equipped" from="Adventurer" to="Interface" method="_on_player_armor_equipped"]
 [connection signal="weapon_dropped" from="Adventurer" to="Interface" method="_on_player_weapon_dropped"]

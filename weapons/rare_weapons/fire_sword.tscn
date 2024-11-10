@@ -1,10 +1,17 @@
-[gd_scene load_steps=11 format=3 uid="uid://bj2o4qmn48oq5"]
+[gd_scene load_steps=15 format=3 uid="uid://b3p1558pfodxo"]
 
-[ext_resource type="PackedScene" uid="uid://deuqmbmge0hxd" path="res://weapons/weapon2.tscn" id="1_y7anc"]
-[ext_resource type="PackedScene" uid="uid://bipc3idppc1df" path="res://weapons/animations/sword_anim.tscn" id="2_02e2y"]
-[ext_resource type="Resource" uid="uid://dvrn5jwiff4m6" path="res://weapons/resources/base_weapons/beginner_sword.tres" id="2_dmrpq"]
+[ext_resource type="PackedScene" uid="uid://deuqmbmge0hxd" path="res://weapons/weapon2.tscn" id="1_jdmqx"]
+[ext_resource type="PackedScene" uid="uid://bipc3idppc1df" path="res://weapons/animations/sword_anim.tscn" id="2_1anpo"]
+[ext_resource type="Resource" uid="uid://c8jnfc651aw2a" path="res://weapons/resources/rare_weapons/fire_sword.tres" id="2_p8w6q"]
+[ext_resource type="Texture2D" uid="uid://csihy4hfybqwa" path="res://assets/sprites/weapons/rare_weapons/fire_sword.png" id="3_lnfdm"]
+[ext_resource type="Shader" path="res://scripts/white.gdshader" id="4_easjk"]
+[ext_resource type="Texture2D" uid="uid://bev6c2sksamnw" path="res://assets/sprites/weapons/projectiles/slash_effect_red.png" id="4_p1u8o"]
 
-[sub_resource type="Animation" id="Animation_h2x2g"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_l8a0v"]
+shader = ExtResource("4_easjk")
+shader_parameter/active = false
+
+[sub_resource type="Animation" id="Animation_hbeo8"]
 length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -79,7 +86,7 @@ tracks/5/keys = {
 "values": [Color(1, 1, 1, 0)]
 }
 
-[sub_resource type="Animation" id="Animation_7300j"]
+[sub_resource type="Animation" id="Animation_p6ssi"]
 resource_name = "attack"
 length = 0.5
 step = 0.05
@@ -153,10 +160,10 @@ tracks/5/keys = {
 "times": PackedFloat32Array(0, 0.15, 0.3),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
-"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 0.478431), Color(1, 1, 1, 0)]
+"values": [Color(1, 1, 1, 0), Color(1, 0.537255, 0.2, 1), Color(1, 1, 1, 0)]
 }
 
-[sub_resource type="Animation" id="Animation_vboo1"]
+[sub_resource type="Animation" id="Animation_xu5cg"]
 resource_name = "cancel_attack"
 length = 0.1
 tracks/0/type = "value"
@@ -232,7 +239,7 @@ tracks/5/keys = {
 "values": [Color(1, 1, 1, 0)]
 }
 
-[sub_resource type="Animation" id="Animation_wvndo"]
+[sub_resource type="Animation" id="Animation_ivok4"]
 resource_name = "charge"
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -271,7 +278,7 @@ tracks/2/keys = {
 "values": [Color(1, 1, 1, 0)]
 }
 
-[sub_resource type="Animation" id="Animation_ggta8"]
+[sub_resource type="Animation" id="Animation_gd8ds"]
 resource_name = "charged_attack"
 step = 0.05
 tracks/0/type = "value"
@@ -344,40 +351,100 @@ tracks/5/keys = {
 "times": PackedFloat32Array(0, 0.5, 0.65),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
-"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+"values": [Color(1, 1, 1, 1), Color(1, 0.537255, 0.2, 1), Color(1, 1, 1, 0)]
+}
+tracks/6/type = "method"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath(".")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.1, 0.15, 0.2, 0.25, 0.3, 0.35, 0.4, 0.45, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"values": [{
+"args": ["Bow", 500, 0.0],
+"method": &"shoot"
+}, {
+"args": ["Bow", 500, 0.0],
+"method": &"shoot"
+}, {
+"args": ["Bow", 500, 0.0],
+"method": &"shoot"
+}, {
+"args": ["Bow", 500, 0.0],
+"method": &"shoot"
+}, {
+"args": ["Bow", 500, 0.0],
+"method": &"shoot"
+}, {
+"args": ["Bow", 500, 0.0],
+"method": &"shoot"
+}, {
+"args": ["Bow", 500, 0.0],
+"method": &"shoot"
+}, {
+"args": ["Bow", 500, 0.0],
+"method": &"shoot"
+}, {
+"args": ["Bow", 500, 0.0],
+"method": &"shoot"
+}, {
+"args": ["Bow", 500, 0.0],
+"method": &"shoot"
+}, {
+"args": ["Staff", 500, 0.0],
+"method": &"shoot"
+}]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_yich1"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_u561g"]
 _data = {
-"RESET": SubResource("Animation_h2x2g"),
-"attack": SubResource("Animation_7300j"),
-"cancel_attack": SubResource("Animation_vboo1"),
-"charge": SubResource("Animation_wvndo"),
-"charged_attack": SubResource("Animation_ggta8")
+"RESET": SubResource("Animation_hbeo8"),
+"attack": SubResource("Animation_p6ssi"),
+"cancel_attack": SubResource("Animation_xu5cg"),
+"charge": SubResource("Animation_ivok4"),
+"charged_attack": SubResource("Animation_gd8ds")
 }
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_o6aj4"]
-radius = 5.0
-height = 22.0
+[sub_resource type="CircleShape2D" id="CircleShape2D_ln4gc"]
+radius = 12.0
 
-[node name="BeginnerSword" node_paths=PackedStringArray("weapon_anim") instance=ExtResource("1_y7anc")]
+[node name="FireSword" node_paths=PackedStringArray("weapon_anim") instance=ExtResource("1_jdmqx")]
 weapon_anim = NodePath("SwordAnimation")
-stats = ExtResource("2_dmrpq")
+stats = ExtResource("2_p8w6q")
 
-[node name="SwordAnimation" parent="." index="0" instance=ExtResource("2_02e2y")]
+[node name="SwordAnimation" parent="." index="0" node_paths=PackedStringArray("projectile_sprite", "shooting_position") instance=ExtResource("2_1anpo")]
+projectile_sprite = NodePath("Effects/Projectile/Sprite2D")
+shooting_position = NodePath("Effects/ShootingPosition")
+
+[node name="Sprite2D" parent="SwordAnimation" index="0"]
+material = SubResource("ShaderMaterial_l8a0v")
+texture = ExtResource("3_lnfdm")
+
+[node name="Hitbox" parent="SwordAnimation/Sprite2D" index="0"]
+visible = false
 
 [node name="AnimationPlayer" parent="SwordAnimation" index="1"]
 libraries = {
-"": SubResource("AnimationLibrary_yich1")
+"": SubResource("AnimationLibrary_u561g")
 }
+
+[node name="Projectile" type="Node2D" parent="SwordAnimation/Effects" index="0"]
+
+[node name="Sprite2D" type="Sprite2D" parent="SwordAnimation/Effects/Projectile" index="0"]
+visible = false
+texture = ExtResource("4_p1u8o")
+
+[node name="ShootingPosition" type="Marker2D" parent="SwordAnimation/Effects" index="2"]
+position = Vector2(-3, -23)
 
 [node name="PickableArea" parent="." index="1"]
 collision_mask = 3
 
 [node name="CollisionShape2D" parent="PickableArea" index="0"]
 visible = false
-position = Vector2(-5, -13)
-rotation = 1.5708
-shape = SubResource("CapsuleShape2D_o6aj4")
+position = Vector2(-6, -13)
+shape = SubResource("CircleShape2D_ln4gc")
 
 [editable path="SwordAnimation"]

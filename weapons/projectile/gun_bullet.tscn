@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=3 uid="uid://dgsm31u8ob3qy"]
 
 [ext_resource type="PackedScene" uid="uid://cqrgnms4g38vm" path="res://weapons/projectile/projectile.tscn" id="1_jmi53"]
-[ext_resource type="Texture2D" uid="uid://ctq6pr6fsvid3" path="res://assets/sprites/effects/bullet/bullet.png" id="2_jcchb"]
+[ext_resource type="Texture2D" uid="uid://ctq6pr6fsvid3" path="res://assets/sprites/weapons/projectiles/bullet.png" id="2_jcchb"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_2fx5v"]
 atlas = ExtResource("2_jcchb")

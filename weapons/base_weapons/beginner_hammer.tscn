@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://deuqmbmge0hxd" path="res://weapons/weapon2.tscn" id="1_ddiql"]
 [ext_resource type="PackedScene" uid="uid://bhg3t2p2cwwcj" path="res://weapons/animations/hammer_anim.tscn" id="2_6c50k"]
-[ext_resource type="Resource" uid="uid://dpdxkjjtvrf7v" path="res://weapons/resources/stats/beginner_hammer.tres" id="2_uhuen"]
+[ext_resource type="Resource" uid="uid://dpdxkjjtvrf7v" path="res://weapons/resources/base_weapons/beginner_hammer.tres" id="2_uhuen"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_l4v3p"]
 radius = 6.0
@@ -14,9 +14,6 @@ stats = ExtResource("2_uhuen")
 
 [node name="HammerAnimation" parent="." index="0" instance=ExtResource("2_6c50k")]
 
-[node name="Polygon2D" parent="HammerAnimation/Sprite2D" index="1"]
-color = Color(1, 1, 1, 0)
-
 [node name="PickableArea" parent="." index="1"]
 collision_mask = 3
 
@@ -25,8 +22,5 @@ visible = false
 position = Vector2(-3, -13)
 rotation = 1.5708
 shape = SubResource("CapsuleShape2D_l4v3p")
-
-[connection signal="body_entered" from="PickableArea" to="." method="_on_pickable_area_body_entered"]
-[connection signal="body_exited" from="PickableArea" to="." method="_on_pickable_area_body_exited"]
 
 [editable path="HammerAnimation"]

@@ -1,7 +1,7 @@
 [gd_scene load_steps=8 format=3 uid="uid://bmly8qew0byye"]
 
 [ext_resource type="Script" path="res://weapons/weapon_animation.gd" id="1_2bflh"]
-[ext_resource type="Texture2D" uid="uid://cu3cnbs3jqbgr" path="res://assets/sprites/weapons/icons/Hammer.png" id="1_th7x8"]
+[ext_resource type="Texture2D" uid="uid://cu3cnbs3jqbgr" path="res://assets/sprites/weapons/base_weapons/hammer.png" id="1_th7x8"]
 
 [sub_resource type="Animation" id="Animation_sux05"]
 resource_local_to_scene = true

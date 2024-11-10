@@ -5,7 +5,7 @@ func enter(previous_state_path: String, data: Dictionary = {}) -> void:
 	player.health_changed = false
 	if player.has_weapon:
 		player.current_weapon.cancel_attack()
-	player.health.set_temp_immortality(1)
+	player.health.set_temp_immortality(0.8)
 	
 func physics_update(delta: float) -> void:
 	player.velocity = player.knockback * 10

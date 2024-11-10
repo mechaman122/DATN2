@@ -5,6 +5,8 @@ class_name Projectile
 var direction = Vector2.ZERO
 var speed: float = 0
 
+@export var sprite: Sprite2D
+
 func _ready() -> void:
 	pass
 

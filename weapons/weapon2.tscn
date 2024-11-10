@@ -3,9 +3,13 @@
 [ext_resource type="Script" path="res://weapons/weapon_2.gd" id="1_l5icb"]
 
 [node name="Weapon2" type="Node2D"]
+z_index = 1
 script = ExtResource("1_l5icb")
 
 [node name="PickableArea" type="Area2D" parent="."]
 collision_layer = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PickableArea"]
+
+[connection signal="body_entered" from="PickableArea" to="." method="_on_pickable_area_body_entered"]
+[connection signal="body_exited" from="PickableArea" to="." method="_on_pickable_area_body_exited"]
