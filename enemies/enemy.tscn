@@ -1,0 +1,42 @@
+[gd_scene load_steps=7 format=3 uid="uid://bu6wovcp3bpiv"]
+
+[ext_resource type="Script" path="res://hitboxes/hitbox.gd" id="1_4xn1g"]
+[ext_resource type="Script" path="res://scripts/health.gd" id="1_k13gs"]
+[ext_resource type="Script" path="res://enemies/enemy.gd" id="1_mrue7"]
+[ext_resource type="Script" path="res://hitboxes/hurtbox.gd" id="2_u8jqy"]
+[ext_resource type="Script" path="res://enemies/states/enemy_state.gd" id="6_x6ylx"]
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_wf2eg"]
+
+[node name="Enemy" type="CharacterBody2D"]
+script = ExtResource("1_mrue7")
+
+[node name="Health" type="Node2D" parent="."]
+script = ExtResource("1_k13gs")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(0, -16)
+animation = &"attack"
+autoplay = "idle"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_wf2eg")
+}
+
+[node name="Hitbox" type="Area2D" parent="."]
+collision_layer = 32
+collision_mask = 2
+script = ExtResource("1_4xn1g")
+
+[node name="Hurtbox" type="Area2D" parent="."]
+collision_layer = 4
+collision_mask = 32
+script = ExtResource("2_u8jqy")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+
+[node name="FSM" type="Node2D" parent="."]
+script = ExtResource("6_x6ylx")
+
+[node name="AttackCooldownTimer" type="Timer" parent="."]

@@ -21,6 +21,7 @@ BetterTerrain="*res://addons/better-terrain/BetterTerrain.gd"
 Popups="*res://scenes/popups.tscn"
 SceneTransitor="*res://autoloads/scene_transitor.tscn"
 SavedData="*res://autoloads/saved_data.gd"
+SoundManager="*res://addons/sound_manager/module/SoundManager.tscn"
 
 [display]
 
@@ -32,7 +33,7 @@ mouse_cursor/tooltip_position_offset=Vector2(0, 0)
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/better-terrain/plugin.cfg")
+enabled=PackedStringArray("res://addons/better-terrain/plugin.cfg", "res://addons/sound_manager/plugin.cfg")
 
 [gui]
 
@@ -117,3 +118,4 @@ ui_interact={
 textures/canvas_textures/default_texture_filter=0
 renderer/rendering_method="gl_compatibility"
 renderer/rendering_method.mobile="gl_compatibility"
+environment/defaults/default_clear_color=Color(0.156675, 0.156675, 0.156675, 1)
