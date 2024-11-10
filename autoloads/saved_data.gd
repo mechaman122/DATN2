@@ -3,6 +3,7 @@ extends Node
 var max_health: int = 6
 var health: int = 6
 var max_armor: int = 4
+var damage: int = 0
 
 var allow_input = true
 
