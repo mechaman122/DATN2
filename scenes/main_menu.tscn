@@ -1,0 +1,269 @@
+[gd_scene load_steps=11 format=3 uid="uid://mabk2akmbsjs"]
+
+[ext_resource type="Texture2D" uid="uid://ddy7plwjgtqdw" path="res://assets/sprites/rpg_icon/Individual icons (16x16)/221.png" id="1_bi6j0"]
+[ext_resource type="Script" path="res://scenes/main_menu.gd" id="1_g1e3o"]
+[ext_resource type="Texture2D" uid="uid://b24fjamma7u1u" path="res://assets/sprites/rpg_icon/Individual icons (16x16)/229.png" id="2_krp70"]
+[ext_resource type="Texture2D" uid="uid://bmg2fn8wwcevp" path="res://assets/sprites/rpg_icon/Individual icons (16x16)/248.png" id="3_nngo8"]
+[ext_resource type="Script" path="res://scenes/weapon_list.gd" id="5_ub82e"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_kcb3o"]
+texture = ExtResource("1_bi6j0")
+region_rect = Rect2(0.5, 0.5, 15, 15)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_okshw"]
+texture = ExtResource("2_krp70")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_wsnxc"]
+texture = ExtResource("3_nngo8")
+region_rect = Rect2(3, 6, 10, 4)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_y5har"]
+texture = ExtResource("3_nngo8")
+region_rect = Rect2(3, 6, 10, 4)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_22xco"]
+texture = ExtResource("1_bi6j0")
+region_rect = Rect2(1, 1, 14, 14)
+
+[node name="MainMenu" type="CanvasLayer"]
+layer = 100
+script = ExtResource("1_g1e3o")
+
+[node name="Menu" type="Panel" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(640, 360)
+theme_override_styles/panel = SubResource("StyleBoxTexture_kcb3o")
+
+[node name="StartButton" type="Button" parent="Menu"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -100.0
+offset_top = -32.0
+offset_right = 100.0
+offset_bottom = 32.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 32
+text = "Start"
+
+[node name="OptionsButton" type="Button" parent="Menu"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -220.0
+offset_top = -300.0
+offset_right = -20.0
+offset_bottom = -236.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_font_sizes/font_size = 32
+text = "Options"
+
+[node name="ContinueButton" type="Button" parent="Menu"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = 20.0
+offset_top = -300.0
+offset_right = 220.0
+offset_bottom = -236.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_font_sizes/font_size = 32
+text = "Continue"
+
+[node name="ViewWeaponsButton" type="Button" parent="Menu"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -150.0
+offset_top = 150.0
+offset_right = 150.0
+offset_bottom = 214.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 32
+text = "View Weapons"
+
+[node name="ExitButton" type="Button" parent="Menu"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -100.0
+offset_top = -120.0
+offset_right = 100.0
+offset_bottom = -56.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_font_sizes/font_size = 32
+text = "Exit"
+
+[node name="Options" type="Panel" parent="."]
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(640, 360)
+
+[node name="ViewWeapons" type="Panel" parent="."]
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(640, 360)
+theme_override_styles/panel = SubResource("StyleBoxTexture_okshw")
+
+[node name="ScrollContainer" type="ScrollContainer" parent="ViewWeapons"]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 80.0
+offset_top = -250.0
+offset_right = 580.0
+offset_bottom = 250.0
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_wsnxc")
+
+[node name="WeaponList" type="VBoxContainer" parent="ViewWeapons/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+script = ExtResource("5_ub82e")
+
+[node name="Information" type="Panel" parent="ViewWeapons"]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -580.0
+offset_top = -250.0
+offset_right = -80.0
+offset_bottom = 250.0
+grow_horizontal = 0
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_y5har")
+
+[node name="Texture" type="TextureRect" parent="ViewWeapons/Information"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(160, 160)
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -80.0
+offset_top = 30.0
+offset_right = 80.0
+offset_bottom = 190.0
+grow_horizontal = 2
+
+[node name="Panel" type="Panel" parent="ViewWeapons/Information/Texture"]
+show_behind_parent = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_22xco")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ViewWeapons/Information"]
+layout_mode = 0
+offset_left = 33.0
+offset_top = 200.0
+offset_right = 213.0
+offset_bottom = 426.0
+
+[node name="Name" type="Label" parent="ViewWeapons/Information/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 24
+text = "Name: "
+
+[node name="Type" type="Label" parent="ViewWeapons/Information/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 24
+text = "Type: "
+
+[node name="Rarity" type="Label" parent="ViewWeapons/Information/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 24
+text = "Rarity:"
+
+[node name="Damage" type="Label" parent="ViewWeapons/Information/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 24
+text = "Damage: "
+
+[node name="Crit" type="Label" parent="ViewWeapons/Information/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 24
+text = "Crit: "
+
+[node name="ScrollContainer" type="ScrollContainer" parent="ViewWeapons/Information/VBoxContainer"]
+custom_minimum_size = Vector2(420, 70)
+layout_mode = 2
+
+[node name="Description" type="Label" parent="ViewWeapons/Information/VBoxContainer/ScrollContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 16
+text = "Description:  "
+autowrap_mode = 1
+
+[node name="BackButton" type="Button" parent="."]
+visible = false
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = 260.0
+offset_top = -100.0
+offset_right = 460.0
+offset_bottom = -36.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_font_sizes/font_size = 32
+text = "Back"
+
+[connection signal="pressed" from="Menu/StartButton" to="." method="_on_start_button_pressed"]
+[connection signal="pressed" from="Menu/OptionsButton" to="." method="_on_options_button_pressed"]
+[connection signal="pressed" from="Menu/ViewWeaponsButton" to="." method="_on_view_weapons_button_pressed"]
+[connection signal="pressed" from="BackButton" to="." method="_on_back_button_pressed"]
