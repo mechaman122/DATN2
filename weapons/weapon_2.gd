@@ -6,7 +6,7 @@ class_name Weapon2
 @export var weapon_anim: WeaponAnimation
 @onready var pickable_area: Area2D = get_node("PickableArea")
 var tween: Tween = null
-var touch_body: Node2D
+var player_ref: Node2D
 
 var stats2: Dictionary
 var passives: Dictionary
@@ -36,12 +36,12 @@ func _ready() -> void:
 		stats2[i] = stats.stats[i]
 	for i in stats.passives:
 		passives[i] = stats.passives[i]
-	for i in range((stats.status_effects).size()):
-		weapon_anim.hitbox.status_effects.append(stats.status_effects[i])
+	#for i in range((stats.status_effects).size()):
+		#weapon_anim.hitbox.status_effects.append(stats.status_effects[i])
 
 func _process(delta: float) -> void:
-	if touch_body is Player:
-		pickable_area.emit_signal("body_entered", touch_body)
+	if player_ref is Player:
+		pickable_area.emit_signal("body_entered", player_ref)
 
 func get_input() -> void:
 	weapon_anim.get_input()
@@ -76,7 +76,7 @@ func cancel_attack() -> void:
 
 
 func _on_pickable_area_body_entered(body: Node2D) -> void:
-	touch_body = body
+	player_ref = body
 	Popups.item_popup(Rect2i(Vector2i(global_position), Vector2i(0,0)), stats)
 	if body is Player:
 		if body.weapons.get_child_count() < 3:
@@ -90,7 +90,7 @@ func _on_pickable_area_body_entered(body: Node2D) -> void:
 
 
 func _on_pickable_area_body_exited(body: Node2D) -> void:
-	touch_body = null
+	player_ref = null
 	Popups.item_hidepopup()
 	
 

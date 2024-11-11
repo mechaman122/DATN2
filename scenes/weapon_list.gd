@@ -2,18 +2,10 @@ extends VBoxContainer
 
 const root_path = "res://weapons/resources/"
 
-var base_weapons = root_path + "base_weapons/"
-var rare_weapons = root_path + "rare_weapons/"
-var epic_weapons = root_path + "epic_weapons/"
-var legendary_weapons = root_path + "legendary_weapons/"
-
 var weapons: Array[WeaponStats] = []
 
 func _ready():
-	dir_content(base_weapons)
-	dir_content(rare_weapons)
-	dir_content(epic_weapons)
-	dir_content(legendary_weapons)
+	dir_content(root_path)
 
 func dir_content(path):
 	var dir = DirAccess.open(path)
@@ -22,7 +14,8 @@ func dir_content(path):
 		var file_name = dir.get_next()
 		while file_name != "":
 			print("Found file: " + file_name)
-			
+			if file_name == "weapon_stats.gd":
+				break
 			var weapon_resource: WeaponStats = load(path + file_name)
 			weapons.append(weapon_resource)
 			

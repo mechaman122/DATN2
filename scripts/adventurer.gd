@@ -307,6 +307,9 @@ func apply_passives(delta: float):
 	if passives.has("crit_boost"):
 		curr_stats["crit"] = base_stats["crit"] + passives["crit_boost"]
 		
-	if passives.has("life_steal") && health.health * 2 < health.max_health:
-		pass
-		
+
+func take_damage(_damage: int) -> void:
+	if armor.armor > 0:
+		armor.armor -= _damage
+	else:
+		health.health -= _damage

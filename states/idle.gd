@@ -5,7 +5,6 @@ func enter(previous_state_path: String, data: Dictionary = {}) -> void:
 	player.velocity = Vector2()
 	player.animation_player.play("idle")
 
-	## move the sprite to the left a little bit
 	player.move_and_slide()
 
 func physics_update(delta: float) -> void:

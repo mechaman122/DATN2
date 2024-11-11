@@ -1,11 +1,14 @@
-[gd_scene load_steps=5 format=3 uid="uid://dfs5socylpgie"]
+[gd_scene load_steps=6 format=3 uid="uid://dfs5socylpgie"]
 
 [ext_resource type="PackedScene" uid="uid://cqrgnms4g38vm" path="res://weapons/projectile/projectile.tscn" id="1_gg4pu"]
 [ext_resource type="Texture2D" uid="uid://jq7vks4ahk23" path="res://assets/sprites/weapons/projectiles/Arrow.png" id="2_xka1o"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_a3ckf"]
-radius = 2.82843
-height = 19.799
+radius = 3.0
+height = 6.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_tcpc0"]
+radius = 3.0
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_rupy0"]
 particle_flag_disable_z = true
@@ -27,14 +30,14 @@ sprite = NodePath("Sprite2D")
 rotation = 0.785398
 texture = ExtResource("2_xka1o")
 
-[node name="Hitbox" parent="." index="1"]
-collision_layer = 16
-
 [node name="CollisionShape2D" parent="Hitbox" index="0"]
-visible = false
-position = Vector2(1, 0)
+position = Vector2(7, 0)
 rotation = 1.5708
 shape = SubResource("CapsuleShape2D_a3ckf")
+
+[node name="CollisionShape2D" parent="ImpactDetector" index="0"]
+position = Vector2(7, 0)
+shape = SubResource("CircleShape2D_tcpc0")
 
 [node name="ChargeParticles" type="GPUParticles2D" parent="." index="3"]
 position = Vector2(7, 0)

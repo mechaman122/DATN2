@@ -7,14 +7,18 @@
 script = ExtResource("1_5lxws")
 
 [node name="Hitbox" type="Area2D" parent="."]
-collision_layer = 64
-collision_mask = 4
+collision_layer = 16
+collision_mask = 0
+monitoring = false
 script = ExtResource("2_g5dnw")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
 
-[node name="LifeTime" type="Timer" parent="."]
-wait_time = 3.0
+[node name="ImpactDetector" type="Area2D" parent="."]
+collision_layer = 0
+monitorable = false
 
-[connection signal="area_entered" from="Hitbox" to="." method="_on_hitbox_area_entered"]
-[connection signal="timeout" from="LifeTime" to="." method="_on_life_time_timeout"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ImpactDetector"]
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 3.0

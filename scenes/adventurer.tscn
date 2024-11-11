@@ -925,7 +925,6 @@ visible = false
 shape = SubResource("CapsuleShape2D_qurs3")
 
 [node name="MeleeHitbox" parent="." instance=ExtResource("6_46qem")]
-collision_layer = 16
 collision_mask = 4
 
 [node name="CollisionShape2D" parent="MeleeHitbox" index="0"]
@@ -949,13 +948,13 @@ script = ExtResource("6_p1umm")
 [node name="Die" type="Node2D" parent="FSM"]
 script = ExtResource("8_7nkeu")
 
-[node name="Hurt" type="Node2D" parent="FSM"]
-script = ExtResource("12_002dt")
-
 [node name="Roll" type="Node2D" parent="FSM"]
 script = ExtResource("16_w342q")
 
-[node name="CollectibleCollision" type="CollisionShape2D" parent="."]
+[node name="Hurt" type="Node2D" parent="FSM"]
+script = ExtResource("12_002dt")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 visible = false
 shape = SubResource("CircleShape2D_6prk3")
 debug_color = Color(0.453053, 0.540124, 0.681173, 0.42)
