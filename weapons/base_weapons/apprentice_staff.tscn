@@ -1,9 +1,9 @@
 [gd_scene load_steps=6 format=3 uid="uid://b66bau71264wo"]
 
 [ext_resource type="PackedScene" uid="uid://deuqmbmge0hxd" path="res://weapons/weapon2.tscn" id="1_di5j4"]
-[ext_resource type="Resource" uid="uid://bsy6asvj1jf4u" path="res://weapons/resources/base_weapons/apprentice_staff.tres" id="2_5ugl2"]
+[ext_resource type="Resource" uid="uid://bsy6asvj1jf4u" path="res://weapons/resources/apprentice_staff.tres" id="2_5ugl2"]
 [ext_resource type="PackedScene" uid="uid://4gksutb3wsqq" path="res://weapons/animations/staff_anim.tscn" id="2_43ad6"]
-[ext_resource type="Texture2D" uid="uid://cx5y8sncv0wxs" path="res://assets/sprites/weapons/projectiles/fireball_V_1_1/FB500-1.png" id="4_yu4y5"]
+[ext_resource type="Texture2D" uid="uid://brsk01g8753kj" path="res://assets/sprites/weapons/projectiles/fireball_V_1_1/FB500-5.png" id="4_g8jho"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_q5xnq"]
 
@@ -14,9 +14,9 @@ stats = ExtResource("2_5ugl2")
 [node name="StaffAnimation" parent="." index="0" instance=ExtResource("2_43ad6")]
 z_index = 1
 
-[node name="Sprite2D" parent="StaffAnimation/Effects/Projectile" index="0"]
+[node name="ProjectileSprite" parent="StaffAnimation/Effects" index="0"]
 visible = false
-texture = ExtResource("4_yu4y5")
+texture = ExtResource("4_g8jho")
 
 [node name="PickableArea" parent="." index="1"]
 collision_mask = 3

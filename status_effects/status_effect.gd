@@ -5,6 +5,7 @@ var duration: float
 var effect_name: String
 @export var damage_per_tick: int = 1
 @export var chance_to_proc: float = 0.3
+@export var icon_texture: Texture2D
 
 func _init(time = 3) -> void:
 	duration = time

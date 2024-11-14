@@ -29,8 +29,8 @@ func set_value(item_stats: Item) -> void:
 	%Description.text = str(item_stats.description)
 	
 	if item_stats is WeaponStats:
-		%Damage.text = str(item_stats.stats["damage"])
-		%Crit.text = str(item_stats.stats["crit"])
+		%Damage.text = str(item_stats.weapon_damage)
+		%Crit.text = str(item_stats.weapon_crit)
 		
 		%ItemPopup.get_node("VBoxContainer/HBoxContainer2").show()
 		%ItemPopup.get_node("VBoxContainer/HBoxContainer3").show()
@@ -38,7 +38,7 @@ func set_value(item_stats: Item) -> void:
 		#%ItemPopup.get_node("VBoxContainer/HBoxContainer5").hide()
 		
 	elif item_stats is ArmorStats:
-		%Armor.text = str(item_stats.stats["armor"])
+		%Armor.text = str(item_stats.armor)
 		#var string = str(item_stats.bonus_attribute)
 		#%BonusLabel.text = string[0].to_upper() + string.substr(1, -1)
 		#%BonusAttributeValue.text = str(item_stats.bonus_attribute_value)

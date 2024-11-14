@@ -51,7 +51,7 @@ func set_health(value: int):
 		if armor != null:
 			armor.cooldown_timer.start()
 			armor.recharge_timer.stop()
-
+		print(health)
 		if health == 0:
 			emit_signal("health_depleted")
 

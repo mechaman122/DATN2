@@ -11,7 +11,6 @@ signal weapon_switched(prev_index: int, new_index: int)
 signal weapon_picked_up(weapon_stats: WeaponStats)
 signal weapon_dropped(index: int)
 signal armor_equipped(armor_stats: ArmorStats)
-signal passive_received
 
 @onready var animated_sprite = $AnimatedSprite2D
 @onready var animation_player = $AnimationPlayer
@@ -35,17 +34,6 @@ var curr_stats = {
 }
 
 var status_effects: Array[StatusEffect] = []
-
-var passives = {
-	# increase damage dealt
-	"enhance" : 0,
-	# increase attack speed
-	"fast_firing" : 0,
-	# increase speed
-	"haste" : 0,
-	# increase crit chance
-	"crit_boost": 0,
-}
 
 @onready var melee_hitbox = $MeleeHitbox/CollisionShape2D
 @onready var weapons = get_node("Weapons")
@@ -137,12 +125,9 @@ func _physics_process(delta: float) -> void:
 			reset_status_effect()
 			break
 	
-	# apply passives
-	apply_passives(delta)
 	
-	
-func player():
-	pass
+#func player():
+	#pass
 
 func _switch_weapon(direction: int) -> void:
 	#if !has_weapon or weapons.get_child_count() == 1:
@@ -158,29 +143,9 @@ func _switch_weapon(direction: int) -> void:
 		if index > weapons.get_child_count() - 1:
 			index = 0
 			
-	#remove old weapon stats
-	for stat_name in current_weapon.stats2:
-		if base_stats.has(stat_name):
-			base_stats[stat_name] -= current_weapon.stats2[stat_name]
-	
-	#remove old weapon passives
-	for passive_name in current_weapon.passives:
-		if passives.has(passive_name):
-			passives[passive_name] -= current_weapon.passives[passive_name]
-			
 	current_weapon.hide()
 	current_weapon = weapons.get_child(index)
 	current_weapon.show()
-	
-	#apply new weapon stats
-	for stat_name in current_weapon.stats2:
-		if base_stats.has(stat_name):
-			base_stats[stat_name] += current_weapon.stats2[stat_name]
-	
-	#apply new weapon passive
-	for passive_name in current_weapon.passives:
-		if passives.has(passive_name):
-			passives[passive_name] += current_weapon.passives[passive_name]
 	
 	SavedData.equipped_weapon_index = index
 	print(index)
@@ -202,27 +167,7 @@ func pick_up_weapon(weapon: Weapon2) -> void:
 	current_weapon.hide()
 	current_weapon.cancel_attack()
 	
-	#remove old weapon stats
-	for stat_name in current_weapon.stats2:
-		if base_stats.has(stat_name):
-			base_stats[stat_name] -= current_weapon.stats2[stat_name]
-	
-	#remove old weapon passives
-	for passive_name in current_weapon.passives:
-		if passives.has(passive_name):
-			passives[passive_name] -= current_weapon.passives[passive_name]
-	
 	current_weapon = weapon
-	
-	#apply new weapon stats
-	for stat_name in current_weapon.stats2:
-		if base_stats.has(stat_name):
-			base_stats[stat_name] += current_weapon.stats2[stat_name]
-	
-	#apply new weapon passive
-	for passive_name in current_weapon.passives:
-		if passives.has(passive_name):
-			passives[passive_name] += current_weapon.passives[passive_name]
 
 	emit_signal("weapon_picked_up", weapon.stats)
 	emit_signal("weapon_switched", prev_index, new_index)
@@ -253,24 +198,14 @@ func spawn_dust() -> void:
 
 
 func equip_armor(armor_stats: ArmorStats) -> void:
-	armor.set_max_armor(armor.get_max_armor() + armor_stats.stats["armor"])
-	
-	# apply new armor passive
-	for passive_name in armor_stats.passives:
-		if passives.has(passive_name):
-			passives[passive_name] += armor_stats.passives[passive_name]
+	armor.set_max_armor(armor.get_max_armor() + armor_stats.armor)
 	
 	SavedData.equipped_armor = armor_stats
 	emit_signal("armor_equipped", armor_stats)
 	
 	
 func equip_different_armor(curr: ArmorStats, next: ArmorStats) -> void:
-	armor.set_max_armor(armor.get_max_armor() - curr.stats["armor"])
-	
-	#remove old armor passives
-	for passive_name in curr.passives:
-		if passives.has(passive_name):
-			passives[passive_name] -= curr.passives[passive_name]
+	armor.set_max_armor(armor.get_max_armor() - curr.armor)
 	
 	SavedData.equipped_armor = null
 	equip_armor(next)
@@ -290,22 +225,6 @@ func apply_status_effect(effect):
 func reset_status_effect():
 	for i in status_effects:
 		i.apply(self)
-		
-
-func apply_passives(delta: float):
-	if passives.has("enhance"):
-		curr_stats["damage"] = base_stats["damage"] + passives["enhance"]
-		SavedData.damage = curr_stats["damage"]
-
-	if passives.has("fast_firing"):
-		curr_stats["atk_speed"] = base_stats["atk_speed"] + base_stats["atk_speed"] * passives["fast_firing"]
-		current_weapon.weapon_anim.anim_player.set_speed_scale(curr_stats["atk_speed"])
-
-	if passives.has("haste"):
-		curr_stats["speed"] = base_stats["speed"] + base_stats["speed"] * passives["haste"]
-		
-	if passives.has("crit_boost"):
-		curr_stats["crit"] = base_stats["crit"] + passives["crit_boost"]
 		
 
 func take_damage(_damage: int) -> void:

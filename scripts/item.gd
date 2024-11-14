@@ -9,7 +9,3 @@ class_name Item
 @export_multiline var description: String
 @export_enum("Common", "Rare", "Epic", "Legendary")
 var rarity: String = "Common"
-
-@export var stats = {}
-
-@export var passives = {}

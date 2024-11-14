@@ -9,14 +9,12 @@
 script = ExtResource("1_de3kx")
 is_ranged = true
 type = "Bow"
+weapon_damage = 1
+weapon_crit = 0.3
+weapon_speed = 1.0
 status_effects = Array[ExtResource("3_hwhmu")]([])
 item_name = "Beginner Bow"
 texture = ExtResource("3_b57n6")
 animated_texture = ExtResource("1_kf0ja")
 description = "A normal bow"
 rarity = "Common"
-stats = {
-"crit": 0.4,
-"damage": 1
-}
-passives = {}

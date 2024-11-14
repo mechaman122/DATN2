@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://deuqmbmge0hxd" path="res://weapons/weapon2.tscn" id="1_y7anc"]
 [ext_resource type="PackedScene" uid="uid://bipc3idppc1df" path="res://weapons/animations/sword_anim.tscn" id="2_02e2y"]
-[ext_resource type="Resource" uid="uid://dvrn5jwiff4m6" path="res://weapons/resources/base_weapons/beginner_sword.tres" id="2_dmrpq"]
+[ext_resource type="Resource" uid="uid://dvrn5jwiff4m6" path="res://weapons/resources/beginner_sword.tres" id="2_dmrpq"]
 
 [sub_resource type="Animation" id="Animation_h2x2g"]
 length = 0.001
@@ -364,7 +364,8 @@ height = 22.0
 weapon_anim = NodePath("SwordAnimation")
 stats = ExtResource("2_dmrpq")
 
-[node name="SwordAnimation" parent="." index="0" instance=ExtResource("2_02e2y")]
+[node name="SwordAnimation" parent="." index="0" node_paths=PackedStringArray("melee_hitbox") instance=ExtResource("2_02e2y")]
+melee_hitbox = NodePath("Sprite2D/Hitbox")
 
 [node name="AnimationPlayer" parent="SwordAnimation" index="1"]
 libraries = {

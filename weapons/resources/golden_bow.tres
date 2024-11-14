@@ -15,16 +15,12 @@ chance_to_proc = 0.3
 script = ExtResource("2_2f6ss")
 is_ranged = true
 type = "Bow"
+weapon_damage = 3
+weapon_crit = 0.4
+weapon_speed = 1.0
 status_effects = Array[ExtResource("3_o5y4j")]([SubResource("Resource_5wo60")])
 item_name = "Golden Bow"
 texture = ExtResource("4_vrybr")
 animated_texture = ExtResource("1_kkx2s")
 description = "A mythical golden bow, given by the god. Chance to burn enemies"
 rarity = "Epic"
-stats = {
-"crit": 0.4,
-"damage": 3
-}
-passives = {
-"haste": 0.1
-}

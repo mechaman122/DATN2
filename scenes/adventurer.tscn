@@ -914,11 +914,9 @@ libraries = {
 }
 autoplay = "idle"
 
-[node name="Hurtbox" parent="." node_paths=PackedStringArray("health", "armor") instance=ExtResource("3_056ev")]
+[node name="Hurtbox" parent="." instance=ExtResource("3_056ev")]
 collision_layer = 2
 collision_mask = 32
-health = NodePath("../Health")
-armor = NodePath("../Armor")
 
 [node name="CollisionShape2D" parent="Hurtbox" index="0"]
 visible = false

@@ -8,13 +8,11 @@
 script = ExtResource("1_uf7ax")
 is_ranged = false
 type = "Hammer"
+weapon_damage = 2
+weapon_crit = 0.4
+weapon_speed = 1.0
 status_effects = Array[ExtResource("2_2ljka")]([])
 item_name = "Beginner Hammer"
 texture = ExtResource("3_1c2a4")
 description = "A common hammer"
 rarity = "Common"
-stats = {
-"crit": 0.4,
-"damage": 2
-}
-passives = {}

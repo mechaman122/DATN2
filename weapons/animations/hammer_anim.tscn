@@ -474,11 +474,10 @@ scale_max = 2.0
 scale_curve = SubResource("CurveTexture_gunxp")
 color_ramp = SubResource("GradientTexture1D_6juaf")
 
-[node name="HammerAnimation" node_paths=PackedStringArray("anim_player", "sprite", "charge_particles", "hitbox") instance=ExtResource("1_ubetg")]
+[node name="HammerAnimation" node_paths=PackedStringArray("anim_player", "sprite", "charge_particles") instance=ExtResource("1_ubetg")]
 anim_player = NodePath("AnimationPlayer")
 sprite = NodePath("Sprite2D")
 charge_particles = NodePath("Effects/ChargeParticles")
-hitbox = NodePath("Sprite2D/Hitbox")
 
 [node name="Sprite2D" parent="." index="0"]
 material = SubResource("ShaderMaterial_jvx3r")
@@ -489,7 +488,6 @@ rotation = -2.35619
 collision_layer = 16
 collision_mask = 4
 script = ExtResource("2_tr0mb")
-damage = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Sprite2D/Hitbox" index="0"]
 position = Vector2(9.8995, -4.24264)

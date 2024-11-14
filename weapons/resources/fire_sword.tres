@@ -14,15 +14,11 @@ chance_to_proc = 0.2
 script = ExtResource("1_mcbas")
 is_ranged = false
 type = "Sword"
+weapon_damage = 3
+weapon_crit = 0.6
+weapon_speed = 1.0
 status_effects = Array[ExtResource("2_1r3oa")]([SubResource("Resource_82wh4")])
 item_name = "Fire Sword"
 texture = ExtResource("4_qhgc3")
 description = "A sword that can shoot fire when charging. Chance to burn enemies"
 rarity = "Rare"
-stats = {
-"crit": 0.5,
-"damage": 2
-}
-passives = {
-"fast_firing": 0.2
-}

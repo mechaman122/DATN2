@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://deuqmbmge0hxd" path="res://weapons/weapon2.tscn" id="1_jdmqx"]
 [ext_resource type="PackedScene" uid="uid://bipc3idppc1df" path="res://weapons/animations/sword_anim.tscn" id="2_1anpo"]
-[ext_resource type="Resource" uid="uid://c8jnfc651aw2a" path="res://weapons/resources/rare_weapons/fire_sword.tres" id="2_p8w6q"]
+[ext_resource type="Resource" uid="uid://c8jnfc651aw2a" path="res://weapons/resources/fire_sword.tres" id="2_p8w6q"]
 [ext_resource type="Texture2D" uid="uid://csihy4hfybqwa" path="res://assets/sprites/weapons/rare_weapons/fire_sword.png" id="3_lnfdm"]
 [ext_resource type="Shader" path="res://scripts/white.gdshader" id="4_easjk"]
 [ext_resource type="Texture2D" uid="uid://bev6c2sksamnw" path="res://assets/sprites/weapons/projectiles/slash_effect_red.png" id="4_p1u8o"]
@@ -89,7 +89,7 @@ tracks/5/keys = {
 [sub_resource type="Animation" id="Animation_p6ssi"]
 resource_name = "attack"
 length = 0.5
-step = 0.05
+step = 0.01
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -161,6 +161,20 @@ tracks/5/keys = {
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
 "values": [Color(1, 1, 1, 0), Color(1, 0.537255, 0.2, 1), Color(1, 1, 1, 0)]
+}
+tracks/6/type = "method"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath(".")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0.06),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": ["Sword", 500, 0.0],
+"method": &"shoot"
+}]
 }
 
 [sub_resource type="Animation" id="Animation_xu5cg"]
@@ -414,7 +428,8 @@ radius = 12.0
 weapon_anim = NodePath("SwordAnimation")
 stats = ExtResource("2_p8w6q")
 
-[node name="SwordAnimation" parent="." index="0" node_paths=PackedStringArray("projectile_sprite", "shooting_position") instance=ExtResource("2_1anpo")]
+[node name="SwordAnimation" parent="." index="0" node_paths=PackedStringArray("melee_hitbox", "projectile_sprite", "shooting_position") instance=ExtResource("2_1anpo")]
+melee_hitbox = NodePath("Sprite2D/Hitbox")
 projectile_sprite = NodePath("Effects/Projectile/Sprite2D")
 shooting_position = NodePath("Effects/ShootingPosition")
 

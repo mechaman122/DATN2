@@ -8,13 +8,11 @@
 script = ExtResource("1_5wx84")
 is_ranged = true
 type = "Staff"
+weapon_damage = 2
+weapon_crit = 0.0
+weapon_speed = 1.0
 status_effects = Array[ExtResource("2_quta8")]([])
 item_name = "Apprentice Staff"
 texture = ExtResource("3_jrb5a")
 description = "A normal staff"
 rarity = "Common"
-stats = {
-"crit": 0.4,
-"damage": 1
-}
-passives = {}

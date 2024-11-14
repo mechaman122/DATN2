@@ -1,9 +1,8 @@
-[gd_scene load_steps=6 format=3 uid="uid://n7vi3j6nc3tk"]
+[gd_scene load_steps=5 format=3 uid="uid://n7vi3j6nc3tk"]
 
 [ext_resource type="PackedScene" uid="uid://deuqmbmge0hxd" path="res://weapons/weapon2.tscn" id="1_ugvid"]
 [ext_resource type="PackedScene" uid="uid://cek62kqieqtap" path="res://weapons/animations/bow_anim.tscn" id="2_cu483"]
-[ext_resource type="Resource" uid="uid://cx3ob0xcbh3pk" path="res://weapons/resources/base_weapons/beginner_bow.tres" id="2_maq7h"]
-[ext_resource type="Texture2D" uid="uid://jq7vks4ahk23" path="res://assets/sprites/weapons/projectiles/Arrow.png" id="4_xa2hm"]
+[ext_resource type="Resource" uid="uid://cx3ob0xcbh3pk" path="res://weapons/resources/beginner_bow.tres" id="2_maq7h"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_gkotm"]
 radius = 7.77817
@@ -13,11 +12,7 @@ height = 26.8701
 weapon_anim = NodePath("BowAnimation")
 stats = ExtResource("2_maq7h")
 
-[node name="BowAnimation" parent="." index="0" node_paths=PackedStringArray("projectile_sprite") instance=ExtResource("2_cu483")]
-projectile_sprite = NodePath("Effects/Projectile/Sprite2D")
-
-[node name="Sprite2D" parent="BowAnimation/Effects/Projectile" index="0"]
-texture = ExtResource("4_xa2hm")
+[node name="BowAnimation" parent="." index="0" instance=ExtResource("2_cu483")]
 
 [node name="PickableArea" parent="." index="1"]
 collision_mask = 3

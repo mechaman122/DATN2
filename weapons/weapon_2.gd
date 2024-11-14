@@ -8,8 +8,7 @@ class_name Weapon2
 var tween: Tween = null
 var player_ref: Node2D
 
-var stats2: Dictionary
-var passives: Dictionary
+# var passives: Array[Passive]
 var status_effects: Array[StatusEffect]
 
 @export var stats: WeaponStats:
@@ -22,6 +21,8 @@ func _ready() -> void:
 		#is_on_floor = true
 	if not stats.is_ranged:
 		weapon_anim.sprite.texture = stats.texture
+		for effect in stats.status_effects:
+			weapon_anim.melee_hitbox.status_effects.append(effect)
 	else:
 		weapon_anim.sprite.texture = stats.animated_texture if stats.animated_texture != null else stats.texture
 	#weapon_anim.hitbox.damage = stats.damage
@@ -31,13 +32,6 @@ func _ready() -> void:
 	#else:
 		#pickable_area.set_collision_mask_value(1, true)
 		#pickable_area.set_collision_mask_value(2, true)
-
-	for i in stats.stats:
-		stats2[i] = stats.stats[i]
-	for i in stats.passives:
-		passives[i] = stats.passives[i]
-	#for i in range((stats.status_effects).size()):
-		#weapon_anim.hitbox.status_effects.append(stats.status_effects[i])
 
 func _process(delta: float) -> void:
 	if player_ref is Player:
