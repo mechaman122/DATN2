@@ -18,8 +18,5 @@ func tick(target, delta: float) -> void:
 	super.tick(target, delta)
 	time_elapsed += 1
 	if time_elapsed == 90:
-		if target.armor != null && target.armor.armor > 0:
-			target.armor.armor -= damage_per_tick
-		else: 
-			target.health.health -= damage_per_tick
+		target.take_damage(damage_per_tick, source)
 		time_elapsed = 0

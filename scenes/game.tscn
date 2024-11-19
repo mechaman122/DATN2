@@ -1,7 +1,6 @@
 [gd_scene load_steps=14 format=3 uid="uid://xfcntficuxyx"]
 
 [ext_resource type="PackedScene" uid="uid://2tkmj873jyu3" path="res://scenes/adventurer.tscn" id="1_7c8dh"]
-[ext_resource type="PackedScene" uid="uid://cmlvksdm3h5h2" path="res://interface/interface.tscn" id="1_mf2yy"]
 [ext_resource type="PackedScene" uid="uid://b4a2vbki2mytf" path="res://scenes/damage_area_test.tscn" id="2_abr38"]
 [ext_resource type="PackedScene" uid="uid://b66bau71264wo" path="res://weapons/base_weapons/apprentice_staff.tscn" id="8_axvye"]
 [ext_resource type="PackedScene" uid="uid://bk1y10ciko62f" path="res://map/map_elements/treasure.tscn" id="8_qskdt"]
@@ -13,16 +12,9 @@
 [ext_resource type="PackedScene" uid="uid://3rtrhjddetts" path="res://map/map_elements/stairs.tscn" id="11_v8ere"]
 [ext_resource type="PackedScene" uid="uid://bnilqrotedah1" path="res://weapons/epic_weapons/golden_bow.tscn" id="12_daosd"]
 [ext_resource type="PackedScene" uid="uid://b3p1558pfodxo" path="res://weapons/rare_weapons/fire_sword.tscn" id="13_lk08e"]
+[ext_resource type="PackedScene" uid="uid://b5llf4cbf0m3v" path="res://armor/base_armors/cloak_of_agility.tscn" id="13_sywp5"]
 
 [node name="Game" type="Node2D"]
-
-[node name="Interface" parent="." instance=ExtResource("1_mf2yy")]
-
-[node name="PanelContainer" parent="Interface" index="2"]
-size_flags_horizontal = 3
-
-[node name="Inventory" parent="Interface/PanelContainer" index="0"]
-custom_minimum_size = Vector2(16, 16)
 
 [node name="Adventurer" parent="." instance=ExtResource("1_7c8dh")]
 position = Vector2(695, 330)
@@ -53,11 +45,6 @@ is_on_floor = true
 position = Vector2(588, 373)
 is_on_floor = true
 
-[node name="BeginnerSword" parent="." instance=ExtResource("10_x42of")]
-z_index = 0
-position = Vector2(657, 394)
-is_on_floor = true
-
 [node name="Statirs" parent="." instance=ExtResource("11_v8ere")]
 position = Vector2(792, 390)
 
@@ -72,9 +59,9 @@ is_on_floor = true
 position = Vector2(751, 324)
 is_on_floor = true
 
-[connection signal="armor_equipped" from="Adventurer" to="Interface" method="_on_player_armor_equipped"]
-[connection signal="weapon_dropped" from="Adventurer" to="Interface" method="_on_player_weapon_dropped"]
-[connection signal="weapon_picked_up" from="Adventurer" to="Interface" method="_on_player_weapon_picked_up"]
-[connection signal="weapon_switched" from="Adventurer" to="Interface" method="_on_player_weapon_switched"]
+[node name="CloakOfAgility" parent="." instance=ExtResource("13_sywp5")]
+position = Vector2(688, 370)
 
-[editable path="Interface"]
+[node name="BeginnerSword" parent="." instance=ExtResource("10_x42of")]
+position = Vector2(646, 388)
+is_on_floor = true

@@ -35,7 +35,7 @@ tracks/1/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [false]
+"values": [true]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
@@ -428,8 +428,7 @@ radius = 12.0
 weapon_anim = NodePath("SwordAnimation")
 stats = ExtResource("2_p8w6q")
 
-[node name="SwordAnimation" parent="." index="0" node_paths=PackedStringArray("melee_hitbox", "projectile_sprite", "shooting_position") instance=ExtResource("2_1anpo")]
-melee_hitbox = NodePath("Sprite2D/Hitbox")
+[node name="SwordAnimation" parent="." index="0" node_paths=PackedStringArray("projectile_sprite", "shooting_position") instance=ExtResource("2_1anpo")]
 projectile_sprite = NodePath("Effects/Projectile/Sprite2D")
 shooting_position = NodePath("Effects/ShootingPosition")
 
@@ -439,6 +438,9 @@ texture = ExtResource("3_lnfdm")
 
 [node name="Hitbox" parent="SwordAnimation/Sprite2D" index="0"]
 visible = false
+
+[node name="CollisionShape2D" parent="SwordAnimation/Sprite2D/Hitbox" index="0"]
+disabled = true
 
 [node name="AnimationPlayer" parent="SwordAnimation" index="1"]
 libraries = {

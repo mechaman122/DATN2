@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="ArmorStats" load_steps=3 format=3 uid="uid://doqtx20qk02m6"]
+
+[ext_resource type="Script" path="res://armor/armor_stats.gd" id="1_7fel8"]
+[ext_resource type="Texture2D" uid="uid://dns4l18n2jbpb" path="res://assets/sprites/rpg_icon/Individual icons (16x16)/51.png" id="2_106bc"]
+
+[resource]
+script = ExtResource("1_7fel8")
+type = "Swift"
+armor = 1
+modifiers = {}
+item_name = "Cloak of Agility"
+texture = ExtResource("2_106bc")
+description = "Light weight. Grants speed in exchange for low armor"
+rarity = "Common"

@@ -1,0 +1,47 @@
+[gd_scene load_steps=4 format=3 uid="uid://cc1ljcuakobd4"]
+
+[ext_resource type="Texture2D" uid="uid://dqkyopxtipewo" path="res://assets/sprites/rpg_icon/Individual icons (16x16)/22.png" id="1_twu7u"]
+[ext_resource type="Script" path="res://interface/upgrade_slot.gd" id="2_ig3uf"]
+[ext_resource type="Texture2D" uid="uid://bmg2fn8wwcevp" path="res://assets/sprites/rpg_icon/Individual icons (16x16)/248.png" id="3_2eqt1"]
+
+[node name="UpgradeSlot" type="TextureButton"]
+custom_minimum_size = Vector2(500, 80)
+offset_right = 315.0
+offset_bottom = 40.0
+mouse_filter = 1
+texture_normal = ExtResource("1_twu7u")
+stretch_mode = 4
+script = ExtResource("2_ig3uf")
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 0
+offset_left = 80.0
+offset_top = 10.0
+offset_right = 160.0
+offset_bottom = 70.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+text = "Lvl 1"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Description" type="Label" parent="."]
+layout_mode = 1
+offset_left = 150.0
+offset_top = 10.0
+offset_right = 480.0
+offset_bottom = 70.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+text = "Test"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="NinePatchRect" type="NinePatchRect" parent="."]
+show_behind_parent = true
+custom_minimum_size = Vector2(500, 80)
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("3_2eqt1")
+region_rect = Rect2(3, 6, 10, 4)
+
+[connection signal="gui_input" from="." to="." method="_on_gui_input"]

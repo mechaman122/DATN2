@@ -15,6 +15,9 @@ stats = ExtResource("2_uhuen")
 [node name="HammerAnimation" parent="." index="0" node_paths=PackedStringArray("melee_hitbox") instance=ExtResource("2_6c50k")]
 melee_hitbox = NodePath("Sprite2D/Hitbox")
 
+[node name="CollisionShape2D" parent="HammerAnimation/Sprite2D/Hitbox" index="0"]
+disabled = true
+
 [node name="PickableArea" parent="." index="1"]
 collision_mask = 3
 

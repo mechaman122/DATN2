@@ -1,0 +1,60 @@
+[gd_scene load_steps=6 format=3 uid="uid://dwl8qm58dmepx"]
+
+[ext_resource type="Script" path="res://passive/aura_area.gd" id="1_h18ja"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_3y8w4"]
+radius = 32.0
+
+[sub_resource type="Animation" id="Animation_ou5jg"]
+resource_name = "DamageOverTime"
+loop_mode = 1
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CollisionShape2D:disabled")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.9),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+
+[sub_resource type="Animation" id="Animation_6l5mv"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CollisionShape2D:disabled")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_sak07"]
+_data = {
+"DamageOverTime": SubResource("Animation_ou5jg"),
+"RESET": SubResource("Animation_6l5mv")
+}
+
+[node name="AuraArea" type="Area2D"]
+collision_layer = 0
+monitorable = false
+script = ExtResource("1_h18ja")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_3y8w4")
+disabled = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_sak07")
+}
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

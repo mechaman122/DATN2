@@ -9,8 +9,8 @@ func _init(time = 3) -> void:
 
 func apply(target) -> void:
 	super.apply(target)
-	base_speed = target.base_stats["speed"] 
-	target.base_stats["speed"] *= 0.25
+	target.base_stats["speed"] *= 0.6
+	
 func remove(target) -> void:
 	super.remove(target)
-	target.base_stats["speed"] = base_speed
+	target.base_stats["speed"] /= 0.6

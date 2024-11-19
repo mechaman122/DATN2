@@ -78,14 +78,14 @@ tracks/4/keys = {
 tracks/5/type = "value"
 tracks/5/imported = false
 tracks/5/enabled = true
-tracks/5/path = NodePath("Sprite2D/Polygon2D:color")
+tracks/5/path = NodePath("Sprite2D/Polygon2D:visible")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Color(1, 1, 1, 0)]
+"update": 1,
+"values": [false]
 }
 
 [sub_resource type="Animation" id="Animation_gs1xx"]
@@ -155,14 +155,14 @@ tracks/4/keys = {
 tracks/5/type = "value"
 tracks/5/imported = false
 tracks/5/enabled = true
-tracks/5/path = NodePath("Sprite2D/Polygon2D:color")
+tracks/5/path = NodePath("Sprite2D/Polygon2D:visible")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = {
-"times": PackedFloat32Array(0, 0.15, 0.3),
+"times": PackedFloat32Array(0, 0.05, 0.15),
 "transitions": PackedFloat32Array(1, 1, 1),
-"update": 0,
-"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 0.478431), Color(1, 1, 1, 0)]
+"update": 1,
+"values": [false, true, false]
 }
 
 [sub_resource type="Animation" id="Animation_aet1p"]
@@ -346,14 +346,14 @@ tracks/4/keys = {
 tracks/5/type = "value"
 tracks/5/imported = false
 tracks/5/enabled = true
-tracks/5/path = NodePath("Sprite2D/Polygon2D:color")
+tracks/5/path = NodePath("Sprite2D/Polygon2D:visible")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = {
-"times": PackedFloat32Array(0, 0.5, 0.65),
+"times": PackedFloat32Array(0, 0.35, 1),
 "transitions": PackedFloat32Array(1, 1, 1),
-"update": 0,
-"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+"update": 1,
+"values": [true, false, false]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_jonbc"]
@@ -378,11 +378,11 @@ tangential_accel_max = 80.3
 turbulence_noise_strength = 20.0
 turbulence_noise_scale = 3.0
 
-[node name="SwordAnimation" node_paths=PackedStringArray("anim_player", "sprite", "charge_particles", "hitbox") instance=ExtResource("1_2i1gq")]
+[node name="SwordAnimation" node_paths=PackedStringArray("anim_player", "sprite", "charge_particles", "melee_hitbox") instance=ExtResource("1_2i1gq")]
 anim_player = NodePath("AnimationPlayer")
 sprite = NodePath("Sprite2D")
 charge_particles = NodePath("Effects/ChargeParticles")
-hitbox = NodePath("Sprite2D/Hitbox")
+melee_hitbox = NodePath("Sprite2D/Hitbox")
 
 [node name="Sprite2D" parent="." index="0"]
 material = SubResource("ShaderMaterial_up422")
@@ -396,17 +396,17 @@ collision_mask = 4
 script = ExtResource("3_fcqpj")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Sprite2D/Hitbox" index="0"]
+visible = false
 position = Vector2(7.77814, -7.77821)
 rotation = 0.785398
 shape = SubResource("CapsuleShape2D_v1voa")
 
 [node name="Polygon2D" type="Polygon2D" parent="Sprite2D" index="1"]
-z_index = -1
-position = Vector2(-8.48528, -8.48528)
+visible = false
+position = Vector2(-8.48532, -8.48524)
 rotation = -3.93438
 scale = Vector2(1.17393, 1.18443)
-color = Color(1, 1, 1, 0)
-polygon = PackedVector2Array(-13.2538, -10.1314, -2, -10, -1.70375, -8.44287, -7.6223, -5.96598, -11.061, -1.7696, -12.8411, -6.75421)
+polygon = PackedVector2Array(-13.2538, -10.1314, -3.33178, -10.1561, -3.34436, -8.46759, -7.6223, -5.96598, -11.061, -1.7696, -12.8411, -6.75421)
 
 [node name="AnimationPlayer" parent="." index="1"]
 libraries = {

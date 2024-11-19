@@ -2,11 +2,13 @@ extends Node2D
 
 class_name Weapon2
 
+
 @export var is_on_floor: bool = false
 @export var weapon_anim: WeaponAnimation
 @onready var pickable_area: Area2D = get_node("PickableArea")
 var tween: Tween = null
 var player_ref: Node2D
+
 
 # var passives: Array[Passive]
 var status_effects: Array[StatusEffect]
@@ -14,6 +16,7 @@ var status_effects: Array[StatusEffect]
 @export var stats: WeaponStats:
 	set(value):
 		stats = value
+			
 
 
 func _ready() -> void:
@@ -21,21 +24,21 @@ func _ready() -> void:
 		#is_on_floor = true
 	if not stats.is_ranged:
 		weapon_anim.sprite.texture = stats.texture
-		for effect in stats.status_effects:
-			weapon_anim.melee_hitbox.status_effects.append(effect)
+		weapon_anim.set_hitbox(weapon_anim.melee_hitbox)
 	else:
 		weapon_anim.sprite.texture = stats.animated_texture if stats.animated_texture != null else stats.texture
 	#weapon_anim.hitbox.damage = stats.damage
 	if not is_on_floor:
 		pickable_area.set_collision_mask_value(1, false)
 		pickable_area.set_collision_mask_value(2, false)
+		player_ref = get_parent().get_parent()
 	#else:
 		#pickable_area.set_collision_mask_value(1, true)
 		#pickable_area.set_collision_mask_value(2, true)
+	EventBus.enemy_died.connect(gain_xp)
 
 func _process(delta: float) -> void:
-	if player_ref is Player:
-		pickable_area.emit_signal("body_entered", player_ref)
+	check_xp()
 
 func get_input() -> void:
 	weapon_anim.get_input()
@@ -70,7 +73,6 @@ func cancel_attack() -> void:
 
 
 func _on_pickable_area_body_entered(body: Node2D) -> void:
-	player_ref = body
 	Popups.item_popup(Rect2i(Vector2i(global_position), Vector2i(0,0)), stats)
 	if body is Player:
 		if body.weapons.get_child_count() < 3:
@@ -78,13 +80,13 @@ func _on_pickable_area_body_entered(body: Node2D) -> void:
 			pickable_area.set_collision_mask_value(2, false)
 			body.pick_up_weapon(self)
 			position = Vector2.ZERO
+			player_ref = body
 	elif body == null:
 		tween.kill()
 		pickable_area.set_collision_mask_value(2, true)
 
 
 func _on_pickable_area_body_exited(body: Node2D) -> void:
-	player_ref = null
 	Popups.item_hidepopup()
 	
 
@@ -101,4 +103,34 @@ func _on_tween_completed() -> void:
 
 
 func get_texture() -> Texture:
-	return weapon_anim.sprite.texture
+	#return weapon_anim.sprite.texture
+	return stats.texture
+
+func is_upgradable() -> bool:
+	if stats.level <= stats.upgrades.size():
+		return true
+	return false
+
+
+func upgrade_weapon():
+	if not is_upgradable():
+		return
+		
+	var upgrade = stats.upgrades[stats.level - 1]
+	
+	stats.weapon_damage += upgrade.weapon_damage
+	stats.weapon_crit += upgrade.weapon_crit
+	stats.weapon_speed += upgrade.weapon_speed
+	
+	stats.level += 1
+
+
+func gain_xp(source):
+	if player_ref != null && self == source:
+		stats.xp += 1
+
+	
+func check_xp():
+	if stats.xp >= stats.total_xp:
+		stats.xp = 0
+		get_parent().get_parent().get_node("Interface").get_node("UpgradeOptions").show_option()

@@ -19,5 +19,5 @@ func tick(target, delta: float) -> void:
 	super.tick(target, delta)
 	time_elapsed += 1
 	if time_elapsed == 60:
-		target.take_damage(damage_per_tick)
+		target.take_damage(damage_per_tick, source)
 		time_elapsed = 0

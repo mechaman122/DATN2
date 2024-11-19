@@ -31,7 +31,8 @@ func get_input() -> void:
 			curr_damage = roundi(get_parent().stats.weapon_damage * 1.5)
 		if randf() <= get_parent().stats.weapon_crit:
 			curr_damage = roundi(curr_damage * 1.5)
-	
+		if melee_hitbox != null:
+			melee_hitbox.damage = curr_damage
 	
 func shoot(weapon_type: String = "Bow", spd: int = 500, offset: float = 0) -> void:
 	var projectile
@@ -47,9 +48,11 @@ func shoot(weapon_type: String = "Bow", spd: int = 500, offset: float = 0) -> vo
 	projectile.direction = global_position.direction_to(get_global_mouse_position()).rotated(deg_to_rad(offset))
 	projectile.sprite.texture = projectile_sprite.texture
 	
-	projectile.get_node("Hitbox").damage = curr_damage
-		
-	for effect in get_parent().stats.status_effects:
-		projectile.get_node("Hitbox").status_effects.append(effect)
+	set_hitbox(projectile.get_node("Hitbox"))
 	
 	add_child(projectile)
+
+func set_hitbox(hitbox: Hitbox):
+	hitbox.damage = curr_damage
+	hitbox.source = get_parent()
+	hitbox.append_effect(get_parent().stats.status_effects)

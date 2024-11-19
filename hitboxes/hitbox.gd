@@ -6,6 +6,7 @@ extends Area2D
 @onready var collision_shape = $CollisionShape2D
 
 var status_effects: Array[StatusEffect] = []
+var source
 
 func _init() -> void:
 	collision_mask = 0
@@ -20,3 +21,9 @@ func get_damage() -> int:
 
 func set_disabled(is_disabled: bool) -> void:
 	collision_shape.set_deferred("disabled", is_disabled)
+
+func append_effect(effects: Array[StatusEffect]):
+	for effect in effects:
+		var e = effect.duplicate(true)
+		e.source = source
+		status_effects.append(e)

@@ -1,13 +1,20 @@
-[gd_scene load_steps=11 format=3 uid="uid://b4a2vbki2mytf"]
+[gd_scene load_steps=17 format=3 uid="uid://b4a2vbki2mytf"]
 
 [ext_resource type="Script" path="res://scripts/health.gd" id="1_0rqek"]
 [ext_resource type="Script" path="res://scenes/damage_area_test.gd" id="1_dcaoo"]
 [ext_resource type="PackedScene" uid="uid://c2deh2ka3p3xy" path="res://hitboxes/hitbox.tscn" id="1_ueb3p"]
 [ext_resource type="Texture2D" uid="uid://ce725v2mlwfwb" path="res://icon.svg" id="2_oddga"]
 [ext_resource type="Script" path="res://hitboxes/hurtbox.gd" id="3_7df3y"]
+[ext_resource type="Shader" path="res://scripts/white.gdshader" id="4_rmn1d"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_m8tpt"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_j7liv"]
 radius = 19.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_r2df4"]
+shader = ExtResource("4_rmn1d")
+shader_parameter/active = false
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_jo17l"]
 atlas = ExtResource("2_oddga")
@@ -28,9 +35,84 @@ animations = [{
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ijwth"]
 
+[sub_resource type="Animation" id="Animation_sv6xc"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimatedSprite2D:material:shader_parameter/active")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_5b8fj"]
+resource_name = "hit"
+length = 0.3
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.25),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [-0.261799, 0.261799, -0.261799, 0.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimatedSprite2D:material:shader_parameter/active")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_j5eml"]
+_data = {
+"RESET": SubResource("Animation_sv6xc"),
+"hit": SubResource("Animation_5b8fj")
+}
+
 [node name="DamageArea_test" type="CharacterBody2D"]
 collision_mask = 0
 script = ExtResource("1_dcaoo")
+
+[node name="StatusEffectContainer" type="PanelContainer" parent="."]
+custom_minimum_size = Vector2(16, 16)
+offset_left = -20.0
+offset_top = -28.0
+offset_right = 20.0
+offset_bottom = -12.0
+theme_override_styles/panel = SubResource("StyleBoxEmpty_m8tpt")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="StatusEffectContainer"]
+layout_mode = 2
+size_flags_vertical = 4
+alignment = 1
 
 [node name="Health" type="Node2D" parent="."]
 script = ExtResource("1_0rqek")
@@ -38,6 +120,7 @@ max_health = 1000
 health = 1000
 
 [node name="Hitbox" parent="." instance=ExtResource("1_ueb3p")]
+visible = false
 collision_layer = 32
 collision_mask = 2
 
@@ -46,20 +129,38 @@ shape = SubResource("CircleShape2D_j7liv")
 debug_color = Color(0.999644, 0, 0.106203, 0.42)
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+material = SubResource("ShaderMaterial_r2df4")
 scale = Vector2(0.15625, 0.148437)
 sprite_frames = SubResource("SpriteFrames_y2y3s")
 
-[node name="Hurtbox" type="Area2D" parent="." node_paths=PackedStringArray("health")]
+[node name="Hurtbox" type="Area2D" parent="."]
+visible = false
 collision_layer = 0
 collision_mask = 16
 monitorable = false
 script = ExtResource("3_7df3y")
-health = NodePath("../Health")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
 shape = SubResource("RectangleShape2D_w6sy3")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
 shape = SubResource("RectangleShape2D_ijwth")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_j5eml")
+}
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
+emitting = false
+lifetime = 0.3
+one_shot = true
+preprocess = 0.03
+explosiveness = 0.86
+randomness = 0.59
+spread = 60.0
+gravity = Vector2(0, 0)
+initial_velocity_max = 60.0
 
 [editable path="Hitbox"]

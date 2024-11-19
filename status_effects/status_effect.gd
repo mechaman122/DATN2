@@ -3,6 +3,7 @@ class_name StatusEffect
 
 var duration: float
 var effect_name: String
+var source
 @export var damage_per_tick: int = 1
 @export var chance_to_proc: float = 0.3
 @export var icon_texture: Texture2D

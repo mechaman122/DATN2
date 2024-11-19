@@ -3,15 +3,15 @@ extends CanvasLayer
 const INVENTORY_ITEM_SCENE: PackedScene = preload("res://inventory/inventory_item.tscn")
 
 @onready var health_bar = $HealthBar
-@onready var health = get_parent().get_node("Adventurer/Health")
+@onready var health = get_parent().get_node("Health")
 
 @onready var armor_bar = $ArmorBar
-@onready var armor = get_parent().get_node("Adventurer/Armor")
+@onready var armor = get_parent().get_node("Armor")
 
 @onready var inventory: HBoxContainer = get_node("PanelContainer/Inventory")
 @onready var armor_inventory: PanelContainer = get_node("ArmorContainer/InventoryItem")
 @onready var level_label: Label = get_node("LevelLabel")
-@onready var player = get_parent().get_node("Adventurer")
+@onready var player = get_parent()
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -57,5 +57,6 @@ func _on_player_weapon_switched(prev_index: int, new_index: int) -> void:
 	inventory.get_child(new_index).select()
 
 
-func _on_player_armor_equipped(armor_stats: ArmorStats) -> void:
-	armor_inventory.initialize(armor_stats)
+func _on_player_armor_equipped(armor_item: ArmorItem) -> void:
+	if armor_item != null:
+		armor_inventory.initialize(armor_item.armor_stats)

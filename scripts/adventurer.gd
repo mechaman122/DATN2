@@ -10,10 +10,11 @@ var current_armor
 signal weapon_switched(prev_index: int, new_index: int)
 signal weapon_picked_up(weapon_stats: WeaponStats)
 signal weapon_dropped(index: int)
-signal armor_equipped(armor_stats: ArmorStats)
+signal armor_equipped(armor_stats: ArmorItem)
 
 @onready var animated_sprite = $AnimatedSprite2D
 @onready var animation_player = $AnimationPlayer
+@onready var dash: GPUParticles2D = $DashParticles
 
 #stats
 @onready var health = $Health
@@ -26,28 +27,31 @@ var base_stats = {
 	"speed" : 100.0
 }
 
-var curr_stats = {
-	"damage" : 0,
-	"crit" : 0.0,
-	"atk_speed": 0,
-	"speed" : 100.0
+var modifiers = {
+	"damage" : 1.0,
+	"crit" : 1.0,
+	"atk_speed": 1.0,
+	"speed" : 1.0
 }
 
 var status_effects: Array[StatusEffect] = []
 
 @onready var melee_hitbox = $MeleeHitbox/CollisionShape2D
 @onready var weapons = get_node("Weapons")
+@onready var armors = get_node("Armors")
 @onready var dust_position = get_node("DustPosition")
 @onready var interaction_manager = get_node("InteractionManager")
 
 var has_weapon = false
 var health_changed = false
 var knockback: Vector2
-
+var regen: bool = false
+var regen_timer = 0
+var evade_chance: float = 0.8
 
 func _ready() -> void:
-
 	emit_signal("weapon_picked_up", weapons.get_child(0).stats)
+	emit_signal("armor_equipped", current_armor)
 	_restore_prev_state()
 
 # for testing purpose
@@ -84,8 +88,14 @@ func _restore_prev_state() -> void:
 	current_weapon.show()
 	has_weapon = true
 	
+	if SavedData.equipped_armor != null:
+		var equipped_armor = SavedData.equipped_armor.duplicate()
+		armors.add_child(equipped_armor)
+		current_armor = armors.get_child(0)
+		emit_signal("armor_equipped", SavedData.equipped_armor)
+	
 	emit_signal("weapon_switched", weapons.get_child_count() - 1, SavedData.equipped_weapon_index)
-	emit_signal("armor_equipped", SavedData.equipped_armor)
+	
 
 	
 func _process(delta: float) -> void:
@@ -93,7 +103,8 @@ func _process(delta: float) -> void:
 		return
 	var mouse_dir: Vector2 = (get_global_mouse_position() - global_position).normalized()
 	
-	animated_sprite.flip_h = mouse_dir.x < 0 
+	animated_sprite.flip_h = mouse_dir.x < 0
+	dash.emitting = (velocity.length() >= 150)
 
 	if has_weapon:
 		if not current_weapon.is_busy():
@@ -103,6 +114,8 @@ func _process(delta: float) -> void:
 				_switch_weapon(DOWN)
 			elif Input.is_action_just_pressed("ui_drop_weapon"):
 				_drop_weapon()
+				
+		current_weapon.weapon_anim.anim_player.speed_scale = current_weapon.stats.weapon_speed * modifiers["atk_speed"]
 		current_weapon.move(mouse_dir)
 		current_weapon.get_input()
 	
@@ -111,6 +124,9 @@ func _process(delta: float) -> void:
 
 # handle all physical stuff
 func _physics_process(delta: float) -> void:
+	reset_modifiers()
+	
+	regenerate(delta)
 	
 	# apply status effect
 	for i in range(status_effects.size()):
@@ -124,10 +140,11 @@ func _physics_process(delta: float) -> void:
 			print(status_effects)
 			reset_status_effect()
 			break
-	
-	
-#func player():
-	#pass
+			
+	# apply modifiers from armor
+	if current_armor != null:
+		for stat in current_armor.armor_stats.modifiers:
+			modifiers[stat] += current_armor.armor_stats.modifiers[stat]
 
 func _switch_weapon(direction: int) -> void:
 	#if !has_weapon or weapons.get_child_count() == 1:
@@ -151,6 +168,7 @@ func _switch_weapon(direction: int) -> void:
 	print(index)
 	
 	emit_signal("weapon_switched", prev_index, index)
+	print(current_weapon.player_ref)
 	
 
 func pick_up_weapon(weapon: Weapon2) -> void:
@@ -190,6 +208,9 @@ func _drop_weapon() -> void:
 
 	var throw_dir: Vector2 = (get_global_mouse_position() - position).normalized()
 	weapon_to_drop.interpolate_pos(position, position + throw_dir * 50)
+	weapon_to_drop.player_ref = null
+	get_node("CollisionShape2D").disabled = true
+	get_node("CollisionShape2D").disabled = false
 
 func spawn_dust() -> void:
 	var dust: Sprite2D = DUST_SCENE.instantiate()
@@ -197,17 +218,33 @@ func spawn_dust() -> void:
 	get_parent().add_child(dust)
 
 
-func equip_armor(armor_stats: ArmorStats) -> void:
-	armor.set_max_armor(armor.get_max_armor() + armor_stats.armor)
+func equip_armor(armor_item: ArmorItem) -> void:
+	armor.set_max_armor(armor.get_max_armor() + armor_item.armor_stats.armor)
 	
-	SavedData.equipped_armor = armor_stats
-	emit_signal("armor_equipped", armor_stats)
+	SavedData.equipped_armor = armor_item.duplicate()
+	armor_item.get_parent().call_deferred("remove_child", armor_item)
+	armors.call_deferred("add_child", armor_item)
+	armor_item.set_deferred("owner", armors)
+	
+	current_armor = armor_item
+	
+	emit_signal("armor_equipped", armor_item)
 	
 	
-func equip_different_armor(curr: ArmorStats, next: ArmorStats) -> void:
-	armor.set_max_armor(armor.get_max_armor() - curr.armor)
+func equip_different_armor(next: ArmorItem) -> void:
+	var armor_to_drop: Node2D = current_armor
+	if armor_to_drop.armor_stats.passive != null:
+		armor_to_drop.armor_stats.passive.deactivate(self)
+	armor.set_max_armor(armor.get_max_armor() - armor_to_drop.armor_stats.armor)
 	
-	SavedData.equipped_armor = null
+	armors.call_deferred("remove_child", armor_to_drop)
+	get_parent().call_deferred("add_child", armor_to_drop)
+	armor_to_drop.set_deferred("owner", get_parent())
+	await(armor_to_drop.tree_entered)
+	
+	var throw_dir: Vector2 = (get_global_mouse_position() - position).normalized()
+	armor_to_drop.interpolate_pos(position, position + throw_dir * 30)
+	
 	equip_armor(next)
 
 
@@ -227,8 +264,41 @@ func reset_status_effect():
 		i.apply(self)
 		
 
-func take_damage(_damage: int) -> void:
-	if armor.armor > 0:
-		armor.armor -= _damage
+func take_damage(_damage: int, source) -> void:
+	if randf() < 0:
+		print("miss")
 	else:
-		health.health -= _damage
+		if armor.armor > 0:
+			var diff = armor.armor - _damage
+			if diff >= 0:
+				armor.armor -= _damage
+			else:
+				armor.armor = 0
+				health.health -= diff
+		else:
+			health.health -= _damage
+
+
+func regenerate(delta: float) -> void:
+	if !regen:
+		return
+	if health.health * 2 < health.max_health:
+		if regen_timer <= 0:
+			health.health += 1
+			regen_timer = 4
+		else:
+			regen_timer -= delta
+
+func reset_modifiers():
+	for stat in modifiers:
+		modifiers[stat] = 1.0
+
+func get_curr_stats() -> Dictionary:
+	var curr_stats = {}
+	for stat in base_stats:
+		# Apply the modifier if it exists; otherwise, use the base value
+		if modifiers.has(stat):
+			curr_stats[stat] = base_stats[stat] * modifiers[stat]
+		else:
+			curr_stats[stat] = base_stats[stat]
+	return curr_stats

@@ -1,9 +1,10 @@
-[gd_scene load_steps=90 format=3 uid="uid://2tkmj873jyu3"]
+[gd_scene load_steps=100 format=3 uid="uid://2tkmj873jyu3"]
 
 [ext_resource type="Texture2D" uid="uid://cn25h6f20oytn" path="res://assets/sprites/adventurer/adventurer_sprite.png" id="1_c2cxh"]
 [ext_resource type="Script" path="res://scripts/adventurer.gd" id="1_cfpa1"]
 [ext_resource type="Script" path="res://scripts/health.gd" id="2_6m0bo"]
 [ext_resource type="PackedScene" uid="uid://c8u2ipj70g35d" path="res://weapons/base_weapons/beginner_hammer.tscn" id="2_7df4t"]
+[ext_resource type="PackedScene" uid="uid://cmlvksdm3h5h2" path="res://interface/interface.tscn" id="2_fqaem"]
 [ext_resource type="PackedScene" uid="uid://c4urdvaatn2no" path="res://hitboxes/hurtbox.tscn" id="3_056ev"]
 [ext_resource type="Script" path="res://states/FSM.gd" id="3_nfnxt"]
 [ext_resource type="Script" path="res://states/idle.gd" id="4_0iug0"]
@@ -15,6 +16,7 @@
 [ext_resource type="Script" path="res://states/hurt.gd" id="12_002dt"]
 [ext_resource type="PackedScene" uid="uid://djialem8q1fvs" path="res://hitboxes/interaction_manager.tscn" id="15_o18yt"]
 [ext_resource type="Script" path="res://states/roll.gd" id="16_w342q"]
+[ext_resource type="Texture2D" uid="uid://ds1edo2dx5jjn" path="res://assets/sprites/adventurer/adventurer_run.png" id="17_yfxkc"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_sow0o"]
 atlas = ExtResource("1_c2cxh")
@@ -621,7 +623,7 @@ tracks/3/keys = {
 
 [sub_resource type="Animation" id="Animation_bchpc"]
 resource_name = "hurt"
-length = 0.45
+length = 0.3
 step = 0.15
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -881,10 +883,94 @@ size = Vector2(7, 16)
 [sub_resource type="CircleShape2D" id="CircleShape2D_6prk3"]
 radius = 7.0
 
+[sub_resource type="Shader" id="Shader_a23y1"]
+code = "// NOTE: Shader automatically converted from Godot Engine 4.3.stable's CanvasItemMaterial.
+
+shader_type canvas_item;
+render_mode blend_mix;
+uniform int particles_anim_h_frames;
+uniform int particles_anim_v_frames;
+uniform bool particles_anim_loop;
+
+void vertex() {
+	float h_frames = float(particles_anim_h_frames);
+	float v_frames = float(particles_anim_v_frames);
+	VERTEX.xy /= vec2(h_frames, v_frames);
+	float particle_total_frames = float(particles_anim_h_frames * particles_anim_v_frames);
+	float particle_frame = floor(INSTANCE_CUSTOM.z * float(particle_total_frames));
+	if (!particles_anim_loop) {
+		particle_frame = clamp(particle_frame, 0.0, particle_total_frames - 1.0);
+	} else {
+		particle_frame = mod(particle_frame, particle_total_frames);
+	}	
+	vec2 scale_uv = UV / vec2(h_frames, v_frames);
+	UV = scale_uv + vec2(mod(particle_frame, h_frames) / h_frames, floor((particle_frame + 0.5) / h_frames) / v_frames);
+}
+"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_7hgs8"]
+shader = SubResource("Shader_a23y1")
+shader_parameter/particles_anim_h_frames = 8
+shader_parameter/particles_anim_v_frames = 1
+shader_parameter/particles_anim_loop = false
+
+[sub_resource type="Curve" id="Curve_jborn"]
+_data = [Vector2(0.00299402, 0.502805), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_kwory"]
+curve = SubResource("Curve_jborn")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_axu4n"]
+gravity = Vector3(0, 0, 0)
+alpha_curve = SubResource("CurveTexture_kwory")
+anim_speed_min = 1.0
+anim_speed_max = 1.0
+
+[sub_resource type="Animation" id="Animation_f0qtg"]
+resource_name = "heal"
+length = 0.3
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(0, 1, 0, 1), Color(0, 1, 0, 1), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_a0n3x"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_is1de"]
+_data = {
+"RESET": SubResource("Animation_a0n3x"),
+"heal": SubResource("Animation_f0qtg")
+}
+
 [node name="Adventurer" type="CharacterBody2D" groups=["Adventurer"]]
 collision_layer = 2
 collision_mask = 77
 script = ExtResource("1_cfpa1")
+
+[node name="Interface" parent="." instance=ExtResource("2_fqaem")]
 
 [node name="Weapons" type="Node2D" parent="."]
 rotation = 3.14159
@@ -892,6 +978,8 @@ rotation = 3.14159
 [node name="BeginnerHammer" parent="Weapons" instance=ExtResource("2_7df4t")]
 visible = false
 z_index = 0
+
+[node name="Armors" type="Node2D" parent="."]
 
 [node name="Health" type="Node2D" parent="." node_paths=PackedStringArray("armor")]
 script = ExtResource("2_6m0bo")
@@ -963,7 +1051,28 @@ position = Vector2(0, 10)
 [node name="InteractionManager" parent="." instance=ExtResource("15_o18yt")]
 visible = false
 
+[node name="PassivesContainer" type="Node2D" parent="."]
+
+[node name="DashParticles" type="GPUParticles2D" parent="."]
+show_behind_parent = true
+material = SubResource("ShaderMaterial_7hgs8")
+position = Vector2(0, -4)
+emitting = false
+process_material = SubResource("ParticleProcessMaterial_axu4n")
+texture = ExtResource("17_yfxkc")
+lifetime = 0.5
+
+[node name="EffectPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_is1de")
+}
+
+[connection signal="armor_equipped" from="." to="Interface" method="_on_player_armor_equipped"]
+[connection signal="weapon_dropped" from="." to="Interface" method="_on_player_weapon_dropped"]
+[connection signal="weapon_picked_up" from="." to="Interface" method="_on_player_weapon_picked_up"]
+[connection signal="weapon_switched" from="." to="Interface" method="_on_player_weapon_switched"]
 [connection signal="area_entered" from="MeleeHitbox" to="FSM/Melee" method="_on_melee_hitbox_area_entered"]
 
+[editable path="Interface"]
 [editable path="Hurtbox"]
 [editable path="MeleeHitbox"]

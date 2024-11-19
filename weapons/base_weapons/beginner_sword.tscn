@@ -347,7 +347,7 @@ tracks/5/keys = {
 "values": [Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_yich1"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_pp5j8"]
 _data = {
 "RESET": SubResource("Animation_h2x2g"),
 "attack": SubResource("Animation_7300j"),
@@ -364,12 +364,11 @@ height = 22.0
 weapon_anim = NodePath("SwordAnimation")
 stats = ExtResource("2_dmrpq")
 
-[node name="SwordAnimation" parent="." index="0" node_paths=PackedStringArray("melee_hitbox") instance=ExtResource("2_02e2y")]
-melee_hitbox = NodePath("Sprite2D/Hitbox")
+[node name="SwordAnimation" parent="." index="0" instance=ExtResource("2_02e2y")]
 
 [node name="AnimationPlayer" parent="SwordAnimation" index="1"]
 libraries = {
-"": SubResource("AnimationLibrary_yich1")
+"": SubResource("AnimationLibrary_pp5j8")
 }
 
 [node name="PickableArea" parent="." index="1"]

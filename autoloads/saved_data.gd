@@ -9,7 +9,7 @@ var allow_input = true
 
 var weapons: Array = []
 var equipped_weapon_index: int = 0
-var equipped_armor: ArmorStats = null
+var equipped_armor: ArmorItem = null
 
 var passives: Dictionary
 

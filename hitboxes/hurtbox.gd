@@ -12,10 +12,10 @@ func _ready() -> void:
 	
 func _on_area_entered(hitbox: Hitbox) -> void:
 	if owner.has_method("take_damage"):
-		owner.take_damage(hitbox.damage)
+		owner.take_damage(hitbox.damage, hitbox.source)
 		for effect in hitbox.status_effects:
 			if randf() <= effect.chance_to_proc:
-				var e = effect.duplicate(true)
+				var e = effect
 				owner.apply_status_effect(e)
 		set_knockback_direction(hitbox)
 

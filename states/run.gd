@@ -5,10 +5,12 @@ func enter(previous_state_path: String, data: Dictionary = {}) -> void:
 
 func physics_update(delta: float) -> void:
 	# move in 4 directions
+	
 	var input_direction_x := Input.get_axis("move_left", "move_right")
-	player.velocity.x = player.curr_stats["speed"] * input_direction_x
+	player.velocity.x = player.get_curr_stats()["speed"] * input_direction_x
 	var input_direction_y := Input.get_axis("move_up", "move_down")
-	player.velocity.y = player.curr_stats["speed"] * input_direction_y
+	player.velocity.y = player.get_curr_stats()["speed"] * input_direction_y
+	player.dash.scale.x = -1 if input_direction_x < 0 else 1
 
 	player.move_and_slide()
 

@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=3 uid="uid://cmlvksdm3h5h2"]
+[gd_scene load_steps=7 format=3 uid="uid://cmlvksdm3h5h2"]
 
 [ext_resource type="Script" path="res://interface/interface.gd" id="1_uhq4k"]
 [ext_resource type="PackedScene" uid="uid://d0u014spi8o8v" path="res://interface/health_bar.tscn" id="2_7d5p2"]
 [ext_resource type="PackedScene" uid="uid://db8p2dw2s41xg" path="res://interface/armor_bar.tscn" id="3_ca6tg"]
 [ext_resource type="FontFile" uid="uid://dlndpcesvur4y" path="res://assets/fonts/quaver.ttf" id="3_cveri"]
 [ext_resource type="PackedScene" uid="uid://dwepsfgttpkaj" path="res://inventory/inventory_item.tscn" id="4_q7k2g"]
+[ext_resource type="Script" path="res://interface/upgrade_options.gd" id="6_eca3q"]
 
 [node name="Interface" type="CanvasLayer"]
 script = ExtResource("1_uhq4k")
@@ -63,3 +64,20 @@ theme_override_fonts/font = ExtResource("3_cveri")
 theme_override_font_sizes/font_size = 50
 text = "Level 1"
 horizontal_alignment = 1
+
+[node name="UpgradeOptions" type="VBoxContainer" parent="."]
+unique_name_in_owner = true
+process_mode = 3
+custom_minimum_size = Vector2(500, 80)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -250.0
+offset_top = -20.0
+offset_right = 250.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("6_eca3q")

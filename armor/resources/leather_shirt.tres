@@ -6,8 +6,11 @@
 [resource]
 script = ExtResource("1_17mnw")
 type = "Light"
-armor = 1
+armor = 2
+modifiers = {
+"speed": 0.0
+}
 item_name = "Leather Shirt"
 texture = ExtResource("2_qmifo")
-description = "A shirt made of leather. Gain little armor and speed"
+description = "A shirt made of leather. Gain some armor and speed"
 rarity = "Common"
