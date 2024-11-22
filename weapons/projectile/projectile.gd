@@ -21,6 +21,8 @@ func _ready() -> void:
 
 
 func _physics_process(delta: float) -> void:
+	if direction == Vector2.ZERO:
+		direction = Vector2.RIGHT.rotated(global_rotation)
 	position += direction * speed * delta
 
 

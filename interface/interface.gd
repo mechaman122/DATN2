@@ -8,6 +8,8 @@ const INVENTORY_ITEM_SCENE: PackedScene = preload("res://inventory/inventory_ite
 @onready var armor_bar = $ArmorBar
 @onready var armor = get_parent().get_node("Armor")
 
+@onready var mana_bar = $ManaBar
+
 @onready var inventory: HBoxContainer = get_node("PanelContainer/Inventory")
 @onready var armor_inventory: PanelContainer = get_node("ArmorContainer/InventoryItem")
 @onready var level_label: Label = get_node("LevelLabel")
@@ -22,7 +24,8 @@ func _ready() -> void:
 
 	armor.max_armor_changed.connect(_on_max_armor_changed)
 	armor.armor_changed.connect(_on_armor_changed)
-
+	
+	mana_bar.change_max_value(200)
 
 func _on_health_changed(diff: int) -> void:
 	health_bar.change_value(health.get_health(), health.get_max_health())

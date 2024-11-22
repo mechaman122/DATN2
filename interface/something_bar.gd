@@ -16,6 +16,7 @@ func _ready() -> void:
 	damage_bar.texture_under = under_texture
 	
 	damage_bar.value = self.value
+	damage_bar.max_value = self.max_value
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 #func _process(delta: float) -> void:
@@ -38,4 +39,5 @@ func change_value(curr: int, max: int):
 
 func change_max_value(max: int):
 	self.max_value = max
+	damage_bar.max_value = max
 	damage_bar.value = self.value 

@@ -1,8 +1,23 @@
-[gd_resource type="Resource" script_class="WeaponStats" load_steps=4 format=3 uid="uid://bsy6asvj1jf4u"]
+[gd_resource type="Resource" script_class="WeaponStats" load_steps=7 format=3 uid="uid://bsy6asvj1jf4u"]
 
 [ext_resource type="Script" path="res://weapons/resources/weapon_stats.gd" id="1_5wx84"]
 [ext_resource type="Script" path="res://status_effects/status_effect.gd" id="2_quta8"]
 [ext_resource type="Texture2D" uid="uid://cj15q45mquvpa" path="res://assets/sprites/weapons/base_weapons/staff.png" id="3_jrb5a"]
+[ext_resource type="Script" path="res://weapons/upgrade/upgrade.gd" id="4_6oafo"]
+
+[sub_resource type="Resource" id="Resource_70wqn"]
+script = ExtResource("4_6oafo")
+weapon_damage = 1
+weapon_crit = 0.0
+weapon_speed = 0.0
+description = "+1 Damage"
+
+[sub_resource type="Resource" id="Resource_d8241"]
+script = ExtResource("4_6oafo")
+weapon_damage = 0
+weapon_crit = 0.1
+weapon_speed = 0.0
+description = "+ 10% Crit"
 
 [resource]
 script = ExtResource("1_5wx84")
@@ -11,7 +26,9 @@ type = "Staff"
 weapon_damage = 2
 weapon_crit = 0.0
 weapon_speed = 1.0
+mana = 1
 status_effects = Array[ExtResource("2_quta8")]([])
+upgrades = Array[ExtResource("4_6oafo")]([SubResource("Resource_70wqn"), SubResource("Resource_d8241")])
 item_name = "Apprentice Staff"
 texture = ExtResource("3_jrb5a")
 description = "A normal staff"

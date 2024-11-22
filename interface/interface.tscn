@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://cmlvksdm3h5h2"]
+[gd_scene load_steps=8 format=3 uid="uid://cmlvksdm3h5h2"]
 
 [ext_resource type="Script" path="res://interface/interface.gd" id="1_uhq4k"]
 [ext_resource type="PackedScene" uid="uid://d0u014spi8o8v" path="res://interface/health_bar.tscn" id="2_7d5p2"]
@@ -6,6 +6,7 @@
 [ext_resource type="FontFile" uid="uid://dlndpcesvur4y" path="res://assets/fonts/quaver.ttf" id="3_cveri"]
 [ext_resource type="PackedScene" uid="uid://dwepsfgttpkaj" path="res://inventory/inventory_item.tscn" id="4_q7k2g"]
 [ext_resource type="Script" path="res://interface/upgrade_options.gd" id="6_eca3q"]
+[ext_resource type="PackedScene" uid="uid://dnouyhy70x7lr" path="res://interface/mana_bar.tscn" id="7_ak2uw"]
 
 [node name="Interface" type="CanvasLayer"]
 script = ExtResource("1_uhq4k")
@@ -19,9 +20,15 @@ scale = Vector2(1.5, 1.5)
 
 [node name="ArmorBar" parent="." instance=ExtResource("3_ca6tg")]
 offset_left = -565.0
-offset_top = -296.0
+offset_top = -300.0
 offset_right = -349.0
-offset_bottom = -256.0
+offset_bottom = -260.0
+
+[node name="ManaBar" parent="." instance=ExtResource("7_ak2uw")]
+offset_left = 75.0
+offset_top = 86.0
+offset_right = 291.0
+offset_bottom = 126.0
 
 [node name="PanelContainer" type="PanelContainer" parent="."]
 anchors_preset = 7

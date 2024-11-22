@@ -1,0 +1,67 @@
+[gd_scene load_steps=10 format=3 uid="uid://dh2ax0yv87hk"]
+
+[ext_resource type="PackedScene" uid="uid://deuqmbmge0hxd" path="res://weapons/weapon2.tscn" id="1_m61fa"]
+[ext_resource type="Resource" uid="uid://yi50fv0q3ji0" path="res://weapons/resources/mini_gun.tres" id="2_hxsya"]
+[ext_resource type="PackedScene" uid="uid://dj2kw1liof2kw" path="res://weapons/gun_anim.tscn" id="2_jmulm"]
+[ext_resource type="Texture2D" uid="uid://2rsjj66bvegq" path="res://assets/sprites/weapons/legendary_weapons/mini_gun.png" id="3_pt1mb"]
+
+[sub_resource type="Animation" id="Animation_gd3jd"]
+length = 0.001
+
+[sub_resource type="Animation" id="Animation_fidx1"]
+resource_name = "attack"
+length = 0.1
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(-0.5, 0), Vector2(0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_pgwh6"]
+resource_name = "cancel_attack"
+length = 0.3
+step = 0.05
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_1iin8"]
+_data = {
+"RESET": SubResource("Animation_gd3jd"),
+"attack": SubResource("Animation_fidx1"),
+"cancel_attack": SubResource("Animation_pgwh6")
+}
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_nyonl"]
+
+[node name="MiniGun" node_paths=PackedStringArray("weapon_anim") instance=ExtResource("1_m61fa")]
+weapon_anim = NodePath("GunAnim")
+stats = ExtResource("2_hxsya")
+
+[node name="GunAnim" parent="." index="0" instance=ExtResource("2_jmulm")]
+bullet_count = 3
+arc = 15.0
+fire_rate = 8.0
+bullet_speed = 300.0
+
+[node name="Sprite2D" parent="GunAnim" index="0"]
+texture = ExtResource("3_pt1mb")
+
+[node name="AnimationPlayer" parent="GunAnim" index="1"]
+libraries = {
+"": SubResource("AnimationLibrary_1iin8")
+}
+
+[node name="BarrelPosition" parent="GunAnim/Effects" index="0"]
+position = Vector2(22, -3)
+
+[node name="CollisionShape2D" parent="PickableArea" index="0"]
+position = Vector2(13, 0)
+shape = SubResource("CircleShape2D_nyonl")
+
+[editable path="GunAnim"]

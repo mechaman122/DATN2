@@ -44,11 +44,16 @@ func reset_status_effect():
 		i.apply(self)
 		
 
-func take_damage(_damage: int, source) -> void:
+func take_damage(_damage: int, source, is_crit: bool = false) -> void:
 	if armor!= null && armor.armor > 0:
 		armor.armor -= _damage
 	else:
 		health.health -= _damage
 		$AnimationPlayer.play("hit")
 		print(source)
+	if health.health <= 0:
 		EventBus.emit_signal("enemy_died", source)
+		health.health += 10
+		DamageNumbers.display_number(-10, global_position + Vector2(0,-16), false)
+	DamageNumbers.display_number(_damage, global_position + Vector2(0,-16), is_crit)
+	

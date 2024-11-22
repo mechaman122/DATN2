@@ -1,0 +1,56 @@
+[gd_resource type="Resource" script_class="WeaponStats" load_steps=9 format=3 uid="uid://yi50fv0q3ji0"]
+
+[ext_resource type="Script" path="res://weapons/resources/weapon_stats.gd" id="1_kfrc8"]
+[ext_resource type="Script" path="res://status_effects/status_effect.gd" id="2_t248o"]
+[ext_resource type="Script" path="res://weapons/upgrade/upgrade.gd" id="3_121rg"]
+[ext_resource type="Texture2D" uid="uid://2rsjj66bvegq" path="res://assets/sprites/weapons/legendary_weapons/mini_gun.png" id="3_ju7ru"]
+
+[sub_resource type="Resource" id="Resource_kbx2o"]
+script = ExtResource("3_121rg")
+weapon_damage = 0
+weapon_crit = 0.0
+weapon_speed = 0.0
+mana = 2
+description = "- 2 Mana"
+
+[sub_resource type="Resource" id="Resource_qkdw2"]
+script = ExtResource("3_121rg")
+weapon_damage = 1
+weapon_crit = 0.0
+weapon_speed = 0.0
+mana = 0
+description = "+ 1 Damage"
+
+[sub_resource type="Resource" id="Resource_ophe0"]
+script = ExtResource("3_121rg")
+weapon_damage = 0
+weapon_crit = 0.1
+weapon_speed = 0.0
+mana = 0
+description = "+ 10% Crit"
+
+[sub_resource type="Resource" id="Resource_4sypv"]
+script = ExtResource("3_121rg")
+weapon_damage = -3
+weapon_crit = 0.1
+weapon_speed = 0.4
+mana = 1
+description = "- Damage but + other Stats"
+
+[resource]
+script = ExtResource("1_kfrc8")
+is_ranged = true
+type = "Gun"
+weapon_damage = 5
+weapon_crit = 0.4
+weapon_speed = 1.0
+mana = 3
+status_effects = Array[ExtResource("2_t248o")]([])
+upgrades = Array[ExtResource("3_121rg")]([SubResource("Resource_kbx2o"), SubResource("Resource_qkdw2"), SubResource("Resource_ophe0"), SubResource("Resource_4sypv")])
+modifiers = {
+"speed": -0.25
+}
+item_name = "Mini Gun"
+texture = ExtResource("3_ju7ru")
+description = "A deadly gun with high fire rate. Be carefull if you don't want to be out mana soon"
+rarity = "Legendary"

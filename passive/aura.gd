@@ -4,8 +4,7 @@ class_name Aura
 var aura_area = preload("res://passive/aura_area.tscn")
 
 
-func activate(target, value):
-	super.activate(target, value)
+func activate(target):
 	var aura = aura_area.instantiate()
 	target.add_child(aura)
 	aura.set_aura(value)

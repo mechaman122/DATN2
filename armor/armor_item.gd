@@ -58,4 +58,4 @@ func _on_tween_completed():
 
 func activate_passive(target):
 	if armor_stats.passive != null:
-		armor_stats.passive.activate(target, armor_stats.passive.value)
+		armor_stats.passive.activate(target)

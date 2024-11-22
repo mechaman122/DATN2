@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="WeaponStats" load_steps=7 format=3 uid="uid://c8jnfc651aw2a"]
+[gd_resource type="Resource" script_class="WeaponStats" load_steps=10 format=3 uid="uid://c8jnfc651aw2a"]
 
 [ext_resource type="Script" path="res://weapons/resources/weapon_stats.gd" id="1_mcbas"]
 [ext_resource type="Script" path="res://status_effects/status_effect.gd" id="2_1r3oa"]
@@ -11,16 +11,41 @@ script = ExtResource("3_h8i42")
 damage_per_tick = 1
 chance_to_proc = 0.2
 
+[sub_resource type="Resource" id="Resource_rxbp0"]
+script = ExtResource("5_q8dq7")
+weapon_damage = 1
+weapon_crit = 0.0
+weapon_speed = 0.0
+mana = 0
+description = "+ 1 Damage"
+
+[sub_resource type="Resource" id="Resource_eycdg"]
+script = ExtResource("5_q8dq7")
+weapon_damage = 0
+weapon_crit = 0.2
+weapon_speed = 0.0
+mana = 0
+description = "+ 20% Crit"
+
+[sub_resource type="Resource" id="Resource_u8pgh"]
+script = ExtResource("5_q8dq7")
+weapon_damage = 0
+weapon_crit = 0.0
+weapon_speed = 0.15
+mana = 0
+description = "+ 15% Atk Speed"
+
 [resource]
 script = ExtResource("1_mcbas")
 is_ranged = false
 type = "Sword"
 weapon_damage = 3
-weapon_crit = 0.6
+weapon_crit = 0.45
 weapon_speed = 1.0
+mana = 1
 status_effects = Array[ExtResource("2_1r3oa")]([SubResource("Resource_82wh4")])
-upgrades = Array[ExtResource("5_q8dq7")]([])
+upgrades = Array[ExtResource("5_q8dq7")]([SubResource("Resource_rxbp0"), SubResource("Resource_eycdg"), SubResource("Resource_u8pgh")])
 item_name = "Fire Sword"
 texture = ExtResource("4_qhgc3")
-description = "A sword that can shoot fire when charging. Chance to burn enemies"
+description = "A sword that can shoot fire. Chance to burn enemies"
 rarity = "Rare"

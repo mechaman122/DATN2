@@ -4,6 +4,7 @@ extends Area2D
 @export var damage: int = 1: set = set_damage, get = get_damage
 @export var knockback_strength = 10
 @onready var collision_shape = $CollisionShape2D
+var is_crit: bool = false
 
 var status_effects: Array[StatusEffect] = []
 var source

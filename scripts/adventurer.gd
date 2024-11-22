@@ -19,13 +19,22 @@ signal armor_equipped(armor_stats: ArmorItem)
 #stats
 @onready var health = $Health
 @onready var armor =$Armor
+var mana: int = 200:
+	set(value):
+		mana = value
+		SavedData.mana = value
+		get_node("Interface").mana_bar.change_value(mana, 200)
+		print(mana)
 
 var base_stats = {
 	"damage" : 0,
 	"crit" : 0.0,
 	"atk_speed": 1,
 	"speed" : 100.0
-}
+}:
+	set(value):
+		base_stats = value
+		SavedData.base_stats = value.duplicate()
 
 var modifiers = {
 	"damage" : 1.0,
@@ -47,7 +56,7 @@ var health_changed = false
 var knockback: Vector2
 var regen: bool = false
 var regen_timer = 0
-var evade_chance: float = 0.8
+var evade_chance: float = 0
 
 func _ready() -> void:
 	emit_signal("weapon_picked_up", weapons.get_child(0).stats)
@@ -73,10 +82,12 @@ func _restore_prev_state() -> void:
 	health.health = SavedData.health
 	armor.max_armor = SavedData.max_armor
 	armor.armor = armor.max_armor
-
+	mana = SavedData.mana
+	base_stats = SavedData.base_stats.duplicate()
 	
 	for weapon in SavedData.weapons:
 		weapon = weapon.duplicate()
+		weapon.player_ref = self
 		weapon.position = Vector2.ZERO
 		weapons.add_child(weapon)
 		weapon.hide()
@@ -104,7 +115,7 @@ func _process(delta: float) -> void:
 	var mouse_dir: Vector2 = (get_global_mouse_position() - global_position).normalized()
 	
 	animated_sprite.flip_h = mouse_dir.x < 0
-	dash.emitting = (velocity.length() >= 150)
+	dash.emitting = (abs(velocity.x) >= 150 or abs(velocity.y) >= 150)
 
 	if has_weapon:
 		if not current_weapon.is_busy():
@@ -115,7 +126,6 @@ func _process(delta: float) -> void:
 			elif Input.is_action_just_pressed("ui_drop_weapon"):
 				_drop_weapon()
 				
-		current_weapon.weapon_anim.anim_player.speed_scale = current_weapon.stats.weapon_speed * modifiers["atk_speed"]
 		current_weapon.move(mouse_dir)
 		current_weapon.get_input()
 	
@@ -145,7 +155,13 @@ func _physics_process(delta: float) -> void:
 	if current_armor != null:
 		for stat in current_armor.armor_stats.modifiers:
 			modifiers[stat] += current_armor.armor_stats.modifiers[stat]
-
+			
+	current_weapon.weapon_anim.anim_player.speed_scale = current_weapon.stats.weapon_speed * modifiers["atk_speed"]
+	
+	#if current_weapon.stats.modifiers != null:
+	for stat in current_weapon.stats.modifiers:
+		modifiers[stat] += current_weapon.stats.modifiers[stat]
+	
 func _switch_weapon(direction: int) -> void:
 	#if !has_weapon or weapons.get_child_count() == 1:
 		#return
@@ -264,8 +280,8 @@ func reset_status_effect():
 		i.apply(self)
 		
 
-func take_damage(_damage: int, source) -> void:
-	if randf() < 0:
+func take_damage(_damage: int, source, is_crit) -> void:
+	if randf() < evade_chance:
 		print("miss")
 	else:
 		if armor.armor > 0:
@@ -291,7 +307,7 @@ func regenerate(delta: float) -> void:
 
 func reset_modifiers():
 	for stat in modifiers:
-		modifiers[stat] = 1.0
+		modifiers[stat] = 1
 
 func get_curr_stats() -> Dictionary:
 	var curr_stats = {}

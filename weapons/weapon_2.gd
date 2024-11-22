@@ -4,7 +4,7 @@ class_name Weapon2
 
 
 @export var is_on_floor: bool = false
-@export var weapon_anim: WeaponAnimation
+@export var weapon_anim: Node2D
 @onready var pickable_area: Area2D = get_node("PickableArea")
 var tween: Tween = null
 var player_ref: Node2D
@@ -121,6 +121,7 @@ func upgrade_weapon():
 	stats.weapon_damage += upgrade.weapon_damage
 	stats.weapon_crit += upgrade.weapon_crit
 	stats.weapon_speed += upgrade.weapon_speed
+	stats.mana -= upgrade.mana
 	
 	stats.level += 1
 

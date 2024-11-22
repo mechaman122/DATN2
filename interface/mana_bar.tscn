@@ -1,0 +1,10 @@
+[gd_scene load_steps=4 format=3 uid="uid://dnouyhy70x7lr"]
+
+[ext_resource type="PackedScene" uid="uid://c4jeejt1av0vj" path="res://interface/something_bar.tscn" id="1_psxrx"]
+[ext_resource type="Texture2D" uid="uid://b4dr1wdxwqpr3" path="res://assets/sprites/interface/mana_bar.png" id="2_lngmi"]
+[ext_resource type="Texture2D" uid="uid://2avmdelg3fh6" path="res://assets/sprites/interface/Health Bar Asset Pack 2 by Adwit Rahman/blue_bar.png" id="3_ier5g"]
+
+[node name="ManaBar" instance=ExtResource("1_psxrx")]
+value = 100.0
+under_texture = ExtResource("2_lngmi")
+progress_texture = ExtResource("3_ier5g")

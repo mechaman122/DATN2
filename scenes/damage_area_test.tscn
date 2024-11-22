@@ -116,8 +116,7 @@ alignment = 1
 
 [node name="Health" type="Node2D" parent="."]
 script = ExtResource("1_0rqek")
-max_health = 1000
-health = 1000
+health = 10
 
 [node name="Hitbox" parent="." instance=ExtResource("1_ueb3p")]
 visible = false

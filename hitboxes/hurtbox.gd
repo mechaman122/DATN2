@@ -12,7 +12,7 @@ func _ready() -> void:
 	
 func _on_area_entered(hitbox: Hitbox) -> void:
 	if owner.has_method("take_damage"):
-		owner.take_damage(hitbox.damage, hitbox.source)
+		owner.take_damage(hitbox.damage, hitbox.source, hitbox.is_crit)
 		for effect in hitbox.status_effects:
 			if randf() <= effect.chance_to_proc:
 				var e = effect

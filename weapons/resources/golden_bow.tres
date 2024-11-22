@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="WeaponStats" load_steps=10 format=3 uid="uid://cn5oogle62ny2"]
+[gd_resource type="Resource" script_class="WeaponStats" load_steps=12 format=3 uid="uid://cn5oogle62ny2"]
 
 [ext_resource type="Texture2D" uid="uid://c5ridqx14vavi" path="res://assets/sprites/weapons/epic_weapons/golden_bow_animatedt.png" id="1_kkx2s"]
 [ext_resource type="Script" path="res://weapons/resources/weapon_stats.gd" id="2_2f6ss"]
@@ -15,16 +15,34 @@ chance_to_proc = 0.3
 [sub_resource type="Resource" id="Resource_k2ted"]
 script = ExtResource("6_kamtj")
 weapon_damage = 0
-weapon_crit = 0.1
+weapon_crit = 0.15
 weapon_speed = 0.0
+mana = 0
 description = "+15% Crit"
 
 [sub_resource type="Resource" id="Resource_oqcso"]
 script = ExtResource("6_kamtj")
-weapon_damage = 1
+weapon_damage = 2
 weapon_crit = 0.0
 weapon_speed = 0.0
-description = "+1 Damage"
+mana = 0
+description = "+2 Damage"
+
+[sub_resource type="Resource" id="Resource_r0nxq"]
+script = ExtResource("6_kamtj")
+weapon_damage = 0
+weapon_crit = 0.0
+weapon_speed = 0.2
+mana = 0
+description = "+ 20% Atk Speed"
+
+[sub_resource type="Resource" id="Resource_aakqt"]
+script = ExtResource("6_kamtj")
+weapon_damage = 1
+weapon_crit = 0.1
+weapon_speed = 0.1
+mana = 0
+description = "Increase all stats"
 
 [resource]
 script = ExtResource("2_2f6ss")
@@ -33,8 +51,9 @@ type = "Bow"
 weapon_damage = 3
 weapon_crit = 0.4
 weapon_speed = 1.0
+mana = 2
 status_effects = Array[ExtResource("3_o5y4j")]([SubResource("Resource_5wo60")])
-upgrades = Array[ExtResource("6_kamtj")]([SubResource("Resource_k2ted"), SubResource("Resource_oqcso")])
+upgrades = Array[ExtResource("6_kamtj")]([SubResource("Resource_k2ted"), SubResource("Resource_oqcso"), SubResource("Resource_r0nxq"), SubResource("Resource_aakqt")])
 item_name = "Golden Bow"
 texture = ExtResource("4_vrybr")
 animated_texture = ExtResource("1_kkx2s")

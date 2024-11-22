@@ -442,6 +442,9 @@ visible = false
 [node name="CollisionShape2D" parent="SwordAnimation/Sprite2D/Hitbox" index="0"]
 disabled = true
 
+[node name="Polygon2D" parent="SwordAnimation/Sprite2D" index="1"]
+color = Color(1, 1, 1, 0)
+
 [node name="AnimationPlayer" parent="SwordAnimation" index="1"]
 libraries = {
 "": SubResource("AnimationLibrary_u561g")

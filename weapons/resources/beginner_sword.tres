@@ -1,19 +1,36 @@
-[gd_resource type="Resource" script_class="WeaponStats" load_steps=5 format=3 uid="uid://dvrn5jwiff4m6"]
+[gd_resource type="Resource" script_class="WeaponStats" load_steps=7 format=3 uid="uid://dvrn5jwiff4m6"]
 
 [ext_resource type="Script" path="res://weapons/resources/weapon_stats.gd" id="1_ii055"]
 [ext_resource type="Texture2D" uid="uid://bw8upvidnh5t8" path="res://assets/sprites/weapons/base_weapons/sword.png" id="2_35302"]
 [ext_resource type="Script" path="res://status_effects/status_effect.gd" id="2_hhpui"]
 [ext_resource type="Script" path="res://weapons/upgrade/upgrade.gd" id="4_a173m"]
 
+[sub_resource type="Resource" id="Resource_rjjvx"]
+script = ExtResource("4_a173m")
+weapon_damage = 0
+weapon_crit = 0.0
+weapon_speed = 0.15
+mana = 0
+description = "+ 15% Atk Speed"
+
+[sub_resource type="Resource" id="Resource_y2wmh"]
+script = ExtResource("4_a173m")
+weapon_damage = 0
+weapon_crit = 0.1
+weapon_speed = 0.0
+mana = 0
+description = "+ 10% Crit"
+
 [resource]
 script = ExtResource("1_ii055")
 is_ranged = false
 type = "Sword"
 weapon_damage = 2
-weapon_crit = 0.6
+weapon_crit = 0.5
 weapon_speed = 1.0
+mana = 0
 status_effects = Array[ExtResource("2_hhpui")]([])
-upgrades = Array[ExtResource("4_a173m")]([])
+upgrades = Array[ExtResource("4_a173m")]([SubResource("Resource_rjjvx"), SubResource("Resource_y2wmh")])
 item_name = "Beginner Sword"
 texture = ExtResource("2_35302")
 description = "A common sword"

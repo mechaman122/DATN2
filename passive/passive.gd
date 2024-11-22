@@ -4,7 +4,7 @@ class_name Passive
 var icon: Texture2D
 @export var value: float
 
-func activate(target, value):
+func activate(target):
 	pass
 
 func deactivate(target):
