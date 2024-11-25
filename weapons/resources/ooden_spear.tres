@@ -31,6 +31,9 @@ weapon_speed = 1.0
 mana = 0
 status_effects = Array[ExtResource("2_e2j6u")]([])
 upgrades = Array[ExtResource("3_1rp1y")]([SubResource("Resource_xwg2i"), SubResource("Resource_74spi")])
+modifiers = {
+"speed": 0.0
+}
 item_name = "Wood Spear"
 texture = ExtResource("3_aajc4")
 description = "A wooden spear. Thrust continuosly after charged"

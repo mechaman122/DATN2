@@ -45,6 +45,9 @@ weapon_speed = 1.0
 mana = 1
 status_effects = Array[ExtResource("2_1r3oa")]([SubResource("Resource_82wh4")])
 upgrades = Array[ExtResource("5_q8dq7")]([SubResource("Resource_rxbp0"), SubResource("Resource_eycdg"), SubResource("Resource_u8pgh")])
+modifiers = {
+"speed": 0.0
+}
 item_name = "Fire Sword"
 texture = ExtResource("4_qhgc3")
 description = "A sword that can shoot fire. Chance to burn enemies"

@@ -47,6 +47,9 @@ weapon_speed = 1.0
 mana = 1
 status_effects = Array[ExtResource("2_1d2ol")]([SubResource("Resource_c5aij")])
 upgrades = Array[ExtResource("3_nohfg")]([SubResource("Resource_qw3h0"), SubResource("Resource_kh2e2"), SubResource("Resource_hu368")])
+modifiers = {
+"speed": 0.0
+}
 item_name = "Scifi Gun"
 texture = ExtResource("3_u5boc")
 description = "A gun from the future. Inflict poison"

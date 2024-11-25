@@ -15,6 +15,7 @@ const INVENTORY_ITEM_SCENE: PackedScene = preload("res://inventory/inventory_ite
 @onready var level_label: Label = get_node("LevelLabel")
 @onready var player = get_parent()
 
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	level_label.text = "Floor " + str(SavedData.level)
@@ -26,6 +27,8 @@ func _ready() -> void:
 	armor.armor_changed.connect(_on_armor_changed)
 	
 	mana_bar.change_max_value(200)
+	$PauseScreen.hide()
+
 
 func _on_health_changed(diff: int) -> void:
 	health_bar.change_value(health.get_health(), health.get_max_health())

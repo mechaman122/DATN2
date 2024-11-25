@@ -54,6 +54,9 @@ weapon_speed = 1.0
 mana = 2
 status_effects = Array[ExtResource("3_o5y4j")]([SubResource("Resource_5wo60")])
 upgrades = Array[ExtResource("6_kamtj")]([SubResource("Resource_k2ted"), SubResource("Resource_oqcso"), SubResource("Resource_r0nxq"), SubResource("Resource_aakqt")])
+modifiers = {
+"speed": 0.0
+}
 item_name = "Golden Bow"
 texture = ExtResource("4_vrybr")
 animated_texture = ExtResource("1_kkx2s")

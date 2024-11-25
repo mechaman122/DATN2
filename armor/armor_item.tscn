@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://armor/armor_item.gd" id="1_w30v0"]
 [ext_resource type="Texture2D" uid="uid://7muyhvx4fenl" path="res://assets/sprites/rpg_icon/Individual icons (16x16)/42.png" id="2_mphoq"]
 
-[node name="ArmorItem" type="Area2D"]
+[node name="ArmorItem" type="Area2D" groups=["game_events"]]
 collision_layer = 0
 collision_mask = 3
 script = ExtResource("1_w30v0")

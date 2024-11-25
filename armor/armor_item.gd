@@ -59,3 +59,7 @@ func _on_tween_completed():
 func activate_passive(target):
 	if armor_stats.passive != null:
 		armor_stats.passive.activate(target)
+
+
+func on_save_game(continue_data: PlayerContinueData):
+	pass

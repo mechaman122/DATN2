@@ -59,8 +59,9 @@ var regen_timer = 0
 var evade_chance: float = 0
 
 func _ready() -> void:
-	emit_signal("weapon_picked_up", weapons.get_child(0).stats)
+	#emit_signal("weapon_picked_up", weapons.get_child(0).stats)
 	emit_signal("armor_equipped", current_armor)
+	
 	_restore_prev_state()
 
 # for testing purpose
@@ -85,6 +86,13 @@ func _restore_prev_state() -> void:
 	mana = SavedData.mana
 	base_stats = SavedData.base_stats.duplicate()
 	
+	if SavedData.weapons == []:
+		SavedData.weapons.append(weapons.get_child(0).duplicate())
+		
+	var weapon_reset = weapons.get_child(0)
+	weapons.remove_child(weapon_reset)
+	weapon_reset.queue_free()
+	
 	for weapon in SavedData.weapons:
 		weapon = weapon.duplicate()
 		weapon.player_ref = self
@@ -101,6 +109,7 @@ func _restore_prev_state() -> void:
 	
 	if SavedData.equipped_armor != null:
 		var equipped_armor = SavedData.equipped_armor.duplicate()
+		equipped_armor.get_node("CollisionShape2D").disabled = true
 		armors.add_child(equipped_armor)
 		current_armor = armors.get_child(0)
 		emit_signal("armor_equipped", SavedData.equipped_armor)

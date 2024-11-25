@@ -135,3 +135,19 @@ func check_xp():
 	if stats.xp >= stats.total_xp:
 		stats.xp = 0
 		get_parent().get_parent().get_node("Interface").get_node("UpgradeOptions").show_option()
+
+
+func on_save_game(continue_data: PlayerContinueData):
+	if player_ref == null:
+		return
+	
+	var my_data = WeaponContinueData.new()
+	my_data.stats = self.stats.duplicate(true)
+	my_data.scene_path = scene_file_path
+	
+	continue_data.weapons.append(my_data)
+
+
+func on_before_load():
+	get_parent().remove_child(self)
+	queue_free()

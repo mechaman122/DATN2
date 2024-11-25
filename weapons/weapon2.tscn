@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://weapons/weapon_2.gd" id="1_l5icb"]
 
-[node name="Weapon2" type="Node2D"]
+[node name="Weapon2" type="Node2D" groups=["game_events"]]
 z_index = 1
 script = ExtResource("1_l5icb")
 

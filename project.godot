@@ -23,6 +23,7 @@ SceneTransitor="*res://autoloads/scene_transitor.tscn"
 SavedData="*res://autoloads/saved_data.gd"
 SoundManager="*res://addons/sound_manager/module/SoundManager.tscn"
 EventBus="*res://autoloads/event_bus.gd"
+DamageNumbers="*res://autoloads/damage_numbers.gd"
 
 [display]
 
@@ -30,11 +31,16 @@ window/size/viewport_width=1280
 window/size/viewport_height=720
 window/stretch/mode="viewport"
 mouse_cursor/custom_image="res://assets/sprites/rpg_icon/Individual icons (16x16)/150_1.png"
+mouse_cursor/custom_image_hotspot=Vector2(34, 34)
 mouse_cursor/tooltip_position_offset=Vector2(0, 0)
 
 [editor_plugins]
 
 enabled=PackedStringArray("res://addons/better-terrain/plugin.cfg", "res://addons/sound_manager/plugin.cfg")
+
+[global_group]
+
+game_events=""
 
 [gui]
 
@@ -105,6 +111,11 @@ ui_interact={
 click={
 "deadzone": 0.5,
 "events": [Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"button_mask":1,"position":Vector2(505, 30),"global_position":Vector2(524, 113),"factor":1.0,"button_index":1,"canceled":false,"pressed":true,"double_click":false,"script":null)
+]
+}
+ui_pause={
+"deadzone": 0.5,
+"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":4194305,"key_label":0,"unicode":0,"location":0,"echo":false,"script":null)
 ]
 }
 

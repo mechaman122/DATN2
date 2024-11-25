@@ -1,17 +1,18 @@
-[gd_scene load_steps=11 format=3 uid="uid://mabk2akmbsjs"]
+[gd_scene load_steps=17 format=3 uid="uid://mabk2akmbsjs"]
 
 [ext_resource type="Texture2D" uid="uid://ddy7plwjgtqdw" path="res://assets/sprites/rpg_icon/Individual icons (16x16)/221.png" id="1_bi6j0"]
 [ext_resource type="Script" path="res://scenes/main_menu.gd" id="1_g1e3o"]
-[ext_resource type="Texture2D" uid="uid://b24fjamma7u1u" path="res://assets/sprites/rpg_icon/Individual icons (16x16)/229.png" id="2_krp70"]
+[ext_resource type="Texture2D" uid="uid://dcha036pmeedt" path="res://assets/sprites/wallpaper/Waterfall Forest.png" id="2_fr3et"]
+[ext_resource type="Script" path="res://scenes/main_menu_video.gd" id="3_5n35p"]
 [ext_resource type="Texture2D" uid="uid://bmg2fn8wwcevp" path="res://assets/sprites/rpg_icon/Individual icons (16x16)/248.png" id="3_nngo8"]
+[ext_resource type="Script" path="res://scenes/main_menu_audio.gd" id="5_tpmk3"]
 [ext_resource type="Script" path="res://scenes/weapon_list.gd" id="5_ub82e"]
+[ext_resource type="Texture2D" uid="uid://75p3r08b6ryh" path="res://assets/sprites/rpg_icon/GUI_export_1.png" id="8_uw2ne"]
+[ext_resource type="Script" path="res://scenes/saves_list.gd" id="9_g3l2o"]
 
-[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_kcb3o"]
-texture = ExtResource("1_bi6j0")
-region_rect = Rect2(0.5, 0.5, 15, 15)
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_40hlw"]
 
-[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_okshw"]
-texture = ExtResource("2_krp70")
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_hxw1y"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_wsnxc"]
 texture = ExtResource("3_nngo8")
@@ -25,18 +26,44 @@ region_rect = Rect2(3, 6, 10, 4)
 texture = ExtResource("1_bi6j0")
 region_rect = Rect2(1, 1, 14, 14)
 
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_fix8k"]
+texture = ExtResource("8_uw2ne")
+texture_margin_left = 3.0
+texture_margin_top = 4.0
+texture_margin_right = 3.0
+texture_margin_bottom = 4.0
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_j0khr"]
+texture = ExtResource("8_uw2ne")
+texture_margin_left = 3.0
+texture_margin_top = 4.0
+texture_margin_right = 3.0
+texture_margin_bottom = 4.0
+region_rect = Rect2(0, 0, 30, 30)
+
 [node name="MainMenu" type="CanvasLayer"]
 layer = 100
 script = ExtResource("1_g1e3o")
 
+[node name="TextureRect" type="TextureRect" parent="."]
+z_index = -1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_fr3et")
+expand_mode = 1
+
 [node name="Menu" type="Panel" parent="."]
+visible = false
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 pivot_offset = Vector2(640, 360)
-theme_override_styles/panel = SubResource("StyleBoxTexture_kcb3o")
+theme_override_styles/panel = SubResource("StyleBoxEmpty_40hlw")
 
 [node name="StartButton" type="Button" parent="Menu"]
 layout_mode = 1
@@ -127,6 +154,126 @@ grow_horizontal = 2
 grow_vertical = 2
 pivot_offset = Vector2(640, 360)
 
+[node name="OptionsTabs" type="TabContainer" parent="Options"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxEmpty_hxw1y")
+current_tab = 0
+
+[node name="Video" type="TabBar" parent="Options/OptionsTabs"]
+layout_mode = 2
+script = ExtResource("3_5n35p")
+metadata/_tab_index = 0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Options/OptionsTabs/Video"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -117.0
+offset_top = -46.0
+offset_right = 117.0
+offset_bottom = 46.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(3, 3)
+pivot_offset = Vector2(117, 46)
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Options/OptionsTabs/Video/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="FullScreen" type="Label" parent="Options/OptionsTabs/Video/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+text = "Full Screen"
+
+[node name="Borderless" type="Label" parent="Options/OptionsTabs/Video/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+text = "Borderless"
+
+[node name="Vsync" type="Label" parent="Options/OptionsTabs/Video/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+text = "V-Sync"
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="Options/OptionsTabs/Video/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="FullScreen" type="CheckBox" parent="Options/OptionsTabs/Video/HBoxContainer/VBoxContainer2"]
+layout_mode = 2
+
+[node name="Borderless" type="CheckBox" parent="Options/OptionsTabs/Video/HBoxContainer/VBoxContainer2"]
+layout_mode = 2
+
+[node name="Vsync" type="OptionButton" parent="Options/OptionsTabs/Video/HBoxContainer/VBoxContainer2"]
+layout_mode = 2
+selected = 1
+item_count = 4
+popup/item_0/text = "Disabled"
+popup/item_1/text = "Enabled"
+popup/item_1/id = 1
+popup/item_2/text = "Adaptive"
+popup/item_2/id = 2
+popup/item_3/text = "Mailbox"
+popup/item_3/id = 3
+
+[node name="Audio" type="TabBar" parent="Options/OptionsTabs"]
+visible = false
+layout_mode = 2
+script = ExtResource("5_tpmk3")
+metadata/_tab_index = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Options/OptionsTabs/Audio"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -150.0
+offset_top = -20.0
+offset_right = 150.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(3, 3)
+pivot_offset = Vector2(150, 20)
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="Options/OptionsTabs/Audio/HBoxContainer"]
+layout_mode = 2
+
+[node name="Master" type="Label" parent="Options/OptionsTabs/Audio/HBoxContainer/VBoxContainer2"]
+layout_mode = 2
+size_flags_vertical = 6
+text = "Master"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Options/OptionsTabs/Audio/HBoxContainer"]
+layout_mode = 2
+
+[node name="Master" type="HSlider" parent="Options/OptionsTabs/Audio/HBoxContainer/VBoxContainer"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+size_flags_vertical = 6
+max_value = 1.0
+step = 0.05
+value = 0.8
+
+[node name="VBoxContainer3" type="VBoxContainer" parent="Options/OptionsTabs/Audio/HBoxContainer"]
+layout_mode = 2
+
+[node name="CheckBox" type="CheckBox" parent="Options/OptionsTabs/Audio/HBoxContainer/VBoxContainer3"]
+layout_mode = 2
+size_flags_vertical = 3
+text = "Mute"
+
 [node name="ViewWeapons" type="Panel" parent="."]
 visible = false
 anchors_preset = 15
@@ -135,7 +282,6 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 pivot_offset = Vector2(640, 360)
-theme_override_styles/panel = SubResource("StyleBoxTexture_okshw")
 
 [node name="ScrollContainer" type="ScrollContainer" parent="ViewWeapons"]
 layout_mode = 1
@@ -247,17 +393,149 @@ theme_override_font_sizes/font_size = 16
 text = "Description:  "
 autowrap_mode = 1
 
+[node name="Continue" type="Panel" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ScrollContainer" type="ScrollContainer" parent="Continue"]
+layout_mode = 0
+offset_left = 80.0
+offset_top = 110.0
+offset_right = 580.0
+offset_bottom = 610.0
+theme_override_styles/panel = SubResource("StyleBoxTexture_fix8k")
+
+[node name="SavesList" type="VBoxContainer" parent="Continue/ScrollContainer"]
+layout_mode = 2
+script = ExtResource("9_g3l2o")
+
+[node name="Information" type="Panel" parent="Continue"]
+layout_mode = 0
+offset_left = 700.0
+offset_top = 20.0
+offset_right = 1200.0
+offset_bottom = 620.0
+theme_override_styles/panel = SubResource("StyleBoxTexture_j0khr")
+
+[node name="Level" type="Label" parent="Continue/Information"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(300, 200)
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -150.0
+offset_right = 150.0
+offset_bottom = 200.0
+grow_horizontal = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 48
+text = "Floor"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Continue/Information"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 33.0
+offset_top = 170.0
+offset_right = -47.0
+offset_bottom = -14.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Health" type="Label" parent="Continue/Information/VBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 60)
+layout_mode = 2
+size_flags_vertical = 6
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+text = "Health"
+autowrap_mode = 3
+
+[node name="Armor" type="Label" parent="Continue/Information/VBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 60)
+layout_mode = 2
+size_flags_vertical = 6
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+text = "Armor"
+autowrap_mode = 3
+
+[node name="BaseStats" type="Label" parent="Continue/Information/VBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 60)
+layout_mode = 2
+size_flags_vertical = 6
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+text = "Base stats"
+autowrap_mode = 3
+
+[node name="WeaponsList" type="Label" parent="Continue/Information/VBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 60)
+layout_mode = 2
+size_flags_vertical = 6
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+text = "Weapons"
+autowrap_mode = 3
+
+[node name="EquippedArmor" type="Label" parent="Continue/Information/VBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 60)
+layout_mode = 2
+size_flags_vertical = 6
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+text = "Equipped Armor"
+autowrap_mode = 3
+
+[node name="LoadButton" type="Button" parent="Continue"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -197.0
+offset_top = -80.0
+offset_right = 3.0
+offset_bottom = -16.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_font_sizes/font_size = 32
+text = "Load"
+
+[node name="DeleteButton" type="Button" parent="Continue"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = 37.0
+offset_top = -80.0
+offset_right = 237.0
+offset_bottom = -16.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_font_sizes/font_size = 32
+text = "Delete"
+
 [node name="BackButton" type="Button" parent="."]
-visible = false
 anchors_preset = 7
 anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
 offset_left = 260.0
-offset_top = -100.0
+offset_top = -80.0
 offset_right = 460.0
-offset_bottom = -36.0
+offset_bottom = -16.0
 grow_horizontal = 2
 grow_vertical = 0
 theme_override_font_sizes/font_size = 32
@@ -265,5 +543,14 @@ text = "Back"
 
 [connection signal="pressed" from="Menu/StartButton" to="." method="_on_start_button_pressed"]
 [connection signal="pressed" from="Menu/OptionsButton" to="." method="_on_options_button_pressed"]
+[connection signal="pressed" from="Menu/ContinueButton" to="." method="_on_continue_button_pressed"]
 [connection signal="pressed" from="Menu/ViewWeaponsButton" to="." method="_on_view_weapons_button_pressed"]
+[connection signal="pressed" from="Menu/ExitButton" to="." method="_on_exit_button_pressed"]
+[connection signal="toggled" from="Options/OptionsTabs/Video/HBoxContainer/VBoxContainer2/FullScreen" to="Options/OptionsTabs/Video" method="_on_full_screen_toggled"]
+[connection signal="toggled" from="Options/OptionsTabs/Video/HBoxContainer/VBoxContainer2/Borderless" to="Options/OptionsTabs/Video" method="_on_borderless_toggled"]
+[connection signal="item_selected" from="Options/OptionsTabs/Video/HBoxContainer/VBoxContainer2/Vsync" to="Options/OptionsTabs/Video" method="_on_vsync_item_selected"]
+[connection signal="value_changed" from="Options/OptionsTabs/Audio/HBoxContainer/VBoxContainer/Master" to="Options/OptionsTabs/Audio" method="_on_master_value_changed"]
+[connection signal="toggled" from="Options/OptionsTabs/Audio/HBoxContainer/VBoxContainer3/CheckBox" to="Options/OptionsTabs/Audio" method="_on_check_box_toggled"]
+[connection signal="pressed" from="Continue/LoadButton" to="Continue/ScrollContainer/SavesList" method="_on_load_button_pressed"]
+[connection signal="pressed" from="Continue/DeleteButton" to="Continue/ScrollContainer/SavesList" method="_on_delete_button_pressed"]
 [connection signal="pressed" from="BackButton" to="." method="_on_back_button_pressed"]

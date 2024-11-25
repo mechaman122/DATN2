@@ -31,6 +31,9 @@ weapon_speed = 0.8
 mana = 0
 status_effects = Array[ExtResource("2_2ljka")]([])
 upgrades = Array[ExtResource("4_kgfq7")]([SubResource("Resource_etvsf"), SubResource("Resource_yd4hy")])
+modifiers = {
+"speed": 0.0
+}
 item_name = "Beginner Hammer"
 texture = ExtResource("3_1c2a4")
 description = "A common hammer"

@@ -31,6 +31,9 @@ weapon_speed = 1.0
 mana = 0
 status_effects = Array[ExtResource("2_hhpui")]([])
 upgrades = Array[ExtResource("4_a173m")]([SubResource("Resource_rjjvx"), SubResource("Resource_y2wmh")])
+modifiers = {
+"speed": 0.0
+}
 item_name = "Beginner Sword"
 texture = ExtResource("2_35302")
 description = "A common sword"

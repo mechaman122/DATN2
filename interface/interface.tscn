@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://cmlvksdm3h5h2"]
+[gd_scene load_steps=11 format=3 uid="uid://cmlvksdm3h5h2"]
 
 [ext_resource type="Script" path="res://interface/interface.gd" id="1_uhq4k"]
 [ext_resource type="PackedScene" uid="uid://d0u014spi8o8v" path="res://interface/health_bar.tscn" id="2_7d5p2"]
@@ -7,6 +7,12 @@
 [ext_resource type="PackedScene" uid="uid://dwepsfgttpkaj" path="res://inventory/inventory_item.tscn" id="4_q7k2g"]
 [ext_resource type="Script" path="res://interface/upgrade_options.gd" id="6_eca3q"]
 [ext_resource type="PackedScene" uid="uid://dnouyhy70x7lr" path="res://interface/mana_bar.tscn" id="7_ak2uw"]
+[ext_resource type="Script" path="res://interface/pause_screen.gd" id="8_es2dh"]
+[ext_resource type="Shader" path="res://scripts/blur_bg.gdshader" id="9_8gkw4"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_dd56p"]
+shader = ExtResource("9_8gkw4")
+shader_parameter/amount = 3.0
 
 [node name="Interface" type="CanvasLayer"]
 script = ExtResource("1_uhq4k")
@@ -88,3 +94,55 @@ offset_bottom = 20.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("6_eca3q")
+
+[node name="PauseScreen" type="Panel" parent="."]
+process_mode = 3
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("8_es2dh")
+
+[node name="ColorRect" type="ColorRect" parent="PauseScreen"]
+material = SubResource("ShaderMaterial_dd56p")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="PauseScreen"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -250.0
+offset_top = -150.0
+offset_right = 250.0
+offset_bottom = 150.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PauseScreen/MarginContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="Resume" type="Button" parent="PauseScreen/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_font_sizes/font_size = 32
+text = "Resume"
+
+[node name="Quit" type="Button" parent="PauseScreen/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_font_sizes/font_size = 32
+text = "Quit"
+
+[connection signal="pressed" from="PauseScreen/MarginContainer/VBoxContainer/Resume" to="PauseScreen" method="_on_resume_pressed"]
+[connection signal="pressed" from="PauseScreen/MarginContainer/VBoxContainer/Quit" to="PauseScreen" method="_on_quit_pressed"]
