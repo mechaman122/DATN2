@@ -30,6 +30,7 @@ DamageNumbers="*res://autoloads/damage_numbers.gd"
 window/size/viewport_width=1280
 window/size/viewport_height=720
 window/stretch/mode="viewport"
+window/per_pixel_transparency/allowed=true
 mouse_cursor/custom_image="res://assets/sprites/rpg_icon/Individual icons (16x16)/150_1.png"
 mouse_cursor/custom_image_hotspot=Vector2(34, 34)
 mouse_cursor/tooltip_position_offset=Vector2(0, 0)
@@ -38,9 +39,19 @@ mouse_cursor/tooltip_position_offset=Vector2(0, 0)
 
 enabled=PackedStringArray("res://addons/better-terrain/plugin.cfg", "res://addons/sound_manager/plugin.cfg")
 
+[file_customization]
+
+folder_colors={
+"res://assets/": "red",
+"res://autoloads/": "green",
+"res://scenes/": "yellow",
+"res://weapons/": "orange"
+}
+
 [global_group]
 
 game_events=""
+enemy=""
 
 [gui]
 

@@ -97,7 +97,7 @@ _data = {
 "hit": SubResource("Animation_5b8fj")
 }
 
-[node name="DamageArea_test" type="CharacterBody2D"]
+[node name="DamageArea_test" type="CharacterBody2D" groups=["enemy"]]
 collision_mask = 0
 script = ExtResource("1_dcaoo")
 
