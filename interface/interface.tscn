@@ -1,7 +1,9 @@
-[gd_scene load_steps=11 format=3 uid="uid://cmlvksdm3h5h2"]
+[gd_scene load_steps=16 format=3 uid="uid://cmlvksdm3h5h2"]
 
 [ext_resource type="Script" path="res://interface/interface.gd" id="1_uhq4k"]
 [ext_resource type="PackedScene" uid="uid://d0u014spi8o8v" path="res://interface/health_bar.tscn" id="2_7d5p2"]
+[ext_resource type="Texture2D" uid="uid://dwxiirdvnol12" path="res://assets/sprites/rpg_icon/GUI_export_2.png" id="2_jp5m5"]
+[ext_resource type="Texture2D" uid="uid://cdffyqiwh31as" path="res://assets/sprites/rpg_icon/Individual icons (16x16)/99.png" id="2_wc5gp"]
 [ext_resource type="PackedScene" uid="uid://db8p2dw2s41xg" path="res://interface/armor_bar.tscn" id="3_ca6tg"]
 [ext_resource type="FontFile" uid="uid://dlndpcesvur4y" path="res://assets/fonts/quaver.ttf" id="3_cveri"]
 [ext_resource type="PackedScene" uid="uid://dwepsfgttpkaj" path="res://inventory/inventory_item.tscn" id="4_q7k2g"]
@@ -10,12 +12,75 @@
 [ext_resource type="Script" path="res://interface/pause_screen.gd" id="8_es2dh"]
 [ext_resource type="Shader" path="res://scripts/blur_bg.gdshader" id="9_8gkw4"]
 
+[sub_resource type="Gradient" id="Gradient_8icqs"]
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_sv7jm"]
+gradient = SubResource("Gradient_8icqs")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_ucpwb"]
+particle_flag_disable_z = true
+emission_shape = 3
+emission_box_extents = Vector3(640, 1, 1)
+angle_min = -200.0
+angle_max = 200.0
+direction = Vector3(0, 1, 0)
+spread = 0.0
+initial_velocity_min = 50.0
+initial_velocity_max = 90.0
+gravity = Vector3(0, 98, 0)
+color_ramp = SubResource("GradientTexture1D_sv7jm")
+
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_dd56p"]
 shader = ExtResource("9_8gkw4")
 shader_parameter/amount = 3.0
 
 [node name="Interface" type="CanvasLayer"]
 script = ExtResource("1_uhq4k")
+
+[node name="UpgradeParticle" type="GPUParticles2D" parent="."]
+process_mode = 3
+visible = false
+position = Vector2(640, 0)
+amount = 100
+process_material = SubResource("ParticleProcessMaterial_ucpwb")
+texture = ExtResource("2_wc5gp")
+lifetime = 3.0
+
+[node name="UpgradePanel" type="NinePatchRect" parent="."]
+process_mode = 3
+visible = false
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -300.0
+offset_top = -150.0
+offset_right = 300.0
+offset_bottom = 150.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_jp5m5")
+region_rect = Rect2(2, 1, 44, 30)
+patch_margin_left = 3
+patch_margin_top = 4
+patch_margin_right = 3
+patch_margin_bottom = 3
+
+[node name="Label" type="Label" parent="UpgradePanel"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -84.0
+offset_top = 20.0
+offset_right = 84.0
+offset_bottom = 48.0
+grow_horizontal = 2
+theme_override_font_sizes/font_size = 24
+text = "WEAPON LEVEL UP!"
+horizontal_alignment = 1
 
 [node name="HealthBar" parent="." instance=ExtResource("2_7d5p2")]
 offset_left = 75.0
@@ -78,7 +143,7 @@ theme_override_font_sizes/font_size = 50
 text = "Level 1"
 horizontal_alignment = 1
 
-[node name="UpgradeOptions" type="VBoxContainer" parent="."]
+[node name="UpgradeOptions" type="VBoxContainer" parent="." node_paths=PackedStringArray("particle", "panel")]
 unique_name_in_owner = true
 process_mode = 3
 custom_minimum_size = Vector2(500, 80)
@@ -94,6 +159,8 @@ offset_bottom = 20.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("6_eca3q")
+particle = NodePath("../UpgradeParticle")
+panel = NodePath("../UpgradePanel")
 
 [node name="PauseScreen" type="Panel" parent="."]
 process_mode = 3
@@ -144,5 +211,19 @@ size_flags_vertical = 3
 theme_override_font_sizes/font_size = 32
 text = "Quit"
 
+[node name="ConfirmationDialog" type="ConfirmationDialog" parent="PauseScreen"]
+unique_name_in_owner = true
+transparent_bg = true
+mode = 3
+title = "Are you sure?"
+initial_position = 1
+size = Vector2i(600, 300)
+ok_button_text = "Okay"
+dialog_text = "The progress will be saved.
+
+However, if you quit while not having advanced to the next level, you will lose this save!"
+dialog_autowrap = true
+
 [connection signal="pressed" from="PauseScreen/MarginContainer/VBoxContainer/Resume" to="PauseScreen" method="_on_resume_pressed"]
 [connection signal="pressed" from="PauseScreen/MarginContainer/VBoxContainer/Quit" to="PauseScreen" method="_on_quit_pressed"]
+[connection signal="confirmed" from="PauseScreen/ConfirmationDialog" to="PauseScreen" method="_on_confirmation_dialog_confirmed"]

@@ -15,6 +15,8 @@ const INVENTORY_ITEM_SCENE: PackedScene = preload("res://inventory/inventory_ite
 @onready var level_label: Label = get_node("LevelLabel")
 @onready var player = get_parent()
 
+var rng = RandomNumberGenerator.new()
+var curr_bgm_name = ""
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -28,7 +30,14 @@ func _ready() -> void:
 	
 	mana_bar.change_max_value(200)
 	$PauseScreen.hide()
+	
+	SoundManager.stop_all()
+	rng.randomize()
+	play_bgm()
 
+func _process(delta: float) -> void:
+	if !SoundManager.is_playing(curr_bgm_name):
+		play_bgm()
 
 func _on_health_changed(diff: int) -> void:
 	health_bar.change_value(health.get_health(), health.get_max_health())
@@ -66,3 +75,8 @@ func _on_player_weapon_switched(prev_index: int, new_index: int) -> void:
 func _on_player_armor_equipped(armor_item: ArmorItem) -> void:
 	if armor_item != null:
 		armor_inventory.initialize(armor_item.armor_stats)
+
+func play_bgm():
+	var bgm_num = rng.randi_range(2,6)
+	curr_bgm_name = "bgm_" + str(bgm_num)
+	SoundManager.fade_in_bgm(curr_bgm_name, 2)

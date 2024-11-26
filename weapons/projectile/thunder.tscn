@@ -1,0 +1,72 @@
+[gd_scene load_steps=12 format=3 uid="uid://byjnmusplq1by"]
+
+[ext_resource type="PackedScene" uid="uid://cqrgnms4g38vm" path="res://weapons/projectile/projectile.tscn" id="1_nx1si"]
+[ext_resource type="Script" path="res://weapons/projectile/visual_projectile.gd" id="2_i2me1"]
+[ext_resource type="Texture2D" uid="uid://dojvhfx0no6jo" path="res://assets/sprites/weapons/projectiles/Lightning Strike.png" id="2_i73rs"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_amapo"]
+atlas = ExtResource("2_i73rs")
+region = Rect2(0, 0, 16, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1sed8"]
+atlas = ExtResource("2_i73rs")
+region = Rect2(16, 0, 16, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_w6uka"]
+atlas = ExtResource("2_i73rs")
+region = Rect2(32, 0, 16, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_b7elj"]
+atlas = ExtResource("2_i73rs")
+region = Rect2(48, 0, 16, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8fwxh"]
+atlas = ExtResource("2_i73rs")
+region = Rect2(64, 0, 16, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_rdbj5"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_amapo")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1sed8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_w6uka")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_b7elj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8fwxh")
+}],
+"loop": false,
+"name": &"default",
+"speed": 12.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_1v71d"]
+radius = 5.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_8wr8v"]
+radius = 5.09902
+
+[node name="Thunder" instance=ExtResource("1_nx1si")]
+script = ExtResource("2_i2me1")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." index="0"]
+position = Vector2(0, -16)
+sprite_frames = SubResource("SpriteFrames_rdbj5")
+autoplay = "default"
+frame = 4
+frame_progress = 1.0
+
+[node name="CollisionShape2D" parent="Hitbox" index="0"]
+visible = false
+shape = SubResource("CircleShape2D_1v71d")
+
+[node name="CollisionShape2D" parent="ImpactDetector" index="0"]
+visible = false
+shape = SubResource("CircleShape2D_8wr8v")

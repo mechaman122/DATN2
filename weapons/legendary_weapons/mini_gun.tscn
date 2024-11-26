@@ -61,6 +61,7 @@ libraries = {
 position = Vector2(22, -3)
 
 [node name="CollisionShape2D" parent="PickableArea" index="0"]
+visible = false
 position = Vector2(13, 0)
 shape = SubResource("CircleShape2D_nyonl")
 

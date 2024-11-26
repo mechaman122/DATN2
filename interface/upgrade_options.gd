@@ -3,14 +3,22 @@ extends VBoxContainer
 @onready var interface = get_parent()
 var OptionSlot = preload("res://interface/upgrade_slot.tscn")
 
+@export var particle: GPUParticles2D
+@export var panel: NinePatchRect
+
 func _ready() -> void:
 	hide()
+	particle.hide()
+	panel.hide()
 	
 
 func close_option():
 	hide()
+	particle.hide()
+	panel.hide()
+	
 	get_tree().paused = false
-
+	SavedData.allow_input = true
 
 func show_option():
 	for slot in get_children():
@@ -27,4 +35,8 @@ func show_option():
 		return
 	
 	show()
+	particle.show()
+	panel.show()
+	
+	SavedData.allow_input = false
 	get_tree().paused = true

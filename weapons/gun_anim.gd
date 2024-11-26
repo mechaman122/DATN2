@@ -28,6 +28,9 @@ func get_input():
 		anim_player.play("attack")
 		shoot(bullet_speed)
 		get_parent().player_ref.mana -= get_parent().stats.mana
+		
+		play_sfx("gun_sfx")
+	
 	
 func shoot(speed: float) -> void:
 	if can_shoot:
@@ -63,3 +66,5 @@ func set_hitbox(hitbox: Hitbox):
 	hitbox.source = get_parent()
 	hitbox.append_effect(get_parent().stats.status_effects)
 	
+func play_sfx(sfx_name: String):
+	SoundManager.play_sfx(sfx_name, 0, -20)

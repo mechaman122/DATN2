@@ -215,6 +215,7 @@ func pick_up_weapon(weapon: Weapon2) -> void:
 	emit_signal("weapon_picked_up", weapon.stats)
 	emit_signal("weapon_switched", prev_index, new_index)
 
+	SoundManager.play_sfx("item_pick_up")
 	
 func _drop_weapon() -> void:
 	if !has_weapon or weapons.get_child_count() == 1:
@@ -255,6 +256,8 @@ func equip_armor(armor_item: ArmorItem) -> void:
 	
 	emit_signal("armor_equipped", armor_item)
 	
+	SoundManager.play_sfx("item_pick_up")
+	
 	
 func equip_different_armor(next: ArmorItem) -> void:
 	var armor_to_drop: Node2D = current_armor
@@ -271,7 +274,7 @@ func equip_different_armor(next: ArmorItem) -> void:
 	armor_to_drop.interpolate_pos(position, position + throw_dir * 30)
 	
 	equip_armor(next)
-
+	SoundManager.play_sfx("item_pick_up")
 
 func apply_status_effect(effect):
 	for i in range(status_effects.size()):

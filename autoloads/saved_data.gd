@@ -20,7 +20,13 @@ var equipped_armor: ArmorItem = null
 
 var passives: Dictionary
 
-var level: int = 1
+var level: int = 1:
+	set(value):
+		level = value
+		can_quit_without_losing_save = true
+
+var can_quit_without_losing_save: bool = true
+var save_data_name: String = ""
 
 func save_data() -> PlayerContinueData:
 	var continue_data = PlayerContinueData.new()

@@ -14,9 +14,6 @@ stats = ExtResource("2_maq7h")
 
 [node name="BowAnimation" parent="." index="0" instance=ExtResource("2_cu483")]
 
-[node name="PickableArea" parent="." index="1"]
-collision_mask = 3
-
 [node name="CollisionShape2D" parent="PickableArea" index="0"]
 visible = false
 position = Vector2(5, 4)

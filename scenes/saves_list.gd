@@ -68,9 +68,16 @@ func _on_pressed(button: Button):
 
 func _on_load_button_pressed() -> void:
 	SavedData.load_data(data_list[curr_data_index])
+	SavedData.save_data_name = str(curr_file_name)
+	SavedData.can_quit_without_losing_save = false
 	SceneTransitor.start_transition_to("res://scenes/game.tscn")
+	SoundManager.fade_out("bgm_1", 2)
 
 
 func _on_delete_button_pressed() -> void:
+	%DeleteDialog.visible = true
+
+
+func _on_delete_dialog_confirmed() -> void:
 	DirAccess.remove_absolute("user://save/" + curr_file_name)
 	dir_content(save_file_path)

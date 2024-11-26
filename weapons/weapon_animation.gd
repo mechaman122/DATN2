@@ -67,3 +67,6 @@ func set_hitbox(hitbox: Hitbox):
 	hitbox.damage = curr_damage
 	hitbox.source = get_parent()
 	hitbox.append_effect(get_parent().stats.status_effects)
+
+func play_sfx(sfx_name: String):
+	SoundManager.play_sfx(sfx_name, 0, -20)

@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://cdrxlscnfr1nu"
+path="res://.godot/imported/Hall of the Ancients.mp3-46954e8aca5924883a3f3ed068017df6.mp3str"
+
+[deps]
+
+source_file="res://assets/music/bg/Hall of the Ancients.mp3"
+dest_files=["res://.godot/imported/Hall of the Ancients.mp3-46954e8aca5924883a3f3ed068017df6.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

@@ -1,0 +1,30 @@
+[gd_scene load_steps=7 format=3 uid="uid://beecyxgrwhtx2"]
+
+[ext_resource type="PackedScene" uid="uid://deuqmbmge0hxd" path="res://weapons/weapon2.tscn" id="1_1p0hs"]
+[ext_resource type="Resource" uid="uid://cejkcl4bjj8c5" path="res://weapons/resources/thunder_staff.tres" id="2_chihw"]
+[ext_resource type="PackedScene" uid="uid://4gksutb3wsqq" path="res://weapons/animations/staff_anim.tscn" id="3_m22mi"]
+[ext_resource type="Script" path="res://weapons/targeted_weapon_anim.gd" id="4_ouc4q"]
+[ext_resource type="Texture2D" uid="uid://dm35ehmqlhwso" path="res://assets/sprites/weapons/rare_weapons/thunder_staff.png" id="4_w5oyl"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_sllgt"]
+radius = 3.56742
+height = 22.597
+
+[node name="ThunderStaff" node_paths=PackedStringArray("weapon_anim") instance=ExtResource("1_1p0hs")]
+weapon_anim = NodePath("StaffAnimation")
+stats = ExtResource("2_chihw")
+
+[node name="StaffAnimation" parent="." index="0" instance=ExtResource("3_m22mi")]
+script = ExtResource("4_ouc4q")
+amount = 2
+
+[node name="Sprite2D" parent="StaffAnimation" index="0"]
+texture = ExtResource("4_w5oyl")
+
+[node name="CollisionShape2D" parent="PickableArea" index="0"]
+visible = false
+position = Vector2(6, 0)
+rotation = 0.73357
+shape = SubResource("CapsuleShape2D_sllgt")
+
+[editable path="StaffAnimation"]

@@ -11,6 +11,7 @@ script = ExtResource("5_bwlun")
 weapon_damage = 0
 weapon_crit = 0.0
 weapon_speed = 0.15
+mana = 0
 description = "+ 15% Atk Speed"
 
 [sub_resource type="Resource" id="Resource_hgn8x"]
@@ -18,6 +19,7 @@ script = ExtResource("5_bwlun")
 weapon_damage = 0
 weapon_crit = 0.1
 weapon_speed = 0.0
+mana = 0
 description = "+ 10% Crit"
 
 [resource]
@@ -30,6 +32,9 @@ weapon_speed = 1.0
 mana = 1
 status_effects = Array[ExtResource("3_hwhmu")]([])
 upgrades = Array[ExtResource("5_bwlun")]([SubResource("Resource_y0l5g"), SubResource("Resource_hgn8x")])
+modifiers = {
+"speed": 0.0
+}
 item_name = "Beginner Bow"
 texture = ExtResource("3_b57n6")
 animated_texture = ExtResource("1_kf0ja")
