@@ -1,0 +1,18 @@
+[gd_scene load_steps=5 format=3 uid="uid://8hym56ab5am3"]
+
+[ext_resource type="PackedScene" uid="uid://b5oxiuv2s82e3" path="res://armor/armor_item.tscn" id="1_8npr2"]
+[ext_resource type="Resource" uid="uid://cphnaviro0e38" path="res://armor/resources/golden_armor.tres" id="2_rkkgg"]
+[ext_resource type="Texture2D" uid="uid://dpxhaxmiqrx8w" path="res://assets/sprites/rpg_icon/Individual icons (16x16)/63.png" id="3_tbuy3"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_7ltfe"]
+radius = 9.05539
+
+[node name="GoldenArmor" instance=ExtResource("1_8npr2")]
+armor_stats = ExtResource("2_rkkgg")
+
+[node name="Sprite2D" parent="." index="0"]
+texture = ExtResource("3_tbuy3")
+
+[node name="CollisionShape2D" parent="." index="1"]
+visible = false
+shape = SubResource("CircleShape2D_7ltfe")

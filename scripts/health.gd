@@ -47,6 +47,8 @@ func set_health(value: int):
 		health = value
 		if get_parent() is Player:
 			SavedData.health = value
+			if difference > 0:
+				get_parent().effect_player.play("heal")
 		emit_signal("health_changed", difference)
 		if armor != null:
 			armor.cooldown_timer.start()

@@ -69,6 +69,7 @@ expand_mode = 1
 stretch_mode = 4
 
 [node name="Menu" type="Panel" parent="."]
+visible = false
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -158,7 +159,6 @@ theme_override_font_sizes/font_size = 32
 text = "Exit"
 
 [node name="Options" type="Panel" parent="."]
-visible = false
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -174,9 +174,10 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxEmpty_hxw1y")
-current_tab = 0
+current_tab = 1
 
 [node name="Video" type="TabBar" parent="Options/OptionsTabs"]
+visible = false
 layout_mode = 2
 script = ExtResource("3_5n35p")
 metadata/_tab_index = 0
@@ -220,12 +221,15 @@ size_flags_horizontal = 4
 size_flags_vertical = 4
 
 [node name="FullScreen" type="CheckBox" parent="Options/OptionsTabs/Video/HBoxContainer/VBoxContainer2"]
+unique_name_in_owner = true
 layout_mode = 2
 
 [node name="Borderless" type="CheckBox" parent="Options/OptionsTabs/Video/HBoxContainer/VBoxContainer2"]
+unique_name_in_owner = true
 layout_mode = 2
 
 [node name="Vsync" type="OptionButton" parent="Options/OptionsTabs/Video/HBoxContainer/VBoxContainer2"]
+unique_name_in_owner = true
 layout_mode = 2
 selected = 1
 item_count = 4
@@ -238,7 +242,6 @@ popup/item_3/text = "Mailbox"
 popup/item_3/id = 3
 
 [node name="Audio" type="TabBar" parent="Options/OptionsTabs"]
-visible = false
 layout_mode = 2
 script = ExtResource("5_tpmk3")
 metadata/_tab_index = 1
@@ -267,10 +270,40 @@ layout_mode = 2
 size_flags_vertical = 6
 text = "Master"
 
+[node name="Music" type="Label" parent="Options/OptionsTabs/Audio/HBoxContainer/VBoxContainer2"]
+layout_mode = 2
+size_flags_vertical = 6
+text = "Music
+"
+
+[node name="Sound" type="Label" parent="Options/OptionsTabs/Audio/HBoxContainer/VBoxContainer2"]
+layout_mode = 2
+size_flags_vertical = 6
+text = "Sound"
+
 [node name="VBoxContainer" type="VBoxContainer" parent="Options/OptionsTabs/Audio/HBoxContainer"]
 layout_mode = 2
 
 [node name="Master" type="HSlider" parent="Options/OptionsTabs/Audio/HBoxContainer/VBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+size_flags_vertical = 6
+max_value = 1.0
+step = 0.05
+value = 0.8
+
+[node name="Music" type="HSlider" parent="Options/OptionsTabs/Audio/HBoxContainer/VBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+size_flags_vertical = 6
+max_value = 1.0
+step = 0.05
+value = 0.8
+
+[node name="Sound" type="HSlider" parent="Options/OptionsTabs/Audio/HBoxContainer/VBoxContainer"]
+unique_name_in_owner = true
 custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
 size_flags_vertical = 6
@@ -281,7 +314,8 @@ value = 0.8
 [node name="VBoxContainer3" type="VBoxContainer" parent="Options/OptionsTabs/Audio/HBoxContainer"]
 layout_mode = 2
 
-[node name="CheckBox" type="CheckBox" parent="Options/OptionsTabs/Audio/HBoxContainer/VBoxContainer3"]
+[node name="Mute" type="CheckBox" parent="Options/OptionsTabs/Audio/HBoxContainer/VBoxContainer3"]
+unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 3
 text = "Mute"
@@ -574,7 +608,9 @@ text = "Back"
 [connection signal="toggled" from="Options/OptionsTabs/Video/HBoxContainer/VBoxContainer2/Borderless" to="Options/OptionsTabs/Video" method="_on_borderless_toggled"]
 [connection signal="item_selected" from="Options/OptionsTabs/Video/HBoxContainer/VBoxContainer2/Vsync" to="Options/OptionsTabs/Video" method="_on_vsync_item_selected"]
 [connection signal="value_changed" from="Options/OptionsTabs/Audio/HBoxContainer/VBoxContainer/Master" to="Options/OptionsTabs/Audio" method="_on_master_value_changed"]
-[connection signal="toggled" from="Options/OptionsTabs/Audio/HBoxContainer/VBoxContainer3/CheckBox" to="Options/OptionsTabs/Audio" method="_on_check_box_toggled"]
+[connection signal="value_changed" from="Options/OptionsTabs/Audio/HBoxContainer/VBoxContainer/Music" to="Options/OptionsTabs/Audio" method="_on_music_value_changed"]
+[connection signal="value_changed" from="Options/OptionsTabs/Audio/HBoxContainer/VBoxContainer/Sound" to="Options/OptionsTabs/Audio" method="_on_sound_value_changed"]
+[connection signal="toggled" from="Options/OptionsTabs/Audio/HBoxContainer/VBoxContainer3/Mute" to="Options/OptionsTabs/Audio" method="_on_check_box_toggled"]
 [connection signal="pressed" from="Continue/LoadButton" to="Continue/ScrollContainer/SavesList" method="_on_load_button_pressed"]
 [connection signal="pressed" from="Continue/DeleteButton" to="Continue/ScrollContainer/SavesList" method="_on_delete_button_pressed"]
 [connection signal="confirmed" from="Continue/DeleteDialog" to="Continue/ScrollContainer/SavesList" method="_on_delete_dialog_confirmed"]

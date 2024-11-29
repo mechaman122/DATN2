@@ -1,0 +1,30 @@
+[gd_scene load_steps=6 format=3 uid="uid://5d7pn1w6jiv0"]
+
+[ext_resource type="PackedScene" uid="uid://deuqmbmge0hxd" path="res://weapons/weapon2.tscn" id="1_iu7om"]
+[ext_resource type="PackedScene" uid="uid://bipc3idppc1df" path="res://weapons/animations/sword_anim.tscn" id="2_8u7v3"]
+[ext_resource type="Resource" uid="uid://cw8d22gg6s5w3" path="res://weapons/resources/dagger.tres" id="2_otmkf"]
+[ext_resource type="Texture2D" uid="uid://edd0kduqq7j2" path="res://assets/sprites/weapons/rare_weapons/11.png" id="4_fxoqc"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_hnbmc"]
+radius = 5.0
+height = 22.0
+
+[node name="Dagger" node_paths=PackedStringArray("weapon_anim") instance=ExtResource("1_iu7om")]
+weapon_anim = NodePath("SwordAnimation")
+stats = ExtResource("2_otmkf")
+
+[node name="SwordAnimation" parent="." index="0" instance=ExtResource("2_8u7v3")]
+
+[node name="Sprite2D" parent="SwordAnimation" index="0"]
+texture = ExtResource("4_fxoqc")
+
+[node name="Polygon2D" parent="SwordAnimation/Sprite2D" index="1"]
+polygon = PackedVector2Array(-10.4581, -10.384, -3.33178, -10.1561, -3.34436, -8.46759, -7.6223, -5.96598, -11.061, -1.7696, -11.5908, -6.3146)
+
+[node name="CollisionShape2D" parent="PickableArea" index="0"]
+visible = false
+position = Vector2(-5, -13)
+rotation = 1.57079
+shape = SubResource("CapsuleShape2D_hnbmc")
+
+[editable path="SwordAnimation"]

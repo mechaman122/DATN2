@@ -38,5 +38,5 @@ func _on_pressed(button: Button):
 	%Damage.text = "Damage:  " + str(weapons[index].weapon_damage)
 	%Crit.text = "Crit:  " + str(weapons[index].weapon_crit)
 	%Description.text = weapons[index].description
-	SoundManager.play_sfx("res://assets/sounds/Cursor_tones/cursor_style_2.wav")
+	SoundManager.play_sfx("cursor2_sfx")
 	

@@ -1,13 +1,19 @@
-[gd_scene load_steps=4 format=3 uid="uid://bm5j1o45d8jd2"]
+[gd_scene load_steps=3 format=3 uid="uid://bm5j1o45d8jd2"]
 
 [ext_resource type="Script" path="res://collectibles/collectible.gd" id="1_kbv4g"]
-[ext_resource type="PackedScene" uid="uid://djialem8q1fvs" path="res://hitboxes/interaction_manager.tscn" id="2_o5bp6"]
-[ext_resource type="Script" path="res://collectibles/collectible_interaction_manager.gd" id="3_dr4im"]
 
-[node name="Collectible" type="Node2D"]
+[sub_resource type="CircleShape2D" id="CircleShape2D_u4g1l"]
+radius = 6.0
+
+[node name="Collectible" type="Area2D"]
+collision_layer = 0
+collision_mask = 3
+monitorable = false
 script = ExtResource("1_kbv4g")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 
-[node name="InteractionManager" parent="." instance=ExtResource("2_o5bp6")]
-script = ExtResource("3_dr4im")
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_u4g1l")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

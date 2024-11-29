@@ -3,8 +3,7 @@ class_name Stun
 
 var base_speed: float
 
-func _init(time = 3) -> void:
-	super._init(time)
+func _init() -> void:
 	effect_name = "Stun"
 
 func apply(target) -> void:

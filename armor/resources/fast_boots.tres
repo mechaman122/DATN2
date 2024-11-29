@@ -1,0 +1,22 @@
+[gd_resource type="Resource" script_class="ArmorStats" load_steps=5 format=3 uid="uid://dbmygcpe5yt0s"]
+
+[ext_resource type="Script" path="res://armor/armor_stats.gd" id="1_iynah"]
+[ext_resource type="Script" path="res://passive/evade.gd" id="1_khqty"]
+[ext_resource type="Texture2D" uid="uid://q2hnuhqprc5i" path="res://assets/sprites/rpg_icon/Individual icons (16x16)/67.png" id="3_dk5db"]
+
+[sub_resource type="Resource" id="Resource_ofkmm"]
+script = ExtResource("1_khqty")
+value = 0.25
+
+[resource]
+script = ExtResource("1_iynah")
+type = "Swift"
+armor = 0
+passive = SubResource("Resource_ofkmm")
+modifiers = {
+"speed": 0.0
+}
+item_name = "Fast Boots"
+texture = ExtResource("3_dk5db")
+description = "Gain no protection, but can sometimes dodge hits."
+rarity = "Epic"

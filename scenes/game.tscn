@@ -1,17 +1,19 @@
-[gd_scene load_steps=13 format=3 uid="uid://xfcntficuxyx"]
+[gd_scene load_steps=15 format=3 uid="uid://xfcntficuxyx"]
 
 [ext_resource type="PackedScene" uid="uid://2tkmj873jyu3" path="res://scenes/adventurer.tscn" id="1_7c8dh"]
 [ext_resource type="PackedScene" uid="uid://b4a2vbki2mytf" path="res://scenes/damage_area_test.tscn" id="2_abr38"]
 [ext_resource type="PackedScene" uid="uid://bk1y10ciko62f" path="res://map/map_elements/treasure.tscn" id="8_qskdt"]
-[ext_resource type="PackedScene" uid="uid://cvua28iqo4xty" path="res://armor/base_armors/leather_shirt.tscn" id="9_bfpx6"]
-[ext_resource type="PackedScene" uid="uid://bj2o4qmn48oq5" path="res://weapons/base_weapons/beginner_sword.tscn" id="10_x42of"]
 [ext_resource type="PackedScene" uid="uid://ctoy1ivcjv8gn" path="res://weapons/epic_weapons/scifi_gun.tscn" id="11_h6kv4"]
 [ext_resource type="PackedScene" uid="uid://3rtrhjddetts" path="res://map/map_elements/stairs.tscn" id="11_v8ere"]
-[ext_resource type="PackedScene" uid="uid://d354mckq8y8cb" path="res://weapons/base_weapons/wooden_spear.tscn" id="12_1tg15"]
 [ext_resource type="PackedScene" uid="uid://bnilqrotedah1" path="res://weapons/epic_weapons/golden_bow.tscn" id="12_daosd"]
+[ext_resource type="PackedScene" uid="uid://dv58dap5deg1u" path="res://collectibles/list/mana_potion.tscn" id="12_fht7t"]
 [ext_resource type="PackedScene" uid="uid://dh2ax0yv87hk" path="res://weapons/legendary_weapons/mini_gun.tscn" id="12_okimy"]
-[ext_resource type="PackedScene" uid="uid://b3p1558pfodxo" path="res://weapons/rare_weapons/fire_sword.tscn" id="13_lk08e"]
-[ext_resource type="PackedScene" uid="uid://b5llf4cbf0m3v" path="res://armor/base_armors/cloak_of_agility.tscn" id="13_sywp5"]
+[ext_resource type="PackedScene" uid="uid://8hym56ab5am3" path="res://armor/base_armors/golden_armor.tscn" id="12_uam2d"]
+[ext_resource type="PackedScene" uid="uid://bijt7kyxx5csp" path="res://armor/base_armors/aura_armor.tscn" id="13_mc13e"]
+[ext_resource type="PackedScene" uid="uid://dbhk7a3emowvu" path="res://collectibles/list/speed_potion.tscn" id="13_ok3x2"]
+[ext_resource type="PackedScene" uid="uid://de6urgmcbhsfg" path="res://collectibles/list/big_mana_potion.tscn" id="13_xtu8e"]
+[ext_resource type="PackedScene" uid="uid://dngy6tjhq1f1u" path="res://collectibles/list/health_potion.tscn" id="14_kedro"]
+[ext_resource type="PackedScene" uid="uid://ihdjm1i2a0ul" path="res://armor/base_armors/fast_boots.tscn" id="14_lvh2u"]
 
 [node name="Game" type="Node2D"]
 
@@ -32,26 +34,8 @@ position = Vector2(700, 390)
 [node name="Statirs" parent="." instance=ExtResource("11_v8ere")]
 position = Vector2(792, 390)
 
-[node name="LeatherShirt" parent="." instance=ExtResource("9_bfpx6")]
-position = Vector2(742, 362)
-
 [node name="GoldenBow" parent="." instance=ExtResource("12_daosd")]
 position = Vector2(778, 334)
-is_on_floor = true
-
-[node name="FireSword" parent="." instance=ExtResource("13_lk08e")]
-position = Vector2(751, 324)
-is_on_floor = true
-
-[node name="CloakOfAgility" parent="." instance=ExtResource("13_sywp5")]
-position = Vector2(688, 370)
-
-[node name="BeginnerSword" parent="." instance=ExtResource("10_x42of")]
-position = Vector2(646, 388)
-is_on_floor = true
-
-[node name="Wooden Spear" parent="." instance=ExtResource("12_1tg15")]
-position = Vector2(593, 335)
 is_on_floor = true
 
 [node name="ScifiGun" parent="." instance=ExtResource("11_h6kv4")]
@@ -61,3 +45,24 @@ is_on_floor = true
 [node name="MiniGun" parent="." instance=ExtResource("12_okimy")]
 position = Vector2(607, 317)
 is_on_floor = true
+
+[node name="HealthPotion" parent="." instance=ExtResource("14_kedro")]
+position = Vector2(588, 282)
+
+[node name="SpeedPotion" parent="." instance=ExtResource("13_ok3x2")]
+position = Vector2(623, 282)
+
+[node name="ManaPotion" parent="." instance=ExtResource("12_fht7t")]
+position = Vector2(558, 308)
+
+[node name="BigManaPotion" parent="." instance=ExtResource("13_xtu8e")]
+position = Vector2(578, 314)
+
+[node name="GoldenArmor" parent="." instance=ExtResource("12_uam2d")]
+position = Vector2(637, 372)
+
+[node name="AuraArmor" parent="." instance=ExtResource("13_mc13e")]
+position = Vector2(666, 372)
+
+[node name="FastBoots" parent="." instance=ExtResource("14_lvh2u")]
+position = Vector2(583, 390)

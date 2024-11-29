@@ -68,7 +68,7 @@ func _on_exit_button_pressed() -> void:
 	
 
 func tween_pop(panel):
-	SoundManager.play_sfx("res://assets/sounds/Confirm_tones/style2/confirm_style_2_001.wav")
+	SoundManager.play_sfx("confirm2_sfx")
 	panel.scale = Vector2(0.85, 0.85)
 	var tween = get_tree().create_tween().set_ease(Tween.EASE_IN_OUT).set_trans(Tween.TRANS_ELASTIC)
 	tween.tween_property(panel, "scale", Vector2(1,1), 0.5)

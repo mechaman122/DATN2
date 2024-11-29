@@ -15,14 +15,17 @@ signal armor_equipped(armor_stats: ArmorItem)
 @onready var animated_sprite = $AnimatedSprite2D
 @onready var animation_player = $AnimationPlayer
 @onready var dash: GPUParticles2D = $DashParticles
+@onready var effect_player = $EffectPlayer
 
 #stats
 @onready var health = $Health
 @onready var armor =$Armor
 var mana: int = 200:
 	set(value):
-		mana = value
-		SavedData.mana = value
+		if mana - value < 0:
+			effect_player.play("mana_gain")
+		mana = min(value, 200)
+		SavedData.mana = mana
 		get_node("Interface").mana_bar.change_value(mana, 200)
 		print(mana)
 
@@ -112,6 +115,7 @@ func _restore_prev_state() -> void:
 		equipped_armor.get_node("CollisionShape2D").disabled = true
 		armors.add_child(equipped_armor)
 		current_armor = armors.get_child(0)
+		equipped_armor.activate_passive(self)
 		emit_signal("armor_equipped", SavedData.equipped_armor)
 	
 	emit_signal("weapon_switched", weapons.get_child_count() - 1, SavedData.equipped_weapon_index)
@@ -170,6 +174,8 @@ func _physics_process(delta: float) -> void:
 	#if current_weapon.stats.modifiers != null:
 	for stat in current_weapon.stats.modifiers:
 		modifiers[stat] += current_weapon.stats.modifiers[stat]
+		
+	$AnimationPlayer.speed_scale = get_curr_stats()["speed"]/100
 	
 func _switch_weapon(direction: int) -> void:
 	#if !has_weapon or weapons.get_child_count() == 1:
@@ -256,7 +262,7 @@ func equip_armor(armor_item: ArmorItem) -> void:
 	
 	emit_signal("armor_equipped", armor_item)
 	
-	SoundManager.play_sfx("item_pick_up")
+	SoundManager.play_sfx("armor_equip_sfx")
 	
 	
 func equip_different_armor(next: ArmorItem) -> void:
@@ -274,7 +280,6 @@ func equip_different_armor(next: ArmorItem) -> void:
 	armor_to_drop.interpolate_pos(position, position + throw_dir * 30)
 	
 	equip_armor(next)
-	SoundManager.play_sfx("item_pick_up")
 
 func apply_status_effect(effect):
 	for i in range(status_effects.size()):
@@ -293,8 +298,9 @@ func reset_status_effect():
 		
 
 func take_damage(_damage: int, source, is_crit) -> void:
-	if randf() < evade_chance:
-		print("miss")
+	if randf() < min(evade_chance + SavedData.evade_chance, 0.35):
+		DamageNumbers.display_number(-69, global_position + Vector2(0,-16), false)
+		return
 	else:
 		if armor.armor > 0:
 			var diff = armor.armor - _damage
@@ -313,7 +319,7 @@ func regenerate(delta: float) -> void:
 	if health.health * 2 < health.max_health:
 		if regen_timer <= 0:
 			health.health += 1
-			regen_timer = 4
+			regen_timer = 3
 		else:
 			regen_timer -= delta
 

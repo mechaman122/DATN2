@@ -24,6 +24,7 @@ SavedData="*res://autoloads/saved_data.gd"
 SoundManager="*res://addons/sound_manager/module/SoundManager.tscn"
 EventBus="*res://autoloads/event_bus.gd"
 DamageNumbers="*res://autoloads/damage_numbers.gd"
+ConfigFileHandler="*res://autoloads/config_file_handler.gd"
 
 [display]
 

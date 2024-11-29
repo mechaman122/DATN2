@@ -7,6 +7,7 @@ var created_date: String = Time.get_datetime_string_from_system()
 @export var health: int = 6
 @export var max_armor: int = 4
 @export var mana: int = 200
+@export var coin: int = 0
 
 @export var base_stats = {
 	"damage": 0,

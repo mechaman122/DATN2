@@ -7,4 +7,5 @@ func enter(previous_state_path: String, data: Dictionary = {}) -> void:
 	if player.has_weapon:
 		player.current_weapon.cancel_attack()
 	player.animation_player.play("die")
+	SoundManager.play_sfx("player_die_sfx")
 	# queue_free()

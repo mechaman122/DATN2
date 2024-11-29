@@ -62,7 +62,7 @@ func _on_pressed(button: Button):
 		%WeaponsList.text += (str(weapon.stats.item_name) + ", ")
 	%EquippedArmor.text = "Equipped Armor: " + (str(data_list[index].equipped_armor.stats.item_name) if data_list[index].equipped_armor != null else "None")
 	
-	SoundManager.play_sfx("res://assets/sounds/Cursor_tones/cursor_style_2.wav")
+	SoundManager.play_sfx("cursor2_sfx")
 	
 
 

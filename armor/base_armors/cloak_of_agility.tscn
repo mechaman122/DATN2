@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://b5llf4cbf0m3v"]
+[gd_scene load_steps=5 format=3 uid="uid://b5llf4cbf0m3v"]
 
 [ext_resource type="PackedScene" uid="uid://b5oxiuv2s82e3" path="res://armor/armor_item.tscn" id="1_sol2a"]
 [ext_resource type="Resource" uid="uid://doqtx20qk02m6" path="res://armor/resources/cloak_of_agility.tres" id="2_xdkc5"]
+[ext_resource type="Texture2D" uid="uid://dns4l18n2jbpb" path="res://assets/sprites/rpg_icon/Individual icons (16x16)/51.png" id="3_r3213"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_bycld"]
 radius = 8.0
@@ -9,5 +10,9 @@ radius = 8.0
 [node name="CloakOfAgility" instance=ExtResource("1_sol2a")]
 armor_stats = ExtResource("2_xdkc5")
 
+[node name="Sprite2D" parent="." index="0"]
+texture = ExtResource("3_r3213")
+
 [node name="CollisionShape2D" parent="." index="1"]
+visible = false
 shape = SubResource("CircleShape2D_bycld")

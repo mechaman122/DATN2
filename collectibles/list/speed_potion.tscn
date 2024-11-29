@@ -1,0 +1,35 @@
+[gd_scene load_steps=8 format=3 uid="uid://dbhk7a3emowvu"]
+
+[ext_resource type="PackedScene" uid="uid://bm5j1o45d8jd2" path="res://collectibles/collectible.tscn" id="1_tn1ri"]
+[ext_resource type="Script" path="res://status_effects/status_effect.gd" id="2_jeoma"]
+[ext_resource type="Script" path="res://collectibles/speed_potion.gd" id="2_lomiw"]
+[ext_resource type="Script" path="res://status_effects/stats_mod.gd" id="3_dmwmi"]
+[ext_resource type="Texture2D" uid="uid://b1qirsiachv25" path="res://assets/sprites/rpg_icon/Individual icons (16x16)/32_white.png" id="4_civ4h"]
+
+[sub_resource type="Resource" id="Resource_1vnq2"]
+script = ExtResource("3_dmwmi")
+damage_mul = 0
+crit_mul = 0.0
+atk_speed_mul = 1.0
+speed_mul = 1.5
+duration = 40.0
+damage_per_tick = 1
+chance_to_proc = 0.3
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_b5lxs"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_civ4h")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="SpeedPotion" instance=ExtResource("1_tn1ri")]
+script = ExtResource("2_lomiw")
+effects = Array[ExtResource("2_jeoma")]([SubResource("Resource_1vnq2")])
+
+[node name="AnimatedSprite2D" parent="." index="0"]
+sprite_frames = SubResource("SpriteFrames_b5lxs")

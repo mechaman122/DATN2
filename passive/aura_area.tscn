@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://passive/aura_area.gd" id="1_h18ja"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_3y8w4"]
-radius = 32.0
+radius = 35.0
 
 [sub_resource type="Animation" id="Animation_ou5jg"]
 resource_name = "DamageOverTime"

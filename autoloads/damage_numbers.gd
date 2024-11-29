@@ -15,6 +15,9 @@ func display_number(value: int, position: Vector2, is_crit: bool = false):
 		color = "#FFF8"
 	if value < 0:
 		color = "GREEN"
+	if value == -69:
+		number.text = "miss"
+		color = "#FFF"
 		
 	number.label_settings.font_color = color
 	number.label_settings.font_size = 8

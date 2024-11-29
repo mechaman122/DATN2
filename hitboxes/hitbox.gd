@@ -25,6 +25,10 @@ func set_disabled(is_disabled: bool) -> void:
 
 func append_effect(effects: Array[StatusEffect]):
 	for effect in effects:
+		for i in range(status_effects.size()):
+			if status_effects[i].get_effect_name() == effect.get_effect_name():
+				status_effects[i].duration = effect.duration
+				return
 		var e = effect.duplicate(true)
 		e.source = source
 		status_effects.append(e)

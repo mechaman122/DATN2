@@ -1,0 +1,22 @@
+[gd_resource type="Resource" script_class="ArmorStats" load_steps=5 format=3 uid="uid://cphnaviro0e38"]
+
+[ext_resource type="Script" path="res://passive/regen.gd" id="1_6tncu"]
+[ext_resource type="Script" path="res://armor/armor_stats.gd" id="1_bbils"]
+[ext_resource type="Texture2D" uid="uid://dpxhaxmiqrx8w" path="res://assets/sprites/rpg_icon/Individual icons (16x16)/63.png" id="3_s4sjl"]
+
+[sub_resource type="Resource" id="Resource_1h2gi"]
+script = ExtResource("1_6tncu")
+value = 0.0
+
+[resource]
+script = ExtResource("1_bbils")
+type = "Heavy"
+armor = 7
+passive = SubResource("Resource_1h2gi")
+modifiers = {
+"speed": 0.0
+}
+item_name = "Golden Armor"
+texture = ExtResource("3_s4sjl")
+description = "An armor made of gold. Provide lots of armor and regen when under 50% Health"
+rarity = "Epic"

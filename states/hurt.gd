@@ -1,6 +1,7 @@
 extends PlayerState
 
 func enter(previous_state_path: String, data: Dictionary = {}) -> void:
+	SoundManager.play_sfx("player_hurt_sfx")
 	player.animation_player.play("hurt")
 	player.health_changed = false
 	if player.has_weapon:

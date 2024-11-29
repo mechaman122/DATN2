@@ -4,6 +4,7 @@ var max_health: int = 6
 var health: int = 6
 var max_armor: int = 4
 var mana: int = 200
+var coin: int = 0
 
 var base_stats = {
 	"damage": 0,
@@ -11,6 +12,8 @@ var base_stats = {
 	"atk_speed": 0,
 	"speed": 100
 }
+
+var evade_chance = 0
 
 var allow_input = true
 
@@ -48,6 +51,7 @@ func save_data() -> PlayerContinueData:
 	continue_data.health = health
 	continue_data.max_armor = max_armor
 	continue_data.mana = mana
+	continue_data.coin = coin
 	
 	continue_data.level = level
 	
@@ -74,5 +78,6 @@ func load_data(data_to_load: PlayerContinueData):
 	health = data_to_load.health
 	max_armor = data_to_load.max_armor
 	mana = data_to_load.mana
+	coin = data_to_load.coin
 	
 	level = data_to_load.level

@@ -1,0 +1,47 @@
+[gd_resource type="Resource" script_class="WeaponStats" load_steps=9 format=3 uid="uid://cw8d22gg6s5w3"]
+
+[ext_resource type="Script" path="res://weapons/resources/weapon_stats.gd" id="1_8gk7h"]
+[ext_resource type="Script" path="res://status_effects/status_effect.gd" id="2_8t5gs"]
+[ext_resource type="Script" path="res://weapons/upgrade/upgrade.gd" id="3_4hdyv"]
+[ext_resource type="Script" path="res://status_effects/bleed.gd" id="3_6m52o"]
+[ext_resource type="Texture2D" uid="uid://edd0kduqq7j2" path="res://assets/sprites/weapons/rare_weapons/11.png" id="4_3gmmg"]
+
+[sub_resource type="Resource" id="Resource_4jgvh"]
+script = ExtResource("3_6m52o")
+duration = 2.0
+damage_per_tick = 1
+chance_to_proc = 0.4
+
+[sub_resource type="Resource" id="Resource_mwkjk"]
+script = ExtResource("3_4hdyv")
+weapon_damage = 0
+weapon_crit = 0.0
+weapon_speed = 0.2
+mana = 0
+description = "+ 20% Atk Speed"
+
+[sub_resource type="Resource" id="Resource_vjw72"]
+script = ExtResource("3_4hdyv")
+weapon_damage = 1
+weapon_crit = 0.0
+weapon_speed = 0.0
+mana = 0
+description = "+ 1 Damage"
+
+[resource]
+script = ExtResource("1_8gk7h")
+is_ranged = false
+type = "Sword"
+weapon_damage = 1
+weapon_crit = 0.3
+weapon_speed = 1.2
+mana = 0
+status_effects = Array[ExtResource("2_8t5gs")]([SubResource("Resource_4jgvh")])
+upgrades = Array[ExtResource("3_4hdyv")]([SubResource("Resource_mwkjk"), SubResource("Resource_vjw72")])
+modifiers = {
+"speed": 0.0
+}
+item_name = "Dagger"
+texture = ExtResource("4_3gmmg")
+description = "A dagger with short range but causes bleed"
+rarity = "Common"

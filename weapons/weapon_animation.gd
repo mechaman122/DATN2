@@ -41,8 +41,11 @@ func get_input() -> void:
 			curr_damage = roundi(curr_damage * 1.5)
 		curr_damage += player_curr_stats["damage"]
 		if melee_hitbox != null:
-			melee_hitbox.damage = curr_damage
-			melee_hitbox.is_crit = is_crit
+			#melee_hitbox.damage = curr_damage
+			#melee_hitbox.is_crit = is_crit
+			#melee_hitbox.source = get_parent()
+			#melee_hitbox.status_effects = get_parent().stats.status_effects.duplicate(true)
+			set_hitbox(melee_hitbox)
 	
 func shoot(weapon_type: String = "Bow", spd: int = 500, offset: float = 0) -> void:
 	var projectile

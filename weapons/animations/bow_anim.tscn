@@ -131,9 +131,12 @@ tracks/3/path = NodePath(".")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
-"times": PackedFloat32Array(0.05),
-"transitions": PackedFloat32Array(1),
+"times": PackedFloat32Array(0, 0.05),
+"transitions": PackedFloat32Array(1, 1),
 "values": [{
+"args": ["bow_sfx"],
+"method": &"play_sfx"
+}, {
 "args": [],
 "method": &"shoot"
 }]
@@ -351,9 +354,12 @@ tracks/3/path = NodePath(".")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
-"times": PackedFloat32Array(0.05),
-"transitions": PackedFloat32Array(1),
+"times": PackedFloat32Array(0, 0.05),
+"transitions": PackedFloat32Array(1, 1),
 "values": [{
+"args": ["bow_sfx"],
+"method": &"play_sfx"
+}, {
 "args": [],
 "method": &"shoot"
 }]
@@ -406,6 +412,7 @@ turbulence_noise_strength = 20.0
 turbulence_noise_scale = 3.0
 
 [node name="BowAnimation" node_paths=PackedStringArray("anim_player", "sprite", "charge_particles", "projectile_sprite", "shooting_position") instance=ExtResource("1_hdcr6")]
+rotation = -0.785398
 anim_player = NodePath("AnimationPlayer")
 sprite = NodePath("Sprite2D")
 charge_particles = NodePath("Effects/ChargeParticles")

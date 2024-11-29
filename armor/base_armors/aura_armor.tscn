@@ -1,0 +1,18 @@
+[gd_scene load_steps=5 format=3 uid="uid://bijt7kyxx5csp"]
+
+[ext_resource type="PackedScene" uid="uid://b5oxiuv2s82e3" path="res://armor/armor_item.tscn" id="1_kk5wk"]
+[ext_resource type="Resource" uid="uid://byiy5jluxyj0n" path="res://armor/resources/aura_armor.tres" id="2_wur23"]
+[ext_resource type="Texture2D" uid="uid://buminmvsc30d7" path="res://assets/sprites/rpg_icon/Individual icons (16x16)/52.png" id="2_x1kn6"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_n4s4h"]
+radius = 9.0
+
+[node name="AuraArmor" instance=ExtResource("1_kk5wk")]
+armor_stats = ExtResource("2_wur23")
+
+[node name="Sprite2D" parent="." index="0"]
+texture = ExtResource("2_x1kn6")
+
+[node name="CollisionShape2D" parent="." index="1"]
+visible = false
+shape = SubResource("CircleShape2D_n4s4h")

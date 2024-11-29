@@ -1,0 +1,22 @@
+[gd_resource type="Resource" script_class="ArmorStats" load_steps=5 format=3 uid="uid://byiy5jluxyj0n"]
+
+[ext_resource type="Script" path="res://passive/aura.gd" id="1_pr7k7"]
+[ext_resource type="Script" path="res://armor/armor_stats.gd" id="1_uqlea"]
+[ext_resource type="Texture2D" uid="uid://buminmvsc30d7" path="res://assets/sprites/rpg_icon/Individual icons (16x16)/52.png" id="3_5ge7v"]
+
+[sub_resource type="Resource" id="Resource_hdj3d"]
+script = ExtResource("1_pr7k7")
+value = 1.0
+
+[resource]
+script = ExtResource("1_uqlea")
+type = "Medium"
+armor = 3
+passive = SubResource("Resource_hdj3d")
+modifiers = {
+"speed": 0.0
+}
+item_name = "Aura Armor"
+texture = ExtResource("3_5ge7v")
+description = "Deal damage to surroundings every second"
+rarity = "Rare"

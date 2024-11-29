@@ -169,9 +169,12 @@ tracks/6/path = NodePath(".")
 tracks/6/interp = 1
 tracks/6/loop_wrap = true
 tracks/6/keys = {
-"times": PackedFloat32Array(0.06),
-"transitions": PackedFloat32Array(1),
+"times": PackedFloat32Array(0, 0.06),
+"transitions": PackedFloat32Array(1, 1),
 "values": [{
+"args": ["sword_sfx"],
+"method": &"play_sfx"
+}, {
 "args": ["Sword", 500, 0.0],
 "method": &"shoot"
 }]
@@ -374,40 +377,37 @@ tracks/6/path = NodePath(".")
 tracks/6/interp = 1
 tracks/6/loop_wrap = true
 tracks/6/keys = {
-"times": PackedFloat32Array(0, 0.05, 0.1, 0.15, 0.2, 0.25, 0.3, 0.35, 0.4, 0.45, 0.5),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"times": PackedFloat32Array(0, 0.05, 0.1, 0.15, 0.2, 0.25, 0.3, 0.35, 0.4, 0.45),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
 "values": [{
-"args": ["Bow", 500, 0.0],
+"args": ["sword_sfx"],
+"method": &"play_sfx"
+}, {
+"args": ["", 500, 0.0],
 "method": &"shoot"
 }, {
-"args": ["Bow", 500, 0.0],
+"args": ["", 500, 0.0],
 "method": &"shoot"
 }, {
-"args": ["Bow", 500, 0.0],
+"args": ["", 500, 0.0],
 "method": &"shoot"
 }, {
-"args": ["Bow", 500, 0.0],
+"args": ["", 500, 0.0],
 "method": &"shoot"
 }, {
-"args": ["Bow", 500, 0.0],
+"args": ["", 500, 0.0],
 "method": &"shoot"
 }, {
-"args": ["Bow", 500, 0.0],
+"args": ["", 500, 0.0],
 "method": &"shoot"
 }, {
-"args": ["Bow", 500, 0.0],
+"args": ["", 500, 0.0],
 "method": &"shoot"
 }, {
-"args": ["Bow", 500, 0.0],
+"args": ["", 500, 0.0],
 "method": &"shoot"
 }, {
-"args": ["Bow", 500, 0.0],
-"method": &"shoot"
-}, {
-"args": ["Bow", 500, 0.0],
-"method": &"shoot"
-}, {
-"args": ["Staff", 500, 0.0],
+"args": ["", 500, 0.0],
 "method": &"shoot"
 }]
 }
@@ -458,9 +458,6 @@ texture = ExtResource("4_p1u8o")
 
 [node name="ShootingPosition" type="Marker2D" parent="SwordAnimation/Effects" index="2"]
 position = Vector2(-3, -23)
-
-[node name="PickableArea" parent="." index="1"]
-collision_mask = 3
 
 [node name="CollisionShape2D" parent="PickableArea" index="0"]
 visible = false

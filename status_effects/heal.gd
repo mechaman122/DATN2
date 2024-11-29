@@ -1,8 +1,7 @@
 extends StatusEffect
 class_name Heal
 
-func _init(time = 3) -> void:
-	super._init(time)
+func _init() -> void:
 	effect_name = "Heal"
 
 func apply(target) -> void:

@@ -34,7 +34,6 @@ weapon_anim = NodePath("BowAnimation")
 stats = ExtResource("2_ew00f")
 
 [node name="BowAnimation" parent="." index="0" instance=ExtResource("2_plqhp")]
-rotation = -0.785398
 
 [node name="Sprite2D" parent="BowAnimation" index="0"]
 texture = ExtResource("3_akkr4")

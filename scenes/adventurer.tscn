@@ -1,4 +1,4 @@
-[gd_scene load_steps=100 format=3 uid="uid://2tkmj873jyu3"]
+[gd_scene load_steps=101 format=3 uid="uid://2tkmj873jyu3"]
 
 [ext_resource type="Texture2D" uid="uid://cn25h6f20oytn" path="res://assets/sprites/adventurer/adventurer_sprite.png" id="1_c2cxh"]
 [ext_resource type="Script" path="res://scripts/adventurer.gd" id="1_cfpa1"]
@@ -915,7 +915,7 @@ shader_parameter/particles_anim_v_frames = 1
 shader_parameter/particles_anim_loop = false
 
 [sub_resource type="Curve" id="Curve_jborn"]
-_data = [Vector2(0.00299402, 0.502805), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+_data = [Vector2(0, 0.352714), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
 point_count = 2
 
 [sub_resource type="CurveTexture" id="CurveTexture_kwory"]
@@ -959,10 +959,28 @@ tracks/0/keys = {
 "values": [Color(0, 1, 0, 1), Color(0, 1, 0, 1), Color(1, 1, 1, 1)]
 }
 
+[sub_resource type="Animation" id="Animation_ev77n"]
+resource_name = "mana_gain"
+length = 0.3
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(0.347692, 0.566911, 1, 1), Color(0.347692, 0.566911, 1, 1), Color(1, 1, 1, 1)]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_is1de"]
 _data = {
 "RESET": SubResource("Animation_a0n3x"),
-"heal": SubResource("Animation_f0qtg")
+"heal": SubResource("Animation_f0qtg"),
+"mana_gain": SubResource("Animation_ev77n")
 }
 
 [node name="Adventurer" type="CharacterBody2D" groups=["Adventurer"]]
@@ -1058,6 +1076,7 @@ show_behind_parent = true
 material = SubResource("ShaderMaterial_7hgs8")
 position = Vector2(0, -4)
 emitting = false
+amount = 6
 process_material = SubResource("ParticleProcessMaterial_axu4n")
 texture = ExtResource("17_yfxkc")
 lifetime = 0.3

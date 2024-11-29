@@ -1,0 +1,17 @@
+[gd_scene load_steps=5 format=3 uid="uid://ihdjm1i2a0ul"]
+
+[ext_resource type="PackedScene" uid="uid://b5oxiuv2s82e3" path="res://armor/armor_item.tscn" id="1_k3jgx"]
+[ext_resource type="Resource" uid="uid://dbmygcpe5yt0s" path="res://armor/resources/fast_boots.tres" id="2_t1pkt"]
+[ext_resource type="Texture2D" uid="uid://q2hnuhqprc5i" path="res://assets/sprites/rpg_icon/Individual icons (16x16)/67.png" id="3_o4uo5"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_0iub0"]
+
+[node name="FastBoots" instance=ExtResource("1_k3jgx")]
+armor_stats = ExtResource("2_t1pkt")
+
+[node name="Sprite2D" parent="." index="0"]
+texture = ExtResource("3_o4uo5")
+
+[node name="CollisionShape2D" parent="." index="1"]
+visible = false
+shape = SubResource("CircleShape2D_0iub0")

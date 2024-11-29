@@ -1,15 +1,15 @@
 extends Resource
 class_name StatusEffect
 
-var duration: float
+@export var duration: float = 3
 var effect_name: String
 var source
 @export var damage_per_tick: int = 1
 @export var chance_to_proc: float = 0.3
 @export var icon_texture: Texture2D
 
-func _init(time = 3) -> void:
-	duration = time
+#func _init(time = 3) -> void:
+	#duration = time
 	
 func apply(target) -> void:
 	print(effect_name + " affected on " + target.name)
