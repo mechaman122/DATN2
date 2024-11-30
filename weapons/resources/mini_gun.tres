@@ -10,8 +10,8 @@ script = ExtResource("3_121rg")
 weapon_damage = 0
 weapon_crit = 0.0
 weapon_speed = 0.0
-mana = 2
-description = "- 2 Mana"
+mana = 1
+description = "- 1 Mana"
 
 [sub_resource type="Resource" id="Resource_qkdw2"]
 script = ExtResource("3_121rg")
@@ -33,7 +33,7 @@ description = "+ 10% Crit"
 script = ExtResource("3_121rg")
 weapon_damage = -3
 weapon_crit = 0.1
-weapon_speed = 0.4
+weapon_speed = 0.3
 mana = 1
 description = "- Damage but + other Stats"
 
@@ -43,8 +43,8 @@ is_ranged = true
 type = "Gun"
 weapon_damage = 5
 weapon_crit = 0.4
-weapon_speed = 1.0
-mana = 3
+weapon_speed = 1.1
+mana = 4
 status_effects = Array[ExtResource("2_t248o")]([])
 upgrades = Array[ExtResource("3_121rg")]([SubResource("Resource_kbx2o"), SubResource("Resource_qkdw2"), SubResource("Resource_ophe0"), SubResource("Resource_4sypv")])
 modifiers = {

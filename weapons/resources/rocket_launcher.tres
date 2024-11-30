@@ -1,0 +1,65 @@
+[gd_resource type="Resource" script_class="WeaponStats" load_steps=12 format=3 uid="uid://dxufi0kt6ablf"]
+
+[ext_resource type="Script" path="res://weapons/resources/weapon_stats.gd" id="1_sb8tr"]
+[ext_resource type="Script" path="res://status_effects/status_effect.gd" id="2_td8us"]
+[ext_resource type="Texture2D" uid="uid://yejsnnmg07e1" path="res://assets/sprites/rpg_icon/Individual icons (16x16)/141.png" id="3_2vx51"]
+[ext_resource type="Script" path="res://weapons/upgrade/upgrade.gd" id="3_wwou4"]
+[ext_resource type="Script" path="res://status_effects/burn.gd" id="4_w8i3f"]
+[ext_resource type="Texture2D" uid="uid://c7f3nqxvcxtee" path="res://assets/sprites/weapons/legendary_weapons/rocket_launcher.png" id="5_5bp5q"]
+
+[sub_resource type="Resource" id="Resource_qo1fw"]
+script = ExtResource("4_w8i3f")
+duration = 3.0
+damage_per_tick = 1
+chance_to_proc = 0.5
+icon_texture = ExtResource("3_2vx51")
+
+[sub_resource type="Resource" id="Resource_w2cb6"]
+script = ExtResource("3_wwou4")
+weapon_damage = 2
+weapon_crit = 0.0
+weapon_speed = 0.0
+mana = 0
+description = "+ 2 Damage"
+
+[sub_resource type="Resource" id="Resource_b13gc"]
+script = ExtResource("3_wwou4")
+weapon_damage = 0
+weapon_crit = 0.0
+weapon_speed = 0.0
+mana = 2
+description = "- 2 Mana"
+
+[sub_resource type="Resource" id="Resource_7mlfq"]
+script = ExtResource("3_wwou4")
+weapon_damage = 0
+weapon_crit = 0.0
+weapon_speed = 0.1
+mana = 0
+description = "+ 10% Atk Speed"
+
+[sub_resource type="Resource" id="Resource_ahywy"]
+script = ExtResource("3_wwou4")
+weapon_damage = 3
+weapon_crit = 0.0
+weapon_speed = 0.0
+mana = 0
+description = "+ 3 Damage"
+
+[resource]
+script = ExtResource("1_sb8tr")
+is_ranged = true
+type = "Gun"
+weapon_damage = 10
+weapon_crit = 0.0
+weapon_speed = 1.0
+mana = 9
+status_effects = Array[ExtResource("2_td8us")]([SubResource("Resource_qo1fw")])
+upgrades = Array[ExtResource("3_wwou4")]([SubResource("Resource_w2cb6"), SubResource("Resource_b13gc"), SubResource("Resource_7mlfq"), SubResource("Resource_ahywy")])
+modifiers = {
+"speed": -0.3
+}
+item_name = "Rocket Launcher"
+texture = ExtResource("5_5bp5q")
+description = "A Rocket Launcher that deals explosive damage"
+rarity = "Legendary"

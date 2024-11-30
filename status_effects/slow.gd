@@ -9,8 +9,14 @@ func _init() -> void:
 
 func apply(target) -> void:
 	super.apply(target)
-	target.base_stats["speed"] *= speed_mul
-	
+	if target is Player:
+		target.base_stats["speed"] *= speed_mul
+	else:
+		base_speed = target.speed
+		target.speed *= speed_mul
 func remove(target) -> void:
 	super.remove(target)
-	target.base_stats["speed"] = 100
+	if target is Player:
+		target.base_stats["speed"] = 100
+	else:
+		target.speed = base_speed

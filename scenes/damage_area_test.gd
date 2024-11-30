@@ -53,7 +53,8 @@ func take_damage(_damage: int, source, is_crit: bool = false) -> void:
 		print(source)
 	if health.health <= 0:
 		EventBus.emit_signal("enemy_died", source)
-		health.health += 10
+		SoundManager.play_sfx("enemy_die")
+		health.health += 20
 		DamageNumbers.display_number(-10, global_position + Vector2(0,-16), false)
 	DamageNumbers.display_number(_damage, global_position + Vector2(0,-16), is_crit)
 	

@@ -8,4 +8,5 @@ func enter(previous_state_path: String, data: Dictionary = {}) -> void:
 		player.current_weapon.cancel_attack()
 	player.animation_player.play("die")
 	SoundManager.play_sfx("player_die_sfx")
-	# queue_free()
+	SavedData.allow_input = false
+	EventBus.emit_signal("player_died")

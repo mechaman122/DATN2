@@ -33,11 +33,12 @@ func _ready() -> void:
 	
 	SoundManager.stop_all()
 	rng.randomize()
-	play_bgm()
+	#play_bgm()
 
 func _process(delta: float) -> void:
 	if !SoundManager.is_playing(curr_bgm_name):
-		play_bgm()
+		#play_bgm()
+		pass
 
 func _on_health_changed(diff: int) -> void:
 	health_bar.change_value(health.get_health(), health.get_max_health())

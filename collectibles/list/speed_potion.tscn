@@ -33,3 +33,6 @@ effects = Array[ExtResource("2_jeoma")]([SubResource("Resource_1vnq2")])
 
 [node name="AnimatedSprite2D" parent="." index="0"]
 sprite_frames = SubResource("SpriteFrames_b5lxs")
+
+[node name="CollisionShape2D" parent="." index="1"]
+visible = false

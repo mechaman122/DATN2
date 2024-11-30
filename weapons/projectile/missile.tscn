@@ -1,0 +1,35 @@
+[gd_scene load_steps=7 format=3 uid="uid://b0y3k4d8eji8n"]
+
+[ext_resource type="PackedScene" uid="uid://cqrgnms4g38vm" path="res://weapons/projectile/projectile.tscn" id="1_jk83s"]
+[ext_resource type="Script" path="res://weapons/projectile/explosive_projectile.gd" id="2_bpwph"]
+[ext_resource type="Texture2D" uid="uid://cnf43exy2gfv7" path="res://assets/sprites/weapons/projectiles/missile.png" id="2_fqymg"]
+[ext_resource type="PackedScene" uid="uid://dimbrorwjtelq" path="res://weapons/projectile/explosion.tscn" id="4_k5u1d"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_888xl"]
+radius = 50.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_yk8yv"]
+radius = 5.0
+
+[node name="Missile" node_paths=PackedStringArray("sprite") instance=ExtResource("1_jk83s")]
+script = ExtResource("2_bpwph")
+sprite = NodePath("Sprite2D")
+
+[node name="Sprite2D" type="Sprite2D" parent="." index="0"]
+scale = Vector2(3, 3)
+texture = ExtResource("2_fqymg")
+
+[node name="CollisionShape2D" parent="Hitbox" index="0"]
+visible = false
+position = Vector2(11, 0)
+shape = SubResource("CircleShape2D_888xl")
+
+[node name="CollisionShape2D" parent="ImpactDetector" index="0"]
+visible = false
+position = Vector2(11, 0)
+shape = SubResource("CircleShape2D_yk8yv")
+
+[node name="Explosion" parent="." index="3" instance=ExtResource("4_k5u1d")]
+position = Vector2(11, 0)
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

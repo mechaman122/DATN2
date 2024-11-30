@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://cmlvksdm3h5h2"]
+[gd_scene load_steps=18 format=3 uid="uid://cmlvksdm3h5h2"]
 
 [ext_resource type="Script" path="res://interface/interface.gd" id="1_uhq4k"]
 [ext_resource type="PackedScene" uid="uid://d0u014spi8o8v" path="res://interface/health_bar.tscn" id="2_7d5p2"]
@@ -11,6 +11,8 @@
 [ext_resource type="PackedScene" uid="uid://dnouyhy70x7lr" path="res://interface/mana_bar.tscn" id="7_ak2uw"]
 [ext_resource type="Script" path="res://interface/pause_screen.gd" id="8_es2dh"]
 [ext_resource type="Shader" path="res://scripts/blur_bg.gdshader" id="9_8gkw4"]
+[ext_resource type="Script" path="res://interface/game_over_screen.gd" id="12_w8c8y"]
+[ext_resource type="Texture2D" uid="uid://ddqalfhmsrcgw" path="res://assets/sprites/wallpaper/game_over_screen.jpg" id="13_chf44"]
 
 [sub_resource type="Gradient" id="Gradient_8icqs"]
 colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
@@ -223,6 +225,45 @@ dialog_text = "The progress will be saved.
 
 However, if you quit while not having advanced to the next level, you will lose this save!"
 dialog_autowrap = true
+
+[node name="GameOverScreen" type="Panel" parent="."]
+process_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("12_w8c8y")
+
+[node name="TextureRect" type="TextureRect" parent="GameOverScreen"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("13_chf44")
+
+[node name="Label" type="RichTextLabel" parent="GameOverScreen"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -166.0
+offset_top = -70.0
+offset_right = 166.0
+offset_bottom = -28.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_font_sizes/normal_font_size = 24
+bbcode_enabled = true
+text = "Press any key to return to menu"
+fit_content = true
+scroll_active = false
+autowrap_mode = 0
 
 [connection signal="pressed" from="PauseScreen/MarginContainer/VBoxContainer/Resume" to="PauseScreen" method="_on_resume_pressed"]
 [connection signal="pressed" from="PauseScreen/MarginContainer/VBoxContainer/Quit" to="PauseScreen" method="_on_quit_pressed"]

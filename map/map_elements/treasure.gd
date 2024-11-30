@@ -6,14 +6,18 @@ extends Node2D
 enum Rarity {COMMON, RARE, EPIC, LEGENDARY}
 
 var base_drop_chance = {
-	Rarity.COMMON : 0.4,
-	Rarity.RARE : 0.35,
-	Rarity.EPIC : 0.2,
-	Rarity.LEGENDARY : 0.05
+	Rarity.COMMON : 0.6,
+	Rarity.RARE : 0.25,
+	Rarity.EPIC : 0.13,
+	Rarity.LEGENDARY : 0.02
 }
+
+var weapon_drop_chance = 0.8
 
 # access folder that contains all the items
 var weapons_folder = "res://weapons/"
+var collectible_folder = "res://collectibles/list"
+var armor_folder = "res://armor/base_armors"
 
 var touch_body: Node2D = null
 
@@ -38,6 +42,33 @@ func get_random_drop(level: int) -> Rarity:
 			return rarity
 		
 	return Rarity.COMMON
+	
+
+# if treasure chest don't drop weapon, it will drop collectibles or armor
+func get_random_item():
+	var rand_value = randf()
+	var extension = "tscn"
+	var foundPaths = []
+	if rand_value > 0.5:
+		# drop collectibles
+		foundPaths = getFilePathByExtension(collectible_folder, extension)
+	else:
+		# drop armor
+		foundPaths = getFilePathByExtension(armor_folder, extension)
+	var item = foundPaths[randi() % foundPaths.size()]
+	# create a new instance of the collectible
+	item = load(item)
+	var new_item = item.instantiate()
+	new_item.position = position
+	get_parent().add_child(new_item)
+	await(new_item.tree_entered)
+	var tween = get_tree().create_tween()
+	tween.set_parallel(true)
+	tween.tween_property(
+		new_item, "position", Vector2(new_item.position + Vector2(0,-1) * 30), 0.25
+	).set_ease(Tween.EASE_OUT)
+	await(tween.finished)
+
 
 func adjust_drop_rates(base_chance: Dictionary, level: int) -> Dictionary:
 	var adjusted_chance = {}
@@ -80,19 +111,28 @@ func drop_weapon(rarity: Rarity) -> void:
 	new_weapon.is_on_floor = true
 	get_parent().add_child(new_weapon)
 	await(new_weapon.tree_entered)
+	#var throw_dir: Vector2 = Vector2(0, -1)
+	#new_weapon.interpolate_pos(position, position + throw_dir * 20)
 	#new_weapon.pickable_area.set_collision_mask_value(1, true)
 	#new_weapon.pickable_area.set_collision_mask_value(2, true)
 
 func interact():
-	var random_drop = get_random_drop(SavedData.level)
-	if random_drop != Rarity.COMMON:
-		animation_player.play("open_gem")
-	else :
-		animation_player.play("open")
+	var rand_value = randf()
+	if rand_value > weapon_drop_chance:
+		get_random_item()
+		#animation_player.play("open")
+	else:
+		# drop weapon
+		var random_drop = get_random_drop(SavedData.level)
+		#if random_drop != Rarity.COMMON:
+			#animation_player.play("open_gem")
+		#else :
+			#animation_player.play("open")
+		print("You got a ", random_drop, " item!")
+		drop_weapon(random_drop)
 	label.hide()
-	print("You got a ", random_drop, " item!")
-	drop_weapon(random_drop)
-
+	SoundManager.play_sfx("open_chest")
+	
 func _on_pickable_area_body_entered(body: Node2D) -> void:
 	if body is Player:
 		label.show()

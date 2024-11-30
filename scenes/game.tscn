@@ -1,7 +1,8 @@
-[gd_scene load_steps=15 format=3 uid="uid://xfcntficuxyx"]
+[gd_scene load_steps=18 format=3 uid="uid://xfcntficuxyx"]
 
 [ext_resource type="PackedScene" uid="uid://2tkmj873jyu3" path="res://scenes/adventurer.tscn" id="1_7c8dh"]
 [ext_resource type="PackedScene" uid="uid://b4a2vbki2mytf" path="res://scenes/damage_area_test.tscn" id="2_abr38"]
+[ext_resource type="Script" path="res://scripts/player_camera.gd" id="2_u03ay"]
 [ext_resource type="PackedScene" uid="uid://bk1y10ciko62f" path="res://map/map_elements/treasure.tscn" id="8_qskdt"]
 [ext_resource type="PackedScene" uid="uid://ctoy1ivcjv8gn" path="res://weapons/epic_weapons/scifi_gun.tscn" id="11_h6kv4"]
 [ext_resource type="PackedScene" uid="uid://3rtrhjddetts" path="res://map/map_elements/stairs.tscn" id="11_v8ere"]
@@ -14,6 +15,15 @@
 [ext_resource type="PackedScene" uid="uid://de6urgmcbhsfg" path="res://collectibles/list/big_mana_potion.tscn" id="13_xtu8e"]
 [ext_resource type="PackedScene" uid="uid://dngy6tjhq1f1u" path="res://collectibles/list/health_potion.tscn" id="14_kedro"]
 [ext_resource type="PackedScene" uid="uid://ihdjm1i2a0ul" path="res://armor/base_armors/fast_boots.tscn" id="14_lvh2u"]
+[ext_resource type="PackedScene" uid="uid://dy5klum2yhl1o" path="res://weapons/legendary_weapons/rocket_launcher.tscn" id="17_lmeie"]
+
+[sub_resource type="Environment" id="Environment_1ng1c"]
+background_mode = 3
+glow_enabled = true
+glow_intensity = 2.0
+glow_bloom = 0.1
+glow_hdr_threshold = 1.5
+glow_hdr_luminance_cap = 2.0
 
 [node name="Game" type="Node2D"]
 
@@ -23,7 +33,13 @@ position = Vector2(695, 330)
 [node name="Camera2D" type="Camera2D" parent="Adventurer"]
 position = Vector2(-2, 0)
 zoom = Vector2(4, 4)
-position_smoothing_speed = 10.0
+position_smoothing_enabled = true
+position_smoothing_speed = 3.0
+rotation_smoothing_enabled = true
+rotation_smoothing_speed = 3.0
+script = ExtResource("2_u03ay")
+RANDOM_SHAKE_STRENGTH = 0.6
+SHAKE_DECAY_RATE = 2.0
 
 [node name="DamageArea_test" parent="." instance=ExtResource("2_abr38")]
 position = Vector2(679, 282)
@@ -66,3 +82,10 @@ position = Vector2(666, 372)
 
 [node name="FastBoots" parent="." instance=ExtResource("14_lvh2u")]
 position = Vector2(583, 390)
+
+[node name="RocketLauncher" parent="." instance=ExtResource("17_lmeie")]
+position = Vector2(736, 295)
+is_on_floor = true
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_1ng1c")

@@ -22,7 +22,7 @@ signal armor_equipped(armor_stats: ArmorItem)
 @onready var armor =$Armor
 var mana: int = 200:
 	set(value):
-		if mana - value < 0:
+		if mana - value <= -40:
 			effect_player.play("mana_gain")
 		mana = min(value, 200)
 		SavedData.mana = mana
@@ -62,6 +62,7 @@ var regen_timer = 0
 var evade_chance: float = 0
 
 func _ready() -> void:
+	EventBus.enemy_died.connect(_on_enemy_died)
 	#emit_signal("weapon_picked_up", weapons.get_child(0).stats)
 	emit_signal("armor_equipped", current_armor)
 	
@@ -78,6 +79,8 @@ func _input(event):
 			apply_status_effect(Heal.new())
 		if event.keycode == KEY_5:
 			apply_status_effect(Burn.new())
+		if event.keycode == KEY_0:
+			health.health = 0
 			
 func _restore_prev_state() -> void:
 	
@@ -126,7 +129,8 @@ func _process(delta: float) -> void:
 	if !SavedData.allow_input:
 		return
 	var mouse_dir: Vector2 = (get_global_mouse_position() - global_position).normalized()
-	
+	var mouse_pos = get_global_mouse_position()
+	$Camera2D.offset = Vector2((mouse_pos.x - global_position.x) / (1280.0/2.0),(mouse_pos.y - global_position.y) / (720.0/2.0))
 	animated_sprite.flip_h = mouse_dir.x < 0
 	dash.emitting = (abs(velocity.x) >= 150 or abs(velocity.y) >= 150)
 
@@ -336,3 +340,8 @@ func get_curr_stats() -> Dictionary:
 		else:
 			curr_stats[stat] = base_stats[stat]
 	return curr_stats
+
+
+func _on_enemy_died(source):
+	mana += 5
+	$Camera2D.apply_shake()
