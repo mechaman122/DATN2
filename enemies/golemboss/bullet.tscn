@@ -1,0 +1,94 @@
+[gd_scene load_steps=13 format=3 uid="uid://cva6olixh66sa"]
+
+[ext_resource type="Texture2D" uid="uid://c0f4x28f6gimd" path="res://assets/sprites/enemies/arm_projectile_glowing.png" id="1_pgjm8"]
+[ext_resource type="Script" path="res://enemies/golemboss/bullet.gd" id="1_yca6q"]
+[ext_resource type="PackedScene" uid="uid://c2deh2ka3p3xy" path="res://hitboxes/hitbox.tscn" id="3_xmtrb"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0wn5b"]
+atlas = ExtResource("1_pgjm8")
+region = Rect2(0, 0, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qbg2o"]
+atlas = ExtResource("1_pgjm8")
+region = Rect2(100, 0, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vui2v"]
+atlas = ExtResource("1_pgjm8")
+region = Rect2(200, 0, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wmpfu"]
+atlas = ExtResource("1_pgjm8")
+region = Rect2(0, 100, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_y3x2d"]
+atlas = ExtResource("1_pgjm8")
+region = Rect2(100, 100, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cnlr4"]
+atlas = ExtResource("1_pgjm8")
+region = Rect2(200, 100, 100, 100)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_pjup8"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0wn5b")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qbg2o")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vui2v")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wmpfu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_y3x2d")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cnlr4")
+}],
+"loop": true,
+"name": &"default",
+"speed": 8.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1cbro"]
+size = Vector2(35, 20)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7rx0k"]
+size = Vector2(35, 20)
+
+[node name="Bullet" type="Area2D"]
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("1_yca6q")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_pjup8")
+autoplay = "default"
+frame = 4
+frame_progress = 0.0674758
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(27.5, -13)
+shape = SubResource("RectangleShape2D_1cbro")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 3.0
+one_shot = true
+autostart = true
+
+[node name="Hitbox" parent="." instance=ExtResource("3_xmtrb")]
+collision_layer = 32
+collision_mask = 2
+
+[node name="CollisionShape2D" parent="Hitbox" index="0"]
+position = Vector2(27.5, -13)
+shape = SubResource("RectangleShape2D_7rx0k")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+
+[editable path="Hitbox"]

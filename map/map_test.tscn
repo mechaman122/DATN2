@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://dqe7ubcc46c7s"]
+[gd_scene load_steps=22 format=3 uid="uid://dqe7ubcc46c7s"]
 
 [ext_resource type="Script" path="res://map/map_test.gd" id="1_0skcb"]
 [ext_resource type="Texture2D" uid="uid://dtfbhbb6yv03n" path="res://assets/sprites/map/dungeon_spritesheet.png" id="1_xv53t"]
@@ -498,9 +498,58 @@ texture_region_size = Vector2i(16, 32)
 "type": 0
 }
 
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_n4xkr"]
+vertices = PackedVector2Array(8, 8, -8, 8, -8, -8, 8, -8)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)])
+agent_radius = 0.0
+
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_65olp"]
+vertices = PackedVector2Array(8, 8, -8, 8, -8, -8, 8, -8)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)])
+agent_radius = 0.0
+
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_q83po"]
+vertices = PackedVector2Array(8, 8, -8, 8, -8, -8, 8, -8)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)])
+agent_radius = 0.0
+
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_8utca"]
+vertices = PackedVector2Array(8, 8, -8, 8, -8, -8, 8, -8)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)])
+agent_radius = 0.0
+
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_4dcam"]
+vertices = PackedVector2Array(8, 8, -8, 8, -8, -8, 8, -8)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)])
+agent_radius = 0.0
+
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_xr657"]
+vertices = PackedVector2Array(8, 8, -8, 8, -8, -8, 8, -8)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)])
+agent_radius = 0.0
+
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_pb6s0"]
+vertices = PackedVector2Array(8, 8, -8, 8, -8, -8, 8, -8)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)])
+agent_radius = 0.0
+
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_max0d"]
+vertices = PackedVector2Array(8, 8, -8, 8, -8, -8, 8, -8)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)])
+agent_radius = 0.0
+
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_lenu5"]
 texture = ExtResource("1_xv53t")
 0:8/0 = 0
+0:8/0/navigation_layer_0/polygon = SubResource("NavigationPolygon_n4xkr")
 0:8/0/metadata/_better_terrain = {
 0: [1, 0],
 3: [0],
@@ -514,6 +563,7 @@ texture = ExtResource("1_xv53t")
 }
 1:8/0 = 0
 1:8/0/probability = 0.1
+1:8/0/navigation_layer_0/polygon = SubResource("NavigationPolygon_q83po")
 1:8/0/metadata/_better_terrain = {
 0: [1, 0],
 3: [0],
@@ -527,6 +577,7 @@ texture = ExtResource("1_xv53t")
 }
 2:8/0 = 0
 2:8/0/probability = 0.1
+2:8/0/navigation_layer_0/polygon = SubResource("NavigationPolygon_4dcam")
 2:8/0/metadata/_better_terrain = {
 0: [1, 0],
 3: [0],
@@ -540,6 +591,7 @@ texture = ExtResource("1_xv53t")
 }
 3:8/0 = 0
 3:8/0/probability = 0.1
+3:8/0/navigation_layer_0/polygon = SubResource("NavigationPolygon_pb6s0")
 3:8/0/metadata/_better_terrain = {
 0: [1, 0],
 3: [0],
@@ -558,6 +610,7 @@ texture = ExtResource("1_xv53t")
 8:8/0 = 0
 0:9/0 = 0
 0:9/0/probability = 0.1
+0:9/0/navigation_layer_0/polygon = SubResource("NavigationPolygon_65olp")
 0:9/0/metadata/_better_terrain = {
 0: [1, 0],
 3: [0],
@@ -571,6 +624,7 @@ texture = ExtResource("1_xv53t")
 }
 1:9/0 = 0
 1:9/0/probability = 0.1
+1:9/0/navigation_layer_0/polygon = SubResource("NavigationPolygon_8utca")
 1:9/0/metadata/_better_terrain = {
 0: [1, 0],
 3: [0],
@@ -584,6 +638,7 @@ texture = ExtResource("1_xv53t")
 }
 2:9/0 = 0
 2:9/0/probability = 0.1
+2:9/0/navigation_layer_0/polygon = SubResource("NavigationPolygon_xr657")
 2:9/0/metadata/_better_terrain = {
 0: [1, 0],
 3: [0],
@@ -597,6 +652,7 @@ texture = ExtResource("1_xv53t")
 }
 3:9/0 = 0
 3:9/0/probability = 0.1
+3:9/0/navigation_layer_0/polygon = SubResource("NavigationPolygon_max0d")
 3:9/0/metadata/_better_terrain = {
 0: [1, 0],
 3: [0],
@@ -676,6 +732,7 @@ texture = ExtResource("1_xv53t")
 [sub_resource type="TileSet" id="TileSet_mvdii"]
 physics_layer_0/collision_layer = 1
 physics_layer_0/collision_mask = 14
+navigation_layer_0/layers = 1
 sources/0 = SubResource("TileSetAtlasSource_qq74l")
 sources/1 = SubResource("TileSetAtlasSource_lenu5")
 metadata/_better_terrain = {
@@ -1488,6 +1545,14 @@ physics_layer_0/collision_mask = 6
 sources/0 = SubResource("TileSetAtlasSource_hkdy0")
 sources/1 = SubResource("TileSetScenesCollectionSource_p17ef")
 
+[sub_resource type="Environment" id="Environment_1asco"]
+background_mode = 3
+glow_enabled = true
+glow_intensity = 2.0
+glow_bloom = 0.1
+glow_hdr_threshold = 1.5
+glow_hdr_luminance_cap = 2.0
+
 [node name="MapTest" type="Node2D" node_paths=PackedStringArray("player")]
 script = ExtResource("1_0skcb")
 player = NodePath("Adventurer")
@@ -1503,3 +1568,11 @@ modulate = Color(1, 0.190391, 0.243975, 1)
 position = Vector2(14, 20)
 
 [node name="Adventurer" parent="." instance=ExtResource("6_u1e8e")]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_1asco")
+
+[node name="SpawnTimer" type="Timer" parent="."]
+wait_time = 10.0
+
+[connection signal="timeout" from="SpawnTimer" to="." method="_on_spawn_timer_timeout"]

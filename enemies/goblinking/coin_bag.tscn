@@ -1,0 +1,66 @@
+[gd_scene load_steps=9 format=3 uid="uid://cgntklp50onkx"]
+
+[ext_resource type="Texture2D" uid="uid://bi3opxffkouss" path="res://assets/sprites/enemies/Coin Bag Sprite Sheet.png" id="1_skios"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qbtvf"]
+atlas = ExtResource("1_skios")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ikri5"]
+atlas = ExtResource("1_skios")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rsi4n"]
+atlas = ExtResource("1_skios")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_88a55"]
+atlas = ExtResource("1_skios")
+region = Rect2(0, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_b44fn"]
+atlas = ExtResource("1_skios")
+region = Rect2(32, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mgn3a"]
+atlas = ExtResource("1_skios")
+region = Rect2(64, 32, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_swu85"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qbtvf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ikri5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rsi4n")
+}],
+"loop": true,
+"name": &"bag",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_88a55")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_b44fn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mgn3a")
+}],
+"loop": true,
+"name": &"explode",
+"speed": 5.0
+}]
+
+[node name="Coin_bag" type="Node2D"]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_swu85")
+animation = &"explode"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]

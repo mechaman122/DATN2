@@ -20,6 +20,7 @@ var curr_bgm_name = ""
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	EventBus.theme_changed.connect(_on_theme_changed)
 	level_label.text = "Floor " + str(SavedData.level)
 	
 	health.max_health_changed.connect(_on_max_health_changed)
@@ -34,7 +35,8 @@ func _ready() -> void:
 	SoundManager.stop_all()
 	rng.randomize()
 	play_bgm()
-
+func _physics_process(delta):
+	$Coins/RichTextLabel.text = ("=  " + str(SavedData.coins))
 func _process(delta: float) -> void:
 	if !SoundManager.is_playing(curr_bgm_name):
 		play_bgm()
@@ -80,3 +82,10 @@ func play_bgm():
 	var bgm_num = rng.randi_range(2,6)
 	curr_bgm_name = "bgm_" + str(bgm_num)
 	SoundManager.fade_in_bgm(curr_bgm_name, 2)
+
+func _on_theme_changed(theme_id):
+	print(theme_id)
+	if theme_id == 1:
+		$SnowParticle.emitting = true
+	else:
+		$SnowParticle.emitting = false

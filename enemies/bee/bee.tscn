@@ -1,0 +1,213 @@
+[gd_scene load_steps=21 format=3 uid="uid://bd6jidvodgsv0"]
+
+[ext_resource type="PackedScene" uid="uid://bu6wovcp3bpiv" path="res://enemies/enemy.tscn" id="1_dtr5h"]
+[ext_resource type="Script" path="res://enemies/bee/bee.gd" id="2_8su7f"]
+[ext_resource type="Texture2D" uid="uid://cjtqaxw56p6mh" path="res://assets/sprites/enemies/bee/bee.png" id="2_xt4u6"]
+[ext_resource type="Script" path="res://enemies/bee/bee_idle.gd" id="4_ve7ov"]
+[ext_resource type="Script" path="res://enemies/bee/bee_follow.gd" id="5_xxujc"]
+[ext_resource type="Script" path="res://enemies/bee/bee_shoot.gd" id="6_ryf3q"]
+[ext_resource type="Script" path="res://enemies/bee/bee_dash.gd" id="7_uovik"]
+[ext_resource type="PackedScene" uid="uid://c7quxe7gllufx" path="res://enemies/bee/bullet.tscn" id="7_w0hsr"]
+[ext_resource type="Script" path="res://enemies/bee/bee_death.gd" id="8_f2syo"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4ja6p"]
+atlas = ExtResource("2_xt4u6")
+region = Rect2(0, 64, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_h3c6o"]
+atlas = ExtResource("2_xt4u6")
+region = Rect2(32, 64, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wnyej"]
+atlas = ExtResource("2_xt4u6")
+region = Rect2(64, 64, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1wsd8"]
+atlas = ExtResource("2_xt4u6")
+region = Rect2(96, 64, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_xpixp"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4ja6p")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_h3c6o")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wnyej")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1wsd8")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}]
+
+[sub_resource type="Animation" id="Animation_7lcq5"]
+resource_name = "die"
+length = 0.6
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"idle"]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimatedSprite2D:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("AnimatedSprite2D:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [true, false, true, false]
+}
+tracks/3/type = "method"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath(".")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0.6),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"queue_free"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_h7tat"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"idle"]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimatedSprite2D:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("AnimatedSprite2D:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_v8j5q"]
+_data = {
+"RESET": SubResource("Animation_h7tat"),
+"die": SubResource("Animation_7lcq5")
+}
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_q5qm8"]
+radius = 5.0
+height = 18.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_icsrf"]
+radius = 5.0
+height = 18.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_v4ckf"]
+radius = 5.0
+height = 18.0
+
+[node name="Bee" instance=ExtResource("1_dtr5h")]
+script = ExtResource("2_8su7f")
+
+[node name="AnimatedSprite2D" parent="." index="1"]
+sprite_frames = SubResource("SpriteFrames_xpixp")
+animation = &"idle"
+
+[node name="AnimationPlayer" parent="." index="2"]
+libraries = {
+"": SubResource("AnimationLibrary_v8j5q")
+}
+
+[node name="Hitbox" parent="." index="3"]
+collision_layer = 32
+collision_mask = 2
+
+[node name="CollisionShape2D" parent="Hitbox" index="0"]
+position = Vector2(0, -20)
+shape = SubResource("CapsuleShape2D_q5qm8")
+
+[node name="CollisionShape2D" parent="Hurtbox" index="0"]
+position = Vector2(0, -20)
+shape = SubResource("CapsuleShape2D_icsrf")
+
+[node name="CollisionShape2D" parent="." index="5"]
+position = Vector2(0, -20)
+shape = SubResource("CapsuleShape2D_v4ckf")
+
+[node name="Idle" type="Node2D" parent="FSM" index="0"]
+script = ExtResource("4_ve7ov")
+
+[node name="Follow" type="Node2D" parent="FSM" index="1"]
+script = ExtResource("5_xxujc")
+
+[node name="Shoot" type="Node2D" parent="FSM" index="2"]
+script = ExtResource("6_ryf3q")
+bullet_node = ExtResource("7_w0hsr")
+
+[node name="Dash" type="Node2D" parent="FSM" index="3"]
+script = ExtResource("7_uovik")
+
+[node name="Timer" type="Timer" parent="FSM/Dash" index="0"]
+wait_time = 1.5
+one_shot = true
+
+[node name="Death" type="Node2D" parent="FSM" index="4"]
+script = ExtResource("8_f2syo")
+
+[connection signal="timeout" from="FSM/Dash/Timer" to="FSM/Dash" method="_on_timer_timeout"]
+[connection signal="timeout" from="AttackCooldownTimer" to="FSM/Shoot" method="_on_attack_cooldown_timer_timeout"]
+
+[editable path="Hitbox"]
+[editable path="Hurtbox"]

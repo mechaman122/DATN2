@@ -1,11 +1,13 @@
 class_name GladiatorState extends State
 
-const IDLE = "Gladiator_idle"
-const CHASE = "Gladiator_chase"
-const ATK = "Gladiator_attack"
+const IDLE = "Idle"
+const CHASE = "Chase"
+const ATK = "Attack"
+const HURT = "Hurt"
+const DIE = "Die"
 
 var gladiator: Gladiator
-var chase = false
+
 func _ready() -> void:
 	await owner.ready
 	gladiator = owner as Gladiator

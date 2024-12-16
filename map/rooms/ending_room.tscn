@@ -1,5 +1,12 @@
-[gd_scene load_steps=2 format=3 uid="uid://hmryeqtgv5jk"]
+[gd_scene load_steps=4 format=3 uid="uid://hmryeqtgv5jk"]
 
 [ext_resource type="PackedScene" uid="uid://m7n00jdah45y" path="res://map/rooms/room.tscn" id="1_vhk74"]
+[ext_resource type="Script" path="res://map/rooms/ending_room.gd" id="2_2dmwf"]
+[ext_resource type="PackedScene" uid="uid://3rtrhjddetts" path="res://map/map_elements/stairs.tscn" id="2_m8xvy"]
 
 [node name="EndingRoom" instance=ExtResource("1_vhk74")]
+script = ExtResource("2_2dmwf")
+
+[node name="Statirs" parent="." index="9" instance=ExtResource("2_m8xvy")]
+
+[editable path="Statirs"]

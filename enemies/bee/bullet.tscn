@@ -1,0 +1,29 @@
+[gd_scene load_steps=5 format=3 uid="uid://c7quxe7gllufx"]
+
+[ext_resource type="Texture2D" uid="uid://xqve7qk0ta0h" path="res://assets/sprites/enemies/bee/bee_sting.png" id="1_c48u0"]
+[ext_resource type="Script" path="res://enemies/bee/bullet.gd" id="1_ndk86"]
+[ext_resource type="PackedScene" uid="uid://c2deh2ka3p3xy" path="res://hitboxes/hitbox.tscn" id="3_i606m"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3dsih"]
+size = Vector2(30, 11)
+
+[node name="Bullet" type="Area2D"]
+script = ExtResource("1_ndk86")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.06, 0.06)
+texture = ExtResource("1_c48u0")
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+
+[node name="Hitbox" parent="." instance=ExtResource("3_i606m")]
+collision_layer = 32
+collision_mask = 2
+
+[node name="CollisionShape2D" parent="Hitbox" index="0"]
+position = Vector2(-1, -0.5)
+shape = SubResource("RectangleShape2D_3dsih")
+
+[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_screen_exited"]
+
+[editable path="Hitbox"]

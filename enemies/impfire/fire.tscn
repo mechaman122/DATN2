@@ -1,0 +1,163 @@
+[gd_scene load_steps=16 format=3 uid="uid://cua7lmlihmpll"]
+
+[ext_resource type="Script" path="res://enemies/impfire/fire.gd" id="1_2v470"]
+[ext_resource type="Texture2D" uid="uid://ch0gw5veykkbb" path="res://assets/sprites/enemies/Imp Sprite Sheet.png" id="1_vhsuh"]
+[ext_resource type="PackedScene" uid="uid://c2deh2ka3p3xy" path="res://hitboxes/hitbox.tscn" id="3_gmhjv"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_r7n78"]
+atlas = ExtResource("1_vhsuh")
+region = Rect2(0, 160, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_34r8t"]
+atlas = ExtResource("1_vhsuh")
+region = Rect2(32, 160, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pj4jy"]
+atlas = ExtResource("1_vhsuh")
+region = Rect2(64, 160, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2kedc"]
+atlas = ExtResource("1_vhsuh")
+region = Rect2(96, 160, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ap2lo"]
+atlas = ExtResource("1_vhsuh")
+region = Rect2(128, 160, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_36edo"]
+atlas = ExtResource("1_vhsuh")
+region = Rect2(160, 160, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ss520"]
+atlas = ExtResource("1_vhsuh")
+region = Rect2(192, 160, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_1vws6"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_r7n78")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_34r8t")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pj4jy")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2kedc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ap2lo")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_36edo")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ss520")
+}],
+"loop": false,
+"name": &"default",
+"speed": 60.0
+}]
+
+[sub_resource type="Animation" id="Animation_kgoo6"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"default"]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimatedSprite2D:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_1hepu"]
+resource_name = "fire"
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"default"]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimatedSprite2D:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.1, 0.7, 0.75, 0.8, 0.85, 0.9),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 2, 3, 4, 5, 6]
+}
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(1),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"queue_free"
+}]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_f157i"]
+_data = {
+"RESET": SubResource("Animation_kgoo6"),
+"fire": SubResource("Animation_1hepu")
+}
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2hlk2"]
+size = Vector2(21, 5)
+
+[node name="Fire" type="Node2D"]
+script = ExtResource("1_2v470")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(-3, -17)
+sprite_frames = SubResource("SpriteFrames_1vws6")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_f157i")
+}
+autoplay = "fire"
+
+[node name="Hitbox" parent="." instance=ExtResource("3_gmhjv")]
+collision_layer = 32
+collision_mask = 2
+
+[node name="CollisionShape2D" parent="Hitbox" index="0"]
+position = Vector2(0.5, -7.5)
+shape = SubResource("RectangleShape2D_2hlk2")
+
+[editable path="Hitbox"]

@@ -36,7 +36,7 @@ func dir_content(path):
 		var file_name = dir.get_next()
 		while file_name != "":
 			print("Found file: " + file_name)
-			var data_resource: PlayerContinueData = load(path + file_name)
+			var data_resource: PlayerContinueData = SafeResourceLoader.load(path + file_name)
 			data_list.append(data_resource)
 			
 			var button = Button.new()
@@ -53,15 +53,17 @@ func _on_pressed(button: Button):
 	var index = button.get_index()
 	curr_data_index = index
 	curr_file_name = button.text
-	%Level.text = "Floor " + str(data_list[index].level)
-	%Health.text = "Health: " + str(data_list[index].max_health) + " / " + str(data_list[index].health)
-	%Armor.text = "Armor: " + str(data_list[index].max_armor)
-	%BaseStats.text = "Base stats: " + str(data_list[index].base_stats)
-	%WeaponsList.text = "Weapons: "
-	for weapon in data_list[index].weapons:
-		%WeaponsList.text += (str(weapon.stats.item_name) + ", ")
-	%EquippedArmor.text = "Equipped Armor: " + (str(data_list[index].equipped_armor.stats.item_name) if data_list[index].equipped_armor != null else "None")
-	
+	if data_list[index] != null:
+		%Level.text = "Floor " + str(data_list[index].level)
+		%Health.text = "Health: " + str(data_list[index].max_health) + " / " + str(data_list[index].health)
+		%Armor.text = "Armor: " + str(data_list[index].max_armor)
+		%BaseStats.text = "Base stats: " + str(data_list[index].base_stats)
+		%WeaponsList.text = "Weapons: "
+		for weapon in data_list[index].weapons:
+			%WeaponsList.text += (str(weapon.stats.item_name) + ", ")
+		%EquippedArmor.text = "Equipped Armor: " + (str(data_list[index].equipped_armor.stats.item_name) if data_list[index].equipped_armor != null else "None")
+	else:
+		OS.alert("Executable code detected! Check file authencity!")
 	SoundManager.play_sfx("cursor2_sfx")
 	
 

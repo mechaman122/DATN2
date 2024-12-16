@@ -21,10 +21,10 @@ BetterTerrain="*res://addons/better-terrain/BetterTerrain.gd"
 Popups="*res://scenes/popups.tscn"
 SceneTransitor="*res://autoloads/scene_transitor.tscn"
 SavedData="*res://autoloads/saved_data.gd"
-SoundManager="*res://addons/sound_manager/module/SoundManager.tscn"
 EventBus="*res://autoloads/event_bus.gd"
 DamageNumbers="*res://autoloads/damage_numbers.gd"
 ConfigFileHandler="*res://autoloads/config_file_handler.gd"
+SoundManager="*res://addons/sound_manager/module/SoundManager.tscn"
 
 [display]
 
@@ -38,7 +38,7 @@ mouse_cursor/tooltip_position_offset=Vector2(0, 0)
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/better-terrain/plugin.cfg", "res://addons/sound_manager/plugin.cfg")
+enabled=PackedStringArray("res://addons/better-terrain/plugin.cfg", "res://addons/safe_resource_loader/plugin.cfg", "res://addons/sound_manager/plugin.cfg")
 
 [file_customization]
 

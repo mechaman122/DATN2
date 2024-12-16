@@ -126,7 +126,8 @@ func _process(delta: float) -> void:
 	if !SavedData.allow_input:
 		return
 	var mouse_dir: Vector2 = (get_global_mouse_position() - global_position).normalized()
-	
+	var mouse_pos = get_global_mouse_position()
+	$Camera2D.offset = Vector2((mouse_pos.x - global_position.x) / (1280.0/2.0),(mouse_pos.y - global_position.y) / (720.0/2.0))
 	animated_sprite.flip_h = mouse_dir.x < 0
 	dash.emitting = (abs(velocity.x) >= 150 or abs(velocity.y) >= 150)
 
@@ -311,6 +312,7 @@ func take_damage(_damage: int, source, is_crit) -> void:
 				health.health -= diff
 		else:
 			health.health -= _damage
+	$Camera2D.apply_shake()
 
 
 func regenerate(delta: float) -> void:

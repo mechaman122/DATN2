@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://cmlvksdm3h5h2"]
+[gd_scene load_steps=22 format=3 uid="uid://cmlvksdm3h5h2"]
 
 [ext_resource type="Script" path="res://interface/interface.gd" id="1_uhq4k"]
 [ext_resource type="PackedScene" uid="uid://d0u014spi8o8v" path="res://interface/health_bar.tscn" id="2_7d5p2"]
@@ -6,11 +6,14 @@
 [ext_resource type="Texture2D" uid="uid://cdffyqiwh31as" path="res://assets/sprites/rpg_icon/Individual icons (16x16)/99.png" id="2_wc5gp"]
 [ext_resource type="PackedScene" uid="uid://db8p2dw2s41xg" path="res://interface/armor_bar.tscn" id="3_ca6tg"]
 [ext_resource type="FontFile" uid="uid://dlndpcesvur4y" path="res://assets/fonts/quaver.ttf" id="3_cveri"]
+[ext_resource type="Texture2D" uid="uid://bumuw187qngr8" path="res://assets/sprites/effects/snowfalke_tiny.png" id="3_l6kok"]
 [ext_resource type="PackedScene" uid="uid://dwepsfgttpkaj" path="res://inventory/inventory_item.tscn" id="4_q7k2g"]
 [ext_resource type="Script" path="res://interface/upgrade_options.gd" id="6_eca3q"]
 [ext_resource type="PackedScene" uid="uid://dnouyhy70x7lr" path="res://interface/mana_bar.tscn" id="7_ak2uw"]
 [ext_resource type="Script" path="res://interface/pause_screen.gd" id="8_es2dh"]
 [ext_resource type="Shader" path="res://scripts/blur_bg.gdshader" id="9_8gkw4"]
+[ext_resource type="Texture2D" uid="uid://dtmcenr1s0xye" path="res://assets/sprites/collectibles/coin/coin_1.png" id="12_187hq"]
+[ext_resource type="Script" path="res://interface/ending_screen.gd" id="14_w63hs"]
 
 [sub_resource type="Gradient" id="Gradient_8icqs"]
 colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
@@ -31,6 +34,20 @@ initial_velocity_max = 90.0
 gravity = Vector3(0, 98, 0)
 color_ramp = SubResource("GradientTexture1D_sv7jm")
 
+[sub_resource type="Curve" id="Curve_2o4v0"]
+_data = [Vector2(0, 0.32967), 0.0, 0.0, 0, 0, Vector2(0.50641, 0.725275), 0.0, 0.0, 0, 0, Vector2(0.961538, 0.043956), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_vtfrl"]
+curve = SubResource("Curve_2o4v0")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_hvypd"]
+particle_flag_disable_z = true
+emission_shape = 3
+emission_box_extents = Vector3(600, 600, 1)
+gravity = Vector3(0, 98, 0)
+scale_curve = SubResource("CurveTexture_vtfrl")
+
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_dd56p"]
 shader = ExtResource("9_8gkw4")
 shader_parameter/amount = 3.0
@@ -46,6 +63,12 @@ amount = 100
 process_material = SubResource("ParticleProcessMaterial_ucpwb")
 texture = ExtResource("2_wc5gp")
 lifetime = 3.0
+
+[node name="SnowParticle" type="GPUParticles2D" parent="."]
+visible = false
+position = Vector2(640, 360)
+process_material = SubResource("ParticleProcessMaterial_hvypd")
+texture = ExtResource("3_l6kok")
 
 [node name="UpgradePanel" type="NinePatchRect" parent="."]
 process_mode = 3
@@ -223,6 +246,58 @@ dialog_text = "The progress will be saved.
 
 However, if you quit while not having advanced to the next level, you will lose this save!"
 dialog_autowrap = true
+
+[node name="Coins" type="Node2D" parent="."]
+
+[node name="Sprite2D" type="Sprite2D" parent="Coins"]
+position = Vector2(1118, 57)
+scale = Vector2(3, 3)
+texture = ExtResource("12_187hq")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Coins"]
+offset_left = 1139.0
+offset_top = 48.0
+offset_right = 1239.0
+offset_bottom = 88.0
+text = "=  0 "
+
+[node name="EndingScreen" type="Panel" parent="."]
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("14_w63hs")
+
+[node name="ColorRect" type="ColorRect" parent="EndingScreen"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.0295066, 0.0295066, 0.0295066, 1)
+
+[node name="Label" type="RichTextLabel" parent="EndingScreen"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -60.0
+offset_top = -21.0
+offset_right = 140.0
+offset_bottom = 21.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/normal_font_size = 24
+bbcode_enabled = true
+text = "Game Over"
+fit_content = true
+scroll_active = false
 
 [connection signal="pressed" from="PauseScreen/MarginContainer/VBoxContainer/Resume" to="PauseScreen" method="_on_resume_pressed"]
 [connection signal="pressed" from="PauseScreen/MarginContainer/VBoxContainer/Quit" to="PauseScreen" method="_on_quit_pressed"]

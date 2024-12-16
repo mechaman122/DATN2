@@ -1,0 +1,128 @@
+[gd_scene load_steps=20 format=3 uid="uid://bos4dtu0pybwr"]
+
+[ext_resource type="Texture2D" uid="uid://cx4npw4ahb0l5" path="res://assets/sprites/enemies/undead_png/summonAppear.png" id="1_c3xrt"]
+[ext_resource type="Script" path="res://enemies/undeadboss/minion.gd" id="1_xwlxc"]
+[ext_resource type="Texture2D" uid="uid://xlo78axnvbkt" path="res://assets/sprites/enemies/undead_png/summonIdle.png" id="2_7lcex"]
+[ext_resource type="Script" path="res://scripts/health.gd" id="2_vk0jy"]
+[ext_resource type="Script" path="res://hitboxes/hurtbox.gd" id="5_icybh"]
+[ext_resource type="PackedScene" uid="uid://c2deh2ka3p3xy" path="res://hitboxes/hitbox.tscn" id="6_jdhtl"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_iokfk"]
+atlas = ExtResource("1_c3xrt")
+region = Rect2(0, 0, 50, 50)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4kk2w"]
+atlas = ExtResource("1_c3xrt")
+region = Rect2(50, 0, 50, 50)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_l2s8e"]
+atlas = ExtResource("1_c3xrt")
+region = Rect2(100, 0, 50, 50)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bu6d8"]
+atlas = ExtResource("1_c3xrt")
+region = Rect2(0, 50, 50, 50)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_omebm"]
+atlas = ExtResource("1_c3xrt")
+region = Rect2(50, 50, 50, 50)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nymc2"]
+atlas = ExtResource("1_c3xrt")
+region = Rect2(100, 50, 50, 50)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ecr8a"]
+atlas = ExtResource("2_7lcex")
+region = Rect2(0, 0, 50, 50)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qdl2c"]
+atlas = ExtResource("2_7lcex")
+region = Rect2(50, 0, 50, 50)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qdyjd"]
+atlas = ExtResource("2_7lcex")
+region = Rect2(100, 0, 50, 50)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1jxfn"]
+atlas = ExtResource("2_7lcex")
+region = Rect2(150, 0, 50, 50)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_p886t"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_iokfk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4kk2w")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_l2s8e")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bu6d8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_omebm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nymc2")
+}],
+"loop": false,
+"name": &"default",
+"speed": 6.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ecr8a")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qdl2c")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qdyjd")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1jxfn")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 6.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_534w7"]
+radius = 6.0
+height = 12.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_wlist"]
+radius = 6.0
+
+[node name="Minion" type="CharacterBody2D"]
+script = ExtResource("1_xwlxc")
+
+[node name="Health" type="Node2D" parent="."]
+script = ExtResource("2_vk0jy")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_p886t")
+animation = &"idle"
+autoplay = "default"
+
+[node name="Hurtbox" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 16
+script = ExtResource("5_icybh")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
+position = Vector2(-1, 8)
+shape = SubResource("CapsuleShape2D_534w7")
+
+[node name="Hitbox" parent="." instance=ExtResource("6_jdhtl")]
+collision_layer = 32
+collision_mask = 2
+
+[node name="CollisionShape2D" parent="Hitbox" index="0"]
+position = Vector2(-1, 8)
+shape = SubResource("CircleShape2D_wlist")
+
+[editable path="Hitbox"]

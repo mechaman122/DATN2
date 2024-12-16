@@ -10,6 +10,7 @@ script = ExtResource("4_6oafo")
 weapon_damage = 1
 weapon_crit = 0.0
 weapon_speed = 0.0
+mana = 0
 description = "+1 Damage"
 
 [sub_resource type="Resource" id="Resource_d8241"]
@@ -17,6 +18,7 @@ script = ExtResource("4_6oafo")
 weapon_damage = 0
 weapon_crit = 0.1
 weapon_speed = 0.0
+mana = 0
 description = "+ 10% Crit"
 
 [resource]
@@ -29,6 +31,9 @@ weapon_speed = 1.0
 mana = 1
 status_effects = Array[ExtResource("2_quta8")]([])
 upgrades = Array[ExtResource("4_6oafo")]([SubResource("Resource_70wqn"), SubResource("Resource_d8241")])
+modifiers = {
+"speed": 0.0
+}
 item_name = "Apprentice Staff"
 texture = ExtResource("3_jrb5a")
 description = "A normal staff"

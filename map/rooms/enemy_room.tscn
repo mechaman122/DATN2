@@ -1,5 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://c8sjgk4oye0xj"]
+[gd_scene load_steps=3 format=3 uid="uid://c8sjgk4oye0xj"]
 
 [ext_resource type="PackedScene" uid="uid://m7n00jdah45y" path="res://map/rooms/room.tscn" id="1_yoi6e"]
+[ext_resource type="Script" path="res://map/rooms/enemy_room.gd" id="2_t0414"]
 
 [node name="EnemyRoom" instance=ExtResource("1_yoi6e")]
+script = ExtResource("2_t0414")

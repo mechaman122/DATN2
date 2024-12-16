@@ -7,22 +7,23 @@ var knockback_direction = Vector2()
 func enter(previous_state_path: String, data: Dictionary = {}) -> void:
 	player = get_tree().get_first_node_in_group("Adventurer")
 	gladiator.animation_player.play("attack")
-	if gladiator.animated_sprite.flip_h == false:
-		gladiator.gladiator_hitbox.position = Vector2(12.5, -10)
-	else:
-		gladiator.gladiator_hitbox.position = Vector2(-12.5, -10)
+	gladiator.attack_cooldown_timer.start()
 
 func physics_update(delta: float) -> void:
 	var dir = player.global_position - gladiator.global_position
-	#if dir.length() > 15:
-		#gladiator.velocity = dir.normalized() * speed
-	#else: 
-		#gladiator.velocity = Vector2()
-	#
-	if dir.length() > 12.5:
-		finished.emit(CHASE)
-	if dir.length() > 75:
-		finished.emit(IDLE)
+	if dir.x < 0:
+		gladiator.animated_sprite.flip_h = true
+		gladiator.hitbox.position = Vector2(-12.5, -10)
+	if dir.x > 0:
+		gladiator.hitbox.position = Vector2(12.5, -10)
+		gladiator.animated_sprite.flip_h = false
 
-func _on_hitbox_body_entered(hurtbox: Hurtbox) -> void:
-	print(hurtbox)
+	if gladiator.health.health == 0:
+		finished.emit(DIE)
+	if gladiator.health_changed:
+		finished.emit(HURT)
+	#if dir.length() > 75:
+		#finished.emit(IDLE)
+
+func _on_attack_cooldown_timer_timeout() -> void:
+	finished.emit(CHASE)

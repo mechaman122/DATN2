@@ -4,7 +4,7 @@ var max_health: int = 6
 var health: int = 6
 var max_armor: int = 4
 var mana: int = 200
-var coin: int = 0
+var coins: int = 0
 
 var base_stats = {
 	"damage": 0,
@@ -23,10 +23,11 @@ var equipped_armor: ArmorItem = null
 
 var passives: Dictionary
 
-var level: int = 1:
+var level: int = 0:
 	set(value):
 		level = value
 		can_quit_without_losing_save = true
+		EventBus.emit_signal("floor_changed")
 
 var can_quit_without_losing_save: bool = true
 var save_data_name: String = ""
@@ -51,7 +52,7 @@ func save_data() -> PlayerContinueData:
 	continue_data.health = health
 	continue_data.max_armor = max_armor
 	continue_data.mana = mana
-	continue_data.coin = coin
+	continue_data.coins = coins
 	
 	continue_data.level = level
 	
@@ -78,6 +79,6 @@ func load_data(data_to_load: PlayerContinueData):
 	health = data_to_load.health
 	max_armor = data_to_load.max_armor
 	mana = data_to_load.mana
-	coin = data_to_load.coin
+	coins = data_to_load.coins
 	
 	level = data_to_load.level

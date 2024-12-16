@@ -1,6 +1,7 @@
-[gd_scene load_steps=15 format=3 uid="uid://xfcntficuxyx"]
+[gd_scene load_steps=21 format=3 uid="uid://xfcntficuxyx"]
 
 [ext_resource type="PackedScene" uid="uid://2tkmj873jyu3" path="res://scenes/adventurer.tscn" id="1_7c8dh"]
+[ext_resource type="PackedScene" uid="uid://d0dt1mok13kxo" path="res://map/rooms/hall.tscn" id="1_ucwir"]
 [ext_resource type="PackedScene" uid="uid://b4a2vbki2mytf" path="res://scenes/damage_area_test.tscn" id="2_abr38"]
 [ext_resource type="PackedScene" uid="uid://bk1y10ciko62f" path="res://map/map_elements/treasure.tscn" id="8_qskdt"]
 [ext_resource type="PackedScene" uid="uid://ctoy1ivcjv8gn" path="res://weapons/epic_weapons/scifi_gun.tscn" id="11_h6kv4"]
@@ -14,28 +15,34 @@
 [ext_resource type="PackedScene" uid="uid://de6urgmcbhsfg" path="res://collectibles/list/big_mana_potion.tscn" id="13_xtu8e"]
 [ext_resource type="PackedScene" uid="uid://dngy6tjhq1f1u" path="res://collectibles/list/health_potion.tscn" id="14_kedro"]
 [ext_resource type="PackedScene" uid="uid://ihdjm1i2a0ul" path="res://armor/base_armors/fast_boots.tscn" id="14_lvh2u"]
+[ext_resource type="PackedScene" uid="uid://clh87ttxri5gv" path="res://map/map_elements/box.tscn" id="16_o1r7p"]
+[ext_resource type="PackedScene" uid="uid://c3kq0kklfl177" path="res://map/map_elements/explosion_box.tscn" id="17_2vrja"]
+[ext_resource type="PackedScene" uid="uid://b00o3vgcvlct0" path="res://map/map_elements/magma_box.tscn" id="18_3nl4y"]
+[ext_resource type="PackedScene" uid="uid://bjyjpqim2hvo5" path="res://map/shop/shop.tscn" id="19_tdksq"]
+[ext_resource type="PackedScene" uid="uid://bd6jidvodgsv0" path="res://enemies/bee/bee.tscn" id="20_x6o1s"]
 
 [node name="Game" type="Node2D"]
 
-[node name="Adventurer" parent="." instance=ExtResource("1_7c8dh")]
-position = Vector2(695, 330)
-
-[node name="Camera2D" type="Camera2D" parent="Adventurer"]
-position = Vector2(-2, 0)
-zoom = Vector2(4, 4)
-position_smoothing_speed = 10.0
-
-[node name="DamageArea_test" parent="." instance=ExtResource("2_abr38")]
-position = Vector2(679, 282)
-
-[node name="Treasure" parent="." instance=ExtResource("8_qskdt")]
-position = Vector2(700, 390)
+[node name="hall" parent="." instance=ExtResource("1_ucwir")]
+position = Vector2(338, 47)
 
 [node name="Statirs" parent="." instance=ExtResource("11_v8ere")]
-position = Vector2(792, 390)
+position = Vector2(723, 260)
+scale = Vector2(2, 2)
+
+[node name="Adventurer" parent="." instance=ExtResource("1_7c8dh")]
+position = Vector2(730, 347)
+
+[node name="DamageArea_test" parent="." instance=ExtResource("2_abr38")]
+visible = false
+position = Vector2(552, 256)
+
+[node name="Treasure" parent="." instance=ExtResource("8_qskdt")]
+visible = false
+position = Vector2(700, 390)
 
 [node name="GoldenBow" parent="." instance=ExtResource("12_daosd")]
-position = Vector2(778, 334)
+position = Vector2(586, 445)
 is_on_floor = true
 
 [node name="ScifiGun" parent="." instance=ExtResource("11_h6kv4")]
@@ -47,22 +54,48 @@ position = Vector2(607, 317)
 is_on_floor = true
 
 [node name="HealthPotion" parent="." instance=ExtResource("14_kedro")]
+visible = false
 position = Vector2(588, 282)
 
 [node name="SpeedPotion" parent="." instance=ExtResource("13_ok3x2")]
+visible = false
 position = Vector2(623, 282)
 
 [node name="ManaPotion" parent="." instance=ExtResource("12_fht7t")]
+visible = false
 position = Vector2(558, 308)
 
 [node name="BigManaPotion" parent="." instance=ExtResource("13_xtu8e")]
+visible = false
 position = Vector2(578, 314)
 
 [node name="GoldenArmor" parent="." instance=ExtResource("12_uam2d")]
+visible = false
 position = Vector2(637, 372)
 
 [node name="AuraArmor" parent="." instance=ExtResource("13_mc13e")]
+visible = false
 position = Vector2(666, 372)
 
 [node name="FastBoots" parent="." instance=ExtResource("14_lvh2u")]
+visible = false
 position = Vector2(583, 390)
+
+[node name="Box" parent="." instance=ExtResource("16_o1r7p")]
+visible = false
+position = Vector2(848, 313)
+
+[node name="ExplosionBox" parent="." instance=ExtResource("17_2vrja")]
+visible = false
+position = Vector2(870, 230)
+
+[node name="MagmaBox" parent="." instance=ExtResource("18_3nl4y")]
+visible = false
+position = Vector2(849, 373)
+
+[node name="Shop" parent="." instance=ExtResource("19_tdksq")]
+visible = false
+position = Vector2(851, 412)
+
+[node name="Bee" parent="." instance=ExtResource("20_x6o1s")]
+position = Vector2(799, 294)

@@ -12,25 +12,24 @@ func randomize_wander():
 
 func enter(previous_state_path: String, data: Dictionary = {}) -> void:
 	player = get_tree().get_first_node_in_group("Adventurer")
-	gladiator.animation_player.play("idle")
-	gladiator.velocity = Vector2()
-	randomize_wander()
-
-func update(delta: float):
-	if wander_time > 0:
-		wander_time -= delta
-	
-	else: 
-		randomize_wander()
+	#gladiator.animation_player.play("idle")
+	#gladiator.velocity = Vector2()
+	#randomize_wander()
+#
+#func update(delta: float):
+	#if wander_time > 0:
+		#wander_time -= delta
+	#
+	#else: 
+		#randomize_wander()
 
 func physics_update(delta: float) -> void:
-	gladiator.velocity = mov_direction * speed
+	#print(gladiator.health.health)
+	gladiator.velocity = Vector2.ZERO
 	var dir = player.global_position - gladiator.global_position
-	if chase == true && dir.length() < 75 :
+	if dir.length() >= 15 :
 		finished.emit(CHASE)
-
-func _on_detection_area_body_entered(body: Node2D) -> void:
-	chase = true
-
-func _on_detection_area_body_exited(body: Node2D) -> void:
-	chase = false
+	if gladiator.health_changed:
+		finished.emit(HURT)
+	if gladiator.health.health <= 0:
+		finished.emit(DIE)

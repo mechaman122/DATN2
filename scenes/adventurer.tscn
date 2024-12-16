@@ -1,4 +1,4 @@
-[gd_scene load_steps=101 format=3 uid="uid://2tkmj873jyu3"]
+[gd_scene load_steps=102 format=3 uid="uid://2tkmj873jyu3"]
 
 [ext_resource type="Texture2D" uid="uid://cn25h6f20oytn" path="res://assets/sprites/adventurer/adventurer_sprite.png" id="1_c2cxh"]
 [ext_resource type="Script" path="res://scripts/adventurer.gd" id="1_cfpa1"]
@@ -17,6 +17,7 @@
 [ext_resource type="PackedScene" uid="uid://djialem8q1fvs" path="res://hitboxes/interaction_manager.tscn" id="15_o18yt"]
 [ext_resource type="Script" path="res://states/roll.gd" id="16_w342q"]
 [ext_resource type="Texture2D" uid="uid://ds1edo2dx5jjn" path="res://assets/sprites/adventurer/adventurer_run.png" id="17_yfxkc"]
+[ext_resource type="Script" path="res://scripts/camera_2d.gd" id="18_h6s66"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_sow0o"]
 atlas = ExtResource("1_c2cxh")
@@ -1085,6 +1086,17 @@ lifetime = 0.3
 libraries = {
 "": SubResource("AnimationLibrary_is1de")
 }
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(-2, 0)
+zoom = Vector2(4, 4)
+position_smoothing_enabled = true
+position_smoothing_speed = 3.0
+rotation_smoothing_enabled = true
+rotation_smoothing_speed = 3.0
+script = ExtResource("18_h6s66")
+RANDOM_SHAKE_STRENGTH = 1.0
+SHAKE_DECAY_RATE = 2.0
 
 [connection signal="armor_equipped" from="." to="Interface" method="_on_player_armor_equipped"]
 [connection signal="weapon_dropped" from="." to="Interface" method="_on_player_weapon_dropped"]

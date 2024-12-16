@@ -1,20 +1,50 @@
-[gd_scene load_steps=4 format=3 uid="uid://3rtrhjddetts"]
+[gd_scene load_steps=7 format=3 uid="uid://3rtrhjddetts"]
 
 [ext_resource type="Script" path="res://map/map_elements/stairs.gd" id="1_768wh"]
-[ext_resource type="Texture2D" uid="uid://bw3trqtksel8p" path="res://assets/sprites/map/stairs.png" id="2_lpxjc"]
+[ext_resource type="Texture2D" uid="uid://cg6kf78kv1tw2" path="res://assets/sprites/map/TPall.png" id="2_kxcfs"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_nt0us"]
-size = Vector2(14, 12)
+[sub_resource type="AtlasTexture" id="AtlasTexture_om2af"]
+atlas = ExtResource("2_kxcfs")
+region = Rect2(424, 0, 193, 145)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_xdwn8"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_om2af")
+}],
+"loop": true,
+"name": &"default",
+"speed": 1.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_j5nx0"]
+radius = 10.9986
+height = 32.2473
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_eeyfd"]
+particle_flag_disable_z = true
+emission_shape = 3
+emission_box_extents = Vector3(20, 1, 1)
+gravity = Vector3(0, -98, 0)
 
 [node name="Statirs" type="Area2D"]
 collision_layer = 0
 collision_mask = 2
 script = ExtResource("1_768wh")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("2_lpxjc")
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+scale = Vector2(0.2, 0.2)
+sprite_frames = SubResource("SpriteFrames_xdwn8")
+autoplay = "default"
+frame_progress = 0.91111
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("RectangleShape2D_nt0us")
+position = Vector2(-1, -1.19209e-07)
+rotation = 1.55509
+shape = SubResource("CapsuleShape2D_j5nx0")
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+process_material = SubResource("ParticleProcessMaterial_eeyfd")
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]

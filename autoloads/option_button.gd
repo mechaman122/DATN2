@@ -27,7 +27,7 @@ func _on_button_pressed():
 	elif text == "+ 0.5% Crit":
 		SavedData.base_stats["crit"] += 0.05
 	elif text == "Earn some coins":
-		SavedData.coin += (SavedData.level * randi_range(1,3))
+		SavedData.coins += (SavedData.level * randi_range(1,3))
 		
 	get_parent().hide()
 	get_tree().paused = false
